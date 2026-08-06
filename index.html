@@ -2671,7 +2671,7 @@ function renderConferences(){
           ${c.hashtag?`<a class="cf-lk cf-lk-li" href="https://www.linkedin.com/search/results/content/?keywords=%23${encodeURIComponent(c.hashtag)}&sortBy=%22date_posted%22" target="_blank" rel="noopener">in #${esc(c.hashtag)}</a>
           <a class="cf-lk cf-lk-li" href="https://www.linkedin.com/search/results/content/?keywords=${encodeURIComponent('#'+c.hashtag+' medical affairs')}&sortBy=%22date_posted%22" target="_blank" rel="noopener">in + medical affairs</a>
           <a class="cf-lk cf-lk-li" href="https://www.linkedin.com/search/results/content/?keywords=${encodeURIComponent('#'+c.hashtag+' symposium')}&sortBy=%22date_posted%22" target="_blank" rel="noopener">in + symposium</a>
-          <a class="cf-lk cf-lk-web" href="https://www.google.com/search?q=${encodeURIComponent('"'+c.short+'" ("meet us at" OR "visit us at" OR booth OR symposium) pharma')}&tbs=qdr:m3" target="_blank" rel="noopener">🔍 "meet us at" announcements</a>`:""}
+          <a class="cf-lk cf-lk-li" href="https://www.linkedin.com/search/results/content/?keywords=${encodeURIComponent('"'+c.name+'" booth')}&sortBy=%22date_posted%22" target="_blank" rel="noopener">in "${esc(c.short)}" + booth</a>`:""}
         </div>
       </div>
     </div>`;
