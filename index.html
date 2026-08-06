@@ -2806,21 +2806,25 @@ function flexMatch(text,q){
 }
 // Map query → space key for full-space browsing
 const SPACE_ALIASES={
-  cardiovascular:"cardiovascular",cardio:"cardiovascular","stroke prevention":"cardiovascular",anticoagulation:"cardiovascular","factor xi":"cardiovascular",cardioembolic:"cardiovascular",thrombosis:"cardiovascular","atrial fibrillation":"cardiovascular",afib:"cardiovascular",
-  nephrology:"nephrology",nephro:"nephrology",kidney:"nephrology",renal:"nephrology",ckd:"nephrology",igan:"nephrology","iga nephropathy":"nephrology","lupus nephritis":"nephrology",glomerular:"nephrology","c3 glomerulopathy":"nephrology",c3g:"nephrology",dialysis:"nephrology",
-  endocrine:"endocrine",diabetes:"endocrine",obesity:"endocrine","glp-1":"endocrine",glp1:"endocrine",mash:"endocrine",metabolic:"endocrine",
-  dermatology:"dermatology",derm:"dermatology",psoriasis:"dermatology","atopic dermatitis":"dermatology",eczema:"dermatology",
-  immunology:"immunology",immuno:"immunology",autoimmune:"immunology",lupus:"immunology",
-  "rare disease":"raredisease",raredisease:"raredisease",rare:"raredisease","rare diseases":"raredisease",orphan:"raredisease",
-  ophthalmology:"ophthalmology",ophtho:"ophthalmology",retina:"ophthalmology","eye disease":"ophthalmology",ophthalmic:"ophthalmology"
+  // ONLY therapeutic-AREA names trigger a full browse. Disease terms (copd, lupus,
+  // diabetes, psoriasis…) deliberately fall through to keyword search so they return
+  // matches rather than dumping the whole area.
+  cardiovascular:"cardiovascular",cardio:"cardiovascular",cardioembolic:"cardiovascular","cardiovascular disease":"cardiovascular",
+  nephrology:"nephrology",nephro:"nephrology",kidney:"nephrology",renal:"nephrology","kidney disease":"nephrology",
+  endocrine:"endocrine",endocrinology:"endocrine","endocrine disease":"endocrine",
+  dermatology:"dermatology","skin disease":"dermatology",
+  immunology:"immunology",immuno:"immunology","immune-mediated":"immunology",
+  "rare disease":"raredisease",raredisease:"raredisease","rare diseases":"raredisease",orphan:"raredisease","orphan disease":"raredisease",
+  ophthalmology:"ophthalmology",ophtho:"ophthalmology",ophthalmic:"ophthalmology","eye disease":"ophthalmology"
 };
 // Immunology sub-specialty aliases
 const SUBSPC_ALIASES={
-  rheumatology:"rheum",rheum:"rheum",rheumatic:"rheum",sle:"rheum","myasthenia gravis":"rheum",mg:"rheum","rheumatoid arthritis":"rheum",ra:"rheum","psoriatic arthritis":"rheum",psa:"rheum",vasculitis:"rheum",sjogren:"rheum","sjögren":"rheum",myositis:"rheum",
-  pulmonology:"pulm",pulm:"pulm",pulmonary:"pulm",asthma:"pulm",copd:"pulm",respiratory:"pulm","severe asthma":"pulm",bronchiectasis:"pulm",
-  gastroenterology:"gastro",gastro:"gastro",gi:"gastro",ibd:"gastro","ulcerative colitis":"gastro",crohns:"gastro","crohn's":"gastro",crohn:"gastro",uc:"gastro",eoe:"gastro","eosinophilic esophagitis":"gastro",
-  "derm-immuno":"derm","derm immuno":"derm","dermatology immunology":"derm",urticaria:"derm",csu:"derm","hidradenitis suppurativa":"derm",hs:"derm","bullous pemphigoid":"derm",
-  allergy:"allergy",allergic:"allergy",allergology:"allergy",anaphylaxis:"allergy","food allergy":"allergy","peanut allergy":"allergy",immunotherapy:"allergy",oit:"allergy",rhinitis:"allergy","allergic rhinitis":"allergy",crswnp:"allergy","nasal polyps":"allergy"
+  // ONLY sub-specialty names trigger a browse. Disease terms go to keyword search.
+  rheumatology:"rheum",rheum:"rheum",rheumatologic:"rheum",
+  pulmonology:"pulm",pulm:"pulm",pulmonary:"pulm",respiratory:"pulm",
+  gastroenterology:"gastro",gastro:"gastro",gi:"gastro",
+  "derm-immuno":"derm","derm immuno":"derm","dermatology immunology":"derm","immuno-derm":"derm",
+  allergy:"allergy",allergology:"allergy"
 };
 
 function deepSearch(query){
