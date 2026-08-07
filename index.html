@@ -59,6 +59,16 @@
   .pd-date{font-size:13.5px;font-weight:700;line-height:1.3}
   .pd-prec{font-size:10px;color:var(--muted);margin-top:2px;font-style:italic}
   .pd-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:#4a4ac0;background:#eeeeff;padding:2px 7px;border-radius:4px;display:inline-block;margin-top:6px}
+  .pd-type.pdt-decision{color:#8a4a00;background:#fff1de}
+  .pd-type.pdt-filing{color:#4a4ac0;background:#eeeeff}
+  .pd-type.pdt-catalyst{color:#0a6b4a;background:#e2f7ee}
+  .pd.pdg-catalyst{border-left-style:dashed}
+  .pd-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .pd-chip{font:inherit;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--muted);padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+  .pd-chip:hover{border-color:#9aa;color:var(--ink)}
+  .pd-chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .pd-chip .pd-n{font-size:10.5px;font-weight:700;background:rgba(0,0,0,.07);border-radius:999px;padding:1px 6px}
+  .pd-chip.on .pd-n{background:rgba(255,255,255,.22)}
   .pd-body{flex:1;min-width:0}
   .pd-h b{font-size:14.5px}
   .pd-asset{font-size:12.5px;color:#444}
@@ -730,7 +740,7 @@
   </div>
 
 
-  <div class="blocklabel" id="sec-pdufa" style="margin-top:22px;font-size:12px">⚖️ FDA decision calendar — PDUFA dates &amp; filings ahead</div>
+  <div class="blocklabel" id="sec-pdufa" style="margin-top:22px;font-size:12px">⚖️ FDA decision calendar — PDUFA dates, filings &amp; catalysts ahead</div>
   <div id="pdufa"></div>
 
   <div class="blocklabel" id="sec-conf" style="margin-top:22px;font-size:12px">🗓️ Congress calendar — next 12 months, rolling</div>
@@ -1717,7 +1727,7 @@ const SUPSTRAT = {
    `date` must be ISO. Use precision to be honest: "exact" only when the company
    published a specific action date; "quarter" or "expected" otherwise.
    EVERY entry needs a working source URL. Never invent a date — omit instead. */
-const PDUFA_UPDATED = "August 6, 2026";
+const PDUFA_UPDATED = "August 7, 2026";
 const PDUFA = [
  {co:"Vertex", asset:"povetacicept (BAFF/APRIL)", indication:"IgA nephropathy", space:"nephrology",
   date:"2026-11-30", precision:"exact", type:"PDUFA", status:"Under review",
@@ -1774,7 +1784,46 @@ const PDUFA = [
  {co:"Novartis", asset:"zigakibart (anti-APRIL)", indication:"IgA nephropathy", space:"nephrology",
   date:"2027-12-31", precision:"expected", type:"BLA/NDA filed", status:"Ph3 BEYOND ongoing",
   note:"Would give Novartis a THIRD IgAN asset alongside Fabhalta and Vanrafia. Sequencing education becomes unavoidable.",
-  url:"https://www.novartis.com/research-development/novartis-pipeline"}
+  url:"https://www.novartis.com/research-development/novartis-pipeline"},
+
+ /* --- CATALYSTS AHEAD (kind:"cat") -------------------------------------
+    Not regulatory decisions — the events that CREATE the next wave of them:
+    pivotal topline readouts, filing submissions, programme starts. These are
+    where a grant conversation should begin, because by the time a PDUFA date
+    exists the education budget is usually already committed.
+    Same honesty rules: company-guided timing only, every entry sourced. */
+ {co:"Vera Therapeutics", asset:"atacicept (Trutakna)", indication:"IgA nephropathy — ORIGIN 3 two-year eGFR", space:"nephrology",
+  date:"2026-09-30", precision:"quarter", type:"Ph3 readout", kind:"cat", status:"eGFR analysis pulled forward to Q3 2026",
+  note:"Converts accelerated approval to full. Vera aligned with FDA on an EARLIER eGFR analysis, so this lands in weeks, not 2027. Their first commercial product — the grant programme is being built right now.",
+  url:"https://ir.veratx.com/news-releases/news-release-details/vera-therapeutics-announces-alignment-us-fda-earlier-origin"},
+ {co:"Incyte", asset:"ruxolitinib cream (Opzelura)", indication:"Mild-to-moderate hidradenitis suppurativa", space:"immunology", sub:"derm",
+  date:"2026-12-31", precision:"quarter", type:"Ph3 readout", kind:"cat", status:"TRuE-HS1 / TRuE-HS2 topline guided Q4 2026",
+  note:"A topical option in HS would change the treatment algorithm at the mild end, where most patients sit and almost no CME exists. Incyte confirmed Q4 2026 timing on its Q2 call.",
+  url:"https://investor.incyte.com/news-releases/news-release-details/incyte-reports-second-quarter-2026-financial-results-and"},
+ {co:"Incyte", asset:"povorcitinib (oral JAK1)", indication:"Hidradenitis suppurativa", space:"immunology", sub:"derm",
+  date:"2026-12-31", precision:"expected", type:"Filing expected", kind:"cat", status:"Both Ph3 trials positive",
+  note:"First oral small molecule in HS. Positive Ph3 already reported, so a submission is the next step — oral-versus-biologic positioning is an open education question with no incumbent programme.",
+  url:"https://investor.incyte.com/news-releases/news-release-details/incyte-announces-positive-topline-results-two-phase-3-clinical"},
+ {co:"UCB", asset:"bimekizumab (Bimzelx)", indication:"Paediatric hidradenitis suppurativa", space:"immunology", sub:"derm",
+  date:"2027-12-31", precision:"expected", type:"Ph3 readout", kind:"cat", status:"First topline guided H2 2027",
+  note:"Paediatric HS has essentially zero dedicated education. UCB reiterated H2 2027 in its 2026 half-year results — long runway, so relationship-building now is cheap.",
+  url:"https://www.ucb.com/newsroom/press-releases/article/ucb-delivers-strong-results-raises-2026-guidance-and-positions-for-next-growth-phase"},
+ {co:"Avalo Therapeutics", asset:"abdakibart (anti-IL-1β/IL-1α)", indication:"Hidradenitis suppurativa", space:"immunology", sub:"derm",
+  date:"2027-06-30", precision:"expected", type:"Ph3 start", kind:"cat", status:"Registrational Ph3 to begin H1 2027",
+  note:"Small company with no grant programme at all. A Ph3 start is the earliest credible moment to open a scientific-exchange conversation.",
+  url:"https://www.sec.gov/Archives/edgar/data/0001534120/000153412026000048/ex-9912q2026earningsrelease.htm"},
+ {co:"Ocular Therapeutix", asset:"Axpaxli (OTX-TKI)", indication:"Wet AMD — SOL-R", space:"ophthalmology",
+  date:"2027-03-31", precision:"quarter", type:"Ph3 readout", kind:"cat", status:"SOL-1 positive; SOL-R topline guided Q1 2027",
+  note:"The second pivotal. SOL-R is the readout that decides whether the BLA happens — the point at which retina education planning becomes real rather than speculative.",
+  url:"https://investors.ocutx.com/news-releases"},
+ {co:"EyePoint", asset:"Duravyu (vorolanib insert)", indication:"Wet AMD — LUGANO / LUCIA", space:"ophthalmology",
+  date:"2026-12-31", precision:"expected", type:"Ph3 readout", kind:"cat", status:"Ph3 topline guided 2026; DME Ph3 starting",
+  note:"If this reads out alongside Axpaxli, retina specialists get two sustained-release TKIs at once and sequencing education becomes urgent for both sponsors.",
+  url:"https://investors.eyepointpharma.com/news-releases"},
+ {co:"Inventiva", asset:"lanifibranor (pan-PPAR)", indication:"MASH — NATiV3 submission", space:"endocrinology",
+  date:"2027-06-30", precision:"expected", type:"Filing expected", kind:"cat", status:"NDA guided H1 2027",
+  note:"First-time filer with no established grant office. The filing is the trigger to have a funded concept already drafted.",
+  url:"https://inventivapharma.com/pipeline/clinical-trials/"}
 ];
 /* WEEKLY-PDUFA-END */
 /* WEEKLY-CONFERENCES-START — the Monday/Thursday task maintains this block.
@@ -2677,20 +2726,42 @@ function renderDirectory(){
 /* ---------- FDA DECISION CALENDAR — PDUFA dates and filings ----------
    Sorted soonest first. Flags whether a decision sits inside the 12–18 month
    lead time enduring education needs, which is the whole point of tracking it. */
+/* Which bucket a row belongs to. Derived from `type` so the data stays flat:
+   decision = the FDA is deciding now; filing = the dossier is (or soon will be)
+   in; catalyst = the event that CREATES the next filing. */
+function pdGroup(t){
+  t=(t||"").toLowerCase();
+  if(t.indexOf("pdufa")>-1||t.indexOf("priority review")>-1||t.indexOf("adcomm")>-1) return "decision";
+  if(t.indexOf("filed")>-1||t.indexOf("filing")>-1||t.indexOf("submission")>-1) return "filing";
+  return "catalyst";
+}
+var pdufaGroup = "all";   // all | decision | filing | catalyst
+
 function renderPdufa(){
   const host=$("#pdufa"); if(!host) return;
   const now=new Date(); now.setHours(0,0,0,0);
   const pd=s=>{const p=(s||"").split("-"); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;};
 
-  let list=(typeof PDUFA!=="undefined"?PDUFA:[]).map(x=>({...x,_d:pd(x.date)}))
+  const base=(typeof PDUFA!=="undefined"?PDUFA:[]).map(x=>({...x,_d:pd(x.date),_g:pdGroup(x.type)}))
     .filter(x=>x._d)
     .filter(x=>activeTab==="all"||x.space===activeTab)
     .filter(x=>!(activeTab==="immunology"&&immunoSub!=="all")||x.sub===immunoSub)
     .filter(x=>supMatch(x.co))
     .sort((a,b)=>a._d-b._d);
 
+  const counts={all:base.length,decision:0,filing:0,catalyst:0};
+  base.forEach(x=>counts[x._g]++);
+  const GLAB={all:"All",decision:"⚖️ FDA decisions",filing:"📄 Filings / NDA-BLA",catalyst:"🚀 Catalysts ahead"};
+  const chips=["all","decision","filing","catalyst"].map(g=>
+    `<button class="pd-chip${pdufaGroup===g?" on":""}" data-pdg="${g}">${GLAB[g]} <span class="pd-n">${counts[g]}</span></button>`
+  ).join("");
+  const chipBar=`<div class="pd-chips">${chips}</div>`;
+
+  let list=base
+    .filter(x=>pdufaGroup==="all"||x._g===pdufaGroup);
+
   if(!list.length){
-    host.innerHTML=`<div class="empty">No FDA decisions tracked for this filter.</div>`; return;
+    host.innerHTML=chipBar+`<div class="empty">Nothing tracked for this filter.</div>`; return;
   }
 
   const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -2709,11 +2780,11 @@ function renderPdufa(){
                : months<12 ? [`${months} mo away — enduring content already needed`,"lead-tight"]
                : months<=18 ? [`${months} mo away — build now`,"lead-now"]
                : [`${months} mo away — seed the relationship`,"lead-early"];
-    return `<div class="pd ${lead[1]}">
+    return `<div class="pd ${lead[1]} pdg-${x._g}">
       <div class="pd-when">
         <div class="pd-date">${esc(fmt(x))}</div>
         <div class="pd-prec">${esc(precLabel[x.precision]||x.precision)}</div>
-        <div class="pd-type">${esc(x.type)}</div>
+        <div class="pd-type pdt-${x._g}">${esc(x.type)}</div>
       </div>
       <div class="pd-body">
         <div class="pd-h"><b>${esc(x.co)}</b> <span class="pd-asset">${esc(x.asset)}</span></div>
@@ -2726,10 +2797,15 @@ function renderPdufa(){
   }).join("");
 
   const exact=list.filter(x=>x.precision==="exact").length;
-  host.innerHTML=rows+`<div class="pd-legend">
-    <b>${list.length}</b> FDA decision${list.length===1?"":"s"} tracked · ${exact} with a company-confirmed action date, the rest quarter-level or expected · verified <b>${esc(typeof PDUFA_UPDATED!=="undefined"?PDUFA_UPDATED:"—")}</b><br>
-    Only dates a company has publicly disclosed appear here — the FDA does not publish a forward calendar of pending applications, so anything unannounced is genuinely unknowable rather than missing. Colour shows lead time against the 12–18 months enduring content requires: <span class="pd-key lead-tight">under 12 mo</span> <span class="pd-key lead-now">12–18 mo, build now</span> <span class="pd-key lead-early">18 mo+, seed the relationship</span>.
+  host.innerHTML=chipBar+rows+`<div class="pd-legend">
+    <b>${list.length}</b> event${list.length===1?"":"s"} shown · ${exact} with a company-confirmed date, the rest quarter-level or expected · verified <b>${esc(typeof PDUFA_UPDATED!=="undefined"?PDUFA_UPDATED:"—")}</b><br>
+    <b>⚖️ FDA decisions</b> are PDUFA and priority-review dates — the agency is deciding now. <b>📄 Filings</b> are dossiers submitted or guided for submission. <b>🚀 Catalysts ahead</b> are the pivotal readouts and programme starts that <i>create</i> the next filing — usually the right moment to open a conversation, because once a PDUFA date exists the education budget is normally already committed.<br>
+    Only timing a company has publicly disclosed appears here — the FDA does not publish a forward calendar of pending applications, so anything unannounced is genuinely unknowable rather than missing. Colour shows lead time against the 12–18 months enduring content requires: <span class="pd-key lead-tight">under 12 mo</span> <span class="pd-key lead-now">12–18 mo, build now</span> <span class="pd-key lead-early">18 mo+, seed the relationship</span>.
   </div>`;
+
+  host.querySelectorAll(".pd-chip").forEach(b=>b.addEventListener("click",()=>{
+    pdufaGroup=b.getAttribute("data-pdg"); renderPdufa();
+  }));
 }
 
 /* ---------- CONGRESS CALENDAR — rolling 12 months from today ---------- */
@@ -3264,6 +3340,8 @@ function applySupporterFilter(){
   render();
   if(typeof renderDirectory==="function") renderDirectory();
   if(typeof renderConferences==="function") renderConferences();
+  if(typeof renderPdufa==="function") renderPdufa();   // was missing — the FDA
+  // calendar kept showing every company regardless of the supporter dropdown.
   if(typeof renderSignals==="function") renderSignals();
   if(typeof renderNewSupp==="function") renderNewSupp();
   if(typeof renderWatch==="function") renderWatch();
