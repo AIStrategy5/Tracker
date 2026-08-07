@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Educational Strategy Tracker — Non-Oncologic · Cardiovascular · Endocrine · Dermatology · Immunology · Rare Disease · Ophthalmology</title>
+<title>Educational Strategy Tracker — Non-Oncologic · Cardiovascular · Nephrology · Endocrinology · Immunology · Rare Disease · Ophthalmology</title>
 <style>
   :root{ color-scheme: light;
     --bg:#f6f6f4; --card:#fff; --ink:#191919; --muted:#6c6c6c; --line:#e7e7e3;
@@ -611,7 +611,7 @@
   <header class="top">
     <div>
       <h1>Educational Strategy Tracker <span style="font-size:14px;font-weight:600;color:var(--muted);vertical-align:middle;margin-left:6px">Non-Oncologic</span></h1>
-      <p class="sub">Cardiovascular · Nephrology · Endocrine · Dermatology · Immunology · Rare Disease · Ophthalmology. For each space: which <b>companies</b> to watch, what <b>medications</b> and <b>stage</b>, live clinical-trial activity, official <b>press-release</b> feeds, and <b>IME grant / RFP</b> portals with current areas of interest. Trials refresh live from ClinicalTrials.gov each time you open this page.</p>
+      <p class="sub">Cardiovascular · Nephrology · Endocrinology · Immunology (Dermatology · Rheumatology · Gastroenterology · Pulmonology · Allergy) · Rare Disease · Ophthalmology. For each space: which <b>companies</b> to watch, what <b>medications</b> and <b>stage</b>, live clinical-trial activity, official <b>press-release</b> feeds, and <b>IME grant / RFP</b> portals with current areas of interest. Trials refresh live from ClinicalTrials.gov each time you open this page.</p>
     </div>
     <div class="meta">
       <span class="pill"><b id="totalCount">—</b> live trials</span>
@@ -625,7 +625,7 @@
     <button class="tab active" data-k="all">All</button>
     <button class="tab" data-k="cardiovascular"><span class="dot" style="background:var(--cardio)"></span>Cardiovascular</button>
     <button class="tab" data-k="nephrology"><span class="dot" style="background:var(--nephro)"></span>Nephrology</button>
-    <button class="tab" data-k="endocrinology"><span class="dot" style="background:var(--endo)"></span>Endocrine</button>
+    <button class="tab" data-k="endocrinology"><span class="dot" style="background:var(--endo)"></span>Endocrinology</button>
     <button class="tab" data-k="immunology"><span class="dot" style="background:var(--immuno)"></span>Immunology</button>
     <button class="tab" data-k="raredisease"><span class="dot" style="background:var(--rare)"></span>Rare Disease</button>
     <button class="tab" data-k="ophthalmology"><span class="dot" style="background:var(--oph)"></span>Ophthalmology</button>
@@ -2265,7 +2265,7 @@ let DATA={}, activeTab="all", liveSearch="", newOnly=false, expand={}, immunoSub
 
 /* Immunology sub-specialties — each renders as its own laid-out section. */
 const IMMUNO_SUBS=[
- {key:"derm",  icon:"🩹", label:"Dermatology (immuno-derm)", lede:"Immune-mediated skin disease: chronic spontaneous urticaria, hidradenitis suppurativa, bullous pemphigoid, cutaneous lupus. Distinct from the standalone Dermatology space, which covers psoriasis and atopic dermatitis as primary indications."},
+ {key:"derm",  icon:"🩹", label:"Dermatology (immuno-derm)", lede:"Immune-mediated skin disease: chronic spontaneous urticaria, hidradenitis suppurativa, bullous pemphigoid, cutaneous lupus, plus psoriasis, atopic dermatitis and vitiligo. All dermatology now lives here — there is no separate dermatology space."},
  {key:"rheum", icon:"🦴", label:"Rheumatology", lede:"SLE, rheumatoid and psoriatic arthritis, Sjögren's, myositis, vasculitis, IgG4-related disease, myasthenia gravis. The largest immunology sub-field and the one with the most crowded mechanism landscape — FcRn, BTK, TYK2, type-I interferon and autoimmune CAR-T all compete here."},
  {key:"gastro",icon:"🫀", label:"Gastroenterology", lede:"IBD (ulcerative colitis, Crohn's) and eosinophilic esophagitis. Oral small molecules (S1P, TYK2) and anti-TL1A are reshaping sequencing after biologics."},
  {key:"pulm",  icon:"🫁", label:"Pulmonology", lede:"Severe asthma, COPD and bronchiectasis. Type-2 biologics plus the newer alarmin/TSLP and ultra-long-acting IL-5 mechanisms — dosing-interval and phenotype education are the live needs."},
