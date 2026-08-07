@@ -28,7 +28,7 @@
   .tab[data-k=all].active{background:#191919}
   .tab[data-k=cardiovascular].active{background:var(--cardio)}
   .tab[data-k=nephrology].active{background:var(--nephro)}
-  .tab[data-k=endocrine].active{background:var(--endo)}
+  .tab[data-k=endocrinology].active{background:var(--endo)}
   .tab[data-k=dermatology].active{background:var(--derm)}
   .tab[data-k=immunology].active{background:var(--immuno)}
   .tab[data-k=raredisease].active{background:var(--rare)}
@@ -49,6 +49,33 @@
   .supbar select:focus{outline:2px solid #5656d4;outline-offset:1px}
   .supclear{border:1px solid #e2c9c9;background:#fdf4f4;color:#a33;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:700;cursor:pointer}
   .supdiv{width:1px;height:24px;background:var(--line);margin:0 3px}
+  /* FDA decision calendar */
+  .pd{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:9px;box-shadow:var(--shadow);border-left:4px solid var(--line)}
+  .pd.lead-tight{border-left-color:#c0392b;background:#fffcfb}
+  .pd.lead-now{border-left-color:#b08a2e;background:#fffdf7}
+  .pd.lead-early{border-left-color:#2f7d55}
+  .pd.lead-past{opacity:.55}
+  .pd-when{flex:0 0 128px;border-right:1px solid var(--line);padding-right:13px}
+  .pd-date{font-size:13.5px;font-weight:700;line-height:1.3}
+  .pd-prec{font-size:10px;color:var(--muted);margin-top:2px;font-style:italic}
+  .pd-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:#4a4ac0;background:#eeeeff;padding:2px 7px;border-radius:4px;display:inline-block;margin-top:6px}
+  .pd-body{flex:1;min-width:0}
+  .pd-h b{font-size:14.5px}
+  .pd-asset{font-size:12.5px;color:#444}
+  .pd-ind{font-size:12.5px;color:#333;margin-top:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .pd-sp{font-size:9.5px;font-weight:700;color:#fff;padding:2px 7px;border-radius:4px}
+  .pd-status{font-size:11.5px;color:var(--muted);margin-top:3px;font-weight:600}
+  .pd-note{font-size:12.2px;line-height:1.55;color:#444;margin-top:6px}
+  .pd-foot{margin-top:7px;font-size:11.5px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .pd-lead{font-weight:700}
+  .lead-tight .pd-lead{color:#c0392b} .lead-now .pd-lead{color:#8a6a1e} .lead-early .pd-lead{color:#2f7d55}
+  .pd-foot a{color:#2b6fd6;font-weight:700;text-decoration:none}
+  .pd-legend{font-size:11.5px;color:var(--muted);line-height:1.65;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+  .pd-key{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:4px;border-left:3px solid;margin:0 3px}
+  .pd-key.lead-tight{border-left-color:#c0392b;color:#c0392b;background:#fdf4f4}
+  .pd-key.lead-now{border-left-color:#b08a2e;color:#8a6a1e;background:#fbfaf5}
+  .pd-key.lead-early{border-left-color:#2f7d55;color:#2f7d55;background:#f0faf5}
+  @media(max-width:700px){ .pd{flex-direction:column;gap:8px} .pd-when{flex:auto;border-right:0;border-bottom:1px solid var(--line);padding:0 0 8px} }
   /* congress calendar */
   .cf-month{font-family:Georgia,serif;font-size:16px;font-weight:700;color:#444;margin:18px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--line)}
   .cf-month:first-child{margin-top:4px}
@@ -598,8 +625,7 @@
     <button class="tab active" data-k="all">All</button>
     <button class="tab" data-k="cardiovascular"><span class="dot" style="background:var(--cardio)"></span>Cardiovascular</button>
     <button class="tab" data-k="nephrology"><span class="dot" style="background:var(--nephro)"></span>Nephrology</button>
-    <button class="tab" data-k="endocrine"><span class="dot" style="background:var(--endo)"></span>Endocrine</button>
-    <button class="tab" data-k="dermatology"><span class="dot" style="background:var(--derm)"></span>Dermatology</button>
+    <button class="tab" data-k="endocrinology"><span class="dot" style="background:var(--endo)"></span>Endocrine</button>
     <button class="tab" data-k="immunology"><span class="dot" style="background:var(--immuno)"></span>Immunology</button>
     <button class="tab" data-k="raredisease"><span class="dot" style="background:var(--rare)"></span>Rare Disease</button>
     <button class="tab" data-k="ophthalmology"><span class="dot" style="background:var(--oph)"></span>Ophthalmology</button>
@@ -621,8 +647,7 @@
       <optgroup label="Therapeutic area">
         <option value="cardiovascular">Cardiovascular</option>
         <option value="nephrology">Nephrology</option>
-        <option value="endocrine">Endocrine</option>
-        <option value="dermatology">Dermatology</option>
+        <option value="endocrinology">Endocrinology</option>
         <option value="immunology">Immunology — all</option>
         <option value="raredisease">Rare Disease</option>
         <option value="ophthalmology">Ophthalmology</option>
@@ -704,6 +729,9 @@
     <b>Reading the RFP signals.</b> <span class="rfp open" style="padding:1px 6px">Open RFP</span> = grant call live now with a deadline. <span class="rfp limited" style="padding:1px 6px">Limited</span> = area listed but funding constrained. <span class="rfp signal" style="padding:1px 6px">Signal</span> = a readout, approval or launch that typically <i>precedes</i> a company opening education funding — watch the newsroom. Agency/vendor business RFPs are rarely public; they surface via company procurement teams, the <a href="https://www.acehp.org/" target="_blank" rel="noopener">Alliance for Continuing Education in the Health Professions</a>, and med-ed network/job boards. Verify every deadline on the portal before acting — cycles rotate.
   </div>
 
+
+  <div class="blocklabel" id="sec-pdufa" style="margin-top:22px;font-size:12px">⚖️ FDA decision calendar — PDUFA dates &amp; filings ahead</div>
+  <div id="pdufa"></div>
 
   <div class="blocklabel" id="sec-conf" style="margin-top:22px;font-size:12px">🗓️ Congress calendar — next 12 months, rolling</div>
   <div id="conferences"></div>
@@ -941,12 +969,9 @@ const SPECIALTIES = [
   {key:"nephrology", label:"Nephrology", color:"var(--nephro)",
    cond:'"IgA nephropathy" OR "lupus nephritis" OR "C3 glomerulopathy" OR "membranous nephropathy" OR "focal segmental glomerulosclerosis" OR "chronic kidney disease" OR "diabetic kidney disease" OR "glomerulonephritis" OR "nephrotic syndrome" OR "Alport syndrome" OR "polycystic kidney"',
    news:'"IgA nephropathy" OR "lupus nephritis" OR nephrology OR "chronic kidney disease" OR glomerular'},
-  {key:"endocrine", label:"Endocrine", color:"var(--endo)",
+  {key:"endocrinology", label:"Endocrinology", color:"var(--endo)",
    cond:'diabetes OR obesity OR "weight management" OR thyroid OR endocrine OR osteoporosis OR MASH',
    news:'obesity OR diabetes OR GLP-1 OR endocrinology'},
-  {key:"dermatology", label:"Dermatology", color:"var(--derm)",
-   cond:'psoriasis OR "atopic dermatitis" OR eczema OR "hidradenitis suppurativa" OR vitiligo OR "prurigo nodularis" OR dermatology',
-   news:'psoriasis OR "atopic dermatitis" OR dermatology'},
   {key:"immunology", label:"Immunology", color:"var(--immuno)",
    cond:'lupus OR "rheumatoid arthritis" OR "inflammatory bowel disease" OR "ulcerative colitis" OR "Crohn" OR "Sjogren" OR "myasthenia gravis" OR immunology',
    news:'lupus OR rheumatology OR "inflammatory bowel disease" OR autoimmune'},
@@ -998,7 +1023,7 @@ const TRIALSNAP = {
     {nct:"NCT07024563",title:"Study of Ravulizumab in Pediatric Participants With Primary IgAN",status:"RECRUITING",phase:"Phase 3",sponsor:"Alexion Pharmaceuticals, Inc.",drugs:[],start:"2025-06-14",pcd:"2028-11-29",updated:"",enroll:"36",summary:"The primary objectives of this study are to characterize ravulizumab pharmacokinetics (PK) and pharmacodynamics (PD), and to evaluate safety and efficacy following ravulizumab IV dosing in pediatric participants with IgAN or IgAVN.",cond:"IgAN, IgAVN, Immunoglobulin A Nephropathy"},
     {nct:"NCT04557462",title:"A Rollover Extension Program (REP) to Evaluate the Long-term Safety and Tolerability of Open Label Iptacopan/LNP023 in P",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"Novartis Pharmaceuticals",drugs:[],start:"2021-09-20",pcd:"2030-12-04",updated:"",enroll:"448",summary:"The purpose of this study is to evaluate the long-term safety and tolerability, of open label iptacopan in primary IgA nephropathy participants who have completed either the CLNP023X2203 or CLNP023A2301 clinical trials. The open-label design of the current study is appropriate to provide study participants the opportunity to receive treatment with iptacopan until marketing authorizations are recei",cond:"Primary IgA Nephropathy"},
   ],
-  endocrine: [
+  endocrinology: [
     {nct:"NCT06318169",title:"A Study Evaluating the Efficacy and Safety of Pegozafermin in Participants With MASH and Fibrosis (ENLIGHTEN-Fibrosis)",status:"RECRUITING",phase:"Phase 3",sponsor:"89bio, Inc.",drugs:[],start:"2024-03-13",pcd:"2029-02",updated:"",enroll:"1350",summary:"The study will assess the efficacy and safety of 2 dose regimens of pegozafermin compared to placebo for the treatment of liver fibrosis stage F2 or F3 in adult participants with MASH.",cond:"Metabolic Dysfunction-Associated Steatotic Liver Disease (MASH) / Nonalcoholic Steatohepatitis (NASH"},
     {nct:"NCT06419374",title:"A Study to Evaluate the Efficacy and Safety of Pegozafermin in Participants With Compensated Cirrhosis Due to MASH",status:"RECRUITING",phase:"Phase 3",sponsor:"89bio, Inc.",drugs:[],start:"2024-05-24",pcd:"2028-06",updated:"",enroll:"762",summary:"The study will assess the efficacy and safety of pegozafermin administered in participants with compensated cirrhosis due to MASH (biopsy-confirmed fibrosis stage F4 MASH \\[previously known as nonalcoholic steatohepatitis, NASH\\]).",cond:"Metabolic Dysfunction-Associated Steatohepatitis (MASH) / Nonalcoholic Steatohepatitis (NASH) With C"},
     {nct:"NCT07704892",title:"A Study to Investigate Safety and Efficacy of Efimosfermin Compared With Placebo in Adult Participants With Compensated ",status:"RECRUITING",phase:"Phase 3",sponsor:"GlaxoSmithKline",drugs:[],start:"2026-07-22",pcd:"2030-10-16",updated:"",enroll:"380",summary:"This is a multi-center, randomized, two-part (Part A and Part B) study investigating the safety and efficacy of efimosfermin alfa in adult participants with compensated cirrhosis due to MASH. Participants who complete the treatment during Part A of the study and meet the inclusion criteria will have the option to enroll in Part B (open label) of the study.",cond:"Metabolic Dysfunction-associated Steatohepatitis"},
@@ -1015,7 +1040,7 @@ const TRIALSNAP = {
     {nct:"NCT07684235",title:"Extension Trial to Evaluate the Long-term Efficacy, Safety, and Tolerability of Maridebart Cafraglutide (MARITIME-1-EXTE",status:"RECRUITING",phase:"Phase 3",sponsor:"Amgen",drugs:[],start:"2026-07-23",pcd:"2027-12-26",updated:"",enroll:"3200",summary:"The primary objective of this trial is to evaluate the long-term efficacy, safety, and tolerability of maridebart cafraglutide in participants with obesity or overweight. Trial 20250197 is an extension of trial 20210181 (NCT06858839).",cond:"Obesity, Overweight"},
     {nct:"NCT07225686",title:"Maridebart Cafraglutide Versus Placebo in Adult Participants With Obstructive Sleep Apnea on Positive Airway Pressure Th",status:"RECRUITING",phase:"Phase 3",sponsor:"Amgen",drugs:[],start:"2025-12-19",pcd:"2027-09-29",updated:"",enroll:"250",summary:"This Phase 3 clinical trial is designed to evaluate the efficacy and safety of maridebart cafraglutide compared to placebo over a 52-week period in adults with obstructive sleep apnea (OSA) who are receiving positive airway pressure (PAP) therapy and are living with overweight or obesity.",cond:"Obesity, Obstructive Sleep Apnea"},
   ],
-  dermatology: [
+  _derm_merged: [
     {nct:"NCT07746479",title:"A Study to Evaluate the Efficacy and Safety of LZM012 ( Psoriasis )",status:"COMPLETED",phase:"Phase 3",sponsor:"Livzon Pharmaceutical Group Inc.",drugs:[],start:"2025-06-23",pcd:"2026-01-26",updated:"",enroll:"244",summary:"This study is a Multicenter, Open-Label, Single-Arm Phase III Clinical Trial to Evaluate the Efficacy and Safety of LZM012 Injection in Patients With Moderate to Severe Plaque Psoriasis.",cond:"Psoriasis"},
     {nct:"NCT07449702",title:"An Open-Label Extension Study of ORKA-001 in Participants With Plaque Psoriasis",status:"RECRUITING",phase:"Phase 2",sponsor:"Oruka Therapeutics, Inc.",drugs:[],start:"2026-02-23",pcd:"2030-05",updated:"",enroll:"240",summary:"An open-label extension (OLE) study to evaluate the long-term safety and efficacy of ORKA-001 in adult participants with moderate-to-severe plaque psoriasis, who previously participated in an Oruka Therapeutics sponsored study.",cond:"Plaque Psoriasis"},
     {nct:"NCT05958407",title:"A 32-week Trial to Evaluate the Efficacy and Safety of Tralokinumab in Subjects With Moderate-to-severe Atopic Hand Ecze",status:"COMPLETED",phase:"Phase 3",sponsor:"LEO Pharma",drugs:[],start:"2023-08-28",pcd:"2025-05-05",updated:"",enroll:"235",summary:"The purpose of this study is to test if treatment with tralokinumab is safe and efficacious in treating moderate-to-severe atopic hand eczema. This will be judged by a range of assessments that rate the severity and extent of atopic hand eczema and its symptoms, as well as general health status and quality of life.  The trial will last for up to 40 weeks for each participant. There will be up to 1",cond:"Atopic Dermatitis, Atopic Hand Eczema"},
@@ -1091,39 +1116,39 @@ const ADV = 'AREA[LeadSponsorClass]INDUSTRY AND AREA[Phase](PHASE2 OR PHASE3)';
 
 /* Master IME/CME grant directory — every company, region, spaces funded (verified 2026-07-10) */
 const MASTER = [
- {co:"Pfizer",region:"Global",spaces:["immunology","dermatology"],focus:"Independent Grants for Learning & Change — Inflammation & Immunology; e.g. Alopecia Areata RFP",rfp:"open",url:"https://www.pfizer.com/about/programs-policies/grants/independent-medical-education"},
- {co:"Eli Lilly",region:"US",spaces:["endocrine","immunology","dermatology"],focus:"Lilly Grant Office — Immunology & Endocrine Areas of Focus",rfp:"open",url:"https://grantoffice.lilly.com/areas-of-focus"},
- {co:"AbbVie",region:"US/Global",spaces:["immunology","dermatology","ophthalmology"],focus:"Immunology, rheumatology, dermatology, IBD; eye care (DME, glaucoma; ABBV-RGX-314). IME Provider Network gating",rfp:"open",url:"https://www.abbvie.com/science/independent-educational-grants.html"},
- {co:"Bristol Myers Squibb",region:"US",spaces:["immunology","dermatology"],focus:"Immunology incl. lupus; RFE/RFP posts intermittently",rfp:"signal",url:"https://www.bms.com/our-impact/corporate-giving/funding-opportunities/request-for-proposals-education.html"},
- {co:"Johnson & Johnson",region:"US",spaces:["immunology","dermatology"],focus:"IBD, dermatology (IL-23), rheumatology, gMG; Implementation Science RFP",rfp:"open",url:"https://www.jnj.com/innovativemedicine/us/grants-and-giving/educational"},
- {co:"Novartis",region:"US",spaces:["cardiovascular","nephrology","dermatology","immunology"],focus:"Atrial Fibrillation (limited); CSU & HS; Sjögren's; ASCVD/Lp(a)",rfp:"open",url:"https://www.novartis.com/us-en/healthcare-professionals/external-funding/educational-grants/professional-medical-education-grants"},
+ {co:"Pfizer",region:"Global",spaces:["immunology"],focus:"Independent Grants for Learning & Change — Inflammation & Immunology; e.g. Alopecia Areata RFP",rfp:"open",url:"https://www.pfizer.com/about/programs-policies/grants/independent-medical-education"},
+ {co:"Eli Lilly",region:"US",spaces:["endocrinology","immunology"],focus:"Lilly Grant Office — Immunology & Endocrine Areas of Focus",rfp:"open",url:"https://grantoffice.lilly.com/areas-of-focus"},
+ {co:"AbbVie",region:"US/Global",spaces:["immunology","ophthalmology"],focus:"Immunology, rheumatology, dermatology, IBD; eye care (DME, glaucoma; ABBV-RGX-314). IME Provider Network gating",rfp:"open",url:"https://www.abbvie.com/science/independent-educational-grants.html"},
+ {co:"Bristol Myers Squibb",region:"US",spaces:["immunology"],focus:"Immunology incl. lupus; RFE/RFP posts intermittently",rfp:"signal",url:"https://www.bms.com/our-impact/corporate-giving/funding-opportunities/request-for-proposals-education.html"},
+ {co:"Johnson & Johnson",region:"US",spaces:["immunology"],focus:"IBD, dermatology (IL-23), rheumatology, gMG; Implementation Science RFP",rfp:"open",url:"https://www.jnj.com/innovativemedicine/us/grants-and-giving/educational"},
+ {co:"Novartis",region:"US",spaces:["cardiovascular","nephrology","immunology"],focus:"Atrial Fibrillation (limited); CSU & HS; Sjögren's; ASCVD/Lp(a)",rfp:"open",url:"https://www.novartis.com/us-en/healthcare-professionals/external-funding/educational-grants/professional-medical-education-grants"},
  {co:"AstraZeneca",region:"US (+ex-US)",spaces:["immunology","cardiovascular"],focus:"SLE open (limited); ex-US lupus/myositis/scleroderma; CV=ATTR-CM/HTN",rfp:"open",url:"https://www.astrazeneca-us.com/sustainability/Request-Support/medical-education-office.html"},
- {co:"Sanofi",region:"US",spaces:["dermatology","immunology"],focus:"Immunology via Sanofi-Regeneron Alliance (type-2 inflammation/AD)",rfp:"limited",url:"https://www.sanofi.us/en/our-company/social-impact/corporate-social-responsibility/contributions-and-giving"},
- {co:"Regeneron",region:"US",spaces:["dermatology","immunology","cardiovascular","ophthalmology"],focus:"Immuno-derm (Alliance); Factor XI thrombosis; retina (Eylea/Eylea HD). Topics portal-gated",rfp:"limited",url:"https://educationalfunding.regeneron.com"},
+ {co:"Sanofi",region:"US",spaces:["immunology"],focus:"Immunology via Sanofi-Regeneron Alliance (type-2 inflammation/AD)",rfp:"limited",url:"https://www.sanofi.us/en/our-company/social-impact/corporate-social-responsibility/contributions-and-giving"},
+ {co:"Regeneron",region:"US",spaces:["immunology","cardiovascular","ophthalmology"],focus:"Immuno-derm (Alliance); Factor XI thrombosis; retina (Eylea/Eylea HD). Topics portal-gated",rfp:"limited",url:"https://educationalfunding.regeneron.com"},
  {co:"GSK",region:"Global",spaces:["immunology"],focus:"Immunology/respiratory strengths; per-RFP topics",rfp:"limited",url:"https://www.gskimefunding.com/ime/index.html"},
- {co:"Amgen",region:"US/Global",spaces:["endocrine","dermatology","immunology","ophthalmology"],focus:"Obesity & dyslipidemia; psoriasis/AD; RA/PsA/vasculitis/lupus/IBD; Thyroid Eye Disease (Tepezza) with named topics",rfp:"open",url:"https://www.amgen.com/responsibility/healthy-society/community-investment/independent-medical-education-funding"},
- {co:"Boehringer Ingelheim",region:"US",spaces:["endocrine","immunology"],focus:"ILD/SARD-ILD RFP; diabetes/obesity plausible",rfp:"limited",url:"https://pro.boehringer-ingelheim.com/funding/"},
- {co:"UCB",region:"US/Global",spaces:["dermatology","immunology"],focus:"Immuno-derm (bimekizumab); rheumatology/lupus/MG. No public topic list",rfp:"limited",url:"https://www.ucb.com/innovation/funding"},
- {co:"Novo Nordisk",region:"Global",spaces:["endocrine","cardiovascular"],focus:"Diabetes, obesity, MASH, cardiovascular",rfp:"open",url:"https://www.novonordisk.com/contact-us/external-support.html"},
- {co:"Bayer",region:"US",spaces:["cardiovascular","endocrine"],focus:"Stroke Prevention; CKD in T2D; Heart Failure; Cardio-Kidney-Metabolic",rfp:"open",url:"https://www.grants-contributions.bayer.com/home/medical-educational-grants"},
- {co:"Merck (MSD)",region:"US",spaces:["endocrine","immunology"],focus:"Cardiometabolic (T2D) + immunology (live list unverified — JS app)",rfp:"signal",url:"https://www.msdimegrants.com/"},
- {co:"Incyte",region:"US",spaces:["dermatology","immunology"],focus:"Immuno-dermatology (AD, vitiligo, HS) + autoimmunity",rfp:"limited",url:"https://www.incytegrantsandgiving.com/"},
- {co:"Takeda",region:"US",spaces:["dermatology","immunology"],focus:"Plaque Psoriasis (TYK2) open; IBD, EoE, CIDP, HAE, PID open",rfp:"open",url:"https://www.takeda.com/en-us/science/independent-medical-education-grants/"},
+ {co:"Amgen",region:"US/Global",spaces:["endocrinology","immunology","ophthalmology"],focus:"Obesity & dyslipidemia; psoriasis/AD; RA/PsA/vasculitis/lupus/IBD; Thyroid Eye Disease (Tepezza) with named topics",rfp:"open",url:"https://www.amgen.com/responsibility/healthy-society/community-investment/independent-medical-education-funding"},
+ {co:"Boehringer Ingelheim",region:"US",spaces:["endocrinology","immunology"],focus:"ILD/SARD-ILD RFP; diabetes/obesity plausible",rfp:"limited",url:"https://pro.boehringer-ingelheim.com/funding/"},
+ {co:"UCB",region:"US/Global",spaces:["immunology"],focus:"Immuno-derm (bimekizumab); rheumatology/lupus/MG. No public topic list",rfp:"limited",url:"https://www.ucb.com/innovation/funding"},
+ {co:"Novo Nordisk",region:"Global",spaces:["endocrinology","cardiovascular"],focus:"Diabetes, obesity, MASH, cardiovascular",rfp:"open",url:"https://www.novonordisk.com/contact-us/external-support.html"},
+ {co:"Bayer",region:"US",spaces:["cardiovascular","endocrinology"],focus:"Stroke Prevention; CKD in T2D; Heart Failure; Cardio-Kidney-Metabolic",rfp:"open",url:"https://www.grants-contributions.bayer.com/home/medical-educational-grants"},
+ {co:"Merck (MSD)",region:"US",spaces:["endocrinology","immunology"],focus:"Cardiometabolic (T2D) + immunology (live list unverified — JS app)",rfp:"signal",url:"https://www.msdimegrants.com/"},
+ {co:"Incyte",region:"US",spaces:["immunology"],focus:"Immuno-dermatology (AD, vitiligo, HS) + autoimmunity",rfp:"limited",url:"https://www.incytegrantsandgiving.com/"},
+ {co:"Takeda",region:"US",spaces:["immunology"],focus:"Plaque Psoriasis (TYK2) open; IBD, EoE, CIDP, HAE, PID open",rfp:"open",url:"https://www.takeda.com/en-us/science/independent-medical-education-grants/"},
  {co:"Gilead",region:"US/Global",spaces:["immunology"],focus:"Inflammation TA; unsolicited, must align to TAs",rfp:"limited",url:"https://www.gilead.com/responsibility/medical-education"},
- {co:"Galderma",region:"US",spaces:["dermatology"],focus:"Dermatology — monetary grants RFP-gated only (since Nov 2024)",rfp:"limited",url:"https://galderma-portal.idea-point.com/Request-for-Proposals.aspx?groupid=GRANT"},
- {co:"LEO Pharma",region:"US",spaces:["dermatology"],focus:"Pure-play dermatology CE/HCP education (confirm live status)",rfp:"signal",url:"https://leo-portal.idea-point.com/"},
- {co:"Organon",region:"US",spaces:["dermatology","immunology"],focus:"Dermatology & biosimilars (touches rheum/immunology)",rfp:"limited",url:"https://www.organongrants.com/"},
- {co:"Roche / Genentech",region:"Global",spaces:["endocrine","immunology","ophthalmology"],focus:"Obesity+MASH; lupus nephritis (Gazyva); TL1A IBD; wet AMD durability (Vabysmo). Posts named RFPs",rfp:"limited",url:"https://www.gene.com/good/giving/corporate-giving/imed"},
+ {co:"Galderma",region:"US",spaces:["immunology"],focus:"Dermatology — monetary grants RFP-gated only (since Nov 2024)",rfp:"limited",url:"https://galderma-portal.idea-point.com/Request-for-Proposals.aspx?groupid=GRANT"},
+ {co:"LEO Pharma",region:"US",spaces:["immunology"],focus:"Pure-play dermatology CE/HCP education (confirm live status)",rfp:"signal",url:"https://leo-portal.idea-point.com/"},
+ {co:"Organon",region:"US",spaces:["immunology"],focus:"Dermatology & biosimilars (touches rheum/immunology)",rfp:"limited",url:"https://www.organongrants.com/"},
+ {co:"Roche / Genentech",region:"Global",spaces:["endocrinology","immunology","ophthalmology"],focus:"Obesity+MASH; lupus nephritis (Gazyva); TL1A IBD; wet AMD durability (Vabysmo). Posts named RFPs",rfp:"limited",url:"https://www.gene.com/good/giving/corporate-giving/imed"},
  {co:"Daiichi Sankyo",region:"US (+ex-US)",spaces:["cardiovascular"],focus:"Anticoagulation (edoxaban); US portal currently oncology-weighted",rfp:"signal",url:"https://grantsandgivingportal.dsi.steeprockinc.com/"},
  {co:"Ionis",region:"US",spaces:["cardiovascular"],focus:"Factor XI antisense (fesomersen); thrombosis",rfp:"limited",url:"https://ionis-grants.steeprockinc.com/"},
- {co:"Madrigal",region:"US",spaces:["endocrine"],focus:"MASH (resmetirom) — defines the treatment paradigm",rfp:"open",url:"https://madrigalcorporategiving.com/medical-educational-grants"},
- {co:"Corcept",region:"US",spaces:["endocrine"],focus:"Hypercortisolism / Cushing's (relacorilant)",rfp:"limited",url:"https://www.corcept.com/resources/grants/"},
+ {co:"Madrigal",region:"US",spaces:["endocrinology"],focus:"MASH (resmetirom) — defines the treatment paradigm",rfp:"open",url:"https://madrigalcorporategiving.com/medical-educational-grants"},
+ {co:"Corcept",region:"US",spaces:["endocrinology"],focus:"Hypercortisolism / Cushing's (relacorilant)",rfp:"limited",url:"https://www.corcept.com/resources/grants/"},
  {co:"argenx",region:"Global",spaces:["immunology"],focus:"FcRn (efgartigimod) — MG, CIDP, autoimmune",rfp:"open",url:"https://www.argenx.com/grants"},
  {co:"Vertex (Alpine)",region:"US",spaces:["immunology"],focus:"BAFF/APRIL (povetacicept) — IgAN, autoimmune nephrology",rfp:"limited",url:"https://www.vrtx.com/responsibility/grants-and-giving"},
  {co:"Aurinia",region:"US",spaces:["immunology"],focus:"Lupus nephritis (voclosporin) — CME grants via CME@auriniapharma.com",rfp:"limited",url:"https://www.auriniapharma.com/company/responsibility"},
  {co:"Otsuka",region:"US",spaces:["immunology"],focus:"IgA nephropathy (anti-APRIL); nephrology/immunology",rfp:"limited",url:"https://www.otsukagrants.com/"},
  {co:"Biogen",region:"US",spaces:["immunology"],focus:"SLE / cutaneous lupus (litifilimab, dapirolizumab)",rfp:"limited",url:"https://grantsandgiving.biogen.com/"},
- {co:"Sun Pharma",region:"US",spaces:["dermatology"],focus:"Alopecia (deuruxolitinib); psoriasis (tildrakizumab)",rfp:"limited",url:"https://sunpharmamedical.com/grant-and-iit-submissions"},
+ {co:"Sun Pharma",region:"US",spaces:["immunology"],focus:"Alopecia (deuruxolitinib); psoriasis (tildrakizumab)",rfp:"limited",url:"https://sunpharmamedical.com/grant-and-iit-submissions"},
  {co:"Alexion (AstraZeneca Rare)",region:"US/Global",spaces:["raredisease","immunology"],focus:"Complement, rare hematology & rare renal (PNH, aHUS, C3G, gMG)",rfp:"open",url:"https://alexion.com/grants"},
  {co:"Alnylam",region:"US/Global",spaces:["raredisease"],focus:"RNAi — ATTR amyloidosis, rare metabolic/hepatic",rfp:"open",url:"https://www.alnylam.com/about-alnylam/grants-and-giving"},
  {co:"BioMarin",region:"US/Global",spaces:["raredisease"],focus:"Rare growth/metabolic & enzyme therapies (Voxzogo)",rfp:"open",url:"https://www.biomarin.com/science/external-scientific-support/"},
@@ -1142,8 +1167,8 @@ const MASTER = [
  {co:"Alcon",region:"US",spaces:["ophthalmology"],focus:"Cataract/IOL, vitreoretinal, glaucoma, dry eye — portal reopens Fall 2026 for 2027",rfp:"limited",url:"https://www.alconscience.com/medical-education/independent/"},
  {co:"Tarsus",region:"US",spaces:["ophthalmology"],focus:"Demodex blepharitis / ocular surface (Xdemvy) — unsolicited, 45–60 days",rfp:"open",url:"https://www.tarsus-science.com"}
 ];
-const SPACECOLOR = {cardiovascular:"var(--cardio)",nephrology:"var(--nephro)",endocrine:"var(--endo)",dermatology:"var(--derm)",immunology:"var(--immuno)",raredisease:"var(--rare)",ophthalmology:"var(--oph)"};
-const SPACENAME = {cardiovascular:"Cardiovascular",nephrology:"Nephrology",endocrine:"Endocrine",dermatology:"Dermatology",immunology:"Immunology",raredisease:"Rare Disease",ophthalmology:"Ophthalmology"};
+const SPACECOLOR = {cardiovascular:"var(--cardio)",nephrology:"var(--nephro)",endocrinology:"var(--endo)",immunology:"var(--immuno)",raredisease:"var(--rare)",ophthalmology:"var(--oph)"};
+const SPACENAME = {cardiovascular:"Cardiovascular",nephrology:"Nephrology",endocrinology:"Endocrinology",immunology:"Immunology",raredisease:"Rare Disease",ophthalmology:"Ophthalmology"};
 /* Verified IME/CME grant-program contact mailboxes (official pages, 2026). null = portal form only. */
 const CONTACTS = {
  "Pfizer":null,"Eli Lilly":null,"AbbVie":"abbviegrants@abbvie.com","Bristol Myers Squibb":null,
@@ -1173,20 +1198,20 @@ const WATCH = [
  {co:"Roche / Genentech",space:"nephrology",asset:"obinutuzumab (Gazyva) in primary membranous nephropathy",trigger:"Priority review, Nov 2026 FDA action date → defined pre-launch window in an indication with almost no existing CME",timing:"Watch 2027"},
  {co:"Otsuka",space:"nephrology",asset:"sibeprenlimab (anti-APRIL)",trigger:"Ph3/filed in IgAN → adds a fifth mechanism; established renal funder already, so this is submit-ready rather than warm-up",timing:"Watch 2026–27"},
  {co:"Apellis",space:"nephrology",asset:"pegcetacoplan (Empaveli) in C3G / IC-MPGN",trigger:"First-ever therapies approved Jul 2025 → prescriber familiarity near zero, structural education demand",timing:"Now"},
- {co:"Viking Therapeutics",space:"endocrine",asset:"VK2735 (GLP-1/GIP, SC + oral)",trigger:"Ph3 VANQUISH data / first obesity approval → likeliest near-term new obesity supporter",timing:"Watch 2026–27",hot:true},
- {co:"Akero",space:"endocrine",asset:"efruxifermin (FGF21)",trigger:"Ph3 SYNCHRONY in MASH → approval would drive first fibrosis education",timing:"Watch 2026–27"},
- {co:"Zealand Pharma",space:"endocrine",asset:"petrelintide (amylin); survodutide (lic. BI)",trigger:"Petrelintide Ph3 + survodutide filing → likely to establish a grant program",timing:"Watch 2027"},
- {co:"Structure Therapeutics",space:"endocrine",asset:"aleniglipron (oral GLP-1)",trigger:"Advance to Ph3 / partnering → oral GLP-1 launch education need",timing:"Watch 2027+"},
- {co:"Inventiva",space:"endocrine",asset:"lanifibranor (pan-PPAR)",trigger:"Ph3 NATiV3 MASH readout → potential MASH supporter",timing:"Watch 2026–27"},
+ {co:"Viking Therapeutics",space:"endocrinology",asset:"VK2735 (GLP-1/GIP, SC + oral)",trigger:"Ph3 VANQUISH data / first obesity approval → likeliest near-term new obesity supporter",timing:"Watch 2026–27",hot:true},
+ {co:"Akero",space:"endocrinology",asset:"efruxifermin (FGF21)",trigger:"Ph3 SYNCHRONY in MASH → approval would drive first fibrosis education",timing:"Watch 2026–27"},
+ {co:"Zealand Pharma",space:"endocrinology",asset:"petrelintide (amylin); survodutide (lic. BI)",trigger:"Petrelintide Ph3 + survodutide filing → likely to establish a grant program",timing:"Watch 2027"},
+ {co:"Structure Therapeutics",space:"endocrinology",asset:"aleniglipron (oral GLP-1)",trigger:"Advance to Ph3 / partnering → oral GLP-1 launch education need",timing:"Watch 2027+"},
+ {co:"Inventiva",space:"endocrinology",asset:"lanifibranor (pan-PPAR)",trigger:"Ph3 NATiV3 MASH readout → potential MASH supporter",timing:"Watch 2026–27"},
  {co:"Abivax",space:"immunology",asset:"obefazimod (oral, UC)",trigger:"Positive Ph3 ABTECT; NDA planned late 2026 → strong near-term IBD supporter candidate",timing:"Watch 2026–27",hot:true},
  {co:"Immunovant",space:"immunology",asset:"IMVT-1402 (next-gen anti-FcRn)",trigger:"Ph3 across autoimmune → FcRn launch would need broad education",timing:"Watch 2027"},
  {co:"Vera Therapeutics",space:"immunology",asset:"atacicept (BAFF/APRIL)",trigger:"Ph3 ORIGIN in IgA nephropathy → nephrology-immunology education at launch",timing:"Watch 2026–27"},
  {co:"Travere",space:"immunology",asset:"sparsentan (Filspari)",trigger:"Already marketed in IgAN/FSGS — likely to formalize an IME program soon",timing:"Watch now",hot:true},
  {co:"Cabaletta / Kyverna",space:"immunology",asset:"CD19 CAR-T (autoimmune)",trigger:"Pivotal autoimmune CAR-T trials → paradigm-shift education need if approved",timing:"Watch 2027+"},
- {co:"Alumis",space:"dermatology",asset:"ESK-001 (oral TYK2)",trigger:"Ph3 ONWARD → oral TYK2 psoriasis launch education",timing:"Watch 2027"},
- {co:"Celldex",space:"dermatology",asset:"barzolvolimab (anti-KIT)",trigger:"Ph3 in CSU → novel mechanism, high education need at launch",timing:"Watch 2026–27",hot:true},
- {co:"Arcutis",space:"dermatology",asset:"roflumilast (Zoryve, topical PDE4)",trigger:"Already marketed & expanding label — likely to formalize grant funding",timing:"Watch now"},
- {co:"Apogee",space:"dermatology",asset:"APG777 (anti-IL-13)",trigger:"Ph2/3 in AD → dosing-differentiated biologic launch",timing:"Watch 2027+"},
+ {co:"Alumis",space:"immunology",sub:"derm",asset:"ESK-001 (oral TYK2)",trigger:"Ph3 ONWARD → oral TYK2 psoriasis launch education",timing:"Watch 2027"},
+ {co:"Celldex",space:"immunology",sub:"derm",asset:"barzolvolimab (anti-KIT)",trigger:"Ph3 in CSU → novel mechanism, high education need at launch",timing:"Watch 2026–27",hot:true},
+ {co:"Arcutis",space:"immunology",sub:"derm",asset:"roflumilast (Zoryve, topical PDE4)",trigger:"Already marketed & expanding label — likely to formalize grant funding",timing:"Watch now"},
+ {co:"Apogee",space:"immunology",sub:"derm",asset:"APG777 (anti-IL-13)",trigger:"Ph2/3 in AD → dosing-differentiated biologic launch",timing:"Watch 2027+"},
  {co:"Intellia",space:"raredisease",asset:"lonvo-z (in vivo CRISPR, hereditary angioedema)",trigger:"Ph3 HAELO positive, rolling BLA → potential 2027 launch; first in-vivo CRISPR for HAE = major education need",timing:"Watch 2027",hot:true},
  {co:"Zevra",space:"raredisease",asset:"arimoclomol (Miplyffa, Niemann-Pick type C)",trigger:"First NPC therapy already marketed — may formalize a CME/grants program",timing:"Watch now"},
  {co:"Ocular Therapeutix",space:"ophthalmology",asset:"Axpaxli (OTX-TKI, wet AMD)",trigger:"Ph3 SOL-1 positive; NDA pending; SOL-R Q1 2027 → highest-probability new wet-AMD durability launch; build Medical Affairs relationship now",timing:"Watch 2026–27",hot:true},
@@ -1197,9 +1222,9 @@ const WATCH = [
 ,
  {co:"Pharvaris",space:"raredisease",asset:"deucrictibant IR (oral B2 antagonist, HAE on-demand)",trigger:"FDA accepted NDA Jul 2026 with PDUFA 23 Apr 2027 → second oral on-demand HAE agent; competitive launch education",timing:"Watch 2027",hot:true},
  {co:"Kyverna",space:"immunology",asset:"miv-cel / KYV-101 (CD19 CAR-T, stiff person syndrome)",trigger:"Rolling BLA completing Q4 2026 under RMAT → potential first-ever autoimmune CAR-T approval and 2027 launch",timing:"Watch 2027",hot:true},
- {co:"Incyte",space:"dermatology",asset:"povorcitinib (oral JAK1, hidradenitis suppurativa)",trigger:"NDA accepted Q1 2026 → US approval/launch anticipated Q1 2027; grants portal already open",timing:"Watch 2027",hot:true},
- {co:"Alumis",space:"dermatology",asset:"envudeucitinib / ESK-001 (oral TYK2)",trigger:"NDA submission on track Q4 2026 → 2027 FDA action; no grants portal found, build Medical Affairs relationship now",timing:"Watch 2027"},
- {co:"Inventiva",space:"endocrine",asset:"lanifibranor (pan-PPAR, MASH)",trigger:"NATiV3 topline Q4 2026 → NDA submission guided H1 2027; first-time MASH funder candidate",timing:"Watch 2027"},
+ {co:"Incyte",space:"immunology",sub:"derm",asset:"povorcitinib (oral JAK1, hidradenitis suppurativa)",trigger:"NDA accepted Q1 2026 → US approval/launch anticipated Q1 2027; grants portal already open",timing:"Watch 2027",hot:true},
+ {co:"Alumis",space:"immunology",sub:"derm",asset:"envudeucitinib / ESK-001 (oral TYK2)",trigger:"NDA submission on track Q4 2026 → 2027 FDA action; no grants portal found, build Medical Affairs relationship now",timing:"Watch 2027"},
+ {co:"Inventiva",space:"endocrinology",asset:"lanifibranor (pan-PPAR, MASH)",trigger:"NATiV3 topline Q4 2026 → NDA submission guided H1 2027; first-time MASH funder candidate",timing:"Watch 2027"},
  {co:"Outlook Therapeutics",space:"ophthalmology",asset:"Lytenava (bevacizumab-vikg, wet AMD)",trigger:"FDA approved Jul 2026 — first on-label ophthalmic bevacizumab; payer/formulary education need now",timing:"Watch now",hot:true},
  {co:"Kodiak Sciences",space:"ophthalmology",asset:"KSI-101 (macular edema secondary to inflammation)",trigger:"PINNACLE Ph3 topline Q2 2027; Zenkuda BLA late 2026 → new disease category with high unmet education need",timing:"Watch 2027"}
 ];
@@ -1210,7 +1235,7 @@ const NEWSUPP = [
   contact:"Med-Ed grants via CyberGrants portal · Medical Info portal <a href='https://medicalaffairs.travere.com/medical-information/' target='_blank' rel='noopener'>medicalaffairs.travere.com</a> · AE line 1-877-659-5518 · MSL locator on site",
   portal:["Medical Education Grants","https://travere.com/our-company/grants/medical-education-grants/"],
   notes:"The benchmark — formal grants office + med-affairs org already in place (really an active funder, not just emerging)."},
- {co:"Arcutis",space:"dermatology",ta:"Dermatology (roflumilast, ZORYVE)",catalyst:"Marketed & expanding label (psoriasis, AD, seb derm)",funding:"Y",
+ {co:"Arcutis",space:"immunology",sub:"derm",ta:"Dermatology (roflumilast, ZORYVE)",catalyst:"Marketed & expanding label (psoriasis, AD, seb derm)",funding:"Y",
   compCME:[["NPF Continuing Education","https://www.psoriasis.org/continuing-education/"]],
   contact:"Med-Ed (CME) grant portal (below) · Medical Info <a href='https://mi-ssp.scimaxmi.com/Arcutis-MI' target='_blank' rel='noopener'>mi-ssp.scimaxmi.com</a>, 1-844-692-6729 · <a href='mailto:information@arcutis.com'>information@arcutis.com</a>",
   portal:["Medical Education Grant portal","https://arcutis.envisionpharma.com/ienv_arcutis/visiontracker/portal/login.xhtml?pgm=CME"],
@@ -1230,32 +1255,32 @@ const NEWSUPP = [
   contact:"<a href='mailto:info@abivax.com'>info@abivax.com</a> · CMO Fabio Cataldi, MD · VP Global Head of Medical Affairs Chris Rabbat, PhD · CCO Michael Nesrallah",
   portal:["None found",""],
   notes:"Nearest to launch; named VP Global Head of Med Affairs = strongest emerging signal. (STAT noted safety questions Jun 2026.)"},
- {co:"Viking Therapeutics",space:"endocrine",ta:"Obesity / metabolic (VK2735)",catalyst:"Ph3 VANQUISH data / first obesity approval",funding:"Emerging",
+ {co:"Viking Therapeutics",space:"endocrinology",ta:"Obesity / metabolic (VK2735)",catalyst:"Ph3 VANQUISH data / first obesity approval",funding:"Emerging",
   compCME:[["NEJM/MMS — Advancements in Obesity Management","https://ce.massmed.nejm.org/obesity-cme-ce/content/demand-recent-advancements-management-obesity-focus-pharmacotherapies"]],
   contact:"<a href='mailto:info@vikingtherapeutics.com'>info@vikingtherapeutics.com</a>, 858-704-4660 · CMO Hubert C. Chen, MD · VP Medical Affairs Karen C. Chung, PharmD",
   portal:["None found",""],
   notes:"Med-affairs build-out (CMO + VP MA added) is the key signal; likeliest near-term obesity supporter."},
- {co:"Zealand Pharma",space:"endocrine",ta:"Obesity (petrelintide)",catalyst:"Petrelintide Ph3 + Roche partnership",funding:"Emerging",
+ {co:"Zealand Pharma",space:"endocrinology",ta:"Obesity (petrelintide)",catalyst:"Petrelintide Ph3 + Roche partnership",funding:"Emerging",
   compCME:[["NEJM/MMS — Advancements in Obesity Management","https://ce.massmed.nejm.org/obesity-cme-ce/content/demand-recent-advancements-management-obesity-focus-pharmacotherapies"]],
   contact:"Web form + compliance hotline · DK +45 88 77 36 00 · US office Boston · EVP/CMO David Kendall · CCO Eric Cox",
   portal:["None found",""],
   notes:"Building commercial org; grants program likely near-term."},
- {co:"Celldex",space:"dermatology",ta:"Chronic spontaneous urticaria (barzolvolimab)",catalyst:"Global Ph3 in CSU",funding:"Emerging",
+ {co:"Celldex",space:"immunology",sub:"derm",ta:"Chronic spontaneous urticaria (barzolvolimab)",catalyst:"Global Ph3 in CSU",funding:"Emerging",
   compCME:[["Healio/Vindico — CSU Situation Room","https://www.healio.com/cme/allergy-asthma/20250319/chronic-spontaneous-urticaria-situation-room/overview"]],
   contact:"<a href='mailto:info@celldex.com'>info@celldex.com</a>, (908) 454-7120 · CMO Diane C. Young, MD, SVP · CCO Teri Lawver",
   portal:["None found",""],
   notes:"CCO hire (Nov 2025) signals commercial/med-affairs build-out."},
- {co:"Akero",space:"endocrine",ta:"MASH (efruxifermin)",catalyst:"Ph3 SYNCHRONY readout",funding:"N",
+ {co:"Akero",space:"endocrinology",ta:"MASH (efruxifermin)",catalyst:"Ph3 SYNCHRONY readout",funding:"N",
   compCME:[["Decera/CCO — MASLD & MASH Therapeutics","https://deceraclinical.com/education/activities/gastroenterology/masld-and-mash-therapeutics/27460"]],
   contact:"Web form · (650) 487-6488 · VP Clinical Research & Med Affairs Reshma Shringarpure, PhD",
   portal:["None found",""],
   notes:"Now a Novo Nordisk company — future med-ed funding likely routes via Novo channels."},
- {co:"Inventiva",space:"endocrine",ta:"MASH (lanifibranor)",catalyst:"Ph3 NATiV3 topline",funding:"N",
+ {co:"Inventiva",space:"endocrinology",ta:"MASH (lanifibranor)",catalyst:"Ph3 NATiV3 topline",funding:"N",
   compCME:[["AASLD LiverLearning — Unmasking MASH & MASLD","https://liverlearning.aasld.org/Listing/Unmasking-MASH-and-MASLD-17444"]],
   contact:"<a href='mailto:info@inventivapharma.com'>info@inventivapharma.com</a> · CMO Jason Campagna, MD, PhD · CEO Andrew Obenshain",
   portal:["None found",""],
   notes:"No med-affairs/grants function published yet; leadership page stale."},
- {co:"Structure Therapeutics",space:"endocrine",ta:"Obesity — oral GLP-1 (aleniglipron)",catalyst:"Advance to Ph3 / partnering",funding:"N",
+ {co:"Structure Therapeutics",space:"endocrinology",ta:"Obesity — oral GLP-1 (aleniglipron)",catalyst:"Advance to Ph3 / partnering",funding:"N",
   compCME:[["ExchangeCME — Managing Obesity in Adolescents","https://www.exchangecme.com/ObesityTop10"]],
   contact:"IR <a href='mailto:ir@structuretx.com'>ir@structuretx.com</a> · CMO Blai Coll, MD, PhD (no med-info mailbox)",
   portal:["None found",""],
@@ -1270,12 +1295,12 @@ const NEWSUPP = [
   contact:"<a href='mailto:contactus@cabalettabio.com'>contactus@cabalettabio.com</a>, +1 267 759 3100 · CMO David J. Chang, MD, MPH",
   portal:["None found",""],
   notes:"Pre-commercial; no med-ed grants yet."},
- {co:"Alumis",space:"dermatology",ta:"Psoriasis — oral TYK2 (ESK-001)",catalyst:"Ph3 ONWARD topline",funding:"N",
+ {co:"Alumis",space:"immunology",sub:"derm",ta:"Psoriasis — oral TYK2 (ESK-001)",catalyst:"Ph3 ONWARD topline",funding:"N",
   compCME:[["ODAC — JAK/TYK2 Inhibition in Psoriasis","https://orlandoderm.org/jak-tyk2-inhibition-new-frontiers-in-the-treatment-of-psoriasis-virtual-cme-event/"]],
   contact:"<a href='mailto:info@alumis.com'>info@alumis.com</a>, (650) 231-6625 · CMO Jörn Drappa, MD, PhD",
   portal:["None found",""],
   notes:"Pre-commercial; catalyst = ONWARD topline."},
- {co:"Apogee",space:"dermatology",ta:"Atopic dermatitis (APG777)",catalyst:"Ph2 APEX positive → Ph3",funding:"N",
+ {co:"Apogee",space:"immunology",sub:"derm",ta:"Atopic dermatitis (APG777)",catalyst:"Ph2 APEX positive → Ph3",funding:"N",
   compCME:[["Clinical Care Options — IL-13 Inhibition in AD","https://clinicaloptions.com/program/dermatology/il-13-inhibition-in-moderate-to-severe-atopic-dermatitis/33851"]],
   contact:"<a href='mailto:info@apogeetherapeutics.com'>info@apogeetherapeutics.com</a> · CMO Carl Dambkowski, MD (HCP routing via form)",
   portal:["None found",""],
@@ -1374,7 +1399,7 @@ const CINTEL = {
    ],
    businessImplications:"IgA nephropathy went from one approved therapy in 2021 to eight-plus approved or filed assets by 2027 across Novartis (two), Travere, Calliditas, Otsuka, Vertex and Vera — every one of them needs sequencing education because there are no head-to-head trials. Vertex and Vera are approaching first-ever renal commercial products, which is historically the moment a company stands up an IME budget — earliest and highest-value relationship window in this tracker. Roche's primary membranous nephropathy priority review (Nov 2026 action date) opens a second launch window in an indication with almost no existing education. C3G and IC-MPGN received first-ever therapies in 2025, meaning prescriber familiarity is near zero and education demand is structural rather than promotional. The provider field in nephrology is thinner than cardiology or immunology, so competitive cost of entry is lower. Cardio-kidney-metabolic framing (Bayer, AstraZeneca, Boehringer) lets a single concept draw funding from cardiovascular, endocrine and nephrology budgets simultaneously."
  },
- endocrine:{
+ endocrinology:{
    funders2526:"Lilly is confirmed (via direct fetch of its own transparency registry) as the most active, most transparent funder: its Q1 2026 filing alone lists 18 Endocrine-category awards (obesity, T2D, once-weekly insulin, OSA) to recipients including PeerView, ACHL, Pri-Med Institute, AACE/Endocrine Society, and the ADA; its full-year 2025 filing adds ~40 more, with Clinical Care Options (Decera) receiving 4 separate obesity/T2D grants. Novo Nordisk confirmed active via two closed-but-informative 2025 obesity RFPs (CGA-APR25-ObEarly/ObHighlights, ex-US/UK) and a confirmed ACP 'Obesity Management: Pharmacotherapy' grant (credit through April 2027). Amgen's standing Areas of Interest explicitly name obesity/GIP-GLP-1 biology as active, though no dated RFP was found.",
    formats:"Lilly funds mainly accredited educational programs and healthcare-improvement/QI initiatives (e.g., Kaiser CGM population-health projects), plus fellowships (Endocrine Society Obesity Fellows Program, Univ. of Puerto Rico endocrinology fellowship). Novo Nordisk's confirmed RFPs were structured as ex-US regional CME programs; its ACP grant funded an online learning-center course.",
    topics:"Once-weekly basal insulin transition education, obesity pharmacotherapy and destigmatization, incretin/amylin combination therapy (Lilly RFP language explicitly references 'emerging biologics, e.g. amylin'), pediatric obesity, and cardiometabolic risk in T2D.",
@@ -1393,26 +1418,6 @@ const CINTEL = {
     {provider:"Decera/CCO",program:"Building a Comprehensive Obesity Care Clinic",format:"On-demand CME",url:"https://deceraclinical.com/education/activities/internal-medicine/obesity-clinic/17384-25053/info"}
    ],
    businessImplications:"GLP-1 market exceeds $50B+ globally by 2026 — Novo Nordisk, Lilly, Amgen all have massive launch education budgets. Oral GLP-1 race (orforglipron, oral semaglutide) creates differentiation-education demand. MASH is a new $10B+ market (resmetirom first-in-class 2024) with Madrigal + Novo Nordisk actively funding. Insurance/access barriers for GLP-1s drive managed-care education needs. Each new indication (HFpEF, CKD, OSA, MASH) expands the addressable HCP audience beyond endocrinology."
- },
- dermatology:{
-   funders2526:"Lilly funds dermatology under its 'Immunology' category (confirmed no separate Dermatology tag exists) — 30+ 2025-26 grants including Clinical Care Options (Decera) programs on pediatric AD and IL-13 inhibitors, National Psoriasis Foundation collaborative-care programs, and multiple GLP-1/psoriasis-obesity crossover programs (AKH Inc., FRED Education Group/CMEsquared). BMS is the most CME-visible funder of TYK2/JAK-class education (ACHL 'TYK2 Inhibitors in Psoriasis,' ODAC/Paradigm 'JAK/TYK2 Inhibition' — though the latter is a stale 2021 listing). Amgen funds OX40/OX40L-pathway AD education via PER (through Aug 2026) despite its own rocatinlimab asset being discontinued. Galderma is the most derm-dedicated, RFP-disciplined funder with a live open RFP: 'H1 2027 U.S. Independent Accredited Education at Dermatology and Aesthetic Industry Meetings.'",
-   formats:"Confirmed formats include accredited multi-part curricula (PER, ACHL), congress-based product theaters and bootcamps (DermNPPA's Oct 2026 Chicago Biologic & Small Molecule Bootcamp, sponsored by Arcutis and Lilly), and Lilly-style single-program educational grants plus fellowships (Univ. of Pittsburgh alopecia/skin-of-color fellowship).",
-   topics:"TYK2/JAK-class competition in psoriasis, IL-13/IL-31 mechanisms in AD, psoriasis-obesity comorbidity (a recurring Lilly theme), skin-of-color equity in AD/psoriasis diagnosis, and HS/CSU disease-state education at derm congresses.",
-   providers:"Clinical Care Options (Decera), PeerView/PVI, ACHL, PER, National Psoriasis Foundation, DermNPPA, AKH Inc., FRED Education Group/CMEsquared, Medical Education Resources.",
-   receptivity:"AbbVie is confirmed gated as of Jan 1, 2024 — IME requests accepted only from providers already in its IME Provider Network (does not affect fellowships, patient education, or its Call for Grants). Galderma is confirmed RFP-only for monetary support ('no longer accepting monetary grant requests unless in response to an RFP') though in-kind/product support remains unsolicited. Takeda's CGA portal shows zero open RFPs across all therapeutic areas as of this pass, including immunology/derm. Lilly remains the most consistently open, rolling funder.",
-   priorities:"A major correction to prior assumptions: Sanofi discontinued amlitelimab in atopic dermatitis on July 24, 2026, two days before this research, stating it does not meaningfully improve on standard of care — combined with Amgen/Kyowa Kirin's earlier rocatinlimab discontinuation, the OX40/OX40L mechanism in AD is now effectively dormant despite an active Amgen-funded class-education grant still running through Aug 2026. This significantly narrows near-term OX40 education demand. TYK2 competition (BMS's deucravacitinib vs. Takeda's zasocitinib vs. Alumis's ESK-001) and psoriasis-obesity comorbidity remain the most active funded themes; Galderma's nemolizumab (IL-31, HS) is the most RFP-disciplined near-term opportunity given its live 2027 congress-education RFP.",
-   competitorGaps:"HMP Global is strongest via Masterclasses in Dermatology + The Dermatologist publication. Medscape dominates reach. PlatformQ partners with patient-advocacy orgs (AAFA, NORD). No competitor offers AI-powered virtual patient simulations with branching biologic-sequencing decisions. No community-level practice benchmarking ('how do peers in your region sequence IL-23 vs. IL-17?'). No longitudinal case formats tracking outcomes over months. No multidisciplinary team simulations (derm + rheum for PsA, derm + GI for IBD overlap). No real-time decision-support tools that also grant CME credit.",
-   deceraEdge:"ACTiconsult wins on biologic sequencing after first-line failure and HS treatment algorithms beyond adalimumab — no competitor offers interactive simulation for these. Activeer fills the community benchmarking gap entirely (zero competition). ClinicalThought can target the underserved prurigo nodularis and vitiligo spaces where few structured CME series exist. Quality Improvement addresses cross-specialty coordination workflows (derm + rheum + GI).",
-   underservedDecisions:"Biologic sequencing after failure (IL-17 vs. IL-23 vs. JAK); comorbidity-aware therapy selection (CV, metabolic, psychiatric); special populations (pediatric AD/psoriasis, pregnancy, skin of color); HS treatment beyond adalimumab; biosimilar transition communication; prurigo nodularis and vitiligo management.",
-   competitorFormats:[
-    {provider:"HMP Global",program:"Masterclasses in Dermatology 2026",format:"Live AI-driven conference",url:"https://hmpglobal.com/news/hmp-globals-masterclasses-dermatology-2026-delivers-ai-driven-case-based-cme-real-world"},
-    {provider:"PeerView",program:"Oral IL-23 Inhibitors in Psoriasis",format:"On-demand CME",url:"https://lrn.peerview.com/150211553/150211553_p1/ptgroup"},
-    {provider:"Medscape",program:"AAD 2026: Updates in Psoriasis",format:"Conference coverage",url:"https://www.medscape.com/viewarticle/updates-psoriasis-and-related-disorders-aad-2026-2026a10008be"},
-    {provider:"RMEI",program:"AD Management Learning Pathway",format:"On-demand CME",url:"https://rmei.realcme.com/learner/course/1953"},
-    {provider:"ReachMD",program:"On the Frontlines of Psoriasis",format:"Podcast series",url:"https://reachmd.com/programs/frontlines-psoriasis/"},
-    {provider:"Rockpointe",program:"New Therapies for AD Webcourse",format:"On-demand webcourse",url:"https://www.rockpointe.com/courses/a-bright-horizon-staying-up-to-date-with-new-and-emerging-therapies-for-atopic-dermatitis-webcourse/"}
-   ],
-   businessImplications:"Biologic market in psoriasis/AD exceeds $30B. Oral TYK2/JAK competition (deucravacitinib, zasocitinib, ESK-001) could disrupt the injectable-biologic paradigm — every manufacturer needs switch/sequence education. Dupixent biosimilar wave coming (2025-26 patent cliff) drives biosimilar-switching education demand. HS has 2 new approvals with limited HCP familiarity → high education need, low competition. Psoriasis-obesity comorbidity is an emerging cross-TA education theme funded by Lilly."
  },
  immunology:{
    funders2526:"Verified via Lilly's own published grant registry (rare, most companies don't disclose one): 61 immunology grants in FY2025 to Medscape/WebMD, Med Learning Group (highest volume, 7 grants), Health Sciences Educational Institute, Clinical Care Options, FRED Education Group/CMEsquared, HMP Education, PeerView, AGA Institute, Crohn's & Colitis Foundation, National Psoriasis Foundation and multiple academic centers. Confirmed live 2026 RFPs: Novartis ($225K autoimmune CAR-T, closed 7/31/26), argenx (CIDP + MMN RFPs), Genentech ($200K MOGAD, closed 7/24/26), J&J (CAR-T implementation science, extended to 8/7/26).",
@@ -1705,6 +1710,73 @@ const SUPSTRAT = {
  }
 };
 /* WEEKLY-SUPSTRAT-END */
+/* WEEKLY-PDUFA-START — the Monday/Thursday task maintains this block.
+   Upcoming FDA action / PDUFA dates across all six spaces. Shape:
+   {co, asset, indication, space, sub?, date:"YYYY-MM-DD", precision:"exact"|"quarter"|"expected",
+    type:"PDUFA"|"BLA/NDA filed"|"Priority Review"|"AdComm", status, note, url}
+   `date` must be ISO. Use precision to be honest: "exact" only when the company
+   published a specific action date; "quarter" or "expected" otherwise.
+   EVERY entry needs a working source URL. Never invent a date — omit instead. */
+const PDUFA_UPDATED = "August 6, 2026";
+const PDUFA = [
+ {co:"Vertex", asset:"povetacicept (BAFF/APRIL)", indication:"IgA nephropathy", space:"nephrology",
+  date:"2026-11-30", precision:"exact", type:"PDUFA", status:"Under review",
+  note:"Vertex's FIRST-EVER renal product. No nephrology grant programme exists yet — the highest-value pre-launch relationship in the tracker. Enduring content for launch should already be in motion.",
+  url:"https://news.vrtx.com/"},
+ {co:"Roche / Genentech", asset:"obinutuzumab (Gazyva, anti-CD20)", indication:"Primary membranous nephropathy", space:"nephrology",
+  date:"2026-11-30", precision:"quarter", type:"Priority Review", status:"Under review",
+  note:"Beat tacrolimus in the pivotal trial. PMN has almost no existing CME — one of the emptiest education fields with a near-term launch.",
+  url:"https://www.roche.com/media/releases/med-cor-2026-07-15"},
+ {co:"Bayer", asset:"asundexian (oral Factor XIa)", indication:"Secondary stroke prevention", space:"cardiovascular",
+  date:"2026-12-31", precision:"quarter", type:"PDUFA", status:"Priority Review",
+  note:"OCEANIC-STROKE positive Nov 2025. First Factor XI approval would open the whole class-positioning education question versus DOACs.",
+  url:"https://www.bayer.com/en/us/news-stories/asundexian-in-patients-after-a-non-cardiovascular-ischemic-stroke"},
+ {co:"Nippon Shinyaku / NS Pharma", asset:"zeleciment rostudirsen", indication:"Duchenne muscular dystrophy", space:"raredisease",
+  date:"2027-01-21", precision:"exact", type:"PDUFA", status:"Priority Review",
+  note:"DMD exon-skipping. Lands amid heightened DMD safety scrutiny after the Elevidys boxed warning — safety-context education is the live need.",
+  url:"https://www.neurologylive.com/view/fda-accepts-bla-z-rostudirsen-dmd-sets-january-pdufa-date"},
+ {co:"Sarepta", asset:"casimersen (Amondys 45) & golodirsen (Vyondys 53)", indication:"Duchenne muscular dystrophy", space:"raredisease",
+  date:"2027-02-28", precision:"exact", type:"PDUFA", status:"Under review",
+  note:"Confirmatory filings. Sarepta's DMD franchise is under safety pressure following the Elevidys boxed warning (Nov 2025).",
+  url:"https://www.neurologylive.com/view/fda-action-update-june-2026-acceptances-clearances-alignments"},
+ {co:"Pharvaris", asset:"deucrictibant (oral bradykinin B2 antagonist)", indication:"Hereditary angioedema, on-demand", space:"raredisease",
+  date:"2027-04-23", precision:"exact", type:"PDUFA", status:"Under review",
+  note:"Second oral on-demand HAE agent after sebetralstat. Sets up a genuinely competitive 2027 HAE education market.",
+  url:"https://www.globenewswire.com/news-release/2026/07/06/3322293/0/en/pharvaris-announces-fda-acceptance-of-new-drug-application-for-deucrictibant-ir-for-on-demand-treatment-of-hereditary-angioedema-attacks.html"},
+ {co:"Eli Lilly", asset:"retatrutide (GIP/GLP-1/glucagon triple agonist)", indication:"Obesity", space:"endocrinology",
+  date:"2027-03-31", precision:"quarter", type:"BLA/NDA filed", status:"BLA guided Q1 2027",
+  note:"Up to 28% weight reduction at 80 weeks across five positive Ph3 trials. Filing guided Q1 2027, so an action date lands late 2027/2028 — the education runway starts NOW.",
+  url:"https://investor.lilly.com/news-releases/news-release-details/lillys-triple-agonist-retatrutide-successful-two-additional"},
+ {co:"Inventiva", asset:"lanifibranor (pan-PPAR)", indication:"MASH", space:"endocrinology",
+  date:"2027-06-30", precision:"quarter", type:"BLA/NDA filed", status:"NDA guided H1 2027",
+  note:"First-time MASH funder — no established grant programme. Worth warming up well ahead of filing.",
+  url:"https://inventivapharma.com/pipeline/clinical-trials/"},
+ {co:"Ocular Therapeutix", asset:"Axpaxli (OTX-TKI, axitinib intravitreal hydrogel)", indication:"Wet AMD", space:"ophthalmology",
+  date:"2027-03-31", precision:"expected", type:"BLA/NDA filed", status:"SOL-1 positive; SOL-R topline Q1 2027",
+  note:"Highest-probability new wet-AMD launch. Sustained-release TKI is a different dosing paradigm from anti-VEGF — real procedural and interval education need.",
+  url:"https://investors.ocutx.com/news-releases"},
+ {co:"EyePoint", asset:"Duravyu (vorolanib TKI insert)", indication:"Wet AMD", space:"ophthalmology",
+  date:"2027-06-30", precision:"expected", type:"BLA/NDA filed", status:"Ph3 topline mid-2026; DME Ph3 starting",
+  note:"Second sustained-TKI depot. If both Axpaxli and Duravyu land, retina specialists face a genuinely new class to sequence.",
+  url:"https://investors.eyepointpharma.com/news-releases"},
+ {co:"Novo Nordisk", asset:"CagriSema (semaglutide + cagrilintide)", indication:"Obesity", space:"endocrinology",
+  date:"2026-12-31", precision:"quarter", type:"PDUFA", status:"Under review",
+  note:"Amylin combination. Securities litigation over tolerability claims survived dismissal, which raises the bar for balanced dosing and tolerability education specifically.",
+  url:"https://www.novonordisk.com/news-and-media/news-and-ir-materials.html"},
+ {co:"Boehringer Ingelheim", asset:"survodutide (GLP-1/glucagon)", indication:"Obesity", space:"endocrinology",
+  date:"2026-12-31", precision:"quarter", type:"PDUFA", status:"Under review",
+  note:"Ph3 SYNCHRONIZE programme. A third late-stage incretin entrant broadens comparative-education need beyond Lilly and Novo.",
+  url:"https://www.boehringer-ingelheim.com/us/human-health/metabolic-diseases/results-phase-iii-synchronize-1-obesity-trial"},
+ {co:"Capricor", asset:"deramiocel (CAP-1002)", indication:"Duchenne cardiomyopathy", space:"raredisease",
+  date:"2026-09-30", precision:"quarter", type:"PDUFA", status:"Priority Review",
+  note:"Cell therapy for DMD cardiomyopathy — a distinct indication from the exon-skippers and a separate education need.",
+  url:"https://www.neurologylive.com/view/fda-action-update-june-2026-acceptances-clearances-alignments"},
+ {co:"Novartis", asset:"zigakibart (anti-APRIL)", indication:"IgA nephropathy", space:"nephrology",
+  date:"2027-12-31", precision:"expected", type:"BLA/NDA filed", status:"Ph3 BEYOND ongoing",
+  note:"Would give Novartis a THIRD IgAN asset alongside Fabhalta and Vanrafia. Sequencing education becomes unavoidable.",
+  url:"https://www.novartis.com/research-development/novartis-pipeline"}
+];
+/* WEEKLY-PDUFA-END */
 /* WEEKLY-CONFERENCES-START — the Monday/Thursday task maintains this block.
    Rolling 12-month congress calendar. The UI filters to today..+12 months
    automatically, so keep roughly 18 months of entries here and drop ones that
@@ -1729,11 +1801,11 @@ const CONFERENCES = [
   note:"Severe asthma and COPD biologics. AstraZeneca (Tezspire), GSK (depemokimab), Sanofi (Dupixent) and Verona/Merck all have a stake here."},
  {name:"EASD Annual Meeting 2026", hashtag:"EASD2026", short:"EASD", org:"European Association for the Study of Diabetes",
   city:"Milan", country:"Italy", start:"2026-09-14", end:"2026-09-18", tbc:true,
-  spaces:["endocrine"], url:"https://www.easd.org/annual-meeting/easd-2026/",
+  spaces:["endocrinology"], url:"https://www.easd.org/annual-meeting/easd-2026/",
   note:"Location confirmed as Milan; exact dates unconfirmed at last check — verify on the EASD site before planning."},
  {name:"EADV Congress 2026", hashtag:"EADV2026", short:"EADV", org:"European Academy of Dermatology and Venereology",
   city:"Vienna", country:"Austria", start:"2026-09-30", end:"2026-10-03",
-  spaces:["dermatology"], sub:["derm"], url:"https://eadv.org/congress/",
+  spaces:["immunology"], sub:["derm"], url:"https://eadv.org/congress/",
   note:"35th annual congress. The main European derm venue — psoriasis, AD, HS, urticaria."},
  {name:"AAO 2026", hashtag:"AAO2026", short:"AAO", org:"American Academy of Ophthalmology",
   city:"New Orleans, LA", country:"USA", start:"2026-10-09", end:"2026-10-12",
@@ -1750,7 +1822,7 @@ const CONFERENCES = [
   note:"THE nephrology meeting and the single highest-value venue in this tracker right now — five approved IgAN mechanisms with no head-to-head data. ASN publishes ancillary-event guidelines, which is how industry satellite sessions get listed."},
  {name:"AASLD The Liver Meeting 2026", hashtag:"TLM26", short:"AASLD", org:"American Association for the Study of Liver Diseases",
   city:"Denver, CO", country:"USA", start:"2026-11-05", end:"2026-11-09",
-  spaces:["endocrine"], url:"https://www.aasld.org/tlm-26/home",
+  spaces:["endocrinology"], url:"https://www.aasld.org/tlm-26/home",
   note:"MASH venue — Madrigal, Novo, Inventiva, Boehringer."},
  {name:"AHA Scientific Sessions 2026", hashtag:"AHA26", short:"AHA", org:"American Heart Association",
   city:"Chicago, IL", country:"USA", start:"2026-11-06", end:"2026-11-09",
@@ -1768,7 +1840,7 @@ const CONFERENCES = [
   note:"Food allergy, anaphylaxis, needle-free epinephrine, OIT. ARS Pharma, ALK, Aimmune territory."},
  {name:"ObesityWeek 2026", hashtag:"OW2026", short:"ObesityWeek", org:"The Obesity Society",
   city:"Washington, DC", country:"USA", start:"2026-11-14", end:"2026-11-17",
-  spaces:["endocrine"], url:"https://obesityweek.org/",
+  spaces:["endocrinology"], url:"https://obesityweek.org/",
   note:"Lilly, Novo, Amgen, Boehringer, Viking, Zealand. The obesity-education centre of gravity."},
  {name:"ASH Annual Meeting 2026", hashtag:"ASH26", short:"ASH", org:"American Society of Hematology",
   city:"New Orleans, LA", country:"USA", start:"2026-12-12", end:"2026-12-15",
@@ -1788,7 +1860,7 @@ const CONFERENCES = [
   note:"22nd congress, Bella Center. The dedicated European IBD meeting."},
  {name:"AAD Annual Meeting 2027", hashtag:"AAD2027", short:"AAD", org:"American Academy of Dermatology",
   city:"San Francisco, CA", country:"USA", start:"2027-03-19", end:"2027-03-23",
-  spaces:["dermatology"], sub:["derm"], url:"https://www.aad.org/member/meetings-education/am27",
+  spaces:["immunology"], sub:["derm"], url:"https://www.aad.org/member/meetings-education/am27",
   note:"85th annual, Moscone Center. The largest US derm meeting."},
  {name:"NKF Spring Clinical Meetings 2027", hashtag:"NKFClinicals", short:"NKF SCM", org:"National Kidney Foundation",
   city:"Orlando, FL", country:"USA", start:"2027-05-12", end:"2027-05-15",
@@ -1808,7 +1880,7 @@ const CONFERENCES = [
   note:"June 2027; city and exact dates not yet announced — verify before planning."},
  {name:"ADA Scientific Sessions 2027", hashtag:"ADA2027", short:"ADA", org:"American Diabetes Association",
   city:"Washington, DC", country:"USA", start:"2027-06-18", end:"2027-06-21",
-  spaces:["endocrine"], url:"https://professional.diabetes.org/scientific-sessions",
+  spaces:["endocrinology"], url:"https://professional.diabetes.org/scientific-sessions",
   note:"Walter E. Washington Convention Center. The diabetes and obesity anchor meeting."},
  {name:"ASRS Annual Meeting 2027", hashtag:"ASRS2027", short:"ASRS", org:"American Society of Retina Specialists",
   city:"San Francisco, CA", country:"USA", start:"2027-07-28", end:"2027-07-31",
@@ -1831,19 +1903,17 @@ const SIGNALS = {
    ["Otsuka sibeprenlimab (VOYXACT) approved Nov 2025 in primary IgAN — the IgAN field now has FIVE approved mechanisms and zero head-to-head data. Sequencing is the single largest unmet education need in nephrology.","https://www.hcplive.com/view/fda-approves-atacicept-trutakna-for-iga-nephropathy"],
    ["Novartis Fabhalta (iptacopan) converted to traditional approval in primary IgAN on eGFR slope — validates eGFR slope as a regulatory surrogate and resets how the class is taught.","https://www.novartis.com/news/media-releases/novartis-receives-fda-accelerated-approval-fabhalta-iptacopan-first-and-only-complement-inhibitor-reduction-proteinuria-primary-iga-nephropathy-igan"]
  ],
- endocrine:[
+ endocrinology:[
    ["Lilly retatrutide: TRIUMPH-2 and TRIUMPH-3 positive, up to 28% body-weight reduction at 80 weeks — five successful Ph3 trials; submission guided to early 2027, a defined launch-education runway.","https://www.biopharmadive.com/news/lillys-retatrutide-tripleG-phase3-obesity-data/820851/"],
    ["Boehringer reports Ph3 SYNCHRONIZE-1 survodutide results in obesity — a third late-stage incretin entrant broadens the comparative-education need beyond Lilly and Novo.","https://www.boehringer-ingelheim.com/us/human-health/metabolic-diseases/results-phase-iii-synchronize-1-obesity-trial"],
    ["Roche drops acmopatide and consolidates behind enicepatide (CT-388) — near-term Roche obesity funding stays disease-state, not launch.","https://www.biospace.com/business/roche-cans-one-carmot-obesity-asset-as-another-shows-best-in-class-potential"],
    ["Inventiva guides lanifibranor NDA submission to H1 2027 after NATiV3 topline — a first-time MASH funder worth warming up now.","https://inventivapharma.com/pipeline/clinical-trials/"]
  ],
- dermatology:[
+ immunology:[
    ["Affibody izokibep shows durable responses in hidradenitis suppurativa — HS remains one of the least-served derm education areas relative to disease burden.","https://pharmaphorum.com/rd/clinical-trials-round-march-and-april-2026"],
    ["Almirall reports up to four years of sustained lebrikizumab efficacy in atopic dermatitis — long-term durability data shifts AD education toward maintenance and persistence.","https://pharmaphorum.com/rd/clinical-trials-round-march-and-april-2026"],
    ["Sanofi discontinues amlitelimab in atopic dermatitis — the OX40/OX40L route in AD is now effectively closed; remove it from concepts.","https://www.sanofi.com/en/media-room"],
-   ["argenx to acquire Forte Biosciences (~$2.2B) for anti-CD122 FB102 in vitiligo and alopecia — a new, well-funded immuno-derm education buyer.","https://www.argenx.com/news"]
- ],
- immunology:[
+   ["argenx to acquire Forte Biosciences (~$2.2B) for anti-CD122 FB102 in vitiligo and alopecia — a new, well-funded immuno-derm education buyer.","https://www.argenx.com/news"],
    ["FDA approves Lumvoa (veligrotug) for thyroid eye disease regardless of duration or activity, Jul 2026 — Viridian's first commercial product and the first real Tepezza competitor.","https://www.ophthalmologyadvisor.com/features/fda-alerts-ophthalmology-drug-and-device-approvals/"],
    ["AbelZeta cleared for a registrational Ph2 of CD20/BCMA CAR-T in refractory lupus nephritis — autoimmune CAR-T broadening past Cabaletta and Kyverna.","https://www.prnewswire.com/news-releases/abelzeta-receives-fda-clearance-of-registrational-phase-ii-trial-for-c-car168-in-refractory-lupus-nephritis-302835248.html"],
    ["Kyverna completing a rolling BLA for miv-cel in stiff person syndrome — potential first-ever autoimmune CAR-T approval and a 2027 launch.","https://www.globenewswire.com/news-release/2026/05/12/3293353/0/en/kyverna-therapeutics-announces-initiation-of-rolling-sps-bla-submission-and-reports-first-quarter-2026-financial-results.html"],
@@ -1866,11 +1936,11 @@ const SIGNALS = {
 /* Offline gap-finder: therapeutic areas → keywords → best funder + verified contact */
 const GAPAREAS = [
  {area:"Factor XI anticoagulation / AF stroke prevention",kw:["factor xi","anticoag","stroke prevention","atrial fib","afib","doac"],space:"cardiovascular",funder:"Bayer / Novartis",contact:"grants.office@novartis.com"},
- {area:"Obesity / GLP-1 & incretins",kw:["obesity","glp","weight","semaglutide","tirzepatide","incretin"],space:"endocrine",funder:"Novo Nordisk / Lilly / Amgen",contact:"HCCIME@amgen.com"},
- {area:"MASH / metabolic liver disease",kw:["mash","nash","fibrosis","liver","resmetirom"],space:"endocrine",funder:"Madrigal / Novo Nordisk",contact:"Contributions@madrigalpharma.com"},
- {area:"Psoriasis (oral IL-23 / TYK2)",kw:["psoriasis","il-23","il23","tyk2","sotyktu","deucravacitinib"],space:"dermatology",funder:"Takeda / Amgen",contact:"IndependentMedicalEducation.TakedaSupport@takeda.com"},
- {area:"Atopic dermatitis",kw:["atopic","dermatitis","eczema","dupixent","il-13","il13"],space:"dermatology",funder:"Amgen / Incyte",contact:"HCCIME@amgen.com"},
- {area:"Hidradenitis suppurativa / chronic urticaria",kw:["hidradenitis","suppurativa","urticaria","csu"],space:"dermatology",funder:"Novartis",contact:"grants.office@novartis.com"},
+ {area:"Obesity / GLP-1 & incretins",kw:["obesity","glp","weight","semaglutide","tirzepatide","incretin"],space:"endocrinology",funder:"Novo Nordisk / Lilly / Amgen",contact:"HCCIME@amgen.com"},
+ {area:"MASH / metabolic liver disease",kw:["mash","nash","fibrosis","liver","resmetirom"],space:"endocrinology",funder:"Madrigal / Novo Nordisk",contact:"Contributions@madrigalpharma.com"},
+ {area:"Psoriasis (oral IL-23 / TYK2)",kw:["psoriasis","il-23","il23","tyk2","sotyktu","deucravacitinib"],space:"immunology",sub:"derm",funder:"Takeda / Amgen",contact:"IndependentMedicalEducation.TakedaSupport@takeda.com"},
+ {area:"Atopic dermatitis",kw:["atopic","dermatitis","eczema","dupixent","il-13","il13"],space:"immunology",sub:"derm",funder:"Amgen / Incyte",contact:"HCCIME@amgen.com"},
+ {area:"Hidradenitis suppurativa / chronic urticaria",kw:["hidradenitis","suppurativa","urticaria","csu"],space:"immunology",sub:"derm",funder:"Novartis",contact:"grants.office@novartis.com"},
  {area:"SLE (systemic lupus)",kw:["lupus","sle"],space:"immunology",sub:"rheum",funder:"AstraZeneca / GSK / Amgen",contact:"grants@astrazeneca.com"},
  {area:"IBD (UC / Crohn's, TL1A)",kw:["ibd","ulcerative","crohn","colitis","tl1a"],space:"immunology",sub:"gastro",funder:"J&J / Takeda",contact:"IndependentMedicalEducation.TakedaSupport@takeda.com"},
  {area:"Chronic spontaneous urticaria (oral BTK)",kw:["urticaria","csu","remibrutinib","chronic spontaneous"],space:"immunology",sub:"derm",funder:"Novartis / Sanofi",contact:"grants.office@novartis.com"},
@@ -1957,7 +2027,7 @@ const CURATED = {
    ],
    signals:"Educational hooks: IgA nephropathy has gone from one approved drug to a crowded five-mechanism field in under three years (gut-directed budesonide, dual ETA/ARB, oral factor B, and two BAFF/APRIL agents) — sequencing and eGFR-slope surrogate endpoints are the single biggest unmet education need in nephrology. Lupus nephritis added two approvals (voclosporin, obinutuzumab) with no consensus on combination strategy. C3G/IC-MPGN got first-ever therapies in 2025 with essentially no prescriber frame of reference. Vertex and Vera are both approaching first-ever renal launches — highest-value early grant relationships."
  },
- endocrine: {
+ endocrinology: {
    grants:[
      {co:"Novo Nordisk", url:"https://www.novonordisk.com/contact-us/external-support.html", focus:"Diabetes, obesity, MASH, cardiovascular — core stated areas.", dl:"Allow ≥45 days for review", rfp:"open"},
      {co:"Eli Lilly", url:"https://grantoffice.lilly.com/areas-of-focus", focus:"Endocrine (diabetes/obesity) is a listed Area of Focus; topic detail behind portal login.", dl:"Submit ≥60 days before start (rolling)", rfp:"open"},
@@ -1986,41 +2056,11 @@ const CURATED = {
    ],
    signals:"Educational hooks: oral GLP-1 pills entering market (orforglipron), multi-receptor & amylin combos, and MASH (resmetirom/Rezdiffra approved). Fast-moving obesity/metabolic education demand."
  },
- dermatology: {
-   grants:[
-     {co:"Takeda", url:"https://www.takeda.com/en-us/science/independent-medical-education-grants/", focus:"Plaque Psoriasis (TYK2) — OPEN.", dl:"Submit ≥60 days before start", rfp:"open"},
-     {co:"Novartis", url:"https://www.novartis.com/us-en/healthcare-professionals/external-funding/educational-grants/professional-medical-education-grants", focus:"Chronic urticaria (CSU/CIndU) & Hidradenitis Suppurativa — funding available.", dl:"≥60 days before event", rfp:"open"},
-     {co:"Amgen", url:"https://www.amgen.com/responsibility/healthy-society/community-investment/independent-medical-education-funding", focus:"Psoriasis, atopic dermatitis, prurigo among IME topics.", dl:"≥60 days before start", rfp:"open"},
-     {co:"Incyte", url:"https://www.incytegrantsandgiving.com/", focus:"Immuno-dermatology (AD, vitiligo, HS) — single application gateway, no public topic list.", dl:"Submit ≥60 days before decision", rfp:"limited"},
-     {co:"Galderma", url:"https://galderma-portal.idea-point.com/Request-for-Proposals.aspx?groupid=GRANT", focus:"Dermatology — monetary grants now RFP-gated only (since Nov 2024).", dl:"RFP-driven; ~12 wks ahead", rfp:"limited"},
-     {co:"LEO Pharma", url:"https://leo-portal.idea-point.com/", focus:"Pure-play dermatology CE/HCP education. (Confirm live status — portal showed a stale banner.)", dl:"No fixed cycle", rfp:"signal"}
-   ],
-   companies:[
-     {name:"J&J", type:"big", region:"US", drugs:"icotrokinra (Icotyde, oral IL-23R); guselkumab (Tremfya)", stage:"Icotrokinra approved Mar 2026 — first oral IL-23 peptide (psoriasis); Tremfya expanded.", news:"https://www.jnj.com/innovativemedicine/newsroom"},
-     {name:"AbbVie", type:"big", region:"US", drugs:"Skyrizi (IL-23); Rinvoq (JAK1); lutikizumab", stage:"Skyrizi/Rinvoq marketed; lutikizumab Ph3 in hidradenitis suppurativa.", news:"https://news.abbvie.com/"},
-     {name:"Sanofi / Regeneron", type:"big", region:"Global (FR)/US", drugs:"Dupixent (dupilumab, IL-4Rα); amlitelimab (OX40L)", stage:"Dupixent added CSU & bullous pemphigoid; amlitelimab Ph3 AD, filing H2 2026.", news:"https://www.news.sanofi.us/"},
-     {name:"UCB", type:"big", region:"Global (BE)", drugs:"bimekizumab (Bimzelx, IL-17A/F)", stage:"Marketed incl. hidradenitis suppurativa.", news:"https://www.ucb.com/newsroom/press-releases"},
-     {name:"BMS", type:"big", region:"US", drugs:"deucravacitinib (Sotyktu, oral TYK2)", stage:"Approved psoriasis; now PsA (Mar 2026) — first TYK2 in PsA.", news:"https://www.bms.com/news-and-media/press-releases.html"},
-     {name:"Galderma", type:"big", region:"Global (CH)", drugs:"nemolizumab (Nemluvio, IL-31Rα)", stage:"Approved prurigo nodularis + atopic dermatitis.", news:"https://www.galderma.com/newsroom"},
-     {name:"Incyte", type:"biotech", region:"US", drugs:"ruxolitinib cream (Opzelura); povorcitinib (oral JAK1)", stage:"Opzelura marketed; povorcitinib under review in HS, Ph3 positive vitiligo.", news:"https://investor.incyte.com/press-releases"},
-     {name:"LEO Pharma", type:"big", region:"Global (DK)", drugs:"tralokinumab (Adbry, IL-13); delgocitinib (Anzupgo)", stage:"Anzupgo first approved topical for chronic hand eczema.", news:"https://www.leo-pharma.us/media-center"},
-     {name:"Eli Lilly", type:"big", region:"US", drugs:"lebrikizumab (Ebglyss, IL-13); ixekizumab (Taltz)", stage:"Ebglyss key new AD biologic; Taltz IL-17 psoriasis.", news:"https://www.lilly.com/news/press-releases"},
-     {name:"Novartis", type:"big", region:"Global (CH)", drugs:"secukinumab (Cosentyx, IL-17); remibrutinib (oral BTK)", stage:"Remibrutinib Ph3 leads oral BTK in CSU.", news:"https://www.novartis.com/us-en/news"},
-     {name:"Takeda", type:"big", region:"Global (JP)", drugs:"zasocitinib / TAK-279 (oral TYK2)", stage:"Ph3 — potential best-in-class oral TYK2.", news:"https://www.takeda.com/en-us/newsroom/news-releases/"},
-     {name:"Pfizer", type:"big", region:"US", drugs:"ritlecitinib (Litfulo); abrocitinib (Cibinqo)", stage:"Litfulo lead alopecia oral; Cibinqo in AD.", news:"https://www.pfizer.com/newsroom/press-releases"},
-     {name:"Amgen", type:"big", region:"US", drugs:"apremilast (Otezla, PDE4)", stage:"Otezla marketed; anti-OX40 rocatinlimab discontinued Mar 2026.", news:"https://www.amgen.com/newsroom/press-releases"},
-     {name:"Sun Pharma", type:"big", region:"Global (IN)", drugs:"deuruxolitinib (Leqselvi); tildrakizumab (Ilumya)", stage:"Leqselvi new oral alopecia entrant; Ilumya psoriasis.", news:"https://sunpharma.com/newsroom/"},
-     {name:"Organon (Dermavant)", type:"big", region:"US", drugs:"tapinarof (Vtama, AhR agonist)", stage:"First topical AhR agonist — psoriasis + AD.", news:"https://www.organon.com/news/"},
-     {name:"Arcutis", type:"biotech", funder:false, region:"US", drugs:"roflumilast (Zoryve, topical PDE4)", stage:"Marketed — non-steroidal topical (psoriasis/seb derm/AD).", news:"https://investors.arcutis.com/news-releases"},
-     {name:"Celldex", type:"biotech", funder:false, region:"US", drugs:"barzolvolimab (anti-KIT mAb)", stage:"Ph3 — potential CSU paradigm shift.", news:"https://ir.celldex.com/news-releases"},
-     {name:"Alumis", type:"biotech", funder:false, region:"US", drugs:"ESK-001 (oral allosteric TYK2)", stage:"Ph3 ONWARD in psoriasis.", news:"https://ir.alumis.com/news-releases"},
-     {name:"Apogee", type:"biotech", funder:false, region:"US", drugs:"APG777 (extended half-life anti-IL-13)", stage:"Ph2 — less-frequent dosing vs dupilumab in AD.", news:"https://ir.apogeetherapeutics.com/news-releases"},
-     {name:"Oruka", type:"biotech", funder:false, region:"US", drugs:"ORKA-001 (anti-IL-23); ORKA-002 (IL-17A/F)", stage:"Ph1 — infrequent-dosing psoriasis biologics.", news:"https://ir.orukatx.com/news-releases"}
-   ],
-   signals:"Educational hooks: oral targeted therapies rivaling biologics (oral IL-23, TYK2), novel itch/OX40 pathways, and label expansion into HS, hand eczema, vitiligo, CSU, bullous pemphigoid. Note: Amgen's rocatinlimab was discontinued Mar 2026."
- },
  immunology: {
    grants:[
+     {co:"Incyte", url:"https://www.incytegrantsandgiving.com/", focus:"Immuno-dermatology (AD, vitiligo, HS) — single application gateway, no public topic list.", dl:"Submit ≥60 days before decision", rfp:"limited"},
+     {co:"Galderma", url:"https://galderma-portal.idea-point.com/Request-for-Proposals.aspx?groupid=GRANT", focus:"Dermatology — monetary grants now RFP-gated only (since Nov 2024).", dl:"RFP-driven; ~12 wks ahead", rfp:"limited"},
+     {co:"LEO Pharma", url:"https://leo-portal.idea-point.com/", focus:"Pure-play dermatology CE/HCP education. (Confirm live status — portal showed a stale banner.)", dl:"No fixed cycle", rfp:"signal"},
      {co:"Amgen", url:"https://www.amgen.com/responsibility/healthy-society/community-investment/independent-medical-education-funding", focus:"RA, PsA, AS, ANCA vasculitis, lupus, IBD, asthma/COPD — broadest published match.", dl:"≥60 days before start", rfp:"open"},
      {co:"J&J", url:"https://www.jnj.com/innovativemedicine/us/grants-and-giving/educational", focus:"IBD (Crohn's, UC), rheumatology (PsA, AS, RA), generalized MG; Implementation Science RFP.", dl:"Impl. Science RFP ~Jun 30 2026; ~90-day decision", rfp:"open"},
      {co:"AstraZeneca", url:"https://www.astrazeneca-us.com/sustainability/Request-Support/medical-education-office.html", focus:"SLE — OPEN (limited budget); ex-US cutaneous/nephritis lupus, myositis, scleroderma.", dl:"≥60 days before start", rfp:"open"},
@@ -2029,6 +2069,26 @@ const CURATED = {
      {co:"Bristol Myers Squibb", url:"https://www.bms.com/our-impact/corporate-giving/funding-opportunities/request-for-proposals-education.html", focus:"Immunology incl. lupus; RFE/RFP table posts intermittently.", dl:"Check portal (was empty at fetch)", rfp:"signal"}
    ],
    companies:[
+     {name:"J&J", type:"big", sub:"derm", region:"US", drugs:"icotrokinra (Icotyde, oral IL-23R); guselkumab (Tremfya)", stage:"Icotrokinra approved Mar 2026 — first oral IL-23 peptide (psoriasis); Tremfya expanded.", news:"https://www.jnj.com/innovativemedicine/newsroom"},
+     {name:"AbbVie", type:"big", sub:"derm", region:"US", drugs:"Skyrizi (IL-23); Rinvoq (JAK1); lutikizumab", stage:"Skyrizi/Rinvoq marketed; lutikizumab Ph3 in hidradenitis suppurativa.", news:"https://news.abbvie.com/"},
+     {name:"Sanofi / Regeneron", type:"big", sub:"derm", region:"Global (FR)/US", drugs:"Dupixent (dupilumab, IL-4Rα); amlitelimab (OX40L)", stage:"Dupixent added CSU & bullous pemphigoid; amlitelimab Ph3 AD, filing H2 2026.", news:"https://www.news.sanofi.us/"},
+     {name:"UCB", type:"big", sub:"derm", region:"Global (BE)", drugs:"bimekizumab (Bimzelx, IL-17A/F)", stage:"Marketed incl. hidradenitis suppurativa.", news:"https://www.ucb.com/newsroom/press-releases"},
+     {name:"BMS", type:"big", sub:"derm", region:"US", drugs:"deucravacitinib (Sotyktu, oral TYK2)", stage:"Approved psoriasis; now PsA (Mar 2026) — first TYK2 in PsA.", news:"https://www.bms.com/news-and-media/press-releases.html"},
+     {name:"Galderma", type:"big", sub:"derm", region:"Global (CH)", drugs:"nemolizumab (Nemluvio, IL-31Rα)", stage:"Approved prurigo nodularis + atopic dermatitis.", news:"https://www.galderma.com/newsroom"},
+     {name:"Incyte", type:"biotech", sub:"derm", region:"US", drugs:"ruxolitinib cream (Opzelura); povorcitinib (oral JAK1)", stage:"Opzelura marketed; povorcitinib under review in HS, Ph3 positive vitiligo.", news:"https://investor.incyte.com/press-releases"},
+     {name:"LEO Pharma", type:"big", sub:"derm", region:"Global (DK)", drugs:"tralokinumab (Adbry, IL-13); delgocitinib (Anzupgo)", stage:"Anzupgo first approved topical for chronic hand eczema.", news:"https://www.leo-pharma.us/media-center"},
+     {name:"Eli Lilly", type:"big", sub:"derm", region:"US", drugs:"lebrikizumab (Ebglyss, IL-13); ixekizumab (Taltz)", stage:"Ebglyss key new AD biologic; Taltz IL-17 psoriasis.", news:"https://www.lilly.com/news/press-releases"},
+     {name:"Novartis", type:"big", sub:"derm", region:"Global (CH)", drugs:"secukinumab (Cosentyx, IL-17); remibrutinib (oral BTK)", stage:"Remibrutinib Ph3 leads oral BTK in CSU.", news:"https://www.novartis.com/us-en/news"},
+     {name:"Takeda", type:"big", sub:"derm", region:"Global (JP)", drugs:"zasocitinib / TAK-279 (oral TYK2)", stage:"Ph3 — potential best-in-class oral TYK2.", news:"https://www.takeda.com/en-us/newsroom/news-releases/"},
+     {name:"Pfizer", type:"big", sub:"derm", region:"US", drugs:"ritlecitinib (Litfulo); abrocitinib (Cibinqo)", stage:"Litfulo lead alopecia oral; Cibinqo in AD.", news:"https://www.pfizer.com/newsroom/press-releases"},
+     {name:"Amgen", type:"big", sub:"derm", region:"US", drugs:"apremilast (Otezla, PDE4)", stage:"Otezla marketed; anti-OX40 rocatinlimab discontinued Mar 2026.", news:"https://www.amgen.com/newsroom/press-releases"},
+     {name:"Sun Pharma", type:"big", sub:"derm", region:"Global (IN)", drugs:"deuruxolitinib (Leqselvi); tildrakizumab (Ilumya)", stage:"Leqselvi new oral alopecia entrant; Ilumya psoriasis.", news:"https://sunpharma.com/newsroom/"},
+     {name:"Organon (Dermavant)", type:"big", sub:"derm", region:"US", drugs:"tapinarof (Vtama, AhR agonist)", stage:"First topical AhR agonist — psoriasis + AD.", news:"https://www.organon.com/news/"},
+     {name:"Arcutis", type:"biotech", sub:"derm", funder:false, region:"US", drugs:"roflumilast (Zoryve, topical PDE4)", stage:"Marketed — non-steroidal topical (psoriasis/seb derm/AD).", news:"https://investors.arcutis.com/news-releases"},
+     {name:"Celldex", type:"biotech", sub:"derm", funder:false, region:"US", drugs:"barzolvolimab (anti-KIT mAb)", stage:"Ph3 — potential CSU paradigm shift.", news:"https://ir.celldex.com/news-releases"},
+     {name:"Alumis", type:"biotech", sub:"derm", funder:false, region:"US", drugs:"ESK-001 (oral allosteric TYK2)", stage:"Ph3 ONWARD in psoriasis.", news:"https://ir.alumis.com/news-releases"},
+     {name:"Apogee", type:"biotech", sub:"derm", funder:false, region:"US", drugs:"APG777 (extended half-life anti-IL-13)", stage:"Ph2 — less-frequent dosing vs dupilumab in AD.", news:"https://ir.apogeetherapeutics.com/news-releases"},
+     {name:"Oruka", type:"biotech", sub:"derm", funder:false, region:"US", drugs:"ORKA-001 (anti-IL-23); ORKA-002 (IL-17A/F)", stage:"Ph1 — infrequent-dosing psoriasis biologics.", news:"https://ir.orukatx.com/news-releases"},
      {name:"AbbVie", type:"big", region:"US", sub:"rheum,gastro,derm", drugs:"Rinvoq (JAK1); Skyrizi (IL-23)", stage:"Rinvoq 9th indication = giant cell arteritis (2025); Skyrizi added UC.", news:"https://news.abbvie.com/"},
      {name:"J&J", type:"big", region:"US", sub:"gastro,rheum,derm", drugs:"Tremfya (IL-23); nipocalimab (Imaavy, FcRn)", stage:"Tremfya across IBD (SC induction); nipocalimab approved gMG (2025), Sjögren's ongoing.", news:"https://www.jnj.com/innovativemedicine/newsroom"},
      {name:"Roche / Genentech", type:"big", region:"Global (CH)", sub:"rheum", drugs:"obinutuzumab (Gazyva, anti-CD20)", stage:"Approved lupus nephritis Oct 2025 (REGENCY); SLE filing (ALLEGORY).", news:"https://www.gene.com/media/press-releases"},
@@ -2526,10 +2586,15 @@ function supStratPanel(name){
       </div></div>`:"";
   // Space-level competitive intelligence this supporter appears in, with program links
   const ciBlocks=[];
+  // Show intel for any space where this supporter has assets or a grant route,
+  // not only spaces where their name happens to appear in the prose.
+  const supSpaces=Object.keys(CURATED).filter(k=>
+    (CURATED[k].companies||[]).some(c=>supMatch(c.name)) ||
+    (CURATED[k].grants||[]).some(g=>supMatch(g.co)));
   Object.keys(CINTEL).forEach(k=>{
     const ci=CINTEL[k];
     if(!ci) return;
-    if(!supMatchText([ci.funders2526,ci.priorities,ci.businessImplications,ci.providers].join(" "))) return;
+    if(supSpaces.indexOf(k)===-1 && !supMatchText([ci.funders2526,ci.priorities,ci.businessImplications,ci.providers].join(" "))) return;
     const progs=(ci.competitorFormats||[]).map(cf=>
       `<li><b>${esc(cf.provider)}</b> · <span class="ss-fmt">${esc(cf.format)}</span> — ${esc(cf.program)}${cf.url?` <a href="${cf.url}" target="_blank" rel="noopener">view →</a>`:""}</li>`).join("");
     ciBlocks.push(`<div class="ss-ci">
@@ -2609,6 +2674,64 @@ function renderDirectory(){
     <div style="font-size:11.5px;color:var(--muted);margin-top:8px">Space key: ${Object.keys(SPACENAME).map(k=>dot(k)+SPACENAME[k]).join(" &nbsp; ")} · Region reflects each portal's primary grant office; many companies also run separate ex-US / EU offices.</div>
     <div class="note" style="margin-top:10px"><b>How to use contacts — compliance note.</b> Listed addresses are official <b>grant-office / IME program mailboxes</b> (verified from company pages); the grant portal is the <b>only</b> correct route to request education funding. Do <b>not</b> send funding requests to a Medical Affairs VP/Director — under ACCME Standards, the PhRMA Code and OIG guidance, grant decisions must stay walled off from brand and field teams, so routing to an individual is a red flag and can disqualify a request. Use MSL / Medical Affairs contacts only for <b>scientific exchange</b> (data, unmet-need input, investigator-initiated study ideas) — never to fund an accredited activity. Find the current Medical Affairs lead via the company's medical-affairs page or LinkedIn rather than a static list.</div>`;
 }
+/* ---------- FDA DECISION CALENDAR — PDUFA dates and filings ----------
+   Sorted soonest first. Flags whether a decision sits inside the 12–18 month
+   lead time enduring education needs, which is the whole point of tracking it. */
+function renderPdufa(){
+  const host=$("#pdufa"); if(!host) return;
+  const now=new Date(); now.setHours(0,0,0,0);
+  const pd=s=>{const p=(s||"").split("-"); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;};
+
+  let list=(typeof PDUFA!=="undefined"?PDUFA:[]).map(x=>({...x,_d:pd(x.date)}))
+    .filter(x=>x._d)
+    .filter(x=>activeTab==="all"||x.space===activeTab)
+    .filter(x=>!(activeTab==="immunology"&&immunoSub!=="all")||x.sub===immunoSub)
+    .filter(x=>supMatch(x.co))
+    .sort((a,b)=>a._d-b._d);
+
+  if(!list.length){
+    host.innerHTML=`<div class="empty">No FDA decisions tracked for this filter.</div>`; return;
+  }
+
+  const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const fmt=x=>{
+    const d=x._d;
+    if(x.precision==="exact") return `${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`;
+    if(x.precision==="quarter") return `Q${Math.floor(d.getMonth()/3)+1} ${d.getFullYear()}`;
+    return `~${MON[d.getMonth()]} ${d.getFullYear()}`;
+  };
+  const precLabel={exact:"confirmed date",quarter:"quarter only",expected:"expected"};
+
+  const rows=list.map(x=>{
+    const months=Math.round((x._d-now)/2629800000);
+    // Enduring content needs 12–18 months. Inside that window you are already late.
+    const lead = months<0 ? ["passed","lead-past"]
+               : months<12 ? [`${months} mo away — enduring content already needed`,"lead-tight"]
+               : months<=18 ? [`${months} mo away — build now`,"lead-now"]
+               : [`${months} mo away — seed the relationship`,"lead-early"];
+    return `<div class="pd ${lead[1]}">
+      <div class="pd-when">
+        <div class="pd-date">${esc(fmt(x))}</div>
+        <div class="pd-prec">${esc(precLabel[x.precision]||x.precision)}</div>
+        <div class="pd-type">${esc(x.type)}</div>
+      </div>
+      <div class="pd-body">
+        <div class="pd-h"><b>${esc(x.co)}</b> <span class="pd-asset">${esc(x.asset)}</span></div>
+        <div class="pd-ind">${esc(x.indication)} <span class="pd-sp" style="background:${SPACECOLOR[x.space]}">${esc(SPACENAME[x.space]||x.space)}</span></div>
+        ${x.status?`<div class="pd-status">${esc(x.status)}</div>`:""}
+        ${x.note?`<div class="pd-note">${esc(x.note)}</div>`:""}
+        <div class="pd-foot"><span class="pd-lead">${esc(lead[0])}</span>${x.url?` <a href="${x.url}" target="_blank" rel="noopener">source →</a>`:""}</div>
+      </div>
+    </div>`;
+  }).join("");
+
+  const exact=list.filter(x=>x.precision==="exact").length;
+  host.innerHTML=rows+`<div class="pd-legend">
+    <b>${list.length}</b> FDA decision${list.length===1?"":"s"} tracked · ${exact} with a company-confirmed action date, the rest quarter-level or expected · verified <b>${esc(typeof PDUFA_UPDATED!=="undefined"?PDUFA_UPDATED:"—")}</b><br>
+    Only dates a company has publicly disclosed appear here — the FDA does not publish a forward calendar of pending applications, so anything unannounced is genuinely unknowable rather than missing. Colour shows lead time against the 12–18 months enduring content requires: <span class="pd-key lead-tight">under 12 mo</span> <span class="pd-key lead-now">12–18 mo, build now</span> <span class="pd-key lead-early">18 mo+, seed the relationship</span>.
+  </div>`;
+}
+
 /* ---------- CONGRESS CALENDAR — rolling 12 months from today ---------- */
 function renderConferences(){
   const host=$("#conferences"); if(!host) return;
@@ -2811,8 +2934,7 @@ const SPACE_ALIASES={
   // matches rather than dumping the whole area.
   cardiovascular:"cardiovascular",cardio:"cardiovascular",cardioembolic:"cardiovascular","cardiovascular disease":"cardiovascular",
   nephrology:"nephrology",nephro:"nephrology",kidney:"nephrology",renal:"nephrology","kidney disease":"nephrology",
-  endocrine:"endocrine",endocrinology:"endocrine","endocrine disease":"endocrine",
-  dermatology:"dermatology","skin disease":"dermatology",
+  endocrinology:"endocrinology",endocrine:"endocrinology","endocrine disease":"endocrinology",metabolic:"endocrinology",
   immunology:"immunology",immuno:"immunology","immune-mediated":"immunology",
   "rare disease":"raredisease",raredisease:"raredisease","rare diseases":"raredisease",orphan:"raredisease","orphan disease":"raredisease",
   ophthalmology:"ophthalmology",ophtho:"ophthalmology",ophthalmic:"ophthalmology","eye disease":"ophthalmology"
@@ -3118,6 +3240,7 @@ function setTA(tab,sub){
   activeTab=tab; immunoSub=sub||"all";
   syncTAControls();
   render();
+  if(typeof renderPdufa==="function") renderPdufa();
   if(typeof renderConferences==="function") renderConferences();
 }
 document.querySelectorAll(".tab").forEach(b=> b.addEventListener("click", ()=>{
@@ -3583,6 +3706,7 @@ renderNewSupp();
 renderCalendar();
 renderWatch();
 renderDirectory();
+renderPdufa();
 renderConferences();
 $("#gapBtn").addEventListener("click", runGap);
 $("#gapModes").addEventListener("click", e=>{
