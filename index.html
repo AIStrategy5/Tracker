@@ -58,6 +58,43 @@
   .pd-when{flex:0 0 128px;border-right:1px solid var(--line);padding-right:13px}
   .pd-date{font-size:13.5px;font-weight:700;line-height:1.3}
   .pd-prec{font-size:10px;color:var(--muted);margin-top:2px;font-style:italic}
+  /* ---------- therapeutic area radar ---------- */
+  .rd-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:22px;background:#fff}
+  .rd-stat{padding:13px 15px;border-right:1px solid var(--line)}
+  .rd-stat:last-child{border-right:0}
+  .rd-stat-lab{font-size:9.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--muted)}
+  .rd-stat-val{font-size:26px;font-weight:700;line-height:1.15;margin:3px 0 2px}
+  .rd-stat-sub{font-size:10.5px;color:var(--muted);line-height:1.4}
+  .rd-space{margin:0 0 26px}
+  .rd-shead{display:flex;align-items:center;gap:10px;margin:0 0 6px}
+  .rd-shead h3{font-size:19px;margin:0;padding-left:11px;line-height:1.25}
+  .rd-count{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);background:#f2f3f5;border-radius:999px;padding:3px 9px}
+  .rd-lede{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0 0 13px;padding-left:15px}
+  .rd-card{display:flex;gap:11px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--line);border-radius:8px;padding:15px 17px;margin-bottom:11px}
+  .rd-num{flex:0 0 22px;height:22px;border-radius:50%;background:#f2f3f5;color:var(--muted);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .rd-main{flex:1;min-width:0}
+  .rd-title{font-size:15.5px;font-weight:700;margin:0 0 8px;line-height:1.35}
+  .rd-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:11px}
+  .rd-tags span{font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:#f2f3f5;color:var(--muted);white-space:nowrap}
+  .rd-imp-high{background:#7a1020;color:#fff}
+  .rd-imp-medium{background:#8a5a12;color:#fff}
+  .rd-imp-low{background:#4a5568;color:#fff}
+  .rd-scope{background:#fdeaee;color:#8d1b32}
+  .rd-date{background:#fff;border:1px solid var(--line);cursor:help}
+  .rd-cols{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start}
+  .rd-lab{font-size:9.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;display:block}
+  .rd-lab-imp{color:#8d1b32}
+  .rd-sum p{font-size:12.5px;line-height:1.65;margin:0}
+  .rd-datenote{margin-top:7px!important;font-size:11px!important;color:var(--muted)}
+  .rd-imps{background:#fdf0f2;border-radius:7px;padding:12px 14px}
+  .rd-lens{margin-bottom:10px}
+  .rd-lens:last-child{margin-bottom:0}
+  .rd-lens span{display:block;font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#8d1b32;margin-bottom:3px}
+  .rd-lens p{font-size:11.5px;line-height:1.6;margin:0}
+  .rd-src{margin-top:12px;padding-top:9px;border-top:1px solid var(--line);font-size:11.5px}
+  .rd-src .rd-lab{display:inline;margin-right:8px}
+  .rd-foot{font-size:11.5px;color:var(--muted);line-height:1.65;padding-top:11px;border-top:1px solid var(--line)}
+  @media(max-width:820px){.rd-cols{grid-template-columns:1fr}}
   .pd-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:#4a4ac0;background:#eeeeff;padding:2px 7px;border-radius:4px;display:inline-block;margin-top:6px}
   .pd-type.pdt-decision{color:#8a4a00;background:#fff1de}
   .pd-type.pdt-filing{color:#4a4ac0;background:#eeeeff}
@@ -739,6 +776,9 @@
     <b>Reading the RFP signals.</b> <span class="rfp open" style="padding:1px 6px">Open RFP</span> = grant call live now with a deadline. <span class="rfp limited" style="padding:1px 6px">Limited</span> = area listed but funding constrained. <span class="rfp signal" style="padding:1px 6px">Signal</span> = a readout, approval or launch that typically <i>precedes</i> a company opening education funding — watch the newsroom. Agency/vendor business RFPs are rarely public; they surface via company procurement teams, the <a href="https://www.acehp.org/" target="_blank" rel="noopener">Alliance for Continuing Education in the Health Professions</a>, and med-ed network/job boards. Verify every deadline on the portal before acting — cycles rotate.
   </div>
 
+
+  <div class="blocklabel" id="sec-radar" style="margin-top:22px;font-size:12px">📡 Therapeutic area radar — what moved, and what it means</div>
+  <div id="radar"></div>
 
   <div class="blocklabel" id="sec-pdufa" style="margin-top:22px;font-size:12px">⚖️ FDA decision calendar — PDUFA dates, filings &amp; catalysts ahead</div>
   <div id="pdufa"></div>
@@ -1720,6 +1760,152 @@ const SUPSTRAT = {
  }
 };
 /* WEEKLY-SUPSTRAT-END */
+/* WEEKLY-RADAR-START — the Monday/Thursday task maintains this block.
+   Therapeutic Area Radar: date-stamped developments read through three lenses
+   (clinical / commercial-access / regulatory), grouped by space.
+   Shape:
+   {space, sub?, title, impact:"high"|"medium"|"low", scope:"US"|"US+EU"|"Global",
+    date:"YYYY-MM-DD", dateNote?:"…", cat:"short category tag",
+    summary, clinical, commercial, regulatory, src:"source label", url}
+   RULES: every entry needs a real date and a working source URL. If the exact
+   day cannot be confirmed, use the first of the month and say so in `dateNote`
+   — never present an approximated date as exact. */
+const RADAR_UPDATED = "August 7, 2026";
+const RADAR_LEDE = {
+ cardiovascular:"A quiet stretch for new approvals — the story is in what has NOT been announced. The Lp(a) outcomes readout has slipped past its guided window, and the Factor XI class is waiting on a single decision.",
+ nephrology:"The busiest space in the tracker. Two IgA nephropathy approvals have landed inside nine months and two more decisions are due by December — the field goes from no options to four in barely a year.",
+ endocrinology:"Obesity has moved from efficacy to differentiation: an oral small molecule is approved, an amylin combination is under review, and a triple agonist is filing. The education question is no longer whether these work but how to choose between them.",
+ immunology:"Oral and first-line positioning is the live theme across dermatology and rheumatology. Hidradenitis suppurativa in particular is turning from an orphan interest into a competitive market.",
+ raredisease:"The regulatory environment itself is the biggest development — FDA has formalised a lower evidentiary bar for ultra-rare individualised therapies, which changes what a grant-funded curriculum needs to cover.",
+ ophthalmology:"Thyroid eye disease now has a second approved biologic, and two sustained-release TKIs are converging on wet AMD. Both create genuine sequencing and procedural education needs."
+};
+const RADAR = [
+ /* ---------------- CARDIOVASCULAR ---------------- */
+ {space:"cardiovascular", title:"Lp(a)HORIZON outcomes readout slips past its guided mid-2026 window with no disclosure",
+  impact:"medium", scope:"Global", date:"2026-07-01", dateNote:"month-level; the absence of an announcement is the signal, so there is no single dated event",
+  cat:"Lipids · Lp(a)",
+  summary:"Novartis guided Phase 3 pelacarsen data for the first half of 2026 with regulatory submissions in the second half. The 8,323-patient Lp(a)HORIZON cardiovascular outcomes trial completed enrolment in 2023, but the mid-2026 readout window closed on 30 June without results being disclosed. Ionis, which licensed the asset to Novartis, has issued a statement on the revised timing.",
+  clinical:"Lp(a) is the largest untreated residual-risk target in lipidology. Until this reads out, there is no outcomes evidence for any Lp(a)-lowering agent, and the whole class stays hypothesis-level.",
+  commercial:"A delay pushes the first Lp(a) launch, and with it the first Lp(a) education budget, further right. Olpasiran's outcomes trial does not complete until 2027–2028.",
+  regulatory:"Submissions were guided for H2 2026 and now look unlikely on that timeline. No FDA action date exists for any Lp(a) agent.",
+  src:"Ionis Pharmaceuticals — statement on updated pelacarsen timing", url:"https://ir.ionis.com/static-files/66c5e90a-3651-480d-a596-1cf0d1a52991"},
+ {space:"cardiovascular", title:"Asundexian is the Factor XI class's single live regulatory decision after two Phase 3 failures",
+  impact:"high", scope:"US+EU", date:"2025-11-01", dateNote:"OCEANIC-STROKE topline announced November 2025; FDA decision guided Q4 2026",
+  cat:"Anticoagulation · Stroke",
+  summary:"The Factor XIa class has had a hard run — milvexian missed in acute coronary syndrome and asundexian missed in atrial fibrillation. OCEANIC-STROKE, in secondary prevention after non-cardioembolic ischaemic stroke, met both its efficacy and safety endpoints, and asundexian is now under FDA priority review with a decision guided for Q4 2026.",
+  clinical:"A first Factor XI approval would open the class-positioning question that has no answer yet: where does an agent that decouples thrombosis from bleeding sit against DOACs, and in which patients.",
+  commercial:"Bayer would hold the only approved asset in a class two large competitors have stumbled in. That is an unusually clean education runway.",
+  regulatory:"Priority review; decision guided Q4 2026. Milvexian's LIBREXIA STROKE and LIBREXIA ACS both estimate completion in 2026, so a second readout could follow quickly.",
+  src:"Bayer — asundexian in patients after non-cardioembolic ischaemic stroke", url:"https://www.bayer.com/en/us/news-stories/asundexian-in-patients-after-a-non-cardiovascular-ischemic-stroke"},
+
+ /* ---------------- NEPHROLOGY ---------------- */
+ {space:"nephrology", title:"FDA approves atacicept (Trutakna) — first dual BAFF/APRIL inhibitor in IgA nephropathy",
+  impact:"high", scope:"US", date:"2026-07-07",
+  cat:"IgAN · B-cell",
+  summary:"Accelerated approval on the strength of ORIGIN 3, in which atacicept produced a 46% reduction in proteinuria from baseline and a 42% reduction versus placebo at week 36. It is the first dual BAFF/APRIL inhibitor cleared in IgAN, and the first commercial product Vera Therapeutics has ever launched.",
+  clinical:"Adds a distinct upstream mechanism to a field that until recently had none. Approval is on proteinuria; it has not been established that atacicept slows long-term kidney function decline.",
+  commercial:"A first-ever commercial launch means the grant programme and med-ed infrastructure are being stood up right now — the highest-leverage moment to be in the conversation.",
+  regulatory:"Accelerated approval. Full approval depends on the two-year eGFR analysis, with a supplemental BLA targeted for Q4 2026.",
+  src:"HCPLive — FDA Approves Atacicept (Trutakna) for IgA Nephropathy", url:"https://www.hcplive.com/view/fda-approves-atacicept-trutakna-for-iga-nephropathy"},
+ {space:"nephrology", title:"Vera pulls the ORIGIN 3 eGFR analysis forward to Q3 2026 with FDA agreement",
+  impact:"high", scope:"US", date:"2026-07-01", dateNote:"month-level; company announcement of the revised analysis plan",
+  cat:"IgAN · Confirmatory",
+  summary:"Vera aligned with FDA on an earlier eGFR analysis than the originally planned 2027 completion. Results are now expected in Q3 2026, with a supplemental BLA to support full approval targeted for Q4 2026.",
+  clinical:"eGFR is the endpoint that actually matters to nephrologists. This is the readout that tells the field whether proteinuria reduction in IgAN translates into preserved kidney function.",
+  commercial:"Compresses the launch timeline sharply. Enduring content commissioned now would land alongside the confirmatory data rather than a year behind it.",
+  regulatory:"Converts accelerated approval to full. sBLA targeted Q4 2026.",
+  src:"Vera Therapeutics — alignment with FDA on earlier ORIGIN analysis", url:"https://ir.veratx.com/news-releases/news-release-details/vera-therapeutics-announces-alignment-us-fda-earlier-origin"},
+ {space:"nephrology", title:"IgA nephropathy goes from no targeted options to four inside roughly a year",
+  impact:"high", scope:"US", date:"2026-08-01", dateNote:"synthesis of dated events, not a single announcement",
+  cat:"IgAN · Class dynamics",
+  summary:"Sibeprenlimab (Voyxact) was approved in November 2025 and atacicept (Trutakna) in July 2026. Two further decisions are pending: povetacicept with an FDA target date of 30 November 2026, and ravulizumab anticipated in Q4 2026. Fabhalta already holds accelerated approval.",
+  clinical:"Sequencing and combination are now the unanswered clinical questions — which mechanism first, in whom, and what happens when proteinuria response and eGFR preservation diverge.",
+  commercial:"Four or five sponsors will be competing for the same nephrologist audience within twelve months. Comparative and sequencing education is the gap none of them can fill alone, which is exactly what independent IME is for.",
+  regulatory:"Two accelerated approvals already carry confirmatory obligations, so the evidence base will keep moving after launch.",
+  src:"Medical Daily — second B-cell drug approved in July, two more decisions due by December", url:"https://www.medicaldaily.com/iga-nephropathy-atacicept-approval-fda-decisions-2026-476696"},
+
+ /* ---------------- ENDOCRINOLOGY ---------------- */
+ {space:"endocrinology", title:"Orforglipron (Foundayo) approved — first small-molecule oral GLP-1 for weight management",
+  impact:"high", scope:"US", date:"2026-04-01",
+  cat:"Obesity · Oral GLP-1",
+  summary:"Approved 1 April 2026 for chronic weight management. Unlike oral semaglutide it is a small molecule, taken once daily with no fixed timing and no fasting window around the dose.",
+  clinical:"Removes the administration burden that drives a large share of GLP-1 discontinuation. Shifts the conversation from access to adherence and to who is best served by an oral versus an injectable.",
+  commercial:"Manufacturing a small molecule at scale is a different economic proposition from peptides — this is the asset most likely to widen the treated population rather than redistribute it.",
+  regulatory:"Approved. Watch for cardiovascular and diabetes label expansions following.",
+  src:"Patient Care Online — FDA approves orforglipron, first oral GLP-1 with no food or water restrictions", url:"https://www.patientcareonline.com/view/fda-approves-orforglipron-first-oral-glp-1-receptor-agonist-for-weight-loss-with-no-food-or-water-restrictions"},
+ {space:"endocrinology", title:"CagriSema REDEFINE data presented at ADA 2026 while the NDA sits under FDA review",
+  impact:"high", scope:"US", date:"2026-07-01", dateNote:"ADA 2026 presentation, June–July 2026",
+  cat:"Obesity · Amylin combination",
+  summary:"Novo Nordisk submitted the CagriSema NDA on 18 December 2025 and review runs through 2026. In pivotal REDEFINE 1, the cagrilintide/semaglutide combination produced roughly 22.7% mean weight loss at 68 weeks, with 91.9% of participants losing at least 5% of body weight versus 31.5% on placebo.",
+  clinical:"Amylin plus incretin is a genuinely different pharmacology from GLP-1 alone. Tolerability and dose escalation are where the clinical questions sit, not efficacy.",
+  commercial:"Novo needs a differentiated second act against Lilly. Securities litigation over tolerability claims survived dismissal, which raises the bar for balanced dosing and tolerability education specifically.",
+  regulatory:"Under FDA review; decision expected around the end of 2026.",
+  src:"DocWire — ADA 2026 obesity drug updates: retatrutide, CagriSema and oral GLP-1s", url:"https://www.docwirenews.com/post/ada-2026-obesity-drug-updates-retatrutide-cagrisema-and-oral-glp-1s"},
+
+ /* ---------------- IMMUNOLOGY ---------------- */
+ {space:"immunology", sub:"derm", title:"Icotrokinra (ICOTYDE) approved — targeted oral peptide IL-23 receptor antagonist in plaque psoriasis",
+  impact:"high", scope:"US", date:"2026-07-01", dateNote:"month-level; exact approval day not confirmed in the sources reviewed",
+  cat:"Psoriasis · Oral peptide",
+  summary:"Johnson & Johnson announced FDA approval of icotrokinra for moderate-to-severe plaque psoriasis in adults and paediatric patients 12 years and older weighing at least 40 kg who are candidates for systemic therapy or phototherapy. It is positioned for first-line systemic use.",
+  clinical:"An oral with biologic-class mechanism changes the step-therapy conversation. First-line systemic positioning in a field where biologics have been reserved for later lines is the substantive clinical shift.",
+  commercial:"J&J is defending a psoriasis franchise against IL-17 and IL-23 injectables. Oral-versus-injectable sequencing is the education question, and it is one no single sponsor can credibly answer about its own product.",
+  regulatory:"Approved, including adolescents 12+ — paediatric labelling is unusual this early and creates a distinct education audience.",
+  src:"Johnson & Johnson — FDA approval of ICOTYDE (icotrokinra)", url:"https://www.jnj.com/media-center/press-releases/fda-approval-of-icotyde-icotrokinra-ushers-in-new-era-for-first-line-systemic-treatment-of-plaque-psoriasis-with-a-targeted-oral-peptide"},
+ {space:"immunology", sub:"rheum", title:"Bimekizumab (Bimzelx) gains three new rheumatic indications",
+  impact:"medium", scope:"US", date:"2026-07-01", dateNote:"month-level; reported by The Rheumatologist",
+  cat:"Rheumatology · IL-17A/F",
+  summary:"FDA approved bimekizumab-bkzx for three additional rheumatic indications, extending a dual IL-17A/IL-17F inhibitor well beyond its original dermatology footprint.",
+  clinical:"Dual IL-17A/F inhibition versus IL-17A alone is an unsettled comparative question in rheumatology, and label expansion forces it into practice before the comparative evidence is mature.",
+  commercial:"UCB is building a cross-specialty franchise. Education that spans dermatology and rheumatology audiences fits their commercial shape, and UCB has an active grants route.",
+  regulatory:"Approved. Paediatric hidradenitis suppurativa topline is separately guided for H2 2027.",
+  src:"The Rheumatologist — FDA approves bimekizumab-bkzx for 3 new rheumatic indications", url:"https://www.the-rheumatologist.org/article/fda-approves-bimekizumab-bkzx-bimzelx-for-3-new-rheumatic-indications/"},
+ {space:"immunology", sub:"derm", title:"Hidradenitis suppurativa turns competitive — oral JAK positive, topical readout due Q4 2026",
+  impact:"medium", scope:"US", date:"2026-08-05", dateNote:"Incyte Q2 2026 results, 5 August 2026",
+  cat:"HS · Orals and topicals",
+  summary:"Incyte reported positive Phase 3 results for oral povorcitinib in HS, and guided topline for ruxolitinib cream in mild-to-moderate HS to Q4 2026. UCB has paediatric bimekizumab data guided for H2 2027 and Avalo plans to start a registrational Phase 3 of abdakibart in H1 2027.",
+  clinical:"HS has been managed almost entirely with a single biologic class. An oral and a topical would extend treatment to the mild end of the spectrum, where most patients sit and where almost no education exists.",
+  commercial:"Four sponsors converging on one under-served indication inside eighteen months. Incyte and UCB have grant routes; Avalo has none, which makes it a genuine first-mover opportunity.",
+  regulatory:"Povorcitinib filing is the next step. Ruxolitinib cream topline Q4 2026.",
+  src:"Incyte — Q2 2026 results and business update", url:"https://investor.incyte.com/news-releases/news-release-details/incyte-reports-second-quarter-2026-financial-results-and"},
+
+ /* ---------------- RARE DISEASE ---------------- */
+ {space:"raredisease", title:"FDA formalises a plausible-mechanism standard for ultra-rare individualised therapies",
+  impact:"high", scope:"US", date:"2026-02-23",
+  cat:"Policy · Individualised therapy",
+  summary:"HHS and FDA launched a framework to accelerate development of individualised therapies for ultra-rare disease, under which a plausible mechanism can be sufficient for approval where a conventional controlled trial is not feasible.",
+  clinical:"Clinicians will be asked to use products approved on mechanism rather than outcome data. Interpreting that evidence — and communicating its limits to families — becomes a core competency rather than a niche one.",
+  commercial:"Lowers the barrier for very small sponsors with no commercial infrastructure and no grant office. Expect more first-time funders, and expect them to need help understanding what independent education is.",
+  regulatory:"A structural change to the evidentiary standard, not a single product event. It affects every n-of-1 and ultra-rare programme behind it.",
+  src:"HHS — FDA launches framework for accelerating individualised therapies for ultra-rare diseases", url:"https://www.hhs.gov/press-room/wtas-fda-launches-framework-accelerating-therapies-ultra-rare-diseases.html"},
+ {space:"raredisease", title:"Casgevy supplemental approval extends gene editing down to age two",
+  impact:"medium", scope:"US", date:"2026-07-01",
+  cat:"Gene editing · SCD / TDT",
+  summary:"On 1 July 2026 FDA issued a supplemental approval for exagamglogene autotemcel in patients aged two and older with sickle cell disease and recurrent vaso-occlusive crises, or transfusion-dependent beta thalassaemia.",
+  clinical:"Moves a curative-intent therapy into early childhood, where the conditioning regimen, fertility counselling and long-term follow-up conversations are materially different from those in adults.",
+  commercial:"Paediatric expansion widens the treatment centre network well beyond the original specialist sites, and those centres need onboarding education.",
+  regulatory:"Supplemental approval expanding the age range of an existing indication.",
+  src:"FDA — first gene therapy for young children with sickle cell disease", url:"https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapy-young-children-sickle-cell-disease"},
+
+ /* ---------------- OPHTHALMOLOGY ---------------- */
+ {space:"ophthalmology", title:"Veligrotug (Lumvoa) approved in thyroid eye disease — second anti-IGF-1R option",
+  impact:"high", scope:"US", date:"2026-07-02", dateNote:"specialist reaction coverage dated 2 July 2026",
+  cat:"TED · Anti-IGF-1R",
+  summary:"Viridian's veligrotug-vvze, an intravenous fully human anti-IGF-1R monoclonal antibody, was approved for thyroid eye disease. It targets the orbital inflammation and tissue expansion that define the condition.",
+  clinical:"TED had a single approved biologic and a well-known hearing-toxicity concern. A second option makes selection, monitoring and counselling a real clinical decision rather than a default.",
+  commercial:"Viridian's first commercial product. No established grant programme, and the audience spans oculoplastics, endocrinology and general ophthalmology — a natural multi-specialty curriculum.",
+  regulatory:"Approved. A subcutaneous formulation is in development behind it.",
+  src:"Ophthalmology Times — specialists react to the approval of veligrotug-vvze", url:"https://www.ophthalmologytimes.com/view/thyroid-eye-disease-specialists-react-to-the-approval-of-veligrotug-vvze"},
+ {space:"ophthalmology", title:"Two sustained-release TKI depots converge on wet AMD",
+  impact:"medium", scope:"US", date:"2026-08-01", dateNote:"synthesis of company-guided timing, not a single announcement",
+  cat:"Wet AMD · Sustained release",
+  summary:"Ocular Therapeutix reported SOL-1 positive and guides SOL-R topline to Q1 2027 for Axpaxli. EyePoint guides Phase 3 topline for Duravyu in 2026 and is starting a diabetic macular oedema Phase 3.",
+  clinical:"A sustained-release tyrosine kinase inhibitor is a different dosing paradigm from anti-VEGF injections. Treatment intervals, retreatment criteria and the insert procedure itself all need teaching.",
+  commercial:"If both read out positive, retina specialists face a new class with two entrants and no sequencing guidance. Neither company has an established IME programme.",
+  regulatory:"Neither has filed. SOL-R is the readout that determines whether the Axpaxli BLA proceeds.",
+  src:"Ocular Therapeutix — investor news releases", url:"https://investors.ocutx.com/news-releases"}
+];
+/* WEEKLY-RADAR-END */
+
 /* WEEKLY-PDUFA-START — the Monday/Thursday task maintains this block.
    Upcoming FDA action / PDUFA dates across all six spaces. Shape:
    {co, asset, indication, space, sub?, date:"YYYY-MM-DD", precision:"exact"|"quarter"|"expected",
@@ -2726,6 +2912,89 @@ function renderDirectory(){
 /* ---------- FDA DECISION CALENDAR — PDUFA dates and filings ----------
    Sorted soonest first. Flags whether a decision sits inside the 12–18 month
    lead time enduring education needs, which is the whole point of tracking it. */
+/* ---------- THERAPEUTIC AREA RADAR ----------
+   Each development read through three lenses — clinical, commercial/access and
+   regulatory — grouped by therapeutic area. Obeys the same area, sub-specialty
+   and supporter filters as everything else on the page. */
+function renderRadar(){
+  const host=$("#radar"); if(!host) return;
+  const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const pd=s=>{const p=(s||"").split("-"); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;};
+  const fmtd=d=>d?`${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`:"—";
+
+  const all=(typeof RADAR!=="undefined"?RADAR:[]).map(x=>({...x,_d:pd(x.date)}))
+    .filter(x=>activeTab==="all"||x.space===activeTab)
+    .filter(x=>!(activeTab==="immunology"&&immunoSub!=="all")||x.sub===immunoSub)
+    .filter(x=>!activeSupporter||supMatchText([x.title,x.summary,x.clinical,x.commercial,x.regulatory,x.src].join(" ")))
+    .sort((a,b)=>(b._d||0)-(a._d||0));
+
+  if(!all.length){
+    host.innerHTML=`<div class="empty">No radar items for this filter.</div>`; return;
+  }
+
+  // order areas the way the tabs do, then only show the ones with content
+  const order=["cardiovascular","nephrology","endocrinology","immunology","raredisease","ophthalmology"];
+  const spaces=order.filter(k=>all.some(x=>x.space===k));
+  const dates=all.map(x=>x._d).filter(Boolean).sort((a,b)=>a-b);
+  const window_=dates.length?`${fmtd(dates[0])} — ${fmtd(dates[dates.length-1])}`:"—";
+
+  const stat=(lab,val,sub)=>`<div class="rd-stat"><div class="rd-stat-lab">${lab}</div><div class="rd-stat-val">${val}</div><div class="rd-stat-sub">${sub}</div></div>`;
+  const nCat=(typeof PDUFA!=="undefined"?PDUFA:[]).filter(p=>activeTab==="all"||p.space===activeTab).length;
+  const strip=`<div class="rd-stats">
+    ${stat("Verified insights",all.length,"Date-stamped, sourced")}
+    ${stat("Therapeutic areas",spaces.length,spaces.map(k=>SPACENAME[k]).join(" · "))}
+    ${stat("Window covered",dates.length?`${Math.max(1,Math.round((dates[dates.length-1]-dates[0])/2629800000))} mo`:"—",window_)}
+    ${stat("Catalysts tracked",nCat,"In the FDA calendar below")}
+  </div>`;
+
+  const IMPACT={high:"High impact",medium:"Medium impact",low:"Low impact"};
+
+  const blocks=spaces.map(k=>{
+    const items=all.filter(x=>x.space===k);
+    const cards=items.map((x,i)=>{
+      const subTag=x.sub&&typeof IMMUNO_SUB_LABEL!=="undefined"&&IMMUNO_SUB_LABEL[x.sub]?` · ${IMMUNO_SUB_LABEL[x.sub]}`:"";
+      return `<article class="rd-card">
+        <div class="rd-num">${i+1}</div>
+        <div class="rd-main">
+          <h4 class="rd-title">${esc(x.title)}</h4>
+          <div class="rd-tags">
+            <span class="rd-imp rd-imp-${esc(x.impact)}">${esc(IMPACT[x.impact]||x.impact)}</span>
+            <span class="rd-scope">${esc(x.scope)}</span>
+            <span class="rd-date"${x.dateNote?` title="${esc(x.dateNote)}"`:""}>${esc(fmtd(x._d))}${x.dateNote?" *":""}</span>
+            <span class="rd-cat">${esc(x.cat)}${esc(subTag)}</span>
+          </div>
+          <div class="rd-cols">
+            <div class="rd-sum">
+              <div class="rd-lab">Summary</div>
+              <p>${esc(x.summary)}</p>
+              ${x.dateNote?`<p class="rd-datenote">* Date precision: ${esc(x.dateNote)}.</p>`:""}
+            </div>
+            <aside class="rd-imps">
+              <div class="rd-lab rd-lab-imp">Implications</div>
+              <div class="rd-lens"><span>Clinical</span><p>${esc(x.clinical)}</p></div>
+              <div class="rd-lens"><span>Commercial / access</span><p>${esc(x.commercial)}</p></div>
+              <div class="rd-lens"><span>Regulatory</span><p>${esc(x.regulatory)}</p></div>
+            </aside>
+          </div>
+          <div class="rd-src"><span class="rd-lab">Source</span> <a href="${x.url}" target="_blank" rel="noopener">${esc(x.src)} →</a></div>
+        </div>
+      </article>`;
+    }).join("");
+    return `<section class="rd-space">
+      <div class="rd-shead">
+        <h3 style="border-left:4px solid ${SPACECOLOR[k]}">${esc(SPACENAME[k]||k)}</h3>
+        <span class="rd-count">${items.length} insight${items.length===1?"":"s"}</span>
+      </div>
+      ${RADAR_LEDE&&RADAR_LEDE[k]?`<p class="rd-lede">${esc(RADAR_LEDE[k])}</p>`:""}
+      ${cards}
+    </section>`;
+  }).join("");
+
+  host.innerHTML=strip+blocks+`<div class="rd-foot">
+    Every insight is date-stamped, scope-tagged (US / US+EU / Global) and linked to its source. Read the three lenses together — a development only becomes a grant opportunity when the clinical question is real, the commercial pressure exists, and the regulatory timing leaves room to build. Items marked <b>*</b> carry a stated date-precision caveat rather than a confirmed day. Verified <b>${esc(typeof RADAR_UPDATED!=="undefined"?RADAR_UPDATED:"—")}</b>.
+  </div>`;
+}
+
 /* Which bucket a row belongs to. Derived from `type` so the data stays flat:
    decision = the FDA is deciding now; filing = the dossier is (or soon will be)
    in; catalyst = the event that CREATES the next filing. */
@@ -3316,6 +3585,7 @@ function setTA(tab,sub){
   activeTab=tab; immunoSub=sub||"all";
   syncTAControls();
   render();
+  if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();
   if(typeof renderConferences==="function") renderConferences();
 }
@@ -3340,6 +3610,7 @@ function applySupporterFilter(){
   render();
   if(typeof renderDirectory==="function") renderDirectory();
   if(typeof renderConferences==="function") renderConferences();
+  if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();   // was missing — the FDA
   // calendar kept showing every company regardless of the supporter dropdown.
   if(typeof renderSignals==="function") renderSignals();
@@ -3784,6 +4055,7 @@ renderNewSupp();
 renderCalendar();
 renderWatch();
 renderDirectory();
+renderRadar();
 renderPdufa();
 renderConferences();
 $("#gapBtn").addEventListener("click", runGap);
