@@ -58,6 +58,35 @@
   .pd-when{flex:0 0 128px;border-right:1px solid var(--line);padding-right:13px}
   .pd-date{font-size:13.5px;font-weight:700;line-height:1.3}
   .pd-prec{font-size:10px;color:var(--muted);margin-top:2px;font-style:italic}
+  /* ---------- supporter emphasis & drift ---------- */
+  .em-strip{font-size:11.5px;color:var(--muted);padding:9px 12px;background:#f7f8f9;border:1px solid var(--line);border-radius:7px;margin-bottom:14px}
+  .em-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+  .em-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .em-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:9px}
+  .em-head h4{font-size:14.5px;margin:0;font-weight:700}
+  .em-spaces{display:flex;flex-wrap:wrap;gap:4px}
+  .em-sp,.em-gap-sp{font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;border-radius:4px;padding:2px 6px;white-space:nowrap}
+  .em-lab{font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin:11px 0 6px}
+  .em-lab-gap{color:#8d1b32}
+  .em-topics{display:flex;flex-wrap:wrap;gap:5px}
+  .em-t{font-size:11px;background:#f2f3f5;color:var(--ink);border-radius:4px;padding:3px 8px;line-height:1.4}
+  .em-new{background:#e2f7ee;color:#0a6b4a;font-weight:600}
+  .em-gone{background:#fdeaee;color:#8d1b32;text-decoration:line-through}
+  .em-new-lab{color:#0a6b4a;font-weight:700}
+  .em-gone-lab{color:#8d1b32;font-weight:700}
+  .em-srcnote{font-size:10.5px;color:var(--muted);line-height:1.55;margin-top:7px;font-style:italic}
+  .em-drift{font-size:11px;color:var(--muted);line-height:1.55;margin-top:9px;padding-top:8px;border-top:1px dashed var(--line)}
+  .em-base{color:#8a6a2a;background:#fff8ec;border-top:0;border-radius:5px;padding:7px 9px}
+  .em-chg{font-size:11px;line-height:1.6;margin-bottom:5px;padding-left:9px;border-left:2px solid #e4c9cf}
+  .em-chg-when{font-weight:700;font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:#8d1b32;margin-right:5px}
+  .em-gap{display:flex;gap:9px;align-items:flex-start;background:#fbfbfc;border-radius:6px;padding:9px 11px;margin-bottom:7px}
+  .em-gap p{font-size:11.5px;line-height:1.6;margin:0 0 6px}
+  .em-gap p:last-child{margin-bottom:0}
+  .em-gap-lab{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .em-des{color:#0a6b4a;margin-top:7px}
+  .em-portal{margin-top:11px;padding-top:8px;border-top:1px solid var(--line);font-size:11.5px}
+  .em-foot{font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:14px;padding-top:11px;border-top:1px solid var(--line)}
+  .em-foot .em-t{font-size:10px}
   /* ---------- deadline banner ---------- */
   .dl-box{border:1px solid #e4c9cf;border-left:4px solid #8d1b32;border-radius:8px;background:#fffafb;padding:14px 16px;margin:0 0 22px}
   .dl-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:11px;padding-bottom:9px;border-bottom:1px solid #f0dde1}
@@ -804,6 +833,9 @@
   </div>
 
 
+  <div class="blocklabel" id="sec-emphasis" style="margin-top:22px;font-size:12px">🎯 Supporter emphasis &amp; drift — what they say they want, and the gaps it leaves</div>
+  <div id="emphasis"></div>
+
   <div class="blocklabel" id="sec-radar" style="margin-top:22px;font-size:12px">📡 Therapeutic area radar — what moved, and what it means</div>
   <div id="radar"></div>
 
@@ -1066,127 +1098,1509 @@ const FETCH_N = 80, SHOW_TRIALS = 15, SHOW_COMPANIES = 10;
    sandboxed Cowork artifact). Shape per space key: array of parsed trial objects
    {nct,title,status,phase,sponsor,drugs:[],start,pcd,updated,enroll,summary,cond}. */
 const TRIALSNAP = {
-  cardiovascular: [
-    {nct:"NCT07175428",title:"Safety in Adult Participants With Atrial Fibrillation Who Are Treated With Anticoagulation",status:"RECRUITING",phase:"Phase 2",sponsor:"Regeneron Pharmaceuticals",drugs:[],start:"2025-10-20",pcd:"2027-02-09",updated:"",enroll:"1200",summary:"This study is researching experimental drugs called REGN7508 and REGN9933. The study is focused on participants who have atrial fibrillation, which means that the heart beats too fast and unevenly. REGN7508 and REGN9933 are designed to help stop blood clots forming in patients with atrial fibrillation.  The aim of the study is to see how well REGN7508 and REGN9933 work in patients that get medicin",cond:"Atrial Fibrillation (AF)"},
-    {nct:"NCT07318610",title:"Reducing Adverse Vascular Outcomes With Factor XI Inhibition in Adult Participants With Peripheral Artery Disease",status:"RECRUITING",phase:"Phase 3",sponsor:"Regeneron Pharmaceuticals",drugs:[],start:"2026-07-10",pcd:"2029-08-18",updated:"",enroll:"7050",summary:"This study is researching 2 different experimental drugs called REGN7508 and REGN9933. The study is focused on people who have Peripheral Artery Disease (PAD), which means that the blood vessels in their arms and legs have become too narrow. People with PAD have a higher risk of getting blood clots after procedures like Lower Extremity Revascularization (LER), a procedure to improve blood flow in ",cond:"Peripheral Artery Disease (PAD)"},
-    {nct:"NCT05702034",title:"A Study of Milvexian in Participants After an Acute Ischemic Stroke or High-Risk Transient Ischemic Attack- LIBREXIA-STR",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"Janssen Research & Development, LLC",drugs:[],start:"2023-02-15",pcd:"2026-11-11",updated:"",enroll:"12532",summary:"The purpose of this study is to evaluate whether milvexian compared to placebo reduce the risk of recurrent ischemic stroke.",cond:"Ischemic Stroke; Ischemic Attack, Transient"},
-    {nct:"NCT07739888",title:"Study to Evaluate the effIcacy and Safety of Abelacimab in High-risk Patients With Atrial Fibrillation Who Have Been Dee",status:"NOT_YET_RECRUITING",phase:"Phase 3",sponsor:"Novartis Pharmaceuticals",drugs:[],start:"2027-12-30",pcd:"2030-12-30",updated:"",enroll:"2500",summary:"This OLE part is an optional, single arm, multicenter, open-label extension (OLE) added to the core part to assess the long-term safety, tolerability, the incidence of ischemic stroke or SE and bleeding events of abelacimab in eligible patients who completed the double-blinded core part of CMAA868A2302 (ANT-010/NCT05712200)",cond:"Atrial Fibrillation (AF)"},
-    {nct:"NCT07217067",title:"A Study to Investigate the Efficacy, Safety, Tolerability and Pharmacokinetics of PKN605 in Participants With Atrial Fib",status:"RECRUITING",phase:"Phase 2",sponsor:"Novartis Pharmaceuticals",drugs:[],start:"2025-10-28",pcd:"2027-09-09",updated:"",enroll:"165",summary:"A randomized, placebo-controlled, participant-and investigator-blinded study to evaluate the efficacy in reducing atrial fibrillation burden as well as the safety, tolerability and pharmacokinetics of PKN605 in participants with atrial fibrillation",cond:"Atrial Fibrillation"},
-    {nct:"NCT07625215",title:"A Study to Test How Well BAY 3670549 Works and How Safe it is in Patients With Atrial Fibrillation",status:"NOT_YET_RECRUITING",phase:"Phase 2",sponsor:"Bayer",drugs:[],start:"2026-08-31",pcd:"2030-05-16",updated:"",enroll:"360",summary:"The main goal of this study is to find out how well BAY 3670549 works, how safe it is, how well people can tolerate it, and how the body handles the medicine. The study will compare BAY 3670549 to a placebo (a dummy treatment with no active medicine) in people with AF who need a treatment called electrical cardioversion.  Electrical cardioversion is a procedure that helps the heart return to a nor",cond:"Atrial Fibrillation"},
-    {nct:"NCT05739383",title:"A Study of Inclisiran to Prevent Cardiovascular Events in High-risk Primary Prevention Patients.",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"Novartis Pharmaceuticals",drugs:[],start:"2023-03-09",pcd:"2029-04-16",updated:"",enroll:"14012",summary:"CKJX839D12302 is a pivotal Phase III study designed to test the hypothesis that treatment with inclisiran sodium 300 milligram (mg) subcutaneous (s.c.) administered on Day 1, Day 90, and every 6 months thereafter in patients at high cardiovascular (CV) risk without a prior major atherosclerotic cardiovascular disease (ASCVD) event will significantly reduce the risk of 4-Point-Major Adverse Cardiov",cond:"Primary Prevention of Atherosclerotic Cardiovascular Disease"},
-    {nct:"NCT05399537",title:"Safety Evaluation of Prismocitrate 18 in Patients Receiving CRRT",status:"RECRUITING",phase:"Phase 3",sponsor:"Vantive Health LLC",drugs:[],start:"2024-07-12",pcd:"2026-12",updated:"",enroll:"40",summary:"Prismocitrate 18 is a continuous renal replacement therapy (CRRT) solution to be used as a renal replacement solution and as an anticoagulant to prevent blood clotting in the extracorporeal circuit. The delivery of CRRT therapy is provided by the PrisMax System which includes regional citrate anticoagulation (RCA) software to facilitate citrate and calcium compensation prescription.  The objective",cond:"Regional Citrate Anticoagulation (RCA), Continuous Renal Replacement Therapy (CRRT), Acute Kidney In"},
-    {nct:"NCT07213778",title:"REGN7508 Versus Acetylsalicylic Acid (ASA) for Venous Thromboprophylaxis After Total Knee Arthroplasty in Adult Particip",status:"RECRUITING",phase:"Phase 3",sponsor:"Regeneron Pharmaceuticals",drugs:[],start:"2025-11-24",pcd:"2027-05-17",updated:"",enroll:"2000",summary:"This study is researching an experimental drug called REGN7508 (called \"study drug\") and how it compares against another treatment called Acetylsalicylic Acid (ASA). The study is focused on adults undergoing elective, unilateral (one side) total knee replacement surgery.  The aim of the study is to see how effective the study drug is at preventing Venous Thromboembolism (VTE) and other related d",cond:"Symptomatic Venous Thromboembolism (VTE)"},
-    {nct:"NCT07015905",title:"REGN7508 Versus Apixaban and Enoxaparin for Thromboprophylaxis After Total Knee Arthroplasty in Adults",status:"RECRUITING",phase:"Phase 3",sponsor:"Regeneron Pharmaceuticals",drugs:[],start:"2025-06-25",pcd:"2027-02-20",updated:"",enroll:"2000",summary:"This study is researching an experimental drug called REGN7508 (called \"study drug\"). The study is focused on adults undergoing elective, unilateral (one side) total knee replacement surgery.  The aim of the study is to see how effective the study drug is at preventing Venous Thromboembolism (VTE) and other related diseases after total knee replacement surgery.  The study is looking at several o",cond:"Venous Thromboembolism (VTE)"},
-    {nct:"NCT07697599",title:"Venous Thromboembolism (VTE) Prophylaxis With REGN7508 and REGN9933 in Adult and Adolescent Participants With a Peripher",status:"NOT_YET_RECRUITING",phase:"Phase 3",sponsor:"Regeneron Pharmaceuticals",drugs:[],start:"2026-08-20",pcd:"2029-06-25",updated:"",enroll:"1908",summary:"This study is researching 2 different experimental drugs called REGN7508 and REGN9933 (called \"study drugs\"). The study is focused on people who have a tube placed in a vein to receive treatment (called Peripherally Inserted Central Catheter \\[PICC\\]). Patients with PICCs have a higher risk of getting blood clots which can block the veins (this is called Venous Thromboembolism \\[VTE\\]) and l",cond:"Venous Thromboembolism (VTE)"},
-    {nct:"NCT05712200",title:"Study to evaLuate the effIcacy and Safety of abeLacimab in High-risk Patients With Atrial Fibrillation Who Have Been Dee",status:"RECRUITING",phase:"Phase 3",sponsor:"Anthos Therapeutics, Inc.",drugs:[],start:"2022-12-27",pcd:"2027-12-30",updated:"",enroll:"2500",summary:"A study to evaluate the effect of abelacimab relative to placebo on the rate of ischemic stroke or systemic embolism (SE) in patients with Atrial Fibrillation (AF) who have been deemed by their responsible physicians or by their own decision to be unsuitable for oral anticoagulation therapy.",cond:"Atrial Fibrillation (AF)"},
-    {nct:"NCT06279793",title:"Intravenous Fish Oil Based Lipid Emulsion to Enhance Recovery in High-Risk Cardiac Surgery Patients",status:"RECRUITING",phase:"Phase 2",sponsor:"GCP-Service International West GmbH",drugs:[],start:"2024-02-15",pcd:"2030-03",updated:"",enroll:"550",summary:"The MODIFY CSX study is a prospective, randomized, placebo-controlled trial conducted in heart centers in Germany and Italy.  A total of 550 high-risk cardiac surgery patients will receive either 0.20 g fish oil/kg body weight (BW) + standard of care versus same volume of placebo (NaCl) + standard of care.",cond:"Intensive Care Unit, Coronary Artery Bypass Grafting (CABG), High Risk Patients"},
-    {nct:"NCT05757869",title:"A Study of Milvexian Versus Apixaban in Participants With Atrial Fibrillation",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"Janssen Research & Development, LLC",drugs:[],start:"2023-04-11",pcd:"2026-10-31",updated:"",enroll:"20284",summary:"The purpose of this study is to evaluate if milvexian is at least as effective as apixaban for reducing the risk of the composite stroke and non-central nervous system (CNS) systemic embolism.",cond:"Atrial Fibrillation"},
-    {nct:"NCT05754957",title:"A Study of Milvexian in Participants After a Recent Acute Coronary Syndrome",status:"COMPLETED",phase:"Phase 3",sponsor:"Janssen Research & Development, LLC",drugs:[],start:"2023-04-07",pcd:"2026-02-06",updated:"",enroll:"14194",summary:"The purpose of this study is to evaluate that milvexian is superior to placebo, in addition to standard-of-care, in reducing the risk of major adverse cardiovascular event (MACE) (the composite of cardiovascular \\[CV\\] death, myocardial infarction \\[MI\\], and ischemic stroke).",cond:"Acute Coronary Syndrome"},
-  ],
-  nephrology: [
-    {nct:"NCT06935357",title:"A Study to Learn About the Effects of Felzartamab Infusions on Adults With Immunoglobulin A Nephropathy (IgAN)",status:"RECRUITING",phase:"Phase 3",sponsor:"Biogen",drugs:[],start:"2025-05-08",pcd:"2027-05-31",updated:"",enroll:"454",summary:"In this study, researchers will learn more about the use of felzartamab in participants with immunoglobulin A nephropathy (IgAN). IgAN is a kidney disease caused by the buildup of an antibody called IgA in the kidneys over time. In people with IgAN, abnormal IgA and other antibodies form clusters that build up in the small filters of the kidneys, which leads to inflammation and damage. Felzartamab",cond:"Immunoglobulin A Nephropathy (IgAN)"},
-    {nct:"NCT07614477",title:"Evaluate the Efficacy, Safety, Pharmacokinetics, and Pharmacodynamics of EVER001 in Participants With Selected Proteinur",status:"RECRUITING",phase:"Phase 2",sponsor:"Everest Medicines (China) Co.,Ltd.",drugs:[],start:"2026-05-20",pcd:"2028-12-31",updated:"",enroll:"45",summary:"This is a Phase 1b/2, open-label, multi-center study evaluating the therapeutic potential and safety of the investigational drug EVER001 in adults with FSGS, MCD, or IgAN. EVER001 acts on multiple immune pathways without directly affecting T cells or depleting B cells (both are lymphocytes). The study will be conducted at \\~30 centers in China, enrolling 45 participants aged 18-75 years (15 per i",cond:"Minimal Change Disease (MCD), IgA Nephropathy (IgAN), Focal Segmental Glomerulosclerosis (FSGS)"},
-    {nct:"NCT05039619",title:"A Study to Evaluate the Efficacy, Safety, and Pharmacokinetics of Obinutuzumab in Adolescents With Active Class III or I",status:"RECRUITING",phase:"Phase 2",sponsor:"Hoffmann-La Roche",drugs:[],start:"2022-05-12",pcd:"2028-06-15",updated:"",enroll:"40",summary:"This phase II, randomized, double-blind, placebo-controlled study is designed to evaluate the safety, efficacy and pharmacokinetics (PK) of obinutuzumab in adolescent participants (AP) aged 12 to less than 18 with biopsy-confirmed proliferative lupus nephritis (LN). It will also evaluate open label safety and PK of obinutuzumab in pediatric participants (PP), aged 5 to \\<12 with LN.",cond:"Lupus Nephritis"},
-    {nct:"NCT07662135",title:"A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Compared With Placebo in Adults With Type 2 Dia",status:"RECRUITING",phase:"Phase 3",sponsor:"AstraZeneca",drugs:[],start:"2026-07-06",pcd:"2028-07-13",updated:"",enroll:"900",summary:"The purpose of this study is to evaluate the efficacy, safety, and tolerability of elecoglipron, compared with placebo in adults with type 2 diabetes mellitus (T2DM) and impaired renal function, who are or will be on a background of sodium-glucose cotransporter 2 inhibitor (SGLT2i) dapagliflozin 10 mg as per guideline directed medical therapy (GDMT) for chronic kidney disease (CKD). Additionally, ",cond:"Type 2 Diabetes Mellitus, Type 2 Diabetes With Chronic Kidney Disease"},
-    {nct:"NCT06419205",title:"A Phase 2 Study to Evaluate the Safety, PD, PK, and Clinical Activity of ADX-097 in Participants With IgAN, LN or C3G",status:"RECRUITING",phase:"Phase 2",sponsor:"Akebia Therapeutics",drugs:[],start:"2026-07-30",pcd:"2028-02",updated:"",enroll:"30",summary:"A Phase 2 Study to Evaluate the Safety, Pharmacodynamics, Pharmacokinetics, and Clinical Activity of ADX-097 Administered Subcutaneously in Male and Female Participants Aged 16 Years or Older with Immunoglobulin A Nephropathy (IgAN), Lupus Nephritis (LN), or Complement Component 3 Glomerulopathy (C3G)",cond:"IgA Nephropathy, Lupus Nephritis (LN), C3 (Complement Component 3) Glomerulopathy"},
-    {nct:"NCT02075463",title:"Study to Evaluate the Safety and Efficacy of GSK1278863 in Recombinant Human Erythropoietin (rhEPO) Hyporesponsive Hemod",status:"TERMINATED",phase:"Phase 2",sponsor:"GlaxoSmithKline",drugs:[],start:"2014-06-11",pcd:"2016-03-16",updated:"",enroll:"15",summary:"The study will evaluate the ability of GSK1278863 to increase the hemoglobin (Hgb) concentration, or maintain it within the target range, and the safety and efficacy of GSK1278863 over 16 weeks of treatment, in hemodialysis-dependent subjects with anemia associated with chronic kidney disease who are chronically hyporesponsive to rhEPO. The data generated will inform dose requirements for any chro",cond:"Anemia, Anaemia"},
-    {nct:"NCT07015983",title:"A Study of CC-97540 (BMS-986353 or Zola-cel), CD19-Targeted NEX-T CAR T Cells, in Participants With Active SLE Despite I",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"Juno Therapeutics, Inc., a Bristol-Myers Squibb Company",drugs:[],start:"2025-07-14",pcd:"2028-05-17",updated:"",enroll:"89",summary:"The purpose of this study is to evaluate the efficacy, safety and drug levels of CC-97540 in participants with active systemic lupus erythematosus (SLE) including lupus nephritis with inadequate response to glucocorticoids and at least 2 immunosuppressants.",cond:"Lupus Erythematosus, Systemic, Lupus Nephritis"},
-    {nct:"NCT07204275",title:"Evaluation of Efficacy, Safety, and Tolerability of Povetacicept in Participants With Primary Membranous Nephropathy (pM",status:"RECRUITING",phase:"Phase 2, Phase 3",sponsor:"Vertex Pharmaceuticals Incorporated",drugs:[],start:"2025-09-30",pcd:"2028-12-29",updated:"",enroll:"176",summary:"The purpose of this study is to evaluate the efficacy, safety, and tolerability of povetacicept in participants with primary membranous nephropathy (pMN).",cond:"Primary Membranous Nephropathy"},
-    {nct:"NCT06466135",title:"Study of WAL0921 in Patients With Glomerular Kidney Diseases",status:"RECRUITING",phase:"Phase 2",sponsor:"Walden Biosciences",drugs:[],start:"2024-07-02",pcd:"2027-03",updated:"",enroll:"96",summary:"This is an adaptive prospective, multi-center, randomized, double-blind, placebo-controlled study to evaluate the safety, efficacy, pharmacokinetics, and pharmacodynamics of WAL0921 in subjects with glomerular kidney disease and proteinuria, including diabetic nephropathy and rare glomerular kidney diseases (primary focal segmental glomerulosclerosis \\[FSGS\\], treatment-resistant minimal change ",cond:"Diabetic Nephropathies, Primary Focal Segmental Glomerulosclerosis, Minimal Change Disease"},
-    {nct:"NCT06712654",title:"A Study to Evaluate Safety, Tolerability and Efficacy of AP306 at Fixed Doses in Dialysis Participants With Hyperphospha",status:"RECRUITING",phase:"Phase 2",sponsor:"R1 Therapeutics",drugs:[],start:"2026-06-01",pcd:"2027-02-28",updated:"",enroll:"168",summary:"This study is being conducted to characterize the safety, tolerability, and efficacy of AP306 at fixed doses in adults with hyperphosphatemia receiving maintenance hemodialysis.",cond:"Hyperphosphatemia, Chronic Kidney Disease Requiring Chronic Dialysis, End Stage Renal Disease on Dia"},
-    {nct:"NCT07053800",title:"Obe-cel in Severe, Refractory Systemic Lupus Erythematosus (SLE) With Active Lupus Nephritis (LN)",status:"RECRUITING",phase:"Phase 2",sponsor:"Autolus Limited",drugs:[],start:"2026-01-16",pcd:"2028-08",updated:"",enroll:"35",summary:"The purpose of this trial is to evaluate the efficacy and safety of obecabtagene autoleucel (obe-cel) administered once following lymphodepletion in participants with severe, refractory systemic lupus erythematosus (SLE) and active lupus nephritis (LN).",cond:"Lupus Nephritis"},
-    {nct:"NCT05138133",title:"Phase 3 Study of Anifrolumab in Adult Patients With Active Proliferative Lupus Nephritis",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"AstraZeneca",drugs:[],start:"2022-02-15",pcd:"2027-02-23",updated:"",enroll:"363",summary:"The purpose of this study is to evaluate the efficacy and safety of IV antifrolumab in adult patients with Active Proliferative Lupus Nephritis",cond:"Lupus Nephritis"},
-    {nct:"NCT06963827",title:"A Study of Mezagitamab in Adults With Kidney Condition Called IgA Nephropathy",status:"RECRUITING",phase:"Phase 3",sponsor:"Takeda",drugs:[],start:"2025-07-15",pcd:"2028-09-07",updated:"",enroll:"347",summary:"Immunoglobulin A nephropathy (IgAN) is a kidney condition. It happens when the body's immune system creates groups of proteins (called immune complexes) that build-up in the kidneys causing swelling (inflammation). Over time, this inflammation may lead to kidney damage and cause the kidneys to no longer work properly. The main aim of this study is to check how well mezagitamab changes protein leve",cond:"Kidney Disease"},
-    {nct:"NCT07024563",title:"Study of Ravulizumab in Pediatric Participants With Primary IgAN",status:"RECRUITING",phase:"Phase 3",sponsor:"Alexion Pharmaceuticals, Inc.",drugs:[],start:"2025-06-14",pcd:"2028-11-29",updated:"",enroll:"36",summary:"The primary objectives of this study are to characterize ravulizumab pharmacokinetics (PK) and pharmacodynamics (PD), and to evaluate safety and efficacy following ravulizumab IV dosing in pediatric participants with IgAN or IgAVN.",cond:"IgAN, IgAVN, Immunoglobulin A Nephropathy"},
-    {nct:"NCT04557462",title:"A Rollover Extension Program (REP) to Evaluate the Long-term Safety and Tolerability of Open Label Iptacopan/LNP023 in P",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"Novartis Pharmaceuticals",drugs:[],start:"2021-09-20",pcd:"2030-12-04",updated:"",enroll:"448",summary:"The purpose of this study is to evaluate the long-term safety and tolerability, of open label iptacopan in primary IgA nephropathy participants who have completed either the CLNP023X2203 or CLNP023A2301 clinical trials. The open-label design of the current study is appropriate to provide study participants the opportunity to receive treatment with iptacopan until marketing authorizations are recei",cond:"Primary IgA Nephropathy"},
-  ],
-  endocrinology: [
-    {nct:"NCT06318169",title:"A Study Evaluating the Efficacy and Safety of Pegozafermin in Participants With MASH and Fibrosis (ENLIGHTEN-Fibrosis)",status:"RECRUITING",phase:"Phase 3",sponsor:"89bio, Inc.",drugs:[],start:"2024-03-13",pcd:"2029-02",updated:"",enroll:"1350",summary:"The study will assess the efficacy and safety of 2 dose regimens of pegozafermin compared to placebo for the treatment of liver fibrosis stage F2 or F3 in adult participants with MASH.",cond:"Metabolic Dysfunction-Associated Steatotic Liver Disease (MASH) / Nonalcoholic Steatohepatitis (NASH"},
-    {nct:"NCT06419374",title:"A Study to Evaluate the Efficacy and Safety of Pegozafermin in Participants With Compensated Cirrhosis Due to MASH",status:"RECRUITING",phase:"Phase 3",sponsor:"89bio, Inc.",drugs:[],start:"2024-05-24",pcd:"2028-06",updated:"",enroll:"762",summary:"The study will assess the efficacy and safety of pegozafermin administered in participants with compensated cirrhosis due to MASH (biopsy-confirmed fibrosis stage F4 MASH \\[previously known as nonalcoholic steatohepatitis, NASH\\]).",cond:"Metabolic Dysfunction-Associated Steatohepatitis (MASH) / Nonalcoholic Steatohepatitis (NASH) With C"},
-    {nct:"NCT07704892",title:"A Study to Investigate Safety and Efficacy of Efimosfermin Compared With Placebo in Adult Participants With Compensated ",status:"RECRUITING",phase:"Phase 3",sponsor:"GlaxoSmithKline",drugs:[],start:"2026-07-22",pcd:"2030-10-16",updated:"",enroll:"380",summary:"This is a multi-center, randomized, two-part (Part A and Part B) study investigating the safety and efficacy of efimosfermin alfa in adult participants with compensated cirrhosis due to MASH. Participants who complete the treatment during Part A of the study and meet the inclusion criteria will have the option to enroll in Part B (open label) of the study.",cond:"Metabolic Dysfunction-associated Steatohepatitis"},
-    {nct:"NCT07748208",title:"A Study Evaluating the Safety of Inavolisib and Fulvestrant With or Without Palbociclib in Participants With Advanced Br",status:"NOT_YET_RECRUITING",phase:"Phase 2",sponsor:"Hoffmann-La Roche",drugs:[],start:"2026-09-01",pcd:"2029-06-15",updated:"",enroll:"40",summary:"This study will evaluate the safety of inavolisib in combination with fulvestrant, with or without palbociclib, in participants with PIK3CA-mutated, HR+, HER2-negative ABC and type 2 diabetes.",cond:"Breast Cancer, Diabetes Type II"},
-    {nct:"NCT07701993",title:"A Pivotal Clinical Study to Investigate the Safety and Efficacy of Efimosfermin Compared With Placebo in Adult Participa",status:"RECRUITING",phase:"Phase 3",sponsor:"GlaxoSmithKline",drugs:[],start:"2026-07-22",pcd:"2033-07-27",updated:"",enroll:"1740",summary:"This study will investigate the safety and efficacy of efimosfermin alfa in participants with compensated cirrhosis due to MASH.",cond:"Metabolic Dysfunction-associated Steatohepatitis"},
-    {nct:"NCT07662135",title:"A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Compared With Placebo in Adults With Type 2 Dia",status:"RECRUITING",phase:"Phase 3",sponsor:"AstraZeneca",drugs:[],start:"2026-07-06",pcd:"2028-07-13",updated:"",enroll:"900",summary:"The purpose of this study is to evaluate the efficacy, safety, and tolerability of elecoglipron, compared with placebo in adults with type 2 diabetes mellitus (T2DM) and impaired renal function, who are or will be on a background of sodium-glucose cotransporter 2 inhibitor (SGLT2i) dapagliflozin 10 mg as per guideline directed medical therapy (GDMT) for chronic kidney disease (CKD). Additionally, ",cond:"Type 2 Diabetes Mellitus, Type 2 Diabetes With Chronic Kidney Disease"},
-    {nct:"NCT07533175",title:"AMAZE 2: A Research Study Investigating How Well the Medicine NNC0487-0111 Helps People With Excess Body Weight and Type",status:"RECRUITING",phase:"Phase 3",sponsor:"Novo Nordisk A/S",drugs:[],start:"2026-04-13",pcd:"2028-08-07",updated:"",enroll:"630",summary:"The purpose of this clinical study is to find out if NNC0487-0111 is safe and effective for treating people who have excess body weight and type 2 diabetes. There are 2 study treatments in this study taken as injections under the skin once a week. Participants will either get NNC0487-0111 (the treatment being tested) or Placebo (treatment that has no active medicine in it). Which treatment partici",cond:"Diabetes Mellitus, Overweight, Obesity"},
-    {nct:"NCT07662044",title:"A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Alone or in Combination With Dapagliflozin Comp",status:"RECRUITING",phase:"Phase 3",sponsor:"AstraZeneca",drugs:[],start:"2026-07-06",pcd:"2028-07-14",updated:"",enroll:"800",summary:"The purpose of this study is to evaluate the efficacy, safety, and tolerability of elecoglipron alone or in combination with dapagliflozin compared with placebo in adults with type 2 diabetes mellitus (T2DM) inadequately managed with lifestyle management alone or treated with other background glucose-lowering medication.",cond:"Type 2 Diabetes Mellitus"},
-    {nct:"NCT07745504",title:"A Research Study to Compare Two Different Versions of Injectable Cagrilintide and Placebo in People With Excess Body Wei",status:"NOT_YET_RECRUITING",phase:"Phase 3",sponsor:"Novo Nordisk A/S",drugs:[],start:"2026-08-04",pcd:"2027-05-18",updated:"",enroll:"285",summary:"The purpose of this clinical study is to look at how well a study medicine called cagrilintide helps people living with excess body weight to lose weight. Participants will either get cagrilintide, the active study medicine being tested or placebo, a medicine that has no active medicine in it. Which treatment participants get is decided by chance. Cagrilintide is a new medicine under development t",cond:"Overweight, Obesity"},
-    {nct:"NCT07553299",title:"A Study of Weekly Oral Dose of Ecnoglutide (VRB-101) for Weight Maintenance in Participants Who Have Obesity or Overweig",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"Verdiva Bio Dev Limited",drugs:[],start:"2026-06-12",pcd:"2026-11-30",updated:"",enroll:"120",summary:"The purpose of this study is to identify the weekly oral dose of VRB-101 (oral ecnoglutide) that can effectively maintain body weight in participants with a history of obesity or overweight with weight-related comorbidities.",cond:"Obesity, Overweight, Weight Maintenance"},
-    {nct:"NCT07662109",title:"A Phase III Study to Investigate the Efficacy and Safety of the Combination of Elecoglipron and Dapagliflozin in Adults ",status:"RECRUITING",phase:"Phase 3",sponsor:"AstraZeneca",drugs:[],start:"2026-07-06",pcd:"2028-07-05",updated:"",enroll:"2000",summary:"The purpose of this study is to evaluate the efficacy, safety, and tolerability of elecoglipron and dapagliflozin in combination, compared with elecoglipron alone and dapagliflozin alone, in adults with type 2 diabetes mellitus (T2DM) inadequately managed with lifestyle management alone or treated with other background glucose-lowering medication.",cond:"Type 2 Diabetes Mellitus"},
-    {nct:"NCT07664553",title:"A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Compared With Placebo in Adults With Type 2 Dia",status:"RECRUITING",phase:"Phase 3",sponsor:"AstraZeneca",drugs:[],start:"2026-07-08",pcd:"2028-05-23",updated:"",enroll:"600",summary:"The purpose of this study is to evaluate the efficacy, safety, and tolerability of elecoglipron compared with placebo in adults with Type 2 Diabetes Mellitus (T2DM), treated with a background insulin and other background glucose-lowering medication(s)",cond:"Type 2 Diabetes Mellitus"},
-    {nct:"NCT07743983",title:"A Study of BGM0504 in Early T2DM With Obesity",status:"RECRUITING",phase:"Phase 3",sponsor:"BrightGene Bio-Medical Technology Co., Ltd.",drugs:[],start:"2026-08-30",pcd:"2028-09-30",updated:"",enroll:"372",summary:"This trial is conducted in China. The aim is to compare BGM0504 Injection 15 mg with semaglutide 1.0 mg in Chinese T2DM patients with obesity and inadequate control despite diet and exercise. Over 52 weeks of once weekly treatment, efficacy and safety are evaluated, including the rate of diabetes remission at 12 weeks after treatment discontinuation.",cond:"Type 2 Diabetes (T2DM)"},
-    {nct:"NCT07684235",title:"Extension Trial to Evaluate the Long-term Efficacy, Safety, and Tolerability of Maridebart Cafraglutide (MARITIME-1-EXTE",status:"RECRUITING",phase:"Phase 3",sponsor:"Amgen",drugs:[],start:"2026-07-23",pcd:"2027-12-26",updated:"",enroll:"3200",summary:"The primary objective of this trial is to evaluate the long-term efficacy, safety, and tolerability of maridebart cafraglutide in participants with obesity or overweight. Trial 20250197 is an extension of trial 20210181 (NCT06858839).",cond:"Obesity, Overweight"},
-    {nct:"NCT07225686",title:"Maridebart Cafraglutide Versus Placebo in Adult Participants With Obstructive Sleep Apnea on Positive Airway Pressure Th",status:"RECRUITING",phase:"Phase 3",sponsor:"Amgen",drugs:[],start:"2025-12-19",pcd:"2027-09-29",updated:"",enroll:"250",summary:"This Phase 3 clinical trial is designed to evaluate the efficacy and safety of maridebart cafraglutide compared to placebo over a 52-week period in adults with obstructive sleep apnea (OSA) who are receiving positive airway pressure (PAP) therapy and are living with overweight or obesity.",cond:"Obesity, Obstructive Sleep Apnea"},
-  ],
-  _derm_merged: [
-    {nct:"NCT07746479",title:"A Study to Evaluate the Efficacy and Safety of LZM012 ( Psoriasis )",status:"COMPLETED",phase:"Phase 3",sponsor:"Livzon Pharmaceutical Group Inc.",drugs:[],start:"2025-06-23",pcd:"2026-01-26",updated:"",enroll:"244",summary:"This study is a Multicenter, Open-Label, Single-Arm Phase III Clinical Trial to Evaluate the Efficacy and Safety of LZM012 Injection in Patients With Moderate to Severe Plaque Psoriasis.",cond:"Psoriasis"},
-    {nct:"NCT07449702",title:"An Open-Label Extension Study of ORKA-001 in Participants With Plaque Psoriasis",status:"RECRUITING",phase:"Phase 2",sponsor:"Oruka Therapeutics, Inc.",drugs:[],start:"2026-02-23",pcd:"2030-05",updated:"",enroll:"240",summary:"An open-label extension (OLE) study to evaluate the long-term safety and efficacy of ORKA-001 in adult participants with moderate-to-severe plaque psoriasis, who previously participated in an Oruka Therapeutics sponsored study.",cond:"Plaque Psoriasis"},
-    {nct:"NCT05958407",title:"A 32-week Trial to Evaluate the Efficacy and Safety of Tralokinumab in Subjects With Moderate-to-severe Atopic Hand Ecze",status:"COMPLETED",phase:"Phase 3",sponsor:"LEO Pharma",drugs:[],start:"2023-08-28",pcd:"2025-05-05",updated:"",enroll:"235",summary:"The purpose of this study is to test if treatment with tralokinumab is safe and efficacious in treating moderate-to-severe atopic hand eczema. This will be judged by a range of assessments that rate the severity and extent of atopic hand eczema and its symptoms, as well as general health status and quality of life.  The trial will last for up to 40 weeks for each participant. There will be up to 1",cond:"Atopic Dermatitis, Atopic Hand Eczema"},
-    {nct:"NCT03952559",title:"A Study of Baricitinib (LY3009104) in Children and Adolescents With Atopic Dermatitis",status:"COMPLETED",phase:"Phase 3",sponsor:"Eli Lilly and Company",drugs:[],start:"2019-05-24",pcd:"2022-04-24",updated:"",enroll:"516",summary:"The reason for this study is to see if the study drug called baricitinib works and is safe in children and teenage participants with atopic dermatitis.",cond:"Atopic Dermatitis"},
-    {nct:"NCT07690371",title:"A Phase 3 Study of Rezpegaldesleukin (NKTR-358) for Patients ≥ 12 Years of Age With Moderate-to-Severe Atopic Dermatitis",status:"RECRUITING",phase:"Phase 3",sponsor:"Nektar Therapeutics",drugs:[],start:"2026-06-29",pcd:"2028-05",updated:"",enroll:"510",summary:"This is an interventional, randomized, parallel group, treatment, Phase 3, double blind study to assess the effect of Rezpegaldesleukin in participants 12 years of age or older with moderate to severe atopic dermatitis, as compared to placebo.  The estimated participant overall duration is approximately 15 months.",cond:"Moderate-to-Severe Atopic Dermatitis"},
-    {nct:"NCT06046729",title:"A Study of Eltrekibart (LY3041658) in Adult Participants With Moderate to Severe Hidradenitis Suppurativa",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"Eli Lilly and Company",drugs:[],start:"2023-10-23",pcd:"2025-09-30",updated:"",enroll:"352",summary:"This study aims to find the appropriately safe and effective dose and dosing frequency for eltrekibart in adults with moderate-to-severe hidradenitis suppurativa (HS) for further clinical development. The study will last approximately 62 weeks and may include up to 31 visits.",cond:"Hidradenitis Suppurativa"},
-    {nct:"NCT04123795",title:"A Study to Evaluate the Pharmacokinetics, Safety, and Effectiveness of Certolizumab Pegol in Children With Moderate to S",status:"COMPLETED",phase:"Phase 3",sponsor:"UCB Biopharma SRL",drugs:[],start:"2020-01-21",pcd:"2026-04-09",updated:"",enroll:"49",summary:"The purpose of the study is to evaluate the pharmacokinetic (PK) of certolizumab pegol (CZP) in study participants aged 6 to 17 years with moderate to severe chronic plaque psoriasis (PSO) in order to support extrapolation of efficacy.",cond:"Moderate Chronic Plaque Psoriasis, Severe Chronic Plaque Psoriasis, Mixed Guttate/Plaque Psoriasis"},
-    {nct:"NCT05889182",title:"A Study to Assess Change in Disease Activity and Adverse Events of Oral Upadacitinib in Adult and Adolescent Participant",status:"RECRUITING",phase:"Phase 3",sponsor:"AbbVie",drugs:[],start:"2023-06-21",pcd:"2028-03",updated:"",enroll:"1328",summary:"Hidradenitis suppurativa (HS) is an inflammatory skin disease that causes painful lesions in the axilla (underarm), inguinal (groin) and anogenital (anal/genital) regions. This study will assess how safe and effective upadacitinib is in treating adult and adolescent participants with moderate to severe HS who have failed to respond to or are intolerant of anti-tumor necrosis factor (TNF) therapy. ",cond:"Hidradenitis Suppurativa"},
-    {nct:"NCT06718101",title:"A Study to Evaluate the Effectiveness and Safety of Treatments, Either Alone or in Combination, for the Treatment of Mod",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"AbbVie",drugs:[],start:"2024-12-19",pcd:"2027-05",updated:"",enroll:"83",summary:"Atopic dermatitis (AD) is a skin condition that may cause a rash and itching due to inflammation of the skin. The purpose of this study is to evaluate the clinical efficacy and safety of single therapies and/or combination therapies for moderate to severe AD through multiple substudies.  This study will consist of multiple substudies. Substudy 1 will have a randomized, open-label period 1 followed",cond:"Atopic Dermatitis"},
-    {nct:"NCT07103174",title:"A Study of MG-K10 Humanized Monoclonal Antibody Injection in Subjects With Atopic Dermatitis",status:"COMPLETED",phase:"Phase 2",sponsor:"Shanghai Mabgeek Biotech.Co.Ltd",drugs:[],start:"2025-06-30",pcd:"2026-03-09",updated:"",enroll:"60",summary:"This study is a multicenter, randomized, double-blind, parallel controlled phase II study. It is planned to include approximately 60 subjects with moderate to severe atopic dermatitis(AD) to evaluate the efficacy and safety of MG-K10 monotherapy in adult patients with moderate to severe AD, and to observe PK characteristics, PD effects and immunogenicity.",cond:"Atopic Dermatitis (AD)"},
-    {nct:"NCT06012240",title:"A Study to Evaluate the Safety and Effectiveness of Upadacitinib Tablets in Adult and Adolescent Participants With Sever",status:"RECRUITING",phase:"Phase 3",sponsor:"AbbVie",drugs:[],start:"2023-10-11",pcd:"2030-04",updated:"",enroll:"1500",summary:"Alopecia areata (AA) is a disease that happens when the immune system attacks hair follicles and causes hair loss. AA usually affects the head and face, but hair loss can happen on any part of the body. The purpose of this study is to assess how safe, effective, and tolerable upadacitinib is in adolescent and adult participants with severe AA.  Upadacitinib is an approved drug being investigated f",cond:"Alopecia Areata"},
-    {nct:"NCT04718896",title:"A Study to Assess the Pharmacokinetics, Safety, and Efficacy of Two Doses of Bimekizumab in Adolescent Study Participant",status:"COMPLETED",phase:"Phase 2",sponsor:"UCB Biopharma SRL",drugs:[],start:"2021-04-06",pcd:"2025-03-12",updated:"",enroll:"41",summary:"The purpose of the study is to assess th pharmacokinetics (PK) of bimekizumab administered subcutaneously (sc) in adolescents with moderate to severe plaque psoriasis (PSO).",cond:"Moderate to Severe Plaque Psoriasis"},
-    {nct:"NCT03886246",title:"Effisayil™ ON: A Study to Test Long-term Treatment With Spesolimab in People With Generalized Pustular Psoriasis Who Too",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"LEO Pharma",drugs:[],start:"2019-05-29",pcd:"2027-09-30",updated:"",enroll:"131",summary:"This study is open to people with generalized pustular psoriasis (GPP). People can only take part if they have completed treatment in a previous study with spesolimab (1368-0013 or 1368-0027).  The goal of this study is to find out how well people with GPP tolerate long-term treatment with spesolimab. The study also tests whether spesolimab helps improve GPP symptoms and how quickly the symptoms i",cond:"Generalized Pustular Psoriasis"},
-    {nct:"NCT06136741",title:"A Phase 2b Study to Evaluate Rezpegaldesleukin (Rezpeg) in the Treatment of Adult Patients With Moderate-to-Severe Atopi",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"Nektar Therapeutics",drugs:[],start:"2023-11-15",pcd:"2025-05-06",updated:"",enroll:"396",summary:"This is an interventional, randomized, parallel group, treatment, Phase IIb, double blind, 4-arm study to assess the effect of pegylated-recombinant-human interleukin-2 (rezpegaldesleukin) in adult participants with moderate to severe atopic dermatitis.  The estimated duration is 15-35 days for screening, an Induction Period of 16 weeks, a Maintenance Period from Week 16-Week 52, and a Posttreatme",cond:"Moderate to Severe Atopic Dermatitis"},
-    {nct:"NCT07314060",title:"A Clinical Trial of TQH2929 Injection in Patients With Acute Flare-up of Generalized Pustular Psoriasis",status:"TERMINATED",phase:"Phase 2",sponsor:"Chia Tai Tianqing Pharmaceutical Group Co., Ltd.",drugs:[],start:"2026-03-19",pcd:"2026-07-30",updated:"",enroll:"36",summary:"This is a multicenter, randomized, double-blind, placebo-controlled phase II clinical study, all subjects need to use TQH2929 injection/placebo. The aim was to demonstrate the efficacy and safety of TQH2929 injection in patients with acute exacerbations of generalized pustular psoriasis, with a total of 36 subjects.",cond:"Generalized Pustular Psoriasis"},
-  ],
-  immunology: [
-    {nct:"NCT07746687",title:"A Study of JNJ-95597528 in Participants With Inadequately Controlled Moderate to Severe Asthma",status:"NOT_YET_RECRUITING",phase:"Phase 2",sponsor:"Janssen Research & Development, LLC",drugs:[],start:"2026-09-23",pcd:"2029-09-11",updated:"",enroll:"440",summary:"The purpose of this study is to assess how well JNJ-95597528 works when compared to placebo in adult participants with moderate to severe asthma (long-term condition that affects the airways in your lungs).",cond:"Asthma"},
-    {nct:"NCT07359846",title:"A Study to Investigate GB-0895 Adjunctive Therapy in Adults and Adolescents With Severe Uncontrolled Asthma (SOLAIRIA-2)",status:"RECRUITING",phase:"Phase 3",sponsor:"Generate Biomedicines",drugs:[],start:"2026-01-20",pcd:"2029-01",updated:"",enroll:"786",summary:"The objective of this study is to assess the potential for GB-0895 treatment to improve the health of adolescents and adults with severe asthma that is uncontrolled by inhaled corticosteroids (ICS) and conventional asthma controllers.  The study details include:  Study treatment: randomized to receive either GB-0895 or placebo administered every 6 months over 52 weeks.  Visit frequency: every 1-2 ",cond:"Severe Asthma"},
-    {nct:"NCT07071519",title:"A Study to Learn More About How Risankizumab Works in Young Participants With Ulcerative Colitis",status:"RECRUITING",phase:"Phase 3",sponsor:"AbbVie",drugs:[],start:"2025-07-28",pcd:"2034-07",updated:"",enroll:"120",summary:"Ulcerative colitis (UC) is a type of inflammatory bowel disease that causes inflammation and bleeding from the lining of the rectum and colon (large intestine). This study will assess how Risankizumab moves through the body as well as how safe and effective it is in treating pediatric participants with moderate to severely active UC. Adverse events and change in disease activity will be assessed. ",cond:"Ulcerative Colitis"},
-    {nct:"NCT07747155",title:"A Study to Evaluate the Efficacy, Safety, Tolerability and Pharmacokinetics of PTT-621 in Patients With Moderately to Se",status:"NOT_YET_RECRUITING",phase:"Phase 2",sponsor:"Pyrotech Therapeutics, Inc.",drugs:[],start:"2026-08",pcd:"2027-12",updated:"",enroll:"40",summary:"This Phase IIa, multicenter, single-arm trial evaluates the efficacy, safety, tolerability, and pharmacokinetics of PTT-621 tablets in adults (18-70 years) with moderate-to-severe active ulcerative colitis (UC) who have inadequate response/intolerance to standard therapies. Participants receive PTT-621 for 12 weeks. The primary endpoint is the proportion of participants achieving endoscopic improv",cond:"Ulcerative Colitis (UC)"},
-    {nct:"NCT05039619",title:"A Study to Evaluate the Efficacy, Safety, and Pharmacokinetics of Obinutuzumab in Adolescents With Active Class III or I",status:"RECRUITING",phase:"Phase 2",sponsor:"Hoffmann-La Roche",drugs:[],start:"2022-05-12",pcd:"2028-06-15",updated:"",enroll:"40",summary:"This phase II, randomized, double-blind, placebo-controlled study is designed to evaluate the safety, efficacy and pharmacokinetics (PK) of obinutuzumab in adolescent participants (AP) aged 12 to less than 18 with biopsy-confirmed proliferative lupus nephritis (LN). It will also evaluate open label safety and PK of obinutuzumab in pediatric participants (PP), aged 5 to \\<12 with LN.",cond:"Lupus Nephritis"},
-    {nct:"NCT06419205",title:"A Phase 2 Study to Evaluate the Safety, PD, PK, and Clinical Activity of ADX-097 in Participants With IgAN, LN or C3G",status:"RECRUITING",phase:"Phase 2",sponsor:"Akebia Therapeutics",drugs:[],start:"2026-07-30",pcd:"2028-02",updated:"",enroll:"30",summary:"A Phase 2 Study to Evaluate the Safety, Pharmacodynamics, Pharmacokinetics, and Clinical Activity of ADX-097 Administered Subcutaneously in Male and Female Participants Aged 16 Years or Older with Immunoglobulin A Nephropathy (IgAN), Lupus Nephritis (LN), or Complement Component 3 Glomerulopathy (C3G)",cond:"IgA Nephropathy, Lupus Nephritis (LN), C3 (Complement Component 3) Glomerulopathy"},
-    {nct:"NCT06450197",title:"Phase IIa Study Evaluating AZD7798 in Crohn's Disease",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"AstraZeneca",drugs:[],start:"2024-08-28",pcd:"2026-04-30",updated:"",enroll:"120",summary:"This is a randomised, double-blind, parallel group, placebo-controlled Phase IIa study designed to evaluate the efficacy and safety of AZD7798 in participants with moderate to severe Crohn's disease.",cond:"Moderate to Severe Crohn's Disease"},
-    {nct:"NCT06880744",title:"A Study to Assess the Change in Disease Activity in Adult Participants With Moderate to Severe Ulcerative Colitis Treate",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"AbbVie",drugs:[],start:"2025-06-17",pcd:"2027-08",updated:"",enroll:"573",summary:"Ulcerative colitis (UC) is a type of inflammatory bowel disease that causes inflammation and bleeding from the lining of the rectum and colon (large intestine).This study will evaluate how safe and effective risankizumab is compared to vedolizumab in treating adult participants with moderate to severe UC who are naive to targeted therapies (TaTs).  Risankizumab and vedolizumab are approved medicat",cond:"Ulcerative Colitis"},
-    {nct:"NCT06044337",title:"A Long-Term Extension Study to Learn More About the Safety of Litifilimab (BIIB059) Injections and Whether They Can Impr",status:"ENROLLING_BY_INVITATION",phase:"Phase 3",sponsor:"Biogen",drugs:[],start:"2023-10-03",pcd:"2029-06-26",updated:"",enroll:"306",summary:"In this study, researchers will learn more about a study drug called BIIB059 (litifilimab) in participants with cutaneous lupus erythematosus (CLE). The study will focus on participants who have either active subacute CLE or chronic CLE, or both. They may also have systemic lupus erythematosus (SLE). The participants did not respond to antimalarial therapy or had problems with the treatment that m",cond:"Subacute Cutaneous Lupus Erythematosus, Chronic Cutaneous Lupus Erythematosus"},
-    {nct:"NCT07276724",title:"A Study to Investigate GB-0895 Adjunctive Therapy in Adults and Adolescents With Severe Uncontrolled Asthma (SOLAIRIA-1)",status:"RECRUITING",phase:"Phase 3",sponsor:"Generate Biomedicines",drugs:[],start:"2025-12-03",pcd:"2028-12",updated:"",enroll:"786",summary:"The objective of this study is to assess the potential for GB-0895 treatment to improve the health of adolescents and adults with severe asthma that is uncontrolled by inhaled corticosteroids (ICS) and conventional asthma controllers.  The study details include:  Study treatment: randomized to receive either GB-0895 or placebo administered every 6 months over 52 weeks.  Visit frequency: every 1-2 ",cond:"Severe Asthma"},
-    {nct:"NCT04624230",title:"Evaluation of Oral Tofacitinib in Children Aged 2 to 17 Years Old Suffering From Moderate to Severe Ulcerative Colitis",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"Pfizer",drugs:[],start:"2021-08-12",pcd:"2027-03-17",updated:"",enroll:"118",summary:"This study, A3921210 is designed to evaluate the efficacy, safety and pharmacokinetics (PK) of tofacitinib in pediatric participants with moderately to severely active UC. In the US and EU, patients with prior TNFi failure or intolerance will be enrolled. Outside of the US or EU, patients having had inadequate response or intolerance to oral or IV corticosteroids or azathioprine or 6-mercaptopurin",cond:"Ulcerative Colitis"},
-    {nct:"NCT07596901",title:"Study of Aritinercept in Patients With Generalized Myasthenia Gravis",status:"RECRUITING",phase:"Phase 1, Phase 2",sponsor:"Aurinia Pharmaceuticals Inc.",drugs:[],start:"2026-04-22",pcd:"2029-03-02",updated:"",enroll:"81",summary:"This clinical study will enroll patients with generalized myasthenia gravis (gMG). The goal of this clinical study is to assess the safety, tolerability, effectiveness, pharmacokinetics (how the body processes the drug) and pharmacodynamics (how the drug affects the body) of aritinercept.",cond:"Myasthenia Gravis, Generalized"},
-    {nct:"NCT07368972",title:"Study of DISC-0974-201 in Participants With IBD and Anemia",status:"RECRUITING",phase:"Phase 2",sponsor:"Disc Medicine, Inc",drugs:[],start:"2026-02-20",pcd:"2026-10",updated:"",enroll:"21",summary:"This is a Phase 2, multicenter, randomized, double-blind placebo-controlled study of DISC-0974 to evaluate safety, tolerability, and efficacy in participants with IBD and anemia of inflammation.",cond:"Inflammatory Bowel Disease (IBD), Anemia, Inflammatory Bowel Disease (IBD); Anemia"},
-    {nct:"NCT07015983",title:"A Study of CC-97540 (BMS-986353 or Zola-cel), CD19-Targeted NEX-T CAR T Cells, in Participants With Active SLE Despite I",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"Juno Therapeutics, Inc., a Bristol-Myers Squibb Company",drugs:[],start:"2025-07-14",pcd:"2028-05-17",updated:"",enroll:"89",summary:"The purpose of this study is to evaluate the efficacy, safety and drug levels of CC-97540 in participants with active systemic lupus erythematosus (SLE) including lupus nephritis with inadequate response to glucocorticoids and at least 2 immunosuppressants.",cond:"Lupus Erythematosus, Systemic, Lupus Nephritis"},
-    {nct:"NCT05197049",title:"A Study of Guselkumab Subcutaneous Therapy in Participants With Moderately to Severely Active Crohn's Disease",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"Janssen Research & Development, LLC",drugs:[],start:"2022-01-19",pcd:"2023-07-04",updated:"",enroll:"350",summary:"The purpose of this study is to evaluate the efficacy and safety of guselkumab in participants with Crohn's disease.",cond:"Crohn Disease"},
-  ],
-  raredisease: [
-    {nct:"NCT07154745",title:"A Study to Evaluate How Pozelimab + Cemdisiran Combination Therapy Works in Adult Patients With Paroxysmal Nocturnal Hem",status:"RECRUITING",phase:"Phase 3",sponsor:"Regeneron Pharmaceuticals",drugs:[],start:"2026-06-11",pcd:"2030-01-18",updated:"",enroll:"35",summary:"This study is researching a treatment combination with two experimental drugs called pozelimab and cemdisiran referred to as \"study drugs\". Researchers are looking for a better way to treat Paroxysmal Nocturnal Hemoglobinuria (PNH).  The aim of the study is to see how well the pozelimab and cemdisiran combination works to lower hemolysis in participants whose PNH has been not well controlled eve",cond:"Paroxysmal Nocturnal Hemoglobinuria"},
-    {nct:"NCT06467084",title:"Open-Label Safety, PK, and Efficacy Trial of Sebetralstat (KVD900) in Pediatric Patients (Ages 2-11) With HAE Type I or ",status:"COMPLETED",phase:"Phase 3",sponsor:"KalVista Pharmaceuticals, Ltd.",drugs:[],start:"2024-08-01",pcd:"2026-01-15",updated:"",enroll:"36",summary:"KVD900-303 is an open-label, multicenter clinical trial in patients aged 2 to 11 years old with HAE Type I or II.",cond:"Hereditary Angioedema"},
-    {nct:"NCT03157635",title:"Study to Assess Safety, Efficacy, Pharmacokinetics, and Pharmacodynamics of Crovalimab in Healthy Volunteers and Partici",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 1, Phase 2",sponsor:"Hoffmann-La Roche",drugs:[],start:"2016-11-14",pcd:"2026-08-13",updated:"",enroll:"59",summary:"This is a Phase I/II, first-in-human study consisting of four sequential parts and an open-label extension (OLE). The safety, tolerability, pharmacokinetics (PK), and pharmacodynamics (PD) of single doses of crovalimab will be evaluated in healthy volunteers (HV) during part 1. The safety, tolerability, PK and PD of multiple doses of crovalimab will be evaluated in participants with paroxysmal noc",cond:"Paroxysmal Hemoglobinuria, Nocturnal"},
-    {nct:"NCT07298447",title:"Donidalorsen Treatment in Children With Hereditary Angioedema",status:"RECRUITING",phase:"Phase 3",sponsor:"Ionis Pharmaceuticals, Inc.",drugs:[],start:"2026-04-21",pcd:"2029-06",updated:"",enroll:"20",summary:"The purpose of this study is to evaluate the safety, tolerability and pharmacokinetics of donidalorsen in pediatric participants with hereditary angioedema (HAE) Type I (HAE-1) or Type II (HAE-2).",cond:"Hereditary Angioedema (HAE)"},
-    {nct:"NCT07747090",title:"A Study of the Efficacy and Safety of FXS6837 Capsules Compared to Eculizumab for 24 Weeks in Patients With PNH.",status:"NOT_YET_RECRUITING",phase:"Phase 3",sponsor:"Shanghai Fosun Pharmaceutical Industrial Development Co. Ltd",drugs:[],start:"2026-12-10",pcd:"2028-05-05",updated:"",enroll:"90",summary:"An open label study to evaluate the efficacy and safety of FXS6837 capsules compared to eculizumab in naive PNH patients. About 90 PNH patients who are naive to complement inhibitor therapies will be enrolled to take FXS6837 capsules or eculizumab for 24 weeks according to protocol.",cond:"Paroxysmal Nocturnal Hemoglobinuria"},
-    {nct:"NCT06563895",title:"Acoramidis Transthyretin Amyloidosis Prevention Trial in the Young (ACT-EARLY) Study in Asymptomatic Carriers of a Patho",status:"RECRUITING",phase:"Phase 3",sponsor:"Eidos Therapeutics, a BridgeBio company",drugs:[],start:"2025-05-12",pcd:"2031-10",updated:"",enroll:"587",summary:"Transthyretin amyloidosis (ATTR) is a disease where the normally occurring transthyretin (TTR) protein falls apart and forms amyloid, a sticky plaque-like substance that accumulates in different organs in the body and can cause damage to the organ. There are two ways that the TTR protein can fall apart. One way occurs as a person ages, where the normal TTR protein can fall apart and form amyloid t",cond:"Amyloidosis, Amyloid Cardiomyopathy, Transthyretin Amyloidosis"},
-    {nct:"NCT07587242",title:"A Phase 3 Study to Evaluate the Safety and Efficacy of AOC 1044 (Also Referred to as Delpacibart Zotadirsen) in Particip",status:"RECRUITING",phase:"Phase 3",sponsor:"Avidity Biosciences, Inc.",drugs:[],start:"2026-08",pcd:"2029-05",updated:"",enroll:"70",summary:"A Randomized, Double-blind, Placebo-controlled, Phase 3 Study to Evaluate the Efficacy and Safety of Intravenous AOC 1044 for the treatment of Duchenne Muscular Dystrophy (DMD) with Gene Mutations Amenable to Exon 44 Skipping",cond:"Muscular Dystrophies, Muscular Dystrophies (Duchenne, Becker, Myotonic Dystrophy), Muscular Disorder"},
-    {nct:"NCT05184088",title:"Efficacy of [18F]Florbetaben PET for Diagnosis of Cardiac AL Amyloidosis",status:"COMPLETED",phase:"Phase 3",sponsor:"Lantheus Germany GmbH",drugs:[],start:"2023-01-13",pcd:"2026-04-21",updated:"",enroll:"244",summary:"This is an open-label, multi-center pivotal Phase 3 study to visually and quantitatively assess PET images obtained after single application of 300 MBq \\[18F\\]florbetaben and PET scanning of patients with suspected cardiac amyloidosis.",cond:"Cardiac Amyloidosis, AL Amyloidosis, ATTR Amyloidosis"},
-    {nct:"NCT06066580",title:"Open-Label Extension of EDG-5506 in Participants With Becker Muscular Dystrophy",status:"ENROLLING_BY_INVITATION",phase:"Phase 2",sponsor:"Edgewise Therapeutics, Inc.",drugs:[],start:"2023-11-02",pcd:"2031-02",updated:"",enroll:"260",summary:"EDG-5506-203 MESA is an open-label extension study to assess the long-term effect of sevasemten (EDG-5506) on safety, biomarkers, and functional measures in adults and adolescents with Becker muscular dystrophy",cond:"Becker Muscular Dystrophy"},
-    {nct:"NCT05291091",title:"Phase 2 Study of EDG-5506 in Becker Muscular Dystrophy (GRAND CANYON)",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"Edgewise Therapeutics, Inc.",drugs:[],start:"2022-11-10",pcd:"2026-09",updated:"",enroll:"244",summary:"A study of sevasemten (EDG-5506) in Becker muscular dystrophy (known as CANYON) and pivotal cohort (known as GRAND CANYON). The EDG-5506-201 CANYON study was expanded to include an additional 120 adult participants in a cohort called GRAND CANYON, that is a multicenter, randomized, double-blind, placebo-controlled study to evaluate the safety and efficacy of sevasemten in adults with Becker.  CANY",cond:"Becker Muscular Dystrophy"},
-    {nct:"NCT07287189",title:"Phase 2 Study of SAT-3247 in Pediatric Ambulatory Patients",status:"RECRUITING",phase:"Phase 2",sponsor:"Satellos Bioscience, Inc.",drugs:[],start:"2025-12-08",pcd:"2027-03-31",updated:"",enroll:"51",summary:"Phase 2a trial of SAT-3247 in ambulatory DMD patients aged ≥ 7 and \\< 10 years. The trial will study two doses of SAT-3247 in a randomized, double-blind, placebo-controlled weekday regimen for 12 weeks to determine the optimal dose, safety, tolerability, and preliminary efficacy.",cond:"Duchenne Muscular Dystrophy, Duchenne, DMD"},
-    {nct:"NCT06244082",title:"Ph2 Open-label Study of AOC 1044 in Duchenne Muscular Dystrophy Participants With Mutations Amenable to Exon44 Skipping",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 2",sponsor:"Avidity Biosciences, Inc.",drugs:[],start:"2024-01-22",pcd:"2027-04-30",updated:"",enroll:"39",summary:"AOC 1044-CS2 (EXPLORE44-OLE) is an Open-label Study to Evaluate the Long-Term Safety and Tolerability of AOC 1044 Administered Intravenously to DMD Participants with Mutations Amenable to Exon 44 Skipping.",cond:"DMD, Duchenne Muscular Dystrophy, Duchenne"},
-    {nct:"NCT07204938",title:"A Long-Term Study of Navenibart in Participants With Hereditary Angioedema",status:"ENROLLING_BY_INVITATION",phase:"Phase 3",sponsor:"Astria Therapeutics, Inc.",drugs:[],start:"2025-10-01",pcd:"2031-06",updated:"",enroll:"145",summary:"This is a Phase 3 multicenter trial in 2 parts to evaluate the long-term safety and efficacy of navenibart in adult and adolescent participants with hereditary angioedema (HAE) who participated in STAR-0215-301 (NCT06842823; ALPHA-ORBIT). Part 1 provides all participants with navenibart in a dose-controlled fashion; Part 2 introduces a personalized dosing option (PDO) for participants based on ind",cond:"Hereditary Angioedema (HAE)"},
-    {nct:"NCT05744921",title:"A Study in Adult Patients With Paroxysmal Nocturnal Hemoglobinuria (PNH) to Evaluate How Safe Long-term Treatment With P",status:"RECRUITING",phase:"Phase 3",sponsor:"Regeneron Pharmaceuticals",drugs:[],start:"2023-03-07",pcd:"2028-10-10",updated:"",enroll:"202",summary:"This study is researching an experimental treatment combination with two experimental drugs called pozelimab and cemdisiran. The study is focused on people with paroxysmal nocturnal hemoglobinuria (PNH). The aim of this study is to see how safe and effective the pozelimab + cemdisiran combination is for people with PNH in the long term. The pozelimab + cemdisiran combination may be referred to as ",cond:"Paroxysmal Nocturnal Hemoglobinuria"},
-    {nct:"NCT06634420",title:"HAELO: A Phase 3 Study to Evaluate NTLA-2002 in Participants With Hereditary Angioedema (HAE)",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"Intellia Therapeutics",drugs:[],start:"2025-01-15",pcd:"2026-02-10",updated:"",enroll:"80",summary:"This Phase 3 study aims to evaluate the efficacy and safety of NTLA-2002 compared to placebo in participants with HAE.",cond:"Hereditary Angioedema"},
-  ],
-  ophthalmology: [
-    {nct:"NCT05210803",title:"Long-Term Follow-Up Study of RGX-314 Administered in the Suprachoroidal Space for Participants With nAMD",status:"ENROLLING_BY_INVITATION",phase:"Phase 2",sponsor:"AbbVie",drugs:[],start:"2021-12-20",pcd:"2031-07",updated:"",enroll:"116",summary:"This is a prospective study designed to evaluate the long-term safety and efficacy of ABBV-RGX-314. Eligible participants are those who were previously enrolled in a clinical study of nAMD in which they received suprachoroidal space (SCS) administration of ABBV-RGX-314. Enrollment of each participant in the current study should occur after the participant has completed either the end of study or e",cond:"Neovascular Age-Related Macular Degeneration (nAMD)"},
-    {nct:"NCT07630649",title:"Ixoberogene Soroparvovec (Ixo-vec) Contralateral Dosing Study in Participants With Neovascular Age-related Macular Degen",status:"RECRUITING",phase:"Phase 2",sponsor:"Adverum Biotechnologies, Inc.",drugs:[],start:"2026-06-02",pcd:"2031-06",updated:"",enroll:"15",summary:"The purpose of this study is to evaluate safety, effectiveness and durability of a gene therapy called Ixo-vec (Ixoberogene soroparvovec) when administered to the contralateral (second) eye of adult participants (≥ 50 years of age) who have been diagnosed with bilateral neovascular (wet) age related macular degeneration (nAMD). The study will enroll adults with nAMD in both eyes, including partici",cond:"Neovascular Age-Related Macular Degeneration (nAMD) Wet AMD"},
-    {nct:"NCT07592273",title:"Surabgene Lomparvovec Administered in the Suprachoroidal Space in Adult Participants With Diabetic Retinopathy Without C",status:"RECRUITING",phase:"Phase 2, Phase 3",sponsor:"AbbVie",drugs:[],start:"2026-06-01",pcd:"2028-06",updated:"",enroll:"576",summary:"Diabetic Retinopathy (DR) is a common eye condition caused by diabetes, where high blood sugar levels damage the blood vessels in the back part of the eye (called the retina). Over time, this damage can lead to vision problems and even blindness if not treated. This study will assess surabgene lomparvovec (sura-vec) as a potential one-time gene therapy administered in the suprachoroidal space (SCS",cond:"Diabetic Retinopathy"},
-    {nct:"NCT05296447",title:"Long-Term Follow-Up Study of RGX-314 Administered in the Suprachoroidal Space for Participants With and Without Diabetic",status:"ENROLLING_BY_INVITATION",phase:"Phase 2",sponsor:"AbbVie",drugs:[],start:"2022-04-04",pcd:"2031-06",updated:"",enroll:"100",summary:"This is a prospective study designed to evaluate the long-term safety and efficacy of ABBV-RGX-314. Eligible participants are those who were previously enrolled in a clinical study of DR with and without center involved-diabetic macular edema (CI-DME) in which they received suprachoroidal space (SCS) administration of ABBV-RGX-314. Enrollment of each participant in the current study should occur a",cond:"Diabetic Retinopathy, DR"},
-    {nct:"NCT07661056",title:"Study to Determine if BHV-1300 is Effective and Safe in Adults With Graves' Disease",status:"RECRUITING",phase:"Phase 3",sponsor:"Biohaven Therapeutics Ltd.",drugs:[],start:"2026-06-26",pcd:"2028-01",updated:"",enroll:"300",summary:"The purpose of this study is to evaluate the efficacy and safety of BHV-1300 in adult participants with Graves' disease who are actively hyperthyroid",cond:"Graves Disease"},
-    {nct:"NCT07449936",title:"COMO: A Phase 3 Randomized, Double-Masked Study Comparing the Efficacy of EYP-1901 Against Aflibercept in DME",status:"RECRUITING",phase:"Phase 3",sponsor:"EyePoint Pharmaceuticals, Inc.",drugs:[],start:"2026-02-16",pcd:"2027-10",updated:"",enroll:"240",summary:"This is a phase 3 randomized, double -masked study comparing the efficacy of EYP-1901 against Aflibercept.",cond:"Diabetic Macular Edema, DME, Diabetic Macular Edema (DME)"},
-    {nct:"NCT06683742",title:"A 2-year Study of EYP-1901 in Subjects With Wet Age Related Macular Degeneration (wAMD) (LUCIA) Primary Efficacy Will be",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"EyePoint Pharmaceuticals, Inc.",drugs:[],start:"2024-11-27",pcd:"2026-10",updated:"",enroll:"400",summary:"This is a phase 3 randomized, double -masked study comparing the efficacy of EYP-1901 against Aflibercept.",cond:"Wet Age Related Macular Degeneration, wAMD"},
-    {nct:"NCT07449923",title:"CAPRI: A Phase 3 Randomized, Double-Masked Study Comparing the Efficacy of EYP-1901 Against Aflibercept in DME",status:"RECRUITING",phase:"Phase 3",sponsor:"EyePoint Pharmaceuticals, Inc.",drugs:[],start:"2026-02-09",pcd:"2027-10",updated:"",enroll:"240",summary:"This is a phase 3 randomized, double -masked study comparing the efficacy of EYP-1901 against Aflibercept.",cond:"Diabetic Macular Edema, DME, Diabetic Macular Edema (DME)"},
-    {nct:"NCT06668064",title:"A 2-year Study of EYP-1901 in Subjects With Wet Age Related Macular Degeneration (wAMD) (LUGANO) Primary Efficacy Will b",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"EyePoint Pharmaceuticals, Inc.",drugs:[],start:"2024-10-22",pcd:"2026-08",updated:"",enroll:"400",summary:"This is a phase 3 randomized, double -masked study comparing the efficacy of EYP-1901 against Aflibercept.",cond:"Wet Age Related Macular Degeneration, wAMD"},
-    {nct:"NCT04674800",title:"Extension Study of MYL-1701P-3001 for Safety and Efficacy",status:"COMPLETED",phase:"Phase 3",sponsor:"Mylan Pharmaceuticals Inc",drugs:[],start:"2020-11-23",pcd:"2022-04-20",updated:"",enroll:"52",summary:"This Study (AFIL-IJZ-3002) is designed to evaluate the safety, efficacy and immunogenicity of MYL-1701P among a group of participants successfully completing MYL-1701P-3001 (NCT03610646) study.",cond:"Diabetic Macular Edema"},
-    {nct:"NCT03834753",title:"A Clinical Effectiveness Study Examining the Efficacy and Safety of ONS-5010 in Subjects With Neovascular Age-related Ma",status:"COMPLETED",phase:"Phase 3",sponsor:"Outlook Therapeutics, Inc.",drugs:[],start:"2019-06-25",pcd:"2021-06-07",updated:"",enroll:"228",summary:"This research study will examine the safety and effectiveness of ONS-5010 in participants with AMD. The goal is to prevent vision loss by evaluating the effectiveness of ONS-5010 as compared with ranibizumab.",cond:"Age-related Macular Degeneration, Neovascular Age-related Macular Degeneration, Wet Macular Degenera"},
-    {nct:"NCT05407636",title:"Pivotal 2 Study of RGX-314 Gene Therapy in Participants With nAMD",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 3",sponsor:"AbbVie",drugs:[],start:"2022-01-13",pcd:"2026-10",updated:"",enroll:"735",summary:"ABBV-RGX-314 (also known as RGX-314 and surabgene lomparvovec (sura-vec)) is being developed as a novel one-time gene therapy for the treatment of neovascular (wet) age-related macular degeneration (wet AMD). Wet AMD is characterized by loss of vision due to new, leaky blood vessel formation in the retina. Wet AMD is a significant cause of vision loss in the United States, Europe and Japan, with u",cond:"AMD, nAMD, Wet Age-related Macular Degeneration"},
-    {nct:"NCT05987423",title:"Study to Evaluate the Efficacy, Safety, Pharmacokinetics, and Pharmacodynamics of Satralizumab in Participants With Thyr",status:"COMPLETED",phase:"Phase 3",sponsor:"Hoffmann-La Roche",drugs:[],start:"2023-10-26",pcd:"2025-07-08",updated:"",enroll:"131",summary:"The purpose of this study is to assess the efficacy, safety, pharmacokinetics, and pharmacodynamics of subcutaneous (SC) satralizumab, a recombinant, humanized anti-interleukin-6 (IL-6) receptor monoclonal antibody, in participants with thyroid eye disease (TED).",cond:"Thyroid Eye Disease, TED"},
-    {nct:"NCT06990269",title:"Phase 2 Study of ADX-038 in Participants With Geographic Atrophy",status:"RECRUITING",phase:"Phase 2",sponsor:"ADARx Pharmaceuticals, Inc.",drugs:[],start:"2025-11-10",pcd:"2030-02-28",updated:"",enroll:"240",summary:"Phase 2 study is designed to assess the efficacy of ADX-038 compared with placebo in participants with GA secondary to AMD. Safety, pharmacokinetics (PK), and pharmacodynamics (PD) will also be assessed.",cond:"Geographic Atrophy Secondary to Age-related Macular Degeneration"},
-    {nct:"NCT06018558",title:"Study to Assess the Safety and Efficacy of OCU410 for Geographic Atrophy",status:"ACTIVE_NOT_RECRUITING",phase:"Phase 1, Phase 2",sponsor:"Ocugen",drugs:[],start:"2023-02-23",pcd:"2026-02-03",updated:"",enroll:"60",summary:"This is a Phase 1/2 Study to Assess the Safety and Efficacy of OCU410 for Geographic Atrophy Secondary to Dry Age-Related Macular Degeneration (AMD).  This is a multicenter study, which will be conducted in two phases and will enroll up to a total of 60 subjects.",cond:"Geographic Atrophy"},
-  ],
+ "cardiovascular": [
+  {
+   "nct": "NCT05714085",
+   "title": "Efficacy, Safety, and Pharmacokinetics of Vericiguat in Pediatric Participants With Heart Failure Due to Left Ventricular Systolic Dysfunction (MK-1242-036)",
+   "status": "RECRUITING",
+   "phase": "PHASE2, PHASE3",
+   "sponsor": "Merck Sharp & Dohme LLC",
+   "drugs": [
+    "Vericiguat tablet",
+    "Vericiguat suspension"
+   ],
+   "start": "2023-05-31",
+   "pcd": "2032-04-15",
+   "updated": "2026-08-10",
+   "enroll": 342,
+   "summary": "This study aims to compare the efficacy of vericiguat versus placebo on change in n-terminal pro-brain natriuretic peptide (NTproBNP) from baseline to Week 16 of the Base Period. The primary hypothesis is that vericiguat is superior to placebo in reducing NT-proBNP at Week 16 of the Base Period.",
+   "cond": "Heart Failure, Left Ventricular Systolic Dysfunction"
+  },
+  {
+   "nct": "NCT06935370",
+   "title": "A Study to Test Whether Vicadrostat (BI 690517) in Combination With Empagliflozin Helps People With Heart Failure and a Weak Pumping Function of the Left Side o…",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "vicadrostat",
+    "empagliflozin"
+   ],
+   "start": "2025-05-20",
+   "pcd": "2029-02-04",
+   "updated": "2026-08-06",
+   "enroll": 4200,
+   "summary": "This study is open to adults with chronic heart failure (HF) who have a reduced left ventricular ejection fraction (LVEF) of less than 40%. People can join the study if they have been diagnosed with chronic HF at least 3 months before they start on the study. The purpose of this study is to find out whether a medicine called vicadrostat, in combination with another medicine called empagliflozin, h…",
+   "cond": "Heart Failure"
+  },
+  {
+   "nct": "NCT07750873",
+   "title": "A Trial of CRD-4730 in HFrEF",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Cardurion Pharmaceuticals, Inc.",
+   "drugs": [
+    "CRD-4730"
+   ],
+   "start": "2026-07-15",
+   "pcd": "2028-09",
+   "updated": "2026-08-06",
+   "enroll": 525,
+   "summary": "CRD-4730 is a calcium/calmodulin-dependent protein kinase II (CaMKII) inhibitor. The CALIBRATE-HF trial is a Phase 2, global, multi-center, randomized, double-blind, parallel-group, placebo-controlled trial. The trial will evaluate the efficacy, safety, and tolerability of CRD-4730 in addition to guideline directed medical therapy in participants with heart failure with reduced ejection fraction (…",
+   "cond": "Heart Failure With Reduced Ejection Fraction (HFrEF)"
+  },
+  {
+   "nct": "NCT06949020",
+   "title": "A Dose-finding Study of JMKX003142 in Treatment of Cardiac Edema",
+   "status": "COMPLETED",
+   "phase": "PHASE2",
+   "sponsor": "Jemincare",
+   "drugs": [
+    "JMKX003142 Injection",
+    "JMKX003142 Injection",
+    "JMKX003142 Injection"
+   ],
+   "start": "2025-07-09",
+   "pcd": "2026-03-14",
+   "updated": "2026-08-06",
+   "enroll": 160,
+   "summary": "To Evaluate the Safety, Efficacy, and Pharmacokinetic/Pharmacodynamics Characteristics of JMKX003142 injection Administered Randomly,Double-blind, Placebo-controlled Study in Chinese Cardiacl Edema Patients.",
+   "cond": "Cardiac Edema"
+  },
+  {
+   "nct": "NCT06056297",
+   "title": "A Study of Mavorixafor in Participants With Congenital and Acquired Primary Autoimmune and Idiopathic Chronic Neutropenic Disorders Who Are Experiencing Recurre…",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "X4 Pharmaceuticals",
+   "drugs": [
+    "Mavorixafor"
+   ],
+   "start": "2024-06-06",
+   "pcd": "2027-09",
+   "updated": "2026-08-06",
+   "enroll": 176,
+   "summary": "The purpose of this study is to demonstrate the efficacy and evaluate the safety and tolerability of mavorixafor in participants with congenital or acquired primary autoimmune and idiopathic chronic neutropenic disorders who are experiencing recurrent and/or serious infections as assessed by demonstrating its clinical benefit and increasing levels of circulating neutrophils.",
+   "cond": "Neutropenia"
+  },
+  {
+   "nct": "NCT06424288",
+   "title": "A Study to Test Whether Vicadrostat in Combination With Empagliflozin Helps People With Heart Failure",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "vicadrostat",
+    "empagliflozin"
+   ],
+   "start": "2024-06-17",
+   "pcd": "2028-05-22",
+   "updated": "2026-08-06",
+   "enroll": 6000,
+   "summary": "This study is open to adults aged 18 or above legal age with heart failure. People can join the study if they have heart failure symptoms and a left ventricular ejection fraction (LVEF) of 40% or more. The purpose of this study is to find out whether vicadrostat (BI 690517) in combination with empagliflozin helps people with heart failure. Participants are put into 2 groups by chance. Every partic…",
+   "cond": "Heart Failure"
+  },
+  {
+   "nct": "NCT07175428",
+   "title": "Safety in Adult Participants With Atrial Fibrillation Who Are Treated With Anticoagulation",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Regeneron Pharmaceuticals",
+   "drugs": [
+    "REGN7508",
+    "REGN9933",
+    "Apixaban"
+   ],
+   "start": "2025-10-20",
+   "pcd": "2027-02-09",
+   "updated": "2026-08-05",
+   "enroll": 1200,
+   "summary": "This study is researching experimental drugs called REGN7508 and REGN9933. The study is focused on participants who have atrial fibrillation, which means that the heart beats too fast and unevenly. REGN7508 and REGN9933 are designed to help stop blood clots forming in patients with atrial fibrillation. The aim of the study is to see how well REGN7508 and REGN9933 work in patients that get medicine…",
+   "cond": "Atrial Fibrillation (AF)"
+  },
+  {
+   "nct": "NCT06979362",
+   "title": "A Research Study Comparing Different Doses of CDR132L With Placebo on the Structure and Function of the Heart in People With Heart Failure With Preserved Ejecti…",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Novo Nordisk A/S",
+   "drugs": [
+    "CDR132L"
+   ],
+   "start": "2025-06-27",
+   "pcd": "2027-11-16",
+   "updated": "2026-08-05",
+   "enroll": 200,
+   "summary": "This study will look into how CDR132L (a potential new medicine) works on the structure and function of the heart in people living with heart failure. Participants will either get CDR132L or placebo (a medicine which has no effect on the body), which treatment the participants get is decided by chance. The study will last for about 60 weeks.",
+   "cond": "Heart Failure"
+  },
+  {
+   "nct": "NCT05702034",
+   "title": "A Study of Milvexian in Participants After an Acute Ischemic Stroke or High-Risk Transient Ischemic Attack- LIBREXIA-STROKE",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Janssen Research & Development, LLC",
+   "drugs": [
+    "Milvexian"
+   ],
+   "start": "2023-02-15",
+   "pcd": "2026-11-11",
+   "updated": "2026-07-31",
+   "enroll": 12532,
+   "summary": "The purpose of this study is to evaluate whether milvexian compared to placebo reduce the risk of recurrent ischemic stroke.",
+   "cond": "Ischemic Stroke; Ischemic Attack, Transient"
+  },
+  {
+   "nct": "NCT06200207",
+   "title": "A Research Study Looking Into How Ziltivekimab Works Compared to Placebo in Participants With Heart Failure and Inflammation",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Novo Nordisk A/S",
+   "drugs": [
+    "Ziltivekimab"
+   ],
+   "start": "2024-04-01",
+   "pcd": "2026-10-01",
+   "updated": "2026-07-31",
+   "enroll": 680,
+   "summary": "The study is being done to see if ziltivekimab can be used to treat participants living with heart failure and inflammation. Participants will either get ziltivekimab (active medicine) or placebo (inactive substance that looks like the study medicine but does not contain any medicine). The treatment participants get is decided by chance. Participant's chance of getting ziltivekimab or placebo is t…",
+   "cond": "Heart Failure, Systemic Inflammation"
+  },
+  {
+   "nct": "NCT07739888",
+   "title": "Study to Evaluate the effIcacy and Safety of Abelacimab in High-risk Patients With Atrial Fibrillation Who Have Been Deemed Unsuitable for Oral Anticoagulation",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Novartis Pharmaceuticals",
+   "drugs": [
+    "Abelacimab"
+   ],
+   "start": "2027-12-30",
+   "pcd": "2030-12-30",
+   "updated": "2026-07-31",
+   "enroll": 2500,
+   "summary": "This OLE part is an optional, single arm, multicenter, open-label extension (OLE) added to the core part to assess the long-term safety, tolerability, the incidence of ischemic stroke or SE and bleeding events of abelacimab in eligible patients who completed the double-blinded core part of CMAA868A2302 (ANT-010/NCT05712200)",
+   "cond": "Atrial Fibrillation (AF)"
+  },
+  {
+   "nct": "NCT07217067",
+   "title": "A Study to Investigate the Efficacy, Safety, Tolerability and Pharmacokinetics of PKN605 in Participants With Atrial Fibrillation",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Novartis Pharmaceuticals",
+   "drugs": [
+    "PKN605"
+   ],
+   "start": "2025-10-28",
+   "pcd": "2027-09-09",
+   "updated": "2026-07-31",
+   "enroll": 165,
+   "summary": "A randomized, placebo-controlled, participant-and investigator-blinded study to evaluate the efficacy in reducing atrial fibrillation burden as well as the safety, tolerability and pharmacokinetics of PKN605 in participants with atrial fibrillation",
+   "cond": "Atrial Fibrillation"
+  },
+  {
+   "nct": "NCT03394365",
+   "title": "A Phase 3 Study of Tabelecleucel for Participants With Epstein-Barr Virus-Associated Post-Transplant Lymphoproliferative Disease After Failure With Rituximab or…",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Pierre Fabre Medicament",
+   "drugs": [
+    "tabelecleucel"
+   ],
+   "start": "2017-12-29",
+   "pcd": "2030-05-31",
+   "updated": "2026-07-31",
+   "enroll": 115,
+   "summary": "The purpose of this study is to determine the clinical benefit and characterize the safety profile of tabelecleucel for the treatment of Epstein-Barr virus-associated post-transplant lymphoproliferative disease (EBV+ PTLD) in the setting of (1) solid organ transplant (SOT) after failure of rituximab (SOT-R) and rituximab plus chemotherapy (SOT-R+C) or (2) allogeneic hematopoietic cell transplant (…",
+   "cond": "Epstein-Barr Virus+ Associated Post-transplant Lymphoproliferative Disease (EBV+ PTLD), Solid Organ Transplant Complicat…"
+  },
+  {
+   "nct": "NCT06677060",
+   "title": "Phase III Study Investigating Heart Failure and Cardiovascular Death With Baxdrostat in Combination With Dapagliflozin",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "AstraZeneca",
+   "drugs": [
+    "Baxdrostat and dapagliflozin"
+   ],
+   "start": "2025-03-14",
+   "pcd": "2029-12-17",
+   "updated": "2026-07-31",
+   "enroll": 11300,
+   "summary": "Participants include men and women ≥ 40 years of age with T2DM, established CV disease, a history of HTN with an SBP of at least 130 mmHg at screening, who meet the predefined serum potassium level, and with at least one additional risk factor for HF. The study will include an optional pre-screening period to facilitate sites' identification of potentially eligible participants to enter the full s…",
+   "cond": "Heart Failure"
+  },
+  {
+   "nct": "NCT06122779",
+   "title": "Study to Evaluate Safety, Tolerability and Drug Levels of BMS-986435/MYK-224 in Participants With Heart Failure With Preserved Ejection Fraction (HFpEF)",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Bristol-Myers Squibb",
+   "drugs": [
+    "BMS-986435"
+   ],
+   "start": "2023-11-07",
+   "pcd": "2026-12-14",
+   "updated": "2026-07-30",
+   "enroll": 227,
+   "summary": "The purpose of this study is to evaluate the safety, tolerability, and exposure-response (E-R) of BMS-986435/MYK-224 in participants with symptomatic Heart Failure with Preserved Ejection Fraction (HFpEF).",
+   "cond": "Heart Failure"
+  }
+ ],
+ "nephrology": [
+  {
+   "nct": "NCT07753993",
+   "title": "A Study to Investigate Outcomes With Elecoglipron Compared With Placebo in Adult Participants With Chronic Kidney Disease.",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "AstraZeneca",
+   "drugs": [
+    "Elecoglipron"
+   ],
+   "start": "2026-08-28",
+   "pcd": "2030-10-04",
+   "updated": "2026-08-10",
+   "enroll": 7000,
+   "summary": "This is a Phase III, randomized, double-blind, parallel-group, placebo-controlled multicenter study to investigate outcomes with elecoglipron compared with placebo in participants with CKD with and without T2DM who are on background SGLT2i (dapagliflozin) as GDMT and other SoC treatments for CKD.",
+   "cond": "Chronic Kidney Disease"
+  },
+  {
+   "nct": "NCT07146906",
+   "title": "A Study to Assess the Effects of Zigakibart on IgA Nephropathy.",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Novartis Pharmaceuticals",
+   "drugs": [
+    "zigakibart"
+   ],
+   "start": "2026-03-26",
+   "pcd": "2030-07-12",
+   "updated": "2026-08-10",
+   "enroll": 32,
+   "summary": "The purpose of the study is to assess the effect of zigakibart on IgA nephropathy (IgAN) disease progression.",
+   "cond": "Immunoglobulin A Nephropathy (IgAN)"
+  },
+  {
+   "nct": "NCT07271186",
+   "title": "Study to Assess the Effects of Angiopoietin-like Protein 3 (ANGPTL3) Inhibition in Adult Participants With Diabetic Kidney Disease",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Regeneron Pharmaceuticals",
+   "drugs": [
+    "ALN-ANG3",
+    "Evinacumab"
+   ],
+   "start": "2026-01-09",
+   "pcd": "2027-09-24",
+   "updated": "2026-08-10",
+   "enroll": 270,
+   "summary": "This study is researching experimental drugs called ALN-ANG3 and evinacumab (called \\\"study drugs\\\"). The study is focused on participants who have diabetic kidney disease. The aim of the study is to see how safe and effective the study drugs are. The study is looking at several other research questions, including: * What side effects may happen from taking the study drug * How much study drug is …",
+   "cond": "Diabetic Kidney Disease (DKD)"
+  },
+  {
+   "nct": "NCT06531824",
+   "title": "EASi-KIDNEY™ (The Studies of Heart & Kidney Protection With BI 690517 in Combination With Empagliflozin)",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "BI 690517",
+    "Empagliflozin"
+   ],
+   "start": "2024-08-30",
+   "pcd": "2028-08-30",
+   "updated": "2026-08-10",
+   "enroll": 11000,
+   "summary": "This study is open to adults with chronic kidney disease at risk of progression. People with and without type 2 diabetes can take part in this study. The study is open to people who take other medicines called angiotensin converting enzyme inhibitors (ACEi) or angiotensin receptor blockers (ARB). People who already take empagliflozin or any other sodium-glucose cotransporter-2 inhibitor (SGLT2i) c…",
+   "cond": "Kidney Disease, Chronic"
+  },
+  {
+   "nct": "NCT07107945",
+   "title": "A Study to Find Out How EMPAgliflozin is Tolerated and if it Helps Children and Adolescents With Chronic KIDNEY Disease (EMPA-KIDNEY® Kids)",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "Empagliflozin"
+   ],
+   "start": "2025-12-09",
+   "pcd": "2027-04-16",
+   "updated": "2026-08-07",
+   "enroll": 120,
+   "summary": "This study is open to children aged 2 to 17 with chronic kidney disease (CKD). The purpose of this study is to find out if a medicine called empagliflozin helps children and adolescents with CKD. Other goals of the study are to find out how empagliflozin is tolerated and handled by the body in children and adolescents with CKD. Participants are put into 2 groups randomly, which means by chance. On…",
+   "cond": "Chronic Kidney Disease"
+  },
+  {
+   "nct": "NCT07606352",
+   "title": "Safety and Efficacy of STL303 In Patients With Primary Immunoglobulin A (IgA) Nephropathy",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Sitala Bio LTD",
+   "drugs": [
+    "STL303",
+    "STL303"
+   ],
+   "start": "2026-08-04",
+   "pcd": "2027-07",
+   "updated": "2026-08-07",
+   "enroll": 15,
+   "summary": "This is a multicenter, randomized, double-blind, placebo controlled Phase IIb study to explore the efficacy and safety of STL303 capsules in IgAN patients. About 15 patients dignosed with primary IgAN will be enrolled and randomized to three cohorts and take different dosage of STL303 or placebo capsules orally according to protocol.",
+   "cond": "IgAN"
+  },
+  {
+   "nct": "NCT06926660",
+   "title": "A Study to Test Whether Vicadrostat in Combination With Empagliflozin Helps People With Chronic Kidney Disease",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "Vicadrostat",
+    "Empagliflozin"
+   ],
+   "start": "2025-07-18",
+   "pcd": "2026-08-20",
+   "updated": "2026-08-07",
+   "enroll": 492,
+   "summary": "This study is open to adults with chronic kidney disease (CKD) that is at risk of getting worse. People who have taken a specific type of medication for kidney disease called SGLT2 inhibitor within 1 month before the study or have certain health conditions cannot take part in this study. The purpose of this study is to find out whether a medicine called vicadrostat, used in combination with anothe…",
+   "cond": "Chronic Kidney Disease"
+  },
+  {
+   "nct": "NCT07498335",
+   "title": "Study to Assess the Efficacy, Pharmacokinetics, Safety and Tolerability of Atrasentan in Pediatric Patients With Primary IgAN",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Novartis Pharmaceuticals",
+   "drugs": [
+    "Drug: Atrasentan"
+   ],
+   "start": "2026-08-26",
+   "pcd": "2031-09-15",
+   "updated": "2026-08-07",
+   "enroll": 28,
+   "summary": "A Phase III, single-arm, multicenter pediatric clinical study evaluating atrasentan in children and adolescents aged 2 to \\\\<18 years with primary immunoglobulin A nephropathy (IgAN).",
+   "cond": "Berger Disease, Bergers Disease, IgA Nephropathy, Immunoglobulin A Nephropathy"
+  },
+  {
+   "nct": "NCT07241390",
+   "title": "A Study of Orforglipron (LY3502970) on Cardiovascular Outcomes in Adults With Atherosclerotic Cardiovascular Disease and/or Chronic Kidney Disease (ATTAIN-Outco…",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Eli Lilly and Company",
+   "drugs": [
+    "Orforglipron"
+   ],
+   "start": "2025-12-01",
+   "pcd": "2031-08",
+   "updated": "2026-08-06",
+   "enroll": 7140,
+   "summary": "The purpose of this study is to measure cardiovascular outcomes with orforglipron compared with placebo in participants with atherosclerotic cardiovascular disease (ASCVD) and/or chronic kidney disease (CKD). Participation in the study will last about 5 years.",
+   "cond": "Atherosclerosis Cardiovascular Disease, Chronic Kidney Disease"
+  },
+  {
+   "nct": "NCT05039619",
+   "title": "A Study to Evaluate the Efficacy, Safety, and Pharmacokinetics of Obinutuzumab in Adolescents With Active Class III or IV Lupus Nephritis and the Safety and PK …",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Hoffmann-La Roche",
+   "drugs": [
+    "Obinutuzumab",
+    "Mycophenolate Mofetil",
+    "Acetaminophen/paracetamol",
+    "Diphenhydramine hydrochloride (HCl)"
+   ],
+   "start": "2022-05-12",
+   "pcd": "2028-06-15",
+   "updated": "2026-08-05",
+   "enroll": 40,
+   "summary": "This phase II, randomized, double-blind, placebo-controlled study is designed to evaluate the safety, efficacy and pharmacokinetics (PK) of obinutuzumab in adolescent participants (AP) aged 12 to less than 18 with biopsy-confirmed proliferative lupus nephritis (LN). It will also evaluate open label safety and PK of obinutuzumab in pediatric participants (PP), aged 5 to \\\\<12 with LN.",
+   "cond": "Lupus Nephritis"
+  },
+  {
+   "nct": "NCT06935357",
+   "title": "A Study to Learn About the Effects of Felzartamab Infusions on Adults With Immunoglobulin A Nephropathy (IgAN)",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Biogen",
+   "drugs": [
+    "Felzartamab"
+   ],
+   "start": "2025-05-08",
+   "pcd": "2027-05-31",
+   "updated": "2026-08-05",
+   "enroll": 454,
+   "summary": "In this study, researchers will learn more about the use of felzartamab in participants with immunoglobulin A nephropathy (IgAN). IgAN is a kidney disease caused by the buildup of an antibody called IgA in the kidneys over time. In people with IgAN, abnormal IgA and other antibodies form clusters that build up in the small filters of the kidneys, which leads to inflammation and damage. Felzartamab…",
+   "cond": "Immunoglobulin A Nephropathy (IgAN)"
+  },
+  {
+   "nct": "NCT07614477",
+   "title": "Evaluate the Efficacy, Safety, Pharmacokinetics, and Pharmacodynamics of EVER001 in Participants With Selected Proteinuric Glomerular Diseases",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Everest Medicines (China) Co.,Ltd.",
+   "drugs": [
+    "EVER001"
+   ],
+   "start": "2026-05-20",
+   "pcd": "2028-12-31",
+   "updated": "2026-08-05",
+   "enroll": 45,
+   "summary": "This is a Phase 1b/2, open-label, multi-center study evaluating the therapeutic potential and safety of the investigational drug EVER001 in adults with FSGS, MCD, or IgAN. EVER001 acts on multiple immune pathways without directly affecting T cells or depleting B cells (both are lymphocytes). The study will be conducted at \\\\~30 centers in China, enrolling 45 participants aged 18-75 years (15 per i…",
+   "cond": "Minimal Change Disease (MCD), IgA Nephropathy (IgAN), Focal Segmental Glomerulosclerosis (FSGS)"
+  },
+  {
+   "nct": "NCT07662135",
+   "title": "A Phase III Study to Investigate the Efficacy and Safety of Elecoglipron Compared With Placebo in Adults With Type 2 Diabetes Mellitus and Impaired Renal Functi…",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "AstraZeneca",
+   "drugs": [
+    "Elecoglipron"
+   ],
+   "start": "2026-07-06",
+   "pcd": "2028-07-13",
+   "updated": "2026-08-04",
+   "enroll": 900,
+   "summary": "The purpose of this study is to evaluate the efficacy, safety, and tolerability of elecoglipron, compared with placebo in adults with type 2 diabetes mellitus (T2DM) and impaired renal function, who are or will be on a background of sodium-glucose cotransporter 2 inhibitor (SGLT2i) dapagliflozin 10 mg as per guideline directed medical therapy (GDMT) for chronic kidney disease (CKD). Additionally, …",
+   "cond": "Type 2 Diabetes Mellitus, Type 2 Diabetes With Chronic Kidney Disease"
+  },
+  {
+   "nct": "NCT02075463",
+   "title": "Study to Evaluate the Safety and Efficacy of GSK1278863 in Recombinant Human Erythropoietin (rhEPO) Hyporesponsive Hemodialysis-dependent Chronic Kidney Disease…",
+   "status": "TERMINATED",
+   "phase": "PHASE2",
+   "sponsor": "GlaxoSmithKline",
+   "drugs": [
+    "GSK1278863"
+   ],
+   "start": "2014-06-11",
+   "pcd": "2016-03-16",
+   "updated": "2026-08-04",
+   "enroll": 15,
+   "summary": "The study will evaluate the ability of GSK1278863 to increase the hemoglobin (Hgb) concentration, or maintain it within the target range, and the safety and efficacy of GSK1278863 over 16 weeks of treatment, in hemodialysis-dependent subjects with anemia associated with chronic kidney disease who are chronically hyporesponsive to rhEPO. The data generated will inform dose requirements for any chro…",
+   "cond": "Anemia, Anaemia"
+  },
+  {
+   "nct": "NCT06419205",
+   "title": "A Phase 2 Study to Evaluate the Safety, PD, PK, and Clinical Activity of ADX-097 in Participants With IgAN, LN or C3G",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Akebia Therapeutics",
+   "drugs": [
+    "ADX-097"
+   ],
+   "start": "2026-07-30",
+   "pcd": "2028-02",
+   "updated": "2026-08-04",
+   "enroll": 30,
+   "summary": "A Phase 2 Study to Evaluate the Safety, Pharmacodynamics, Pharmacokinetics, and Clinical Activity of ADX-097 Administered Subcutaneously in Male and Female Participants Aged 16 Years or Older with Immunoglobulin A Nephropathy (IgAN), Lupus Nephritis (LN), or Complement Component 3 Glomerulopathy (C3G)",
+   "cond": "IgA Nephropathy, Lupus Nephritis (LN), C3 (Complement Component 3) Glomerulopathy"
+  }
+ ],
+ "endocrinology": [
+  {
+   "nct": "NCT07754045",
+   "title": "Evaluating the Efficacy and Safety of LUM-201 Plus Semaglutide Versus Semaglutide Plus Placebo in Older Obese Adults",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Lumos Pharma",
+   "drugs": [
+    "LUM-201",
+    "Semagludtide"
+   ],
+   "start": "2027-02-15",
+   "pcd": "2028-02-15",
+   "updated": "2026-08-10",
+   "enroll": 202,
+   "summary": "This is a phase 2 randomized, double-blind, placebo-controlled, multi-center study evaluating the efficacy and safety of LUM-201 plus Semaglutide versus Semaglutide plus placebo in obese adults with body mass index between 30 and 45 kg/m\\\\^2, between the ages of 60 and 85 years that have mild functional impairment.",
+   "cond": "Obesity & Overweight"
+  },
+  {
+   "nct": "NCT06693843",
+   "title": "A Phase 2b, Dose-range Finding Study of the Efficacy and Safety of Multiple Doses of Aleniglipron (GSBR-1290) in Participants Living With Obesity or Overweight …",
+   "status": "COMPLETED",
+   "phase": "PHASE2",
+   "sponsor": "Gasherbrum Bio, Inc., a wholly owned subsidiary of Structure Therapeutics",
+   "drugs": [
+    "Aleniglipron",
+    "Aleniglipron",
+    "Aleniglipron",
+    "Aleniglipron"
+   ],
+   "start": "2024-10-28",
+   "pcd": "2025-10-24",
+   "updated": "2026-08-10",
+   "enroll": 230,
+   "summary": "This study is a randomized, double-blind, placebo-controlled, dose-range finding study of the efficacy, safety, tolerability, PK, and PD of multiple doses of aleniglipron in participants living with overweight or obesity with at least one weight-related comorbidity. Participants will be randomized to aleniglipron or placebo in a ratio of 3:1 within each Cohort receiving multiple-ascending, QD dose…",
+   "cond": "Obesity, Overweight, or Chronic Weight Management"
+  },
+  {
+   "nct": "NCT05774756",
+   "title": "A Trial of Setmelanotide in Acquired Hypothalamic Obesity",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Rhythm Pharmaceuticals, Inc.",
+   "drugs": [
+    "Setmelanotide"
+   ],
+   "start": "2023-04-26",
+   "pcd": "2025-03-18",
+   "updated": "2026-08-10",
+   "enroll": 143,
+   "summary": "The goal of this trial is to learn how well Setmelanotide works to improve weight reduction, hunger, and quality of life in patients 4 years of age and older with acquired Hypothalamic Obesity (HO). To determine how well setmelanotide works and how safe it is, patients with HO will take a daily injection of either setmelanotide or placebo and complete trial assessments for 52 weeks on a therapeuti…",
+   "cond": "Hypothalamic Obesity"
+  },
+  {
+   "nct": "NCT06854952",
+   "title": "A Clinical Study to Evaluate the Efficacy, Safety, and Tolerability of TERN-601 in Adults With Overweight or Obesity",
+   "status": "COMPLETED",
+   "phase": "PHASE2",
+   "sponsor": "Terns, Inc., a subsidiary of Merck & Co., Inc. (Rahway, New Jersey USA)",
+   "drugs": [
+    "TERN-601"
+   ],
+   "start": "2025-03-07",
+   "pcd": "2025-08-19",
+   "updated": "2026-08-10",
+   "enroll": 167,
+   "summary": "This is a Phase 2a multicenter, randomized, double-blind, placebo-controlled clinical trial studying the efficacy, safety, and tolerability of orally administered TERN-601 in adults with overweight or obesity.",
+   "cond": "Overweight or Obesity"
+  },
+  {
+   "nct": "NCT07271186",
+   "title": "Study to Assess the Effects of Angiopoietin-like Protein 3 (ANGPTL3) Inhibition in Adult Participants With Diabetic Kidney Disease",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Regeneron Pharmaceuticals",
+   "drugs": [
+    "ALN-ANG3",
+    "Evinacumab"
+   ],
+   "start": "2026-01-09",
+   "pcd": "2027-09-24",
+   "updated": "2026-08-10",
+   "enroll": 270,
+   "summary": "This study is researching experimental drugs called ALN-ANG3 and evinacumab (called \\\"study drugs\\\"). The study is focused on participants who have diabetic kidney disease. The aim of the study is to see how safe and effective the study drugs are. The study is looking at several other research questions, including: * What side effects may happen from taking the study drug * How much study drug is …",
+   "cond": "Diabetic Kidney Disease (DKD)"
+  },
+  {
+   "nct": "NCT07654361",
+   "title": "Efficacy and Safety of Aleniglipron in Participants With Obesity or Overweight With a Weight-Related Comorbidity (ACCOMPLISH-1)",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Gasherbrum Bio, Inc., a wholly owned subsidiary of Structure Therapeutics",
+   "drugs": [
+    "Aleniglipron"
+   ],
+   "start": "2026-07-13",
+   "pcd": "2028-09",
+   "updated": "2026-08-10",
+   "enroll": 3600,
+   "summary": "Study GSBR-1290-12 is a Phase 3 pivotal, multicenter, global, randomized, placebo-controlled, double-blind study to investigate the long-term efficacy, safety, and tolerability of 3 maintenance doses of aleniglipron once daily (QD) compared with placebo, when used in combination with a reduced-calorie diet and increased physical activity. All participants will be randomized to at least 76 weeks of…",
+   "cond": "Obesity, Overweight, Chronic Weight Management"
+  },
+  {
+   "nct": "NCT07754461",
+   "title": "A Study to Test Whether Survodutide Helps People With Type 2 Diabetes Control Their Blood Sugar",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "Survodutide"
+   ],
+   "start": "2026-08-24",
+   "pcd": "2028-01-17",
+   "updated": "2026-08-10",
+   "enroll": 600,
+   "summary": "This study aims to find out whether a study medicine called survodutide helps people control their blood sugar. Adults who live with type 2 diabetes and with a body mass index (BMI) of 23 kg/m2 or higher can join. The study has 3 parts. In each part the study compares survodutide with placebo. Survodutide is being developed to treat several health problems including type 2 diabetes. Placebo looks …",
+   "cond": "Type 2 Diabetes"
+  },
+  {
+   "nct": "NCT07668388",
+   "title": "A Research Study Comparing How Well Different Doses of the Medicine UBT251 Lower Blood Sugar in People With Type 2 Diabetes",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Novo Nordisk A/S",
+   "drugs": [
+    "UBT251",
+    "Semaglutide"
+   ],
+   "start": "2026-06-22",
+   "pcd": "2027-10-04",
+   "updated": "2026-08-10",
+   "enroll": 300,
+   "summary": "The study is testing UBT251 in participants with type 2 diabetes. The purpose of this clinical study is to find out if UBT251 is effective and safe for treating participants with type 2 diabetes. Participants will either get UBT251, UBT251 placebo, semaglutide, or semaglutide placebo. Which treatment participants get is decided by chance. UBT251 is the treatment being tested and is not yet availab…",
+   "cond": "Diabetes Mellitus, Type 2"
+  },
+  {
+   "nct": "NCT07415954",
+   "title": "A Research Study Comparing How Well Different Doses of the Medicine NNC0662-0419 Lower Blood Sugar in People With Type 2 Diabetes",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Novo Nordisk A/S",
+   "drugs": [
+    "NNC0662-0419",
+    "Semaglutide"
+   ],
+   "start": "2026-04-17",
+   "pcd": "2027-09-03",
+   "updated": "2026-08-10",
+   "enroll": 270,
+   "summary": "This study is being done to look at the effect and safety of different doses of NNC0662-0419 in people living with type 2 diabetes when compared to placebo or semaglutide. The purpose of this clinical study is to find out if NNC0662-0419 is effective and safe for treating people living with type 2 diabetes. Participants will get either NNC0662-0419, semaglutide or placebo. Which treatment particip…",
+   "cond": "Diabetes Mellitus, Type 2"
+  },
+  {
+   "nct": "NCT07654374",
+   "title": "A Study of Aleniglipron in Adults With Obesity or Overweight and Type 2 Diabetes Mellitus (ACCOMPLISH-2)",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Gasherbrum Bio, Inc., a wholly owned subsidiary of Structure Therapeutics",
+   "drugs": [
+    "aleniglipron",
+    "aleniglipron",
+    "aleniglipron"
+   ],
+   "start": "2026-07-17",
+   "pcd": "2028-09",
+   "updated": "2026-08-10",
+   "enroll": 1100,
+   "summary": "This is randomized, double-blind, placebo-controlled study of the long-term efficacy, safety, and tolerability of multiple doses of aleniglipron in participants living with overweight or obesity and T2DM. Participants will be randomized to aleniglipron or placebo for a total of 76 weeks of treatment.",
+   "cond": "Obesity, Overweight, Chronic Weight Management, Type2 Diabetes Mellitus"
+  },
+  {
+   "nct": "NCT06632444",
+   "title": "LIVERAGE™: A Study to Test Whether Survodutide Helps People With a Liver Disease Called NASH/MASH Who Have Moderate or Advanced Liver Fibrosis",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "Survodutide"
+   ],
+   "start": "2024-09-17",
+   "pcd": "2031-12-27",
+   "updated": "2026-08-10",
+   "enroll": 1800,
+   "summary": "This study is open to adults who are at least 18 years old living with obesity and have: * a confirmed liver disease called non-alcoholic steatohepatitis (NASH)/metabolic associated steatohepatitis (MASH) and * moderate or advanced liver fibrosis People with a history of acute or chronic liver diseases other than MASH or chronic alcohol intake cannot take part in this study. The purpose of this st…",
+   "cond": "Metabolic Dysfunction Associated Steatohepatitis (MASH), Liver Fibrosis"
+  },
+  {
+   "nct": "NCT06632457",
+   "title": "LIVERAGE™ - Cirrhosis: A Study to Test Whether Survodutide Helps People With a Liver Disease Called NASH/MASH Who Have Cirrhosis",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "Survodutide"
+   ],
+   "start": "2024-11-07",
+   "pcd": "2029-06-05",
+   "updated": "2026-08-10",
+   "enroll": 1590,
+   "summary": "This study is open to adults who are at least 18 years old and have: * A confirmed liver disease called non-alcoholic steatohepatitis (NASH) or * A confirmed liver disease called metabolic-associated steatohepatitis (MASH) * BMI of 27 kg/m2 or more or * 25 kg/m2 or more if the participant is Asian. People with a history of other chronic liver diseases or high alcohol intake cannot take part in thi…",
+   "cond": "Metabolic Dysfunction Associated Steatohepatitis"
+  },
+  {
+   "nct": "NCT07755150",
+   "title": "A Study to Evaluate the Efficacy and Safety of DA-302168S Tablets in Subjects With Type 2 Diabetes",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Chendu DIAO Pharmaceutical Group CO., LTD.",
+   "drugs": [
+    "DA-302168S"
+   ],
+   "start": "2026-08-30",
+   "pcd": "2027-10-20",
+   "updated": "2026-08-10",
+   "enroll": 272,
+   "summary": "This Phase II, multicenter, randomized, double-blind, placebo-controlled, parallel-group study aims to assess the efficacy, safety, and PK characteristics of DA-302168S tablets in Chinese T2DM participants, and to provide dose-selection evidence for the Phase III confirmatory trial.",
+   "cond": "Type 2 Diabetes Mellitus"
+  },
+  {
+   "nct": "NCT07527910",
+   "title": "A Phase 2a Study of ALN-PNP With and Without a GLP1R Agonist in Adult Patients With Homozygous PNPLA3-Related MASLD",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Regeneron Pharmaceuticals",
+   "drugs": [
+    "ALN-PNP",
+    "Tirzepatide"
+   ],
+   "start": "2026-05-22",
+   "pcd": "2030-03-15",
+   "updated": "2026-08-10",
+   "enroll": 204,
+   "summary": "This study will test a study drug called ALN-PNP with and without another drug that is used for controlling blood sugar, appetite, and weight (for example, tirzepatide), to see if it can help treat MASLD, also known as fatty liver disease. ALN-PNP reduces the amount of Patatin-like phospholipase domain-containing protein 3 (PNPLA3), a protein that liver cells make, which may help decrease liver fa…",
+   "cond": "Metabolic Dysfunction-Associated Steatotic Liver Disease (MASLD)"
+  },
+  {
+   "nct": "NCT07589686",
+   "title": "A Dose-Finding Study of Petrelintide With Enicepatide (RO7795068) in Adults With Obesity or Overweight",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Hoffmann-La Roche",
+   "drugs": [
+    "Petrelintide",
+    "Enicepatide"
+   ],
+   "start": "2026-09-30",
+   "pcd": "2027-11-12",
+   "updated": "2026-08-07",
+   "enroll": 486,
+   "summary": "The main purpose of this study is to evaluate the safety and efficacy of the co-administration of petrelintide and enicepatide compared with placebo, petrelintide monotherapy, and enicepatide monotherapy in participants with obesity or overweight with at least one weight-related comorbidity.",
+   "cond": "Obesity or Overweight"
+  }
+ ],
+ "immunology": [
+  {
+   "nct": "NCT06586112",
+   "title": "A Study to Evaluate the Efficacy and Safety of ESK-001 in Patients With Moderate to Severe Plaque Psoriasis",
+   "status": "COMPLETED",
+   "phase": "PHASE3",
+   "sponsor": "Alumis Inc",
+   "drugs": [
+    "Envudeucitinib",
+    "Apremilast"
+   ],
+   "start": "2024-07-25",
+   "pcd": "2025-09-19",
+   "updated": "2026-08-10",
+   "enroll": 912,
+   "summary": "The goal of this clinical trial is to learn if ESK-001 works to treat moderate to severe plaque psoriasis. The main questions it aims to answer are: * Does ESK-001 reduce the severity of people's psoriasis? * How safe is ESK-001 in people with moderate to severe plaque psoriasis? The study includes 2 comparators: a placebo control (a 'dummy' tablet that does not contain the medicine ESK-001 but lo…",
+   "cond": "Plaque Psoriasis"
+  },
+  {
+   "nct": "NCT06920771",
+   "title": "A Randomized, Double-Blind, Placebo-Controlled, Multi-Centre Study to Assess the Efficacy of PURETHAL Mites Mixture 50,000 AUeq/mL Subcutaneous Immunotherapy in…",
+   "status": "COMPLETED",
+   "phase": "PHASE3",
+   "sponsor": "HAL Allergy",
+   "drugs": [
+    "PURETHAL Mites 50,000 AUeq/ml"
+   ],
+   "start": "2024-09-09",
+   "pcd": "2026-03-30",
+   "updated": "2026-08-10",
+   "enroll": 691,
+   "summary": "Rationale: Allergic rhinitis/rhinoconjunctivitis (ARC) is a global health problem, affecting 10-25% of the population. Allergen-specific immunotherapy is the only disease-modifying therapeutic option for subjects with house dust mites (HDM)-induced allergic rhinitis/rhinoconjunctivitis. This Phase 3 clinical study aims to demonstrate the effecacy of PURETHAL Mites (PM) Mixture subcutaneous immunot…",
+   "cond": "House Dust Mite Allergy, House Dust Mite Rhinitis"
+  },
+  {
+   "nct": "NCT06588738",
+   "title": "A Study in Patients With Moderate to Severe Plaque Psoriasis to Evaluate the Efficacy and Safety of ESK-001",
+   "status": "COMPLETED",
+   "phase": "PHASE3",
+   "sponsor": "Alumis Inc",
+   "drugs": [
+    "Envudeucitinib",
+    "Apremilast"
+   ],
+   "start": "2024-08-20",
+   "pcd": "2025-09-23",
+   "updated": "2026-08-10",
+   "enroll": 862,
+   "summary": "The goal of this clinical trial is to learn if ESK-001 works to treat moderate to severe plaque psoriasis. The main questions it aims to answer are: * Does ESK-001 reduce the severity of people's psoriasis? * How safe is ESK-001 in people with moderate to severe plaque psoriasis? The study includes 2 comparators: a placebo control (a 'dummy' tablet that does not contain the medicine ESK-001 but lo…",
+   "cond": "Plaque Psoriasis"
+  },
+  {
+   "nct": "NCT06380907",
+   "title": "A Phase 2 Study of ZL-1102 in Patients With Chronic Plaque Psoriasis",
+   "status": "TERMINATED",
+   "phase": "PHASE2",
+   "sponsor": "Zai Lab (Hong Kong), Ltd.",
+   "drugs": [
+    "ZL-1102 1% w/w gel BID for 16 weeks",
+    "ZL-1102 3% w/w gel BID for 16 weeks",
+    "ZL-1102 3% w/w gel QD for 16 weeks"
+   ],
+   "start": "2024-05-22",
+   "pcd": "2025-12-16",
+   "updated": "2026-08-10",
+   "enroll": 65,
+   "summary": "A Randomized, Double-Blind, Vehicle-Controlled, Multicenter, Dose-Ranging, Phase 2 Study to Evaluate the Efficacy and Safety of Different Doses of ZL-1102 Topical gel (A Human VH IL-17A Antibody Fragment) in the Treatment of Chronic Plaque Psoriasis",
+   "cond": "Plaque Psoriasis"
+  },
+  {
+   "nct": "NCT07755241",
+   "title": "A Study of AC-101 Tablets in Patients With Ulcerative Colitis",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Accro Bioscience (Suzhou) Limited",
+   "drugs": [
+    "AC-101",
+    "AC-101"
+   ],
+   "start": "2026-08-28",
+   "pcd": "2027-11-30",
+   "updated": "2026-08-10",
+   "enroll": 153,
+   "summary": "This is a Phase Ⅱb, multicenter, randomized, parallel-group, double-blind, placebo-controlled, dose-finding study of AC-101 tablets in patients with moderately to severely active ulcerative colitis (UC). The study will evaluate the efficacy, safety, and pharmacokinetics of AC-101 compared with placebo in patients who have had an inadequate response, loss of response, or intolerance to prior advanc…",
+   "cond": "Ulcerative Colitis (UC)"
+  },
+  {
+   "nct": "NCT03453112",
+   "title": "Foster 100/6 mg NEXThaler Versus Foster 100/6mg Pressurized Metered-dose Inhaler (pMDI) in Patients With Controlled Asthma.",
+   "status": "COMPLETED",
+   "phase": "PHASE3",
+   "sponsor": "Chiesi Farmaceutici S.p.A.",
+   "drugs": [
+    "Foster 100/6µg NEXThaler",
+    "Foster 100/6µg pMDI"
+   ],
+   "start": "2017-10-09",
+   "pcd": "2021-12-28",
+   "updated": "2026-08-10",
+   "enroll": 494,
+   "summary": "Primary Objective To demonstrate the non-inferiority of Foster® NEXThaler® 100/6 µg versus (vs.) Foster® pressurised metered dose inhaler (pMDI) 100/6 µg in terms of pulmonary function (change from baseline to the entire treatment period in average pre-dose morning peak expiratory flow \\\\[PEF\\\\]) in asthmatic patients. Secondary Objectives To evaluate the effect of the test treatments in terms of …",
+   "cond": "Asthma"
+  },
+  {
+   "nct": "NCT07474792",
+   "title": "Dose Ranging Study of ORKA-002 in Patients With Moderate-to-Severe Plaque Psoriasis",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Oruka Therapeutics, Inc.",
+   "drugs": [
+    "ORKA-002"
+   ],
+   "start": "2026-03-19",
+   "pcd": "2027-10",
+   "updated": "2026-08-10",
+   "enroll": 160,
+   "summary": "This is a multicenter, randomized, double-blinded, placebo-controlled, dose-range finding study to evaluate the efficacy and safety of ORKA-002 in adult participants with moderate-to-severe plaque psoriasis.",
+   "cond": "Plaque Psoriasis"
+  },
+  {
+   "nct": "NCT06653322",
+   "title": "A Multi-centered，Randomized，Double-blind，Placebo-controlled Study to Evaluate the Efficacy and Safety of SHR-1703 in Eosinophilic Asthma",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Guangdong Hengrui Pharmaceutical Co., Ltd",
+   "drugs": [
+    "HR-1703"
+   ],
+   "start": "2024-11-21",
+   "pcd": "2027-09",
+   "updated": "2026-08-10",
+   "enroll": 401,
+   "summary": "The purpose of this study is to evaluate the Pharmacodynamic, Efficacy and Safety of SHR-1703 in Asthma Patients with Eosinophil Phenotype",
+   "cond": "Asthma With Eosinophilic Phenotype"
+  },
+  {
+   "nct": "NCT07404865",
+   "title": "Phase 3 Study of Telitacicept in Active Primary Sjögren's Disease",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Vor Biopharma",
+   "drugs": [
+    "Telitacicept"
+   ],
+   "start": "2026-02-26",
+   "pcd": "2028-12",
+   "updated": "2026-08-10",
+   "enroll": 250,
+   "summary": "Phase 3 Study of Telitacicept in Active Primary Sjögren's Disease (UPSTREAM SjD)",
+   "cond": "Primary Sjogren's Disease"
+  },
+  {
+   "nct": "NCT07486960",
+   "title": "Study to Evaluate Tulisokibart in Adults With Psoriatic Arthritis (MK-7240-015)",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Merck Sharp & Dohme LLC",
+   "drugs": [
+    "Tulisokibart"
+   ],
+   "start": "2026-04-20",
+   "pcd": "2027-08-13",
+   "updated": "2026-08-10",
+   "enroll": 140,
+   "summary": "Researchers are looking for new ways to treat Psoriatic Arthritis (PsA). This study will help find out if a study medicine called tulisokibart (MK-7240) can treat symptoms of active PsA. This study assesses the efficacy, safety, and tolerability of tulisokibart in adult participants with active PsA. In this study, researchers will look at different doses of tulisokibart. Researchers want to learn …",
+   "cond": "Psoriatic Arthritis"
+  },
+  {
+   "nct": "NCT04844606",
+   "title": "A Master Protocol (AMAZ): A Study of Mirikizumab (LY3074828) in Pediatric Participants With Ulcerative Colitis or Crohn's Disease (SHINE-ON)",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Eli Lilly and Company",
+   "drugs": [
+    "Mirikizumab",
+    "Mirikizumab"
+   ],
+   "start": "2021-05-26",
+   "pcd": "2030-12",
+   "updated": "2026-08-07",
+   "enroll": 150,
+   "summary": "The main purpose of this study is to evaluate the long-term efficacy of mirikizumab in pediatric participants with ulcerative colitis (UC) or Crohn's disease (CD). The study will last about 172 weeks and may include up to 44 visits. Additional treatment may be available to participants via a Continued Access Period.",
+   "cond": "Ulcerative Colitis, Ulcerative Colitis Chronic, Inflammatory Bowel Diseases, Crohn's Disease"
+  },
+  {
+   "nct": "NCT04746911",
+   "title": "Maximal Usage Pharmacokinetics and Safety of ARQ-151 in Children With Plaque Psoriasis (ARQ-151-216)",
+   "status": "COMPLETED",
+   "phase": "PHASE2",
+   "sponsor": "Arcutis Biotherapeutics, Inc.",
+   "drugs": [
+    "ARQ-151 cream 0.3%"
+   ],
+   "start": "2021-03-01",
+   "pcd": "2022-05-11",
+   "updated": "2026-08-07",
+   "enroll": 10,
+   "summary": "This is a Phase 2, open label, maximal usage PK and safety study of ARQ-151 cream 0.3% in pediatric subjects (ages 2 to 5 years old) with plaque psoriasis:",
+   "cond": "Psoriasis, Plaque Psoriasis"
+  },
+  {
+   "nct": "NCT06425549",
+   "title": "A Study to Evaluate the Efficacy and Safety of Bimekizumab Compared to Ustekinumab in Children and Adolescents From 6 Years to Less Than 18 Years of Age With Mo…",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "UCB Biopharma SRL",
+   "drugs": [
+    "bimekizumab",
+    "ustekinumab"
+   ],
+   "start": "2024-06-25",
+   "pcd": "2028-08-21",
+   "updated": "2026-08-07",
+   "enroll": 175,
+   "summary": "The primary purpose of this study is to evaluate the efficacy of bimekizumab administered subcutaneously (sc) compared to active control (ustekinumab) in children and adolescents aged 6 to \\\\<18 years of age with moderate to severe plaque psoriasis (PSO).",
+   "cond": "Moderate to Severe Plaque Psoriasis"
+  },
+  {
+   "nct": "NCT05668013",
+   "title": "A Study to Evaluate the Long-Term Effect of TEV-48574 in Moderate to Severe Ulcerative Colitis or Crohn's Disease",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Teva Branded Pharmaceutical Products R&D LLC",
+   "drugs": [
+    "TEV-48574 Dose Regimen A",
+    "TEV-48574 Dose Regiment B"
+   ],
+   "start": "2023-01-11",
+   "pcd": "2026-01-05",
+   "updated": "2026-08-07",
+   "enroll": 247,
+   "summary": "The primary objective of the study is to evaluate the efficacy of 2 different maintenance dose regimens of TEV-48574 subcutaneous (sc) administered every 4 weeks (Q4W) in adult participants with inflammatory bowel disease (IBD). Secondary objectives of the study are to: * evaluate the efficacy of 2 different maintenance dose regimens of TEV-48574 sc administered Q4W in adult participants with IBD …",
+   "cond": "Crohn Disease, Colitis, Ulcerative"
+  },
+  {
+   "nct": "NCT06733935",
+   "title": "A Phase 1/2 Study of NKX019 in Subjects With Immune-Mediated Diseases (Ntrust-2)",
+   "status": "RECRUITING",
+   "phase": "PHASE1, PHASE2",
+   "sponsor": "Nkarta, Inc.",
+   "drugs": [
+    "NKX019",
+    "Fludarabine",
+    "Cyclophosphamide"
+   ],
+   "start": "2024-11-04",
+   "pcd": "2028-10",
+   "updated": "2026-08-07",
+   "enroll": 240,
+   "summary": "This is a Phase 1/2, open-label, multi-center, multi-cohort, non-randomized dose escalation and dose expansion basket study to determine the safety and tolerability of NKX019 (allogeneic CAR NK cells targeting CD19) in participants with autoimmune diseases.",
+   "cond": "Systemic Sclerosis, Idiopathic Inflammatory Myopathies, Antineutrophil Cytoplasmic Antibody-Associated Vasculitis, Rheum…"
+  }
+ ],
+ "raredisease": [
+  {
+   "nct": "NCT06128564",
+   "title": "A Gene Delivery Study to Evaluate the Safety and Expression of Delandistrogene Moxeparvovec in Participants Under the Age of Four With Duchenne Muscular Dystrop…",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Hoffmann-La Roche",
+   "drugs": [
+    "delandistrogene moxeparvovec"
+   ],
+   "start": "2023-11-29",
+   "pcd": "2026-03-04",
+   "updated": "2026-08-10",
+   "enroll": 13,
+   "summary": "This open-label, single-arm study will evaluate the safety and expression of delandistrogene moxeparvovec in participants with DMD. Participants will be in the study for approximately 264 weeks.",
+   "cond": "Duchenne Muscular Dystrophy"
+  },
+  {
+   "nct": "NCT07704099",
+   "title": "Safety and Efficacy of KER-065 in Participants With Duchenne Muscular Dystrophy",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Keros Therapeutics, Inc.",
+   "drugs": [
+    "KER-065"
+   ],
+   "start": "2026-09-14",
+   "pcd": "2029-07-17",
+   "updated": "2026-08-10",
+   "enroll": 36,
+   "summary": "The purpose of this study is to evaluate the safety, tolerability, pharmacokinetics (PK), pharmacodynamics (PD), and efficacy of KER-065 administered to adult and pediatric ambulatory and nonambulatory male participants with Duchenne Muscular Dystrophy (DMD) on stable background therapy.",
+   "cond": "Duchenne Muscular Dystrophy"
+  },
+  {
+   "nct": "NCT03368742",
+   "title": "Microdystrophin Gene Transfer Study in Adolescents and Children With DMD",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE1, PHASE2",
+   "sponsor": "Solid Biosciences Inc.",
+   "drugs": [
+    "SGT-001"
+   ],
+   "start": "2017-12-06",
+   "pcd": "2026-10-15",
+   "updated": "2026-08-10",
+   "enroll": 12,
+   "summary": "This is a controlled, open-label, single-ascending dose study to evaluate the safety and tolerability of SGT-001 in adolescents and children with Duchenne muscular dystrophy (DMD). Participants will receive a single intravenous (IV) infusion of SGT-001 and will be followed for approximately 5 years. The protocol was amended to drop the control arm after 4 participants were dosed.",
+   "cond": "Duchenne Muscular Dystrophy"
+  },
+  {
+   "nct": "NCT06183931",
+   "title": "Study of ALXN2220 Versus Placebo in Adults With ATTR-CM",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Alexion Pharmaceuticals, Inc.",
+   "drugs": [
+    "ALXN2220"
+   ],
+   "start": "2024-01-11",
+   "pcd": "2027-12-06",
+   "updated": "2026-08-10",
+   "enroll": 1181,
+   "summary": "The primary objective of this study is to access the efficacy of ALXN2220 in the treatment of adult participants with ATTR-CM by evaluating the difference between the ALXN2220 and placebo groups as assessed by the total occurrences of all-cause mortality (ACM) and cardiovascular (CV) clinical events.",
+   "cond": "Transthyretin Amyloid Cardiomyopathy"
+  },
+  {
+   "nct": "NCT06659549",
+   "title": "A Phase 2 Efficacy and Safety Study of GAL-101, 2% Ophthalmic Solution in Non-foveal Geographic Atrophy Secondary to Non-neovascular AMD",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Galimedix Therapeutics Inc",
+   "drugs": [
+    "GAL-101"
+   ],
+   "start": "2025-01-10",
+   "pcd": "2027-03-30",
+   "updated": "2026-08-06",
+   "enroll": 110,
+   "summary": "Age-related macular degeneration (AMD) affects millions of elderly patients. When advanced, there is Geographic Atrophy (GA) in the retina. This means that there is an area with a loss of light-sensitive cells, called photoreceptors. That part of the retina can no longer see. Atrophy begins as a small spot in the retina distant from the fovea which is the part of the retina responsible for sharp c…",
+   "cond": "Geographic Atrophy of the Macula"
+  },
+  {
+   "nct": "NCT07589595",
+   "title": "A Study of Donanemab (LY3002813) in Participants With Early Cognitive Decline (TRAILBLAZER-ALZ 7)",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Eli Lilly and Company",
+   "drugs": [
+    "Donanemab"
+   ],
+   "start": "2026-05-20",
+   "pcd": "2028-08",
+   "updated": "2026-08-06",
+   "enroll": 350,
+   "summary": "The main purpose of this study is to evaluate whether treatment with donanemab slows the progression of cognitive (how we think, learn, remember, pay attention, and make decisions) and functional (how we are able to perform daily activities) decline. For each participant, the study will last one and a half years.",
+   "cond": "Cognitive Dysfunction, Lewy Body Disease, Synucleinopathies, Amyloid"
+  },
+  {
+   "nct": "NCT07750678",
+   "title": "Safety and Efficacy Study of GEB-101 Injection in Subjects With TGFBI-related Corneal Dystrophy",
+   "status": "NOT_YET_RECRUITING",
+   "phase": "PHASE1, PHASE2",
+   "sponsor": "GenEditBio Limited",
+   "drugs": [
+    "GEB-101 Injection"
+   ],
+   "start": "2026-08",
+   "pcd": "2027-08",
+   "updated": "2026-08-06",
+   "enroll": 30,
+   "summary": "The goal of this clinical trial is to evaluate the safety and efficacy of GEB-101 injection in subjects with TGFBI-related Corneal Dystrophy",
+   "cond": "Hereditary Corneal Dystrophy, Corneal Abnormality, Corneal Dystrophies, Corneal Dystrophies, Hereditary"
+  },
+  {
+   "nct": "NCT06361537",
+   "title": "Study of IV Human Plasma-derived C1 Esterase Inhibitor Concentrate in Patients With Congenital C1-INH Deficiency for Treatment and Pre-procedure Preventing of A…",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Octapharma",
+   "drugs": [
+    "OCTA-C1-INH"
+   ],
+   "start": "2024-04-30",
+   "pcd": "2026-12",
+   "updated": "2026-08-06",
+   "enroll": 124,
+   "summary": "Prospective, multicenter, randomized, double-blind, parallel group, placebo- controlled, efficacy and safety phase 3 study of an intravenous human plasma- derived C1 esterase inhibitor (C1-INH) concentrate in participants with congenital C1-INH deficiency for the treatment and pre-procedure prevention of acute hereditary angioedema attacks",
+   "cond": "Acute Hereditary Angio Edema"
+  },
+  {
+   "nct": "NCT06467084",
+   "title": "Open-Label Safety, PK, and Efficacy Trial of Sebetralstat (KVD900) in Pediatric Patients (Ages 2-11) With HAE Type I or II",
+   "status": "COMPLETED",
+   "phase": "PHASE3",
+   "sponsor": "KalVista Pharmaceuticals, Ltd.",
+   "drugs": [
+    "KVD900 150 mg",
+    "KVD900 300 mg",
+    "KVD900 600 mg"
+   ],
+   "start": "2024-08-01",
+   "pcd": "2026-01-15",
+   "updated": "2026-08-05",
+   "enroll": 36,
+   "summary": "KVD900-303 is an open-label, multicenter clinical trial in patients aged 2 to 11 years old with HAE Type I or II.",
+   "cond": "Hereditary Angioedema"
+  },
+  {
+   "nct": "NCT07298447",
+   "title": "Donidalorsen Treatment in Children With Hereditary Angioedema",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Ionis Pharmaceuticals, Inc.",
+   "drugs": [
+    "Donidalorsen"
+   ],
+   "start": "2026-04-21",
+   "pcd": "2029-06",
+   "updated": "2026-08-05",
+   "enroll": 20,
+   "summary": "The purpose of this study is to evaluate the safety, tolerability and pharmacokinetics of donidalorsen in pediatric participants with hereditary angioedema (HAE) Type I (HAE-1) or Type II (HAE-2).",
+   "cond": "Hereditary Angioedema (HAE)"
+  },
+  {
+   "nct": "NCT06563895",
+   "title": "Acoramidis Transthyretin Amyloidosis Prevention Trial in the Young (ACT-EARLY) Study in Asymptomatic Carriers of a Pathogenic TTR Variant",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Eidos Therapeutics, a BridgeBio company",
+   "drugs": [
+    "Acoramidis"
+   ],
+   "start": "2025-05-12",
+   "pcd": "2031-10",
+   "updated": "2026-08-04",
+   "enroll": 587,
+   "summary": "Transthyretin amyloidosis (ATTR) is a disease where the normally occurring transthyretin (TTR) protein falls apart and forms amyloid, a sticky plaque-like substance that accumulates in different organs in the body and can cause damage to the organ. There are two ways that the TTR protein can fall apart. One way occurs as a person ages, where the normal TTR protein can fall apart and form amyloid t…",
+   "cond": "Amyloidosis, Amyloid Cardiomyopathy, Transthyretin Amyloidosis, Cardiomyopathies"
+  },
+  {
+   "nct": "NCT07587242",
+   "title": "A Phase 3 Study to Evaluate the Safety and Efficacy of AOC 1044 (Also Referred to as Delpacibart Zotadirsen) in Participants With DMD With Gene Mutations Amenab…",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Avidity Biosciences, Inc.",
+   "drugs": [
+    "AOC 1044"
+   ],
+   "start": "2026-08",
+   "pcd": "2029-05",
+   "updated": "2026-08-04",
+   "enroll": 70,
+   "summary": "A Randomized, Double-blind, Placebo-controlled, Phase 3 Study to Evaluate the Efficacy and Safety of Intravenous AOC 1044 for the treatment of Duchenne Muscular Dystrophy (DMD) with Gene Mutations Amenable to Exon 44 Skipping",
+   "cond": "Muscular Dystrophies, Muscular Dystrophies (Duchenne, Becker, Myotonic Dystrophy), Muscular Disorders, Atrophic, Muscula…"
+  },
+  {
+   "nct": "NCT05184088",
+   "title": "Efficacy of [18F]Florbetaben PET for Diagnosis of Cardiac AL Amyloidosis",
+   "status": "COMPLETED",
+   "phase": "PHASE3",
+   "sponsor": "Lantheus Germany GmbH",
+   "drugs": [
+    "[18F]florbetaben"
+   ],
+   "start": "2023-01-13",
+   "pcd": "2026-04-21",
+   "updated": "2026-08-03",
+   "enroll": 244,
+   "summary": "This is an open-label, multi-center pivotal Phase 3 study to visually and quantitatively assess PET images obtained after single application of 300 MBq \\\\[18F\\\\]florbetaben and PET scanning of patients with suspected cardiac amyloidosis.",
+   "cond": "Cardiac Amyloidosis, AL Amyloidosis, ATTR Amyloidosis"
+  },
+  {
+   "nct": "NCT02008357",
+   "title": "Clinical Trial of Solanezumab for Older Individuals Who May be at Risk for Memory Loss",
+   "status": "COMPLETED",
+   "phase": "PHASE3",
+   "sponsor": "Eli Lilly and Company",
+   "drugs": [
+    "Solanezumab"
+   ],
+   "start": "2014-02-28",
+   "pcd": "2022-12-27",
+   "updated": "2026-08-03",
+   "enroll": 1169,
+   "summary": "The purpose of this study is to test whether an investigational drug called solanezumab can slow the progression of memory problems associated with brain amyloid (protein that forms plaques in the brains of people with Alzheimer Disease \\\\[AD\\\\]).",
+   "cond": "Cognition Disorders"
+  },
+  {
+   "nct": "NCT07224828",
+   "title": "The Efficacy of a Battery Toothbrush in the Reduction of Established Plaque and Gingivitis",
+   "status": "COMPLETED",
+   "phase": "PHASE3",
+   "sponsor": "Colgate Palmolive",
+   "drugs": [
+    "Total Active Prevention Fresh Toothpaste + Colgate Total Act…",
+    "Colgate Great Regular + Total Active Prevention Battery Toot…",
+    "Colgate Great Regular + standard reference flat trim toothpa…"
+   ],
+   "start": "2025-10-14",
+   "pcd": "2026-01-28",
+   "updated": "2026-07-31",
+   "enroll": 130,
+   "summary": "A clinical research study design to compare the effectiveness of a battery toothbrush and dentifrice in reducing gingivitis and dental plaque in adults.",
+   "cond": "Plaque, Gingivitis"
+  }
+ ],
+ "ophthalmology": [
+  {
+   "nct": "NCT06401044",
+   "title": "A Study of AMG 732 in Healthy Participants and Participants With Thyroid Eye Disease",
+   "status": "ACTIVE_NOT_RECRUITING",
+   "phase": "PHASE1, PHASE2",
+   "sponsor": "Amgen",
+   "drugs": [
+    "AMG 732"
+   ],
+   "start": "2024-05-30",
+   "pcd": "2027-01-06",
+   "updated": "2026-08-10",
+   "enroll": 94,
+   "summary": "The primary objective of Part A of this study is to investigate the safety and tolerability of AMG 732 after single subcutaneous (SC) doses. The primary objective of Part B of this study is to investigate the efficacy of AMG 732 in participants with Thyroid Eye Disease (TED) after multiple SC doses.",
+   "cond": "Thyroid Eye Disease"
+  },
+  {
+   "nct": "NCT06765980",
+   "title": "A Study to Evaluate KRIYA-825 (VV-14295) in Adults With Geographic Atrophy Secondary to Age-related Macular Degeneration",
+   "status": "RECRUITING",
+   "phase": "PHASE1, PHASE2",
+   "sponsor": "Kriya Therapeutics, Inc.",
+   "drugs": [
+    "VV-14295"
+   ],
+   "start": "2025-05-28",
+   "pcd": "2027-12-15",
+   "updated": "2026-08-10",
+   "enroll": 62,
+   "summary": "The goal of this study is to evaluate how safe and tolerable KRIYA-825 (VV-14295) is and to determine how effective it is in reducing the growth of geographic atrophy (GA) lesions in the treated eye in patients with GA secondary to age-related macular degeneration (AMD).",
+   "cond": "Geographic Atrophy Secondary to Age-related Macular Degeneration"
+  },
+  {
+   "nct": "NCT07661056",
+   "title": "Study to Determine if BHV-1300 is Effective and Safe in Adults With Graves' Disease",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Biohaven Therapeutics Ltd.",
+   "drugs": [
+    "BHV-1300"
+   ],
+   "start": "2026-06-26",
+   "pcd": "2028-01",
+   "updated": "2026-08-07",
+   "enroll": 300,
+   "summary": "The purpose of this study is to evaluate the efficacy and safety of BHV-1300 in adult participants with Graves' disease who are actively hyperthyroid",
+   "cond": "Graves Disease"
+  },
+  {
+   "nct": "NCT07753603",
+   "title": "Study to Assess Linsitinib in Participants With Moderate to Severe Active Thyroid Eye Disease (TED)",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Sling Therapeutics, Inc.",
+   "drugs": [
+    "linsitinib"
+   ],
+   "start": "2026-08-04",
+   "pcd": "2028-06-30",
+   "updated": "2026-08-07",
+   "enroll": 130,
+   "summary": "The goal of this clinical trial is to evaluate the efficacy, safety, and tolerability of linsitinib in participants with moderate to severe Thyroid Eye Disease (TED).",
+   "cond": "Thyroid Eye Disease, TED, Graves Orbitopathy"
+  },
+  {
+   "nct": "NCT07317934",
+   "title": "Efficacy and Safety of LX102 Gene Therapy in Patients With Neovascular Age-related Macular Degeneration (nAMD) (STELLAR)",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Innostellar Biotherapeutics Co.,Ltd",
+   "drugs": [
+    "LX102",
+    "Aflibercept"
+   ],
+   "start": "2026-01-14",
+   "pcd": "2028-03",
+   "updated": "2026-08-06",
+   "enroll": 388,
+   "summary": "This is a Phase III, randomized, open-label, active-controlled study to evaluate the efficacy and safety of subretinal injection of LX102 in participants with neovascular age-related macular degeneration. The study will evaluate a single subretinal injection of LX102 compared to an active comparator. The primary endpoint of this study is the mean change from D0 in BCVA based on an average at weeks…",
+   "cond": "Neovascular Age-Related Macular Degeneration (nAMD), Wet AMD"
+  },
+  {
+   "nct": "NCT06659549",
+   "title": "A Phase 2 Efficacy and Safety Study of GAL-101, 2% Ophthalmic Solution in Non-foveal Geographic Atrophy Secondary to Non-neovascular AMD",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Galimedix Therapeutics Inc",
+   "drugs": [
+    "GAL-101"
+   ],
+   "start": "2025-01-10",
+   "pcd": "2027-03-30",
+   "updated": "2026-08-06",
+   "enroll": 110,
+   "summary": "Age-related macular degeneration (AMD) affects millions of elderly patients. When advanced, there is Geographic Atrophy (GA) in the retina. This means that there is an area with a loss of light-sensitive cells, called photoreceptors. That part of the retina can no longer see. Atrophy begins as a small spot in the retina distant from the fovea which is the part of the retina responsible for sharp c…",
+   "cond": "Geographic Atrophy of the Macula"
+  },
+  {
+   "nct": "NCT07496567",
+   "title": "A Clinical Trial of EYE201/MK-8748 in People With Macular Degeneration (MK-8748-003)",
+   "status": "RECRUITING",
+   "phase": "PHASE2, PHASE3",
+   "sponsor": "EyeBiotech Ltd.",
+   "drugs": [
+    "Tiespectus",
+    "Aflibercept"
+   ],
+   "start": "2026-04-15",
+   "pcd": "2028-07-31",
+   "updated": "2026-08-06",
+   "enroll": 960,
+   "summary": "Researchers are looking for new ways to treat neovascular age-related macular degeneration (NVAMD). Available standard (usual) treatments for NVAMD, such as aflibercept, may not work for every person. Researchers want to learn if a trial medicine called tiespectus (also called MK-8748 or EYE201) can treat NVAMD. The goal of this trial is to learn if tiespectus works as well as aflibercept to treat…",
+   "cond": "Macular Degeneration, Age-Related Macular Degeneration, Choroidal Neovascularization, Wet Macular Degeneration"
+  },
+  {
+   "nct": "NCT06962839",
+   "title": "A Study to Test Whether BI 1815368 Helps People With an Eye Condition Called Diabetic Macular Edema",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Boehringer Ingelheim",
+   "drugs": [
+    "BI 1815368"
+   ],
+   "start": "2025-06-05",
+   "pcd": "2027-09-01",
+   "updated": "2026-08-06",
+   "enroll": 300,
+   "summary": "This study is open to adults 18 and older with an eye condition called diabetic macular edema. People are required to have a specific type of diabetic macular edema called centre-involved diabetic macular edema (CI-DME) to take part. The purpose of this study is to find out whether a medicine called BI 1815368 improves sight in people with CI-DME and to find the most suitable dose. This study has …",
+   "cond": "Macular Edema"
+  },
+  {
+   "nct": "NCT07440225",
+   "title": "A Clinical Trial of EYE201/MK-8748 in People With Macular Degeneration (MK-8748-002)",
+   "status": "RECRUITING",
+   "phase": "PHASE2, PHASE3",
+   "sponsor": "EyeBiotech Ltd.",
+   "drugs": [
+    "Tiespectus",
+    "Aflibercept"
+   ],
+   "start": "2026-03-27",
+   "pcd": "2028-06-30",
+   "updated": "2026-08-06",
+   "enroll": 960,
+   "summary": "Researchers are looking for new ways to treat neovascular age-related macular degeneration (NVAMD). Available standard (usual) treatments for NVAMD, such as aflibercept, may not work for every person. Researchers want to learn if a trial medicine called tiespectus (also called MK-8748 or EYE201) can treat NVAMD. The goal of this trial is to learn if tiespectus works as well as aflibercept to treat…",
+   "cond": "Macular Degeneration, Age-Related Macular Degeneration, Choroidal Neovascularization, Wet Macular Degeneration"
+  },
+  {
+   "nct": "NCT07592273",
+   "title": "Surabgene Lomparvovec Administered in the Suprachoroidal Space in Adult Participants With Diabetic Retinopathy Without Center-Involved Diabetic Macular Edema",
+   "status": "RECRUITING",
+   "phase": "PHASE2, PHASE3",
+   "sponsor": "AbbVie",
+   "drugs": [
+    "Surabgene Lomparvovec",
+    "Topical Steroid",
+    "Artificial Tears"
+   ],
+   "start": "2026-06-01",
+   "pcd": "2028-06",
+   "updated": "2026-08-05",
+   "enroll": 576,
+   "summary": "Diabetic Retinopathy (DR) is a common eye condition caused by diabetes, where high blood sugar levels damage the blood vessels in the back part of the eye (called the retina). Over time, this damage can lead to vision problems and even blindness if not treated. This study will assess surabgene lomparvovec (sura-vec) as a potential one-time gene therapy administered in the suprachoroidal space (SCS…",
+   "cond": "Diabetic Retinopathy"
+  },
+  {
+   "nct": "NCT07630649",
+   "title": "Ixoberogene Soroparvovec (Ixo-vec) Contralateral Dosing Study in Participants With Neovascular Age-related Macular Degeneration",
+   "status": "RECRUITING",
+   "phase": "PHASE2",
+   "sponsor": "Adverum Biotechnologies, Inc.",
+   "drugs": [
+    "Ixo-vec"
+   ],
+   "start": "2026-06-02",
+   "pcd": "2031-06",
+   "updated": "2026-08-05",
+   "enroll": 15,
+   "summary": "The purpose of this study is to evaluate safety, effectiveness and durability of a gene therapy called Ixo-vec (Ixoberogene soroparvovec) when administered to the contralateral (second) eye of adult participants (≥ 50 years of age) who have been diagnosed with bilateral neovascular (wet) age related macular degeneration (nAMD). The study will enroll adults with nAMD in both eyes, including partici…",
+   "cond": "Neovascular Age-Related Macular Degeneration (nAMD) Wet AMD"
+  },
+  {
+   "nct": "NCT05210803",
+   "title": "Long-Term Follow-Up Study of RGX-314 Administered in the Suprachoroidal Space for Participants With nAMD",
+   "status": "ENROLLING_BY_INVITATION",
+   "phase": "PHASE2",
+   "sponsor": "AbbVie",
+   "drugs": [
+    "Standard of Care",
+    "Ranibizumab"
+   ],
+   "start": "2021-12-20",
+   "pcd": "2031-07",
+   "updated": "2026-08-05",
+   "enroll": 116,
+   "summary": "This is a prospective study designed to evaluate the long-term safety and efficacy of ABBV-RGX-314. Eligible participants are those who were previously enrolled in a clinical study of nAMD in which they received suprachoroidal space (SCS) administration of ABBV-RGX-314. Enrollment of each participant in the current study should occur after the participant has completed either the end of study or e…",
+   "cond": "Neovascular Age-Related Macular Degeneration (nAMD)"
+  },
+  {
+   "nct": "NCT05296447",
+   "title": "Long-Term Follow-Up Study of RGX-314 Administered in the Suprachoroidal Space for Participants With and Without Diabetic Retinopathy",
+   "status": "ENROLLING_BY_INVITATION",
+   "phase": "PHASE2",
+   "sponsor": "AbbVie",
+   "drugs": [
+    "Standard of Care",
+    "Aflibercept"
+   ],
+   "start": "2022-04-04",
+   "pcd": "2031-06",
+   "updated": "2026-08-05",
+   "enroll": 100,
+   "summary": "This is a prospective study designed to evaluate the long-term safety and efficacy of ABBV-RGX-314. Eligible participants are those who were previously enrolled in a clinical study of DR with and without center involved-diabetic macular edema (CI-DME) in which they received suprachoroidal space (SCS) administration of ABBV-RGX-314. Enrollment of each participant in the current study should occur a…",
+   "cond": "Diabetic Retinopathy, DR"
+  },
+  {
+   "nct": "NCT07449936",
+   "title": "COMO: A Phase 3 Randomized, Double-Masked Study Comparing the Efficacy of EYP-1901 Against Aflibercept in DME",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "EyePoint Pharmaceuticals, Inc.",
+   "drugs": [
+    "EYP-1901",
+    "Aflibercept (2.0 mg)"
+   ],
+   "start": "2026-02-16",
+   "pcd": "2027-10",
+   "updated": "2026-08-04",
+   "enroll": 240,
+   "summary": "This is a phase 3 randomized, double -masked study comparing the efficacy of EYP-1901 against Aflibercept.",
+   "cond": "Diabetic Macular Edema, DME, Diabetic Macular Edema (DME)"
+  },
+  {
+   "nct": "NCT05562947",
+   "title": "A Study of the Efficacy, Safety, and Pharmacokinetics (PK) of the Port Delivery System With Ranibizumab (PDS) in Chinese Participants With Neovascular Age-relat…",
+   "status": "RECRUITING",
+   "phase": "PHASE3",
+   "sponsor": "Hoffmann-La Roche",
+   "drugs": [
+    "PDS With Ranibizumab (100 mg/mL)",
+    "Ranibizumab (10 mg/mL)"
+   ],
+   "start": "2024-06-17",
+   "pcd": "2027-07-27",
+   "updated": "2026-08-04",
+   "enroll": 68,
+   "summary": "This study will evaluate the efficacy, safety, and PK of ranibizumab 100 milligrams per milliliter (mg/mL) delivered every 24 weeks (Q24W) via the PDS implant compared with ranibizumab 0.5 milligrams (mg) delivered every 4 weeks (Q4W) as intravitreal (IVT) injection in Chinese participants with nAMD.",
+   "cond": "Neovascular Age-related Macular Degeneration, nAMD"
+  }
+ ]
 };
-const TRIALSNAP_UPDATED = "August 5, 2026";
+const TRIALSNAP_UPDATED = "August 10, 2026";
 /* WEEKLY-TRIALSNAP-END */
 const FIELDS = "NCTId,BriefTitle,OverallStatus,Phase,LeadSponsorName,LeadSponsorClass,Condition,LastUpdatePostDate,StartDate,PrimaryCompletionDate,EnrollmentCount,BriefSummary,InterventionName";
 const ADV = 'AREA[LeadSponsorClass]INDUSTRY AND AREA[Phase](PHASE2 OR PHASE3)';
@@ -1787,6 +3201,137 @@ const SUPSTRAT = {
  }
 };
 /* WEEKLY-SUPSTRAT-END */
+/* WEEKLY-EMPHASIS-START — the Monday/Thursday task maintains this block.
+   What each supporter SAYS it wants, tracked release over release, so drift is
+   visible: what is new this cycle, what quietly disappeared, what has persisted.
+   Shape:
+   "Canonical Co":{ spaces:[keys], portal, url,
+     cycles:[ {when:"YYYY-MM-DD", label, topics:[...], src?} , ...],   // OLDEST FIRST
+     changed?:[ {when:"YYYY-MM", what} ],                              // dated, documented shifts only
+     gaps:[ {space, gap, design} ] }
+
+   HOW TO MAINTAIN THIS — read carefully, it is easy to corrupt:
+   * Each run, compare the funder's CURRENT published areas of interest against
+     `cycles[cycles.length-1]`. If the wording is materially the same, do NOT append
+     a cycle — appending identical cycles destroys the signal. Only append when the
+     topic list actually changes, and date the new cycle the day you saw the change.
+   * Keep at most 4 cycles per supporter; drop the oldest beyond that.
+   * `changed` is for shifts you can date and evidence (a portal closing, a topic
+     being withdrawn, a mechanism moving to invite-only). Never infer one.
+   * `gaps` is the payoff: what the funder is NOT saying, and the educational design
+     that would answer it. One or two per supporter, specific enough to brief.
+   The UI diffs the last two cycles automatically. A supporter with one cycle renders
+   as "baseline" — honest, because we have no prior observation, not a claim of stability. */
+const EMPHASIS_UPDATED = "August 10, 2026";
+const EMPHASIS_BASELINE = "August 10, 2026";
+const EMPHASIS = {
+ "Bayer":{spaces:["cardiovascular","nephrology","endocrinology"], portal:"Bayer Grants & Donations", url:"https://www.grants.bayer.com/",
+  cycles:[{when:"2026-08-10", label:"Published areas of interest", topics:["Stroke prevention","Cardio-Kidney-Metabolic syndrome","Heart failure","CKD in type 2 diabetes","Finerenone / Kerendia"]}],
+  gaps:[{space:"cardiovascular", gap:"Bayer names stroke prevention but says nothing about how a Factor XI agent would be positioned against DOACs — the question clinicians will actually ask if asundexian is approved.", design:"Comparative anticoagulation decision-support: case-based, bleeding-risk stratified, built to update at approval."},
+        {space:"nephrology", gap:"Cardio-Kidney-Metabolic is named as a syndrome but the funded education rarely crosses specialty lines in practice.", design:"Joint cardiology–nephrology–endocrinology curriculum with shared patient cases rather than three parallel single-specialty modules."}]},
+ "Novartis":{spaces:["cardiovascular","nephrology","immunology"], portal:"Novartis Independent Medical Education", url:"https://www.novartis.com/about/our-support-healthcare-community/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Published areas of interest", topics:["Atrial fibrillation / thromboembolism","ASCVD and Lp(a)","IgA nephropathy","C3 glomerulopathy","Sjögren's disease"]}],
+  changed:[{when:"2026-07", what:"Fabhalta (iptacopan) converted to full IgAN approval, opening a live launch-education window; Vanrafia (atrasentan) sits alongside it."}],
+  gaps:[{space:"nephrology", gap:"Three IgAN assets in one portfolio and no published education on how to sequence them — the sequencing question is precisely what a sponsor cannot credibly answer about itself.", design:"Independent sequencing curriculum across all approved IgAN mechanisms, not one company's portfolio."},
+        {space:"cardiovascular", gap:"Lp(a) is listed as an area of interest while the pelacarsen outcomes readout has slipped past its guided window — education risks being built on a hypothesis.", design:"Stage the content: Lp(a) risk identification and testing now, therapeutic decision-making held until outcomes read out."}]},
+ "Novo Nordisk":{spaces:["cardiovascular","endocrinology"], portal:"Novo Nordisk Independent Medical Education", url:"https://www.novonordisk-us.com/sustainable-business/patients/independent-medical-education.html",
+  cycles:[{when:"2026-08-10", label:"Stated therapeutic areas", topics:["Diabetes","Obesity","MASH","Cardiovascular outcomes in cardiometabolic disease"]}],
+  gaps:[{space:"endocrinology", gap:"Tolerability and dose-escalation are the live clinical questions for amylin combinations, and securities litigation over tolerability claims makes company-sourced material harder to trust on exactly that point.", design:"Independent tolerability and titration education — side-effect anticipation, dose de-escalation, and when to stop."}]},
+ "Eli Lilly":{spaces:["endocrinology","immunology"], portal:"Lilly Grant Office", url:"https://grantoffice.lilly.com/areas-of-focus",
+  cycles:[{when:"2026-08-10", label:"Published Areas of Focus", topics:["Endocrine — diabetes","Endocrine — obesity","Immunology"], src:"Topic detail sits behind portal login; the public awarded-grants registry is the better read on what actually gets funded."}],
+  gaps:[{space:"endocrinology", gap:"With an oral small molecule now approved, the unmet need moves from access to choosing between oral and injectable for a specific patient — no funder names that decision.", design:"Oral-versus-injectable selection and adherence curriculum, including what to do when a patient fails or stops."}]},
+ "Amgen":{spaces:["endocrinology","immunology"], portal:"Amgen Independent Medical Education", url:"https://www.amgen.com/science/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Published IME topics", topics:["Obesity","Dyslipidemia in diabetes","Rheumatoid arthritis","Psoriatic arthritis","Ankylosing spondylitis","ANCA vasculitis","Lupus","IBD","Asthma / COPD"]}],
+  gaps:[{space:"immunology", gap:"The broadest published topic list in the tracker, which makes it the easiest match — and the most crowded. Differentiation has to come from format, not topic.", design:"Lead with under-served formats — longitudinal case series, decision-support tools — rather than another symposium on a listed topic."}]},
+ "AstraZeneca":{spaces:["nephrology","immunology"], portal:"AstraZeneca Medical Education Grants", url:"https://www.astrazeneca.com/our-company/independent-medical-education.html",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["CKD / cardio-renal-metabolic","IgA nephropathy","Lupus nephritis (ex-US)","SLE (limited budget)","Myositis","Scleroderma"]}],
+  gaps:[{space:"nephrology", gap:"Lupus nephritis funding is scoped ex-US while the US audience faces the same sequencing questions.", design:"Global-format content with US-applicable case law and access framing, designed to be fundable from an ex-US budget line."}]},
+ "Otsuka":{spaces:["nephrology"], portal:"Otsuka Independent Medical Education", url:"https://www.otsuka-us.com/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["IgA nephropathy (sibeprenlimab / anti-APRIL)","ADPKD (tolvaptan)"]}],
+  changed:[{when:"2025-11", what:"Sibeprenlimab (Voyxact) approved, moving Otsuka from pre-launch to launch-stage education need in IgAN."}],
+  gaps:[{space:"nephrology", gap:"An established renal funder now competing in a four-drug field it used to have largely to itself.", design:"Comparative mechanism education — BAFF/APRIL versus complement versus endothelin — pitched as class literacy rather than product positioning."}]},
+ "Travere":{spaces:["nephrology"], portal:"Travere Medical Education Grants", url:"https://travere.com/grants-and-giving/",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["IgA nephropathy (Filspari / sparsentan)","FSGS","Non-immunosuppressive management"]}],
+  gaps:[{space:"nephrology", gap:"FSGS has almost no dedicated education and no competing funder, which makes it the least contested topic in nephrology.", design:"A dedicated FSGS curriculum — diagnosis, genetic versus primary, and realistic treatment expectations."}]},
+ "Vertex":{spaces:["nephrology"], portal:"No nephrology grants route published yet", url:"https://www.vrtx.com/",
+  cycles:[{when:"2026-08-10", label:"No published renal areas of interest", topics:["(none published — povetacicept PDUFA 30 Nov 2026 would be Vertex's first renal product)"]}],
+  gaps:[{space:"nephrology", gap:"The single largest structural gap in the tracker: a company weeks from a first-ever renal approval with no renal grant programme and no published areas of interest.", design:"Approach on scientific-exchange terms about unmet need now; have a fully costed IgAN concept ready for the moment a renal area of interest appears."}]},
+ "Roche / Genentech":{spaces:["nephrology","ophthalmology"], portal:"Genentech Independent Medical Education (iMED)", url:"https://www.gene.com/good/grants/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Named RFP areas", topics:["Lupus nephritis","Primary membranous nephropathy","IgA nephropathy","Wet AMD durability (Vabysmo / Susvimo)"]}],
+  changed:[{when:"2026-06", what:"The dated implementation-science RFP closed 30 June 2026; no replacement dated call has appeared."},{when:"2025-10", what:"Gazyva approved in lupus nephritis, shifting that topic from pipeline to launch."}],
+  gaps:[{space:"nephrology", gap:"Primary membranous nephropathy has almost no existing CME anywhere, and a priority-review decision is due.", design:"Build the first PMN curriculum — anti-PLA2R testing, when to treat, and how the new option changes the rituximab-versus-tacrolimus habit."}]},
+ "Apellis":{spaces:["nephrology","ophthalmology"], portal:"Apellis Independent Medical Education", url:"https://apellis.com/grants-and-giving/",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["C3 glomerulopathy","IC-MPGN","Geographic atrophy / AMD (Syfovre)","Retina Fellow Research Grant"]}],
+  changed:[{when:"2025-07", what:"First-ever therapy approved in IC-MPGN, creating a field with no prescriber frame of reference at all."}],
+  gaps:[{space:"nephrology", gap:"Prescribers have no comparator experience in C3G/IC-MPGN — this is education from zero, not education against a habit.", design:"Foundational disease-recognition content first (biopsy interpretation, complement pathway literacy), therapeutics second."}]},
+ "Aurinia":{spaces:["nephrology"], portal:"Aurinia Medical Education Grants", url:"https://www.auriniapharma.com/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Published area", topics:["Lupus nephritis (Lupkynis)"]}],
+  gaps:[{space:"nephrology", gap:"A single-indication funder in a space where rheumatology and nephrology rarely learn together.", design:"Dual-audience lupus nephritis programme built around the referral hand-off, which is where care actually breaks down."}]},
+ "J&J":{spaces:["immunology"], portal:"Johnson & Johnson Independent Medical Education", url:"https://www.jnj.com/partners/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["Crohn's disease","Ulcerative colitis","Psoriatic arthritis","Ankylosing spondylitis","Rheumatoid arthritis","Generalized myasthenia gravis","Implementation science"]}],
+  changed:[{when:"2026-07", what:"Icotrokinra approved in plaque psoriasis with first-line systemic positioning, adding an oral-versus-injectable question the published topic list does not yet name."}],
+  gaps:[{space:"immunology", sub:"derm", gap:"Psoriasis is conspicuously absent from the published list despite a new oral approval and adolescent labelling.", design:"Step-therapy and first-line systemic decision-making in psoriasis, including the adolescent population."}]},
+ "Takeda":{spaces:["immunology","raredisease"], portal:"Takeda Independent Medical Education", url:"https://www.takeda.com/who-we-are/company-information/independent-medical-education/",
+  cycles:[{when:"2026-08-10", label:"Currently accepting", topics:["IBD","Eosinophilic esophagitis","Short bowel syndrome / SBS-IF","CIDP","Hereditary angioedema","Primary immunodeficiency","Rare metabolic / lysosomal"]}],
+  changed:[{when:"2026-08", what:"SLE and psoriatic arthritis are no longer accepting submissions — a withdrawal, not an omission. The accepted list rotates, so re-check before writing to it."}],
+  gaps:[{space:"immunology", sub:"gastro", gap:"EoE and SBS-IF are named but sit with gastroenterologists who rarely attend IBD-framed education.", design:"Separate EoE and intestinal-failure tracks rather than folding them into an IBD umbrella."}]},
+ "Incyte":{spaces:["immunology"], portal:"Incyte Grants & Giving", url:"https://www.incyte.com/who-we-are/grants-and-giving",
+  cycles:[{when:"2026-08-10", label:"Stated interest (no public topic list)", topics:["Atopic dermatitis","Vitiligo","Hidradenitis suppurativa"]}],
+  changed:[{when:"2026-08", what:"Positive Phase 3 for oral povorcitinib in HS and a topical HS readout guided to Q4 2026 — HS moves from niche to launch-stage."}],
+  gaps:[{space:"immunology", sub:"derm", gap:"HS education is built almost entirely around a single biologic class; mild-to-moderate disease, where most patients sit, is barely covered.", design:"Mild-to-moderate HS curriculum — staging, topical and oral options, and when to escalate."}]},
+ "Galderma":{spaces:["immunology"], portal:"Galderma Grants (RFP-gated)", url:"https://www.galderma.com/grants",
+  cycles:[{when:"2026-08-10", label:"RFP-only", topics:["Dermatology (topics defined per RFP)"]}],
+  changed:[{when:"2024-11", what:"Monetary grants moved to RFP-gated only — unsolicited requests are no longer a route. Watch the RFP page rather than the general portal."}],
+  gaps:[{space:"immunology", sub:"derm", gap:"No standing topic list means no way to prepare a concept in advance; the window opens and closes with each RFP.", design:"Keep a shelf-ready dermatology concept costed and ready to re-scope to whatever the next RFP names."}]},
+ "LEO Pharma":{spaces:["immunology"], portal:"LEO Pharma medical education", url:"https://www.leo-pharma.com/",
+  cycles:[{when:"2026-08-10", label:"Stated focus", topics:["Dermatology continuing education"]}],
+  gaps:[{space:"immunology", sub:"derm", gap:"Pure-play dermatology funder, but the portal showed a stale banner at last check — live status unconfirmed.", design:"Confirm the route is live before investing concept time."}]},
+ "Bristol Myers Squibb":{spaces:["immunology"], portal:"BMS Independent Medical Education", url:"https://www.bms.com/about-us/responsibility/independent-grants.html",
+  cycles:[{when:"2026-08-10", label:"Stated areas", topics:["Immunology","Lupus"]}],
+  gaps:[{space:"immunology", sub:"rheum", gap:"RFP table posts intermittently and topics are broad — hard to time.", design:"Monitor rather than plan against; keep a lupus concept warm."}]},
+ "AbbVie":{spaces:["immunology","ophthalmology"], portal:"AbbVie IME Provider Network (invited only)", url:"https://www.abbvie.com/our-company/partnerships/independent-medical-education.html",
+  cycles:[{when:"2026-08-10", label:"Invited network only", topics:["DME","Glaucoma","Immunology (via network members)"]}],
+  changed:[{when:"2024-01", what:"Funding restricted to an invited IME Provider Network — verify membership before investing any concept development time."}],
+  gaps:[{space:"ophthalmology", gap:"Access, not topic, is the binding constraint here.", design:"Confirm network membership first; if not a member, the topic work is premature."}]},
+ "Alexion / AstraZeneca (Rare)":{spaces:["raredisease"], portal:"Alexion rare-disease grants office", url:"https://alexion.com/our-responsibility/grants-and-giving",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["Complement-mediated disease","PNH","aHUS","C3 glomerulopathy","Rare hematology","Rare renal"]}],
+  gaps:[{space:"raredisease", gap:"Complement literacy is assumed rather than taught, and the prescriber base is widening as indications expand.", design:"Complement pathway foundations for non-specialists, built to sit under several indication-specific modules."}]},
+ "Sanofi (Genzyme / Rare)":{spaces:["raredisease"], portal:"Sanofi grants", url:"https://www.sanofi.com/en/our-responsibility/grants",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["Lysosomal storage disorders","Rare blood disorders","Rare neurology"]}],
+  gaps:[{space:"raredisease", gap:"Diagnostic odyssey remains the dominant clinical problem and is rarely the subject of funded education.", design:"Recognition-and-referral education aimed at generalists rather than treatment education aimed at specialists."}]},
+ "Amgen (Ultra-Rare / Horizon)":{spaces:["raredisease","ophthalmology"], portal:"Amgen ultra-rare grants", url:"https://www.amgen.com/science/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["Thyroid eye disease","Gout / CPP disease","Rare autoimmune"]}],
+  changed:[{when:"2026-07", what:"A second anti-IGF-1R agent was approved in TED, turning a single-option field into a comparative one."}],
+  gaps:[{space:"ophthalmology", gap:"TED now needs selection and monitoring education — including hearing toxicity — that no single sponsor can deliver credibly.", design:"Comparative TED programme across oculoplastics, endocrinology and general ophthalmology."}]},
+ "Sobi":{spaces:["raredisease"], portal:"Sobi grants", url:"https://www.sobi.com/en/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["Rare hematology","Hereditary angioedema","Rare immunology"]}],
+  gaps:[{space:"raredisease", gap:"HAE is about to become genuinely competitive with two oral on-demand agents.", design:"On-demand versus prophylaxis decision-making, refreshed as each oral agent lands."}]},
+ "Chiesi Global Rare Diseases":{spaces:["raredisease"], portal:"Chiesi Global Rare Diseases (CyberGrants)", url:"https://www.chiesirarediseases.com/",
+  cycles:[{when:"2026-08-10", label:"Published areas", topics:["Rare metabolic","Lysosomal disorders"]}],
+  changed:[{when:"2026-03", what:"US IME submissions moved to CyberGrants — a new route, so historical contacts and processes no longer apply."}],
+  gaps:[{space:"raredisease", gap:"Newly restructured US route with little published detail on topics.", design:"Submit early in the new cycle while the queue is short."}]},
+ "Amgen (Thyroid Eye Disease)":{spaces:["ophthalmology"], portal:"Amgen IME — TED", url:"https://www.amgen.com/science/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Named topics published", topics:["Thyroid eye disease","Accredited education only","No fellowships"]}],
+  gaps:[{space:"ophthalmology", gap:"The most explicitly documented ophthalmology target in the tracker, with named topics and an unsolicited route.", design:"Accredited, multi-specialty TED activity — the constraints are published, so build to them exactly."}]},
+ "Astellas (Iveric Bio)":{spaces:["ophthalmology"], portal:"Astellas medical education grants", url:"https://www.astellas.com/us/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Named CGAs plus general submissions", topics:["Retina / geographic atrophy (Izervay)","Diabetic macular edema"]}],
+  gaps:[{space:"ophthalmology", gap:"GA education focuses on starting therapy; almost nothing addresses when to stop or how to counsel on modest benefit.", design:"Expectation-setting and discontinuation decision-making in GA."}]},
+ "Bausch + Lomb":{spaces:["ophthalmology"], portal:"Bausch + Lomb (caring@bausch.com)", url:"https://www.bausch.com/",
+  cycles:[{when:"2026-08-10", label:"Core eye care", topics:["Retina","Dry eye (Miebo)","Glaucoma"]}],
+  gaps:[{space:"ophthalmology", gap:"Optometry is a large part of the dry-eye audience and is rarely included in funded education.", design:"Optometry-inclusive ocular surface programme with co-management pathways."}]},
+ "Tarsus":{spaces:["ophthalmology"], portal:"Tarsus grants", url:"https://www.tarsusrx.com/",
+  cycles:[{when:"2026-08-10", label:"Published area", topics:["Demodex blepharitis / ocular surface (Xdemvy)"]}],
+  gaps:[{space:"ophthalmology", gap:"Demodex blepharitis is under-diagnosed because the examination step is simply not taught.", design:"Short procedural recognition module — lash examination technique — rather than a therapeutic lecture."}]},
+ "Alcon":{spaces:["ophthalmology"], portal:"Alcon Grants & Giving (closed)", url:"https://www.alcon.com/grants-and-giving",
+  cycles:[{when:"2026-08-10", label:"Published annual goals (portal closed)", topics:["Cataract / IOL","Vitreoretinal","Glaucoma","Dry eye / ocular surface"]}],
+  changed:[{when:"2026-08", what:"Portal remains CLOSED; reopening expected Fall 2026 for 2027 activities, with no date published. Topics are aligned to published annual goals, so the goals document is the thing to watch."}],
+  gaps:[{space:"ophthalmology", gap:"Surgical and device education is tied to annual goals that are published before the portal opens — the preparation window is the closed period.", design:"Draft against the published annual goals now so the concept is ready the day the portal reopens."}]},
+ "Regeneron":{spaces:["ophthalmology"], portal:"Regeneron grants (rolling)", url:"https://www.regeneron.com/responsibility/independent-medical-education",
+  cycles:[{when:"2026-08-10", label:"Rolling, no public RFP", topics:["Retina (Eylea / Eylea HD)"]}],
+  gaps:[{space:"ophthalmology", gap:"Treatment-interval and durability decisions are the live retina question, and two sustained-release TKIs are approaching.", design:"Durability and retreatment-criteria education designed to extend to new sustained-release options."}]}
+};
+/* WEEKLY-EMPHASIS-END */
+
 /* WEEKLY-RFPDL-START — the Monday/Thursday task maintains this block.
    Dated grant/RFP deadlines. This drives the banner at the very top of the page,
    which shows anything falling inside the next 90 days.
@@ -2970,6 +4515,92 @@ function renderDirectory(){
 /* ---------- FDA DECISION CALENDAR — PDUFA dates and filings ----------
    Sorted soonest first. Flags whether a decision sits inside the 12–18 month
    lead time enduring education needs, which is the whole point of tracking it. */
+/* ---------- SUPPORTER EMPHASIS & DRIFT ----------
+   What each funder says it wants, and how that has moved. The diff between the
+   two most recent cycles is computed here rather than stored, so the data stays
+   a plain record of observations and cannot go stale against its own summary. */
+function emphDiff(cycles){
+  if(!cycles||cycles.length<2) return null;
+  const prev=cycles[cycles.length-2].topics||[], cur=cycles[cycles.length-1].topics||[];
+  const norm=t=>String(t).toLowerCase().replace(/\s+/g," ").trim();
+  const pset=prev.map(norm), cset=cur.map(norm);
+  return {
+    added:cur.filter(t=>!pset.includes(norm(t))),
+    dropped:prev.filter(t=>!cset.includes(norm(t))),
+    kept:cur.filter(t=>pset.includes(norm(t))),
+    from:cycles[cycles.length-2], to:cycles[cycles.length-1]
+  };
+}
+function renderEmphasis(){
+  const host=$("#emphasis"); if(!host) return;
+  const E=(typeof EMPHASIS!=="undefined"?EMPHASIS:{});
+  const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const fd=s=>{const p=String(s||"").split("-");
+    return p.length>=2?`${p.length>2?p[2]+" ":""}${MON[+p[1]-1]} ${p[0]}`:s;};
+
+  const names=Object.keys(E)
+    .filter(co=>activeTab==="all"||(E[co].spaces||[]).includes(activeTab))
+    .filter(co=>!activeSupporter||supMatch(co))
+    .filter(co=>{
+      if(activeTab!=="immunology"||immunoSub==="all") return true;
+      return (E[co].gaps||[]).some(g=>!g.sub||g.sub===immunoSub)||true;
+    })
+    .sort();
+
+  if(!names.length){ host.innerHTML=`<div class="empty">No supporter emphasis recorded for this filter.</div>`; return; }
+
+  let nDrift=0;
+  const cards=names.map(co=>{
+    const e=E[co], cyc=e.cycles||[], cur=cyc[cyc.length-1]||{topics:[]}, dif=emphDiff(cyc);
+    if(dif&&(dif.added.length||dif.dropped.length)) nDrift++;
+
+    const chips = dif
+      ? dif.added.map(t=>`<span class="em-t em-new">＋ ${esc(t)}</span>`).join("")
+        + dif.kept.map(t=>`<span class="em-t">${esc(t)}</span>`).join("")
+        + dif.dropped.map(t=>`<span class="em-t em-gone">− ${esc(t)}</span>`).join("")
+      : (cur.topics||[]).map(t=>`<span class="em-t">${esc(t)}</span>`).join("");
+
+    const drift = dif
+      ? `<div class="em-drift"><b>Since ${esc(fd(dif.from.when))}:</b> ${
+          dif.added.length?`<span class="em-new-lab">${dif.added.length} new</span>`:""}${
+          dif.dropped.length?` <span class="em-gone-lab">${dif.dropped.length} dropped</span>`:""}${
+          !dif.added.length&&!dif.dropped.length?"wording changed but the topic list is unchanged":""}</div>`
+      : `<div class="em-drift em-base">Baseline recorded ${esc(fd(cur.when||EMPHASIS_BASELINE))} — this is the first observation on file, so no drift can be shown yet. Change tracking runs from here.</div>`;
+
+    const changed=(e.changed||[]).map(c=>`<div class="em-chg"><span class="em-chg-when">${esc(fd(c.when))}</span> ${esc(c.what)}</div>`).join("");
+
+    const gaps=(e.gaps||[])
+      .filter(g=>activeTab!=="immunology"||immunoSub==="all"||!g.sub||g.sub===immunoSub)
+      .map(g=>`<div class="em-gap">
+        <div class="em-gap-sp" style="background:${SPACECOLOR[g.space]||"#888"}">${esc(SPACENAME[g.space]||g.space)}${g.sub&&typeof IMMUNO_SUB_LABEL!=="undefined"&&IMMUNO_SUB_LABEL[g.sub]?" · "+esc(IMMUNO_SUB_LABEL[g.sub]):""}</div>
+        <div><div class="em-gap-lab">Remaining gap</div><p>${esc(g.gap)}</p>
+        <div class="em-gap-lab em-des">Educational design that answers it</div><p>${esc(g.design)}</p></div>
+      </div>`).join("");
+
+    return `<article class="em-card">
+      <div class="em-head">
+        <h4>${esc(co)}</h4>
+        <div class="em-spaces">${(e.spaces||[]).map(s=>`<span class="em-sp" style="background:${SPACECOLOR[s]||"#888"}">${esc(SPACENAME[s]||s)}</span>`).join("")}</div>
+      </div>
+      <div class="em-lab">Stated emphasis — ${esc(cur.label||"current")}${cur.when?` · seen ${esc(fd(cur.when))}`:""}</div>
+      <div class="em-topics">${chips}</div>
+      ${cur.src?`<div class="em-srcnote">${esc(cur.src)}</div>`:""}
+      ${drift}
+      ${changed?`<div class="em-lab">Documented changes</div>${changed}`:""}
+      ${gaps?`<div class="em-lab em-lab-gap">Gaps &amp; design implications</div>${gaps}`:""}
+      <div class="em-portal"><a href="${e.url}" target="_blank" rel="noopener">${esc(e.portal||"Portal")} →</a></div>
+    </article>`;
+  }).join("");
+
+  host.innerHTML=`<div class="em-strip">
+      <b>${names.length}</b> supporter${names.length===1?"":"s"} tracked · <b>${nDrift}</b> with a recorded change in stated topics · verified <b>${esc(typeof EMPHASIS_UPDATED!=="undefined"?EMPHASIS_UPDATED:"—")}</b>
+    </div>
+    <div class="em-grid">${cards}</div>
+    <div class="em-foot">
+      Topic lists are what each funder <i>publishes</i>, not what it funds — the gap between the two is where independent education has room. <span class="em-t em-new">＋ new</span> appeared since the previous observation, <span class="em-t em-gone">− dropped</span> disappeared from the published list, and unmarked topics have persisted. Most supporters currently show a <b>baseline</b>: change tracking began ${esc(fd(typeof EMPHASIS_BASELINE!=="undefined"?EMPHASIS_BASELINE:""))}, so drift will appear as the Monday and Thursday runs re-read each portal. A dropped topic is a real signal — funders withdraw quietly and rarely announce it.
+    </div>`;
+}
+
 /* ---------- DEADLINES IN THE NEXT 90 DAYS ----------
    Two kinds of date, kept visually separate because they are not equally hard:
    (1) published RFP deadlines, and (2) lead-time cut-offs derived from confirmed
@@ -3719,6 +5350,7 @@ function setTA(tab,sub){
   syncTAControls();
   render();
   if(typeof renderDeadlines==="function") renderDeadlines();
+  if(typeof renderEmphasis==="function") renderEmphasis();
   if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();
   if(typeof renderConferences==="function") renderConferences();
@@ -3745,6 +5377,7 @@ function applySupporterFilter(){
   if(typeof renderDirectory==="function") renderDirectory();
   if(typeof renderConferences==="function") renderConferences();
   if(typeof renderDeadlines==="function") renderDeadlines();
+  if(typeof renderEmphasis==="function") renderEmphasis();
   if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();   // was missing — the FDA
   // calendar kept showing every company regardless of the supporter dropdown.
@@ -4191,6 +5824,7 @@ renderCalendar();
 renderWatch();
 renderDirectory();
 renderDeadlines();
+renderEmphasis();
 renderRadar();
 renderPdufa();
 renderConferences();
