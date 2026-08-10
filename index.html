@@ -58,6 +58,31 @@
   .pd-when{flex:0 0 128px;border-right:1px solid var(--line);padding-right:13px}
   .pd-date{font-size:13.5px;font-weight:700;line-height:1.3}
   .pd-prec{font-size:10px;color:var(--muted);margin-top:2px;font-style:italic}
+  /* ---------- deadline banner ---------- */
+  .dl-box{border:1px solid #e4c9cf;border-left:4px solid #8d1b32;border-radius:8px;background:#fffafb;padding:14px 16px;margin:0 0 22px}
+  .dl-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:11px;padding-bottom:9px;border-bottom:1px solid #f0dde1}
+  .dl-title{font-size:13px;font-weight:700;letter-spacing:.3px}
+  .dl-sum{font-size:11.5px;color:var(--muted)}
+  .dl-row{display:grid;grid-template-columns:58px 1fr auto;gap:12px;align-items:start;padding:9px 0;border-bottom:1px dashed #f0dde1}
+  .dl-row:last-of-type{border-bottom:0}
+  .dl-derived .dl-date{color:var(--muted);font-weight:600}
+  .dl-date{font-size:13px;font-weight:700;line-height:1.35;white-space:nowrap}
+  .dl-what{font-size:12.5px;line-height:1.5;min-width:0}
+  .dl-note{font-size:11px;color:var(--muted);line-height:1.55;margin-top:3px}
+  .dl-bud{font-size:10.5px;font-weight:700;background:#eef6ef;color:#1d6b3f;border-radius:4px;padding:1px 6px;margin-left:5px}
+  .dl-act{text-align:right;white-space:nowrap;font-size:11.5px}
+  .dl-act a{display:block;margin-top:4px}
+  .dl-chip{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 8px;border-radius:999px}
+  .dl-now{background:#7a1020;color:#fff}
+  .dl-soon{background:#8a5a12;color:#fff}
+  .dl-ok{background:#eceef1;color:var(--muted)}
+  .dl-past{background:#f4f4f5;color:#9aa0a6;text-decoration:line-through}
+  .dl-soft{margin-top:11px;padding:10px 12px;background:#fff6e8;border-radius:6px}
+  .dl-soft-lab{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#8a5a12;margin-bottom:6px}
+  .dl-soft-row{font-size:11.5px;line-height:1.6;margin-bottom:5px}
+  .dl-soft-row:last-child{margin-bottom:0}
+  .dl-foot{font-size:11px;color:var(--muted);line-height:1.65;margin-top:11px;padding-top:9px;border-top:1px solid #f0dde1}
+  @media(max-width:640px){.dl-row{grid-template-columns:52px 1fr}.dl-act{grid-column:2;text-align:left}}
   /* ---------- therapeutic area radar ---------- */
   .rd-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:22px;background:#fff}
   .rd-stat{padding:13px 15px;border-right:1px solid var(--line)}
@@ -713,6 +738,8 @@
     <button id="supClear" class="supclear" hidden>✕ Clear all filters</button>
     <span id="supNote" class="supnote"></span>
   </div>
+
+  <div id="deadlines" data-sec="sec-deadlines"></div>
 
   <div class="lookup" id="sec-lookup">
     <div class="lk-head">
@@ -1760,6 +1787,37 @@ const SUPSTRAT = {
  }
 };
 /* WEEKLY-SUPSTRAT-END */
+/* WEEKLY-RFPDL-START — the Monday/Thursday task maintains this block.
+   Dated grant/RFP deadlines. This drives the banner at the very top of the page,
+   which shows anything falling inside the next 90 days.
+   Shape:
+   {co, title, space:[keys] | "all", due:"YYYY-MM-DD", confirmed:true|false,
+    budget?, portal, url, note}
+   `confirmed:true` means the funder has PUBLISHED that date on its own portal or
+   in a dated RFP document, and you have seen it this run. `confirmed:false` is a
+   company-signalled expectation with no published date — it renders separately and
+   is never counted as a deadline. NEVER upgrade an entry to confirmed:true without
+   seeing the date on the funder's own page. An invented deadline makes Leen miss a
+   real one. If nothing is confirmed, leave the array empty — an empty banner that
+   says so is correct and useful; a padded one is not. */
+const RFPDL_UPDATED = "August 10, 2026";
+const RFPDL_NOTE = "No funder in the tracker currently has a published, dated RFP deadline falling inside the next 90 days. The dated calls that ran earlier in 2026 (including the Genentech implementation-science RFP that closed 30 June 2026) have passed, and the remaining portals are rolling submission rather than fixed-cycle. The lead-time cut-offs below are therefore the real planning dates.";
+const RFPDL = [
+ {co:"Alcon", title:"Independent Medical Education portal reopens for the 2027 grant cycle",
+  space:["ophthalmology"], due:"2026-10-01", confirmed:false,
+  portal:"Alcon Grants & Giving", url:"https://www.alcon.com/grants-and-giving",
+  note:"Alcon has signalled a Fall 2026 reopening for 2027 funding but has NOT published a date. 1 Oct is a placeholder for sorting only — treat it as 'watch the portal', not a deadline."},
+ {co:"Eli Lilly Foundation", title:"Annual open call for the 2027 cycle",
+  space:["endocrinology","immunology"], due:"2027-01-01", confirmed:false,
+  portal:"Lilly Grant Office", url:"https://grantoffice.lilly.com/areas-of-focus",
+  note:"Foundation moves to an annual open call from 2027. No date published. Lilly's awarded-grants registry remains the best public read on what actually gets funded."}
+];
+/* Most funders in this tracker require the request in 45–90 days before the
+   activity starts; 60 days is the modal rule across the grants data, so that is
+   the line the banner draws. Overrides live in the `dl` field of each grants entry. */
+const LEAD_DAYS_DEFAULT = 60;
+/* WEEKLY-RFPDL-END */
+
 /* WEEKLY-RADAR-START — the Monday/Thursday task maintains this block.
    Therapeutic Area Radar: date-stamped developments read through three lenses
    (clinical / commercial-access / regulatory), grouped by space.
@@ -2912,6 +2970,81 @@ function renderDirectory(){
 /* ---------- FDA DECISION CALENDAR — PDUFA dates and filings ----------
    Sorted soonest first. Flags whether a decision sits inside the 12–18 month
    lead time enduring education needs, which is the whole point of tracking it. */
+/* ---------- DEADLINES IN THE NEXT 90 DAYS ----------
+   Two kinds of date, kept visually separate because they are not equally hard:
+   (1) published RFP deadlines, and (2) lead-time cut-offs derived from confirmed
+   congress dates — if a funder needs 60 days and the congress is in 70, the
+   decision to submit is this week. Anything a funder has only hinted at renders
+   in a separate, clearly-labelled row and is never counted. */
+function renderDeadlines(){
+  const host=$("#deadlines"); if(!host) return;
+  const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const now=new Date(); now.setHours(0,0,0,0);
+  const HORIZON=90, DAY=86400000;
+  const pd=s=>{const p=(s||"").split("-"); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;};
+  const fmtd=d=>d?`${d.getDate()} ${MON[d.getMonth()]}`:"—";
+  const inSpace=k=>activeTab==="all"||k==="all"||(Array.isArray(k)?k.includes(activeTab):k===activeTab);
+  const days=d=>Math.round((d-now)/DAY);
+
+  /* (1) published, dated RFP calls */
+  const dated=(typeof RFPDL!=="undefined"?RFPDL:[])
+    .map(x=>({...x,_d:pd(x.due)}))
+    .filter(x=>x._d&&inSpace(x.space)&&(!activeSupporter||supMatch(x.co)));
+  const hard=dated.filter(x=>x.confirmed&&days(x._d)>=0&&days(x._d)<=HORIZON).sort((a,b)=>a._d-b._d);
+  const soft=dated.filter(x=>!x.confirmed).sort((a,b)=>a._d-b._d);
+
+  /* (2) lead-time cut-offs computed backwards from confirmed congress dates */
+  const lead=(typeof LEAD_DAYS_DEFAULT!=="undefined"?LEAD_DAYS_DEFAULT:60);
+  const cuts=(typeof CONFERENCES!=="undefined"?CONFERENCES:[])
+    .map(c=>({c,_s:pd(c.start)}))
+    .filter(x=>x._s&&!x.c.tbc)
+    .filter(x=>activeTab==="all"||(x.c.spaces||[]).includes(activeTab))
+    .filter(x=>!(activeTab==="immunology"&&immunoSub!=="all")||(x.c.sub||[]).includes(immunoSub))
+    .map(x=>({...x,_cut:new Date(x._s.getTime()-lead*DAY)}))
+    .filter(x=>days(x._cut)<=HORIZON&&days(x._s)>=0)
+    .sort((a,b)=>a._cut-b._cut);
+
+  const chip=n=>n<0?`<span class="dl-chip dl-past">closed ${Math.abs(n)}d ago</span>`
+              :n===0?`<span class="dl-chip dl-now">today</span>`
+              :n<=14?`<span class="dl-chip dl-now">${n} days left</span>`
+              :n<=45?`<span class="dl-chip dl-soon">${n} days left</span>`
+              :`<span class="dl-chip dl-ok">${n} days left</span>`;
+
+  let rows="";
+  if(hard.length) rows+=hard.map(x=>`<div class="dl-row">
+      <div class="dl-date">${esc(fmtd(x._d))}</div>
+      <div class="dl-what"><b>${esc(x.co)}</b> — ${esc(x.title)}${x.budget?` <span class="dl-bud">${esc(x.budget)}</span>`:""}
+        ${x.note?`<div class="dl-note">${esc(x.note)}</div>`:""}</div>
+      <div class="dl-act">${chip(days(x._d))} <a href="${x.url}" target="_blank" rel="noopener">${esc(x.portal)} →</a></div>
+    </div>`).join("");
+
+  rows+=cuts.map(x=>{
+    const n=days(x._cut);
+    return `<div class="dl-row dl-derived">
+      <div class="dl-date">${esc(fmtd(x._cut))}</div>
+      <div class="dl-what"><b>${esc(x.c.short||x.c.name)}</b> — submission cut-off for a ${lead}-day funder
+        <div class="dl-note">${esc(x.c.name)}, ${esc(x.c.city)}${x.c.country?", "+esc(x.c.country):""} · ${esc(fmtd(x._s))}${x.c.end?"–"+esc(fmtd(pd(x.c.end))):""}. ${n<0?"A standard 60-day window has already closed; only funders on a 45-day rule are still reachable.":"Anything tied to this congress needs to be with the grants office by this date."}</div></div>
+      <div class="dl-act">${chip(n)} <a href="${x.c.industryUrl||x.c.url}" target="_blank" rel="noopener">Congress site →</a></div>
+    </div>`;
+  }).join("");
+
+  const softRows=soft.length?`<div class="dl-soft">
+    <div class="dl-soft-lab">⚠️ Signalled but NOT published — do not plan against these</div>
+    ${soft.map(x=>`<div class="dl-soft-row"><b>${esc(x.co)}</b> — ${esc(x.title)}. ${esc(x.note||"")} <a href="${x.url}" target="_blank" rel="noopener">${esc(x.portal)} →</a></div>`).join("")}
+  </div>`:"";
+
+  const headline = hard.length
+    ? `<b>${hard.length}</b> published RFP deadline${hard.length===1?"":"s"} and <b>${cuts.length}</b> lead-time cut-off${cuts.length===1?"":"s"} in the next 90 days`
+    : `<b>No published RFP deadlines</b> in the next 90 days · <b>${cuts.length}</b> lead-time cut-off${cuts.length===1?"":"s"}`;
+
+  host.innerHTML=`<div class="dl-box">
+    <div class="dl-head"><span class="dl-title">⏰ Due in the next 90 days</span><span class="dl-sum">${headline}</span></div>
+    ${rows||`<div class="empty">Nothing due in the next 90 days for this filter.</div>`}
+    ${softRows}
+    <div class="dl-foot">${esc(typeof RFPDL_NOTE!=="undefined"?RFPDL_NOTE:"")} Cut-off dates are calculated as the congress start date minus ${lead} days, the modal requirement across the grant portals in this tracker; individual funders range from 45 to 90 days, so check the portal before relying on a date near the line. Verified <b>${esc(typeof RFPDL_UPDATED!=="undefined"?RFPDL_UPDATED:"—")}</b>.</div>
+  </div>`;
+}
+
 /* ---------- THERAPEUTIC AREA RADAR ----------
    Each development read through three lenses — clinical, commercial/access and
    regulatory — grouped by therapeutic area. Obeys the same area, sub-specialty
@@ -3585,6 +3718,7 @@ function setTA(tab,sub){
   activeTab=tab; immunoSub=sub||"all";
   syncTAControls();
   render();
+  if(typeof renderDeadlines==="function") renderDeadlines();
   if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();
   if(typeof renderConferences==="function") renderConferences();
@@ -3610,6 +3744,7 @@ function applySupporterFilter(){
   render();
   if(typeof renderDirectory==="function") renderDirectory();
   if(typeof renderConferences==="function") renderConferences();
+  if(typeof renderDeadlines==="function") renderDeadlines();
   if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();   // was missing — the FDA
   // calendar kept showing every company regardless of the supporter dropdown.
@@ -4055,6 +4190,7 @@ renderNewSupp();
 renderCalendar();
 renderWatch();
 renderDirectory();
+renderDeadlines();
 renderRadar();
 renderPdufa();
 renderConferences();
