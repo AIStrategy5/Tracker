@@ -124,6 +124,22 @@
   .fc-ev a{margin-right:12px;display:inline-block}
   .fc-foot{font-size:11.5px;color:var(--muted);line-height:1.65;padding-top:10px;border-top:1px solid var(--line)}
   @media(max-width:640px){.fc-rel{grid-template-columns:1fr}}
+  /* ---------- provenance strip ---------- */
+  .pv-box{border:1px solid var(--line);border-radius:8px;background:#fbfcfd;padding:10px 14px;margin:0 0 14px;font-size:12px}
+  .pv-box summary{cursor:pointer;font-weight:600;font-size:12px;color:var(--ink);list-style:none}
+  .pv-box summary::-webkit-details-marker{display:none}
+  .pv-box summary::before{content:"\25B8 ";color:var(--muted)}
+  .pv-box[open] summary::before{content:"\25BE "}
+  .pv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:2px 18px;margin:10px 0 0}
+  .pv-row{display:flex;align-items:baseline;gap:8px;padding:3px 0;border-bottom:1px dotted var(--line)}
+  .pv-lab{flex:1;color:var(--muted)}
+  .pv-date{font-weight:600;white-space:nowrap}
+  .pv-age{font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;border-radius:999px;padding:1px 7px;white-space:nowrap}
+  .pv-fresh{background:#eef6ef;color:#1d6b3f}
+  .pv-ok{background:#eceef1;color:var(--muted)}
+  .pv-stale{background:#fff1de;color:#8a5a12}
+  .pv-note{font-size:11px;color:var(--muted);line-height:1.65;margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+  .pv-sched{border-top:0;padding-top:0;margin-top:6px}
   /* ---------- deadline banner ---------- */
   .dl-box{border:1px solid #e4c9cf;border-left:4px solid #8d1b32;border-radius:8px;background:#fffafb;padding:14px 16px;margin:0 0 22px}
   .dl-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:11px;padding-bottom:9px;border-bottom:1px solid #f0dde1}
@@ -805,6 +821,7 @@
     <span id="supNote" class="supnote"></span>
   </div>
 
+  <div id="provenance"></div>
   <div id="deadlines" data-sec="sec-deadlines"></div>
 
   <div class="lookup" id="sec-lookup">
@@ -872,9 +889,6 @@
 
   <div class="blocklabel" id="sec-emphasis" style="margin-top:22px;font-size:12px">🎯 Supporter emphasis &amp; drift — what they say they want, and the gaps it leaves</div>
   <div id="emphasis"></div>
-
-  <div class="blocklabel" id="sec-focus" style="margin-top:22px;font-size:12px">🎯 Clinical emphasis by supporter — what they ask for, and how it has shifted between RFPs</div>
-  <div id="focus"></div>
 
   <div class="blocklabel" id="sec-radar" style="margin-top:22px;font-size:12px">📡 Therapeutic area radar — what moved, and what it means</div>
   <div id="radar"></div>
@@ -2720,7 +2734,7 @@ const CONTACTS = {
  "Astellas (Iveric Bio)":null,"Bausch + Lomb":"caring@bausch.com","Alcon":null,"Tarsus":null
 };
 /* WEEKLY-SUPPORTERS-START — the Monday task re-verifies and rewrites WATCH + NEWSUPP + SUPPORTERS_VERIFIED in place */
-const SUPPORTERS_VERIFIED = "August 5, 2026";
+const SUPPORTERS_VERIFIED = "August 11, 2026";
 /* Potential NEW supporters — pipeline-only companies likely to fund IME/CME as they near launch */
 const WATCH = [
  {co:"Idorsia",space:"cardiovascular",asset:"selatogrel (self-injected P2Y12)",trigger:"Ph3 SOS-AMI readout → first cardio launch would justify education funding",timing:"Watch 2026–27"},
@@ -3368,91 +3382,20 @@ const EMPHASIS = {
   gaps:[{space:"ophthalmology", gap:"Surgical and device education is tied to annual goals that are published before the portal opens — the preparation window is the closed period.", design:"Draft against the published annual goals now so the concept is ready the day the portal reopens."}]},
  "Regeneron":{spaces:["ophthalmology"], portal:"Regeneron grants (rolling)", url:"https://www.regeneron.com/responsibility/independent-medical-education",
   cycles:[{when:"2026-08-10", label:"Rolling, no public RFP", topics:["Retina (Eylea / Eylea HD)"]}],
-  gaps:[{space:"ophthalmology", gap:"Treatment-interval and durability decisions are the live retina question, and two sustained-release TKIs are approaching.", design:"Durability and retreatment-criteria education designed to extend to new sustained-release options."}]}
+  gaps:[{space:"ophthalmology", gap:"Treatment-interval and durability decisions are the live retina question, and two sustained-release TKIs are approaching.", design:"Durability and retreatment-criteria education designed to extend to new sustained-release options."}]},
+ /* Pfizer is the ONLY funder here with two dated RFP releases on file, so it is the
+    only genuine drift observation rather than a baseline. Both PDFs are public. */
+ "Pfizer":{spaces:["raredisease","immunology","cardiovascular"], portal:"Pfizer Competitive Grants — active RFPs", url:"https://www.pfizer.com/about/programs-policies/grants/competitive-grants",
+  cycles:[
+   {when:"2026-05-26", label:"RFP: Implementing Shared Decision Making in Hemophilia Patient Care (Quality Improvement, US, internal review) — due 26 Sep 2026", topics:["Shared decision making","Haemophilia","Implementation into practice"], src:"https://cdn.pfizer.com/pfizercom/2026-07/GMG-2026-RD-US-SDM%20Hemo-QI.pdf?VersionId=VQbOfLqCf6D8RLK1_lr7wdgcKJygT.EZ"},
+   {when:"2026-06-25", label:"RFP: Shared Decision Making in Hemophilia — Visiting Professorship, Semester 2 (IME, US, HTRS partner, expert panel review) — due 17 Sep 2026", topics:["Shared decision making","Haemophilia","Clinician–patient communication","Visiting professorship"], src:"https://cdn.pfizer.com/pfizercom/2026-06/2026-RD-US-HTRSHemophiliaVisitingProfessorshipS2-IME.pdf?VersionId=S0UX2w7h6YGGRCFMir1OYcJcikIYh_0N"}
+  ],
+  changed:[{when:"2026-06", what:"Same clinical topic re-released one month later through a different mechanism — quality improvement in May, accredited education with a society partner and external review in June. A funder repeating a topic across two grant types inside 30 days is signalling that the need is unmet and the budget is committed."},
+           {when:"2026-08", what:"Pfizer's own IME page states the grant system is being replaced and to check back after 19 Aug 2026 for the new submission link. Applications in flight for the September deadlines may need resubmitting in the new system."}],
+  gaps:[{space:"raredisease", gap:"Both calls say 'implementing' and 'shared decision making', not 'understanding' — Pfizer believes the knowledge exists and the practice does not. Nothing addresses what SDM looks like when the treatment choice includes gene therapy, which is where haemophilia decision-making is actually hardest.", design:"Decision-quality curriculum built on real consultation recordings or simulated encounters, with an explicit gene-therapy-versus-prophylaxis decision arm and measurement of decisional conflict, not knowledge."},
+        {space:"cardiovascular", gap:"No published non-oncologic RFP outside rare disease — nothing cardiovascular despite an active portfolio, and nothing on the Factor XI class.", design:"Hold a costed Factor XI class-positioning concept ready; the first CV RFP after an asundexian approval will be heavily contested and quick to close."}]}
 };
 /* WEEKLY-EMPHASIS-END */
-
-/* WEEKLY-FOCUS-START — the Monday/Thursday task maintains this block.
-   Clinical emphasis per supporter, tracked ACROSS RFP releases so drift is visible.
-   The point is not "what do they fund" — that is in the grants data already — but
-   "what has changed since last time, and what are they still not funding".
-   Shape, keyed by canonical supCanon() name:
-   "Name":{ spaces:[keys], stance:"one line on how this funder behaves",
-            releases:[ {date:"YYYY-MM-DD", label, topics:[...], mechanism, geo,
-                        url, note} ],   // newest first
-            shift:"what moved between the two most recent releases, or why it cannot be judged yet",
-            stillMissing:[ "gaps their own stated interests leave open" ],
-            evidence:[[label,url],...] }
-   RULES: `releases` entries must each have a real dated source you have seen.
-   If there is only ONE observation, say so in `shift` — a comparison needs two
-   points, and inventing the earlier one to make a trend is the failure mode here. */
-const FOCUS_UPDATED = "August 10, 2026";
-const FOCUSHIST = {
- "Pfizer":{
-  spaces:["raredisease","immunology","cardiovascular"],
-  stance:"The most transparent funder in the tracker. Posts dated RFPs with named clinical areas, states the review route, and keeps a public archive of closed calls — which means emphasis drift is actually measurable here rather than inferred.",
-  releases:[
-   {date:"2026-06-25", label:"Improving Shared Decision Making in Hemophilia: Visiting Professorship Program, Semester 2",
-    topics:["Shared decision making","Haemophilia","Clinician–patient communication"], mechanism:"Education (IME) · partnered with HTRS · expert review panel", geo:"USA",
-    url:"https://cdn.pfizer.com/pfizercom/2026-06/2026-RD-US-HTRSHemophiliaVisitingProfessorshipS2-IME.pdf?VersionId=S0UX2w7h6YGGRCFMir1OYcJcikIYh_0N",
-    note:"Due 17 Sep 2026. Second semester, so this is a repeating programme rather than a one-off."},
-   {date:"2026-05-26", label:"Implementing Shared Decision Making in Hemophilia Patient Care",
-    topics:["Shared decision making","Haemophilia","Implementation into practice"], mechanism:"Quality Improvement · Pfizer internal review", geo:"USA",
-    url:"https://cdn.pfizer.com/pfizercom/2026-07/GMG-2026-RD-US-SDM%20Hemo-QI.pdf?VersionId=VQbOfLqCf6D8RLK1_lr7wdgcKJygT.EZ",
-    note:"Due 26 Sep 2026. Note the verb — 'implementing', not 'understanding'. They believe the knowledge exists and the practice does not."},
-   {date:"2012-07-25", label:"Cardiovascular Risk in Rheumatoid Arthritis (archived)",
-    topics:["Cardiovascular risk","Rheumatoid arthritis","Comorbidity"], mechanism:"Competitive grant · closed", geo:"USA",
-    url:"https://cdn.pfizer.com/pfizercom/rfp_cv_risk_ra.pdf?VersionId=GCfUZtVET1R.CTqB0lzpSp6fkfo4bBMb",
-    note:"Included because Pfizer publishes awarded-grant summaries for closed calls — the clearest public record anywhere of what a funder actually paid for."}
-  ],
-  shift:"Emphasis has not drifted between the two 2026 releases — it has DEEPENED and changed mechanism. Same clinical topic (shared decision making in haemophilia), one month apart, first as quality improvement then as accredited education with a society partner and external review. A funder repeating a topic through two different grant types inside 30 days is telling you the need is unmet and the budget is committed. Against the archived 2012 calls, the direction of travel is away from broad disease-awareness topics (chronic pain, smoking cessation, stroke prevention in women) and towards implementation and decision quality in narrow, high-complexity populations.",
-  stillMissing:["Nothing dated and non-oncologic outside rare disease right now — no open cardiovascular, nephrology, endocrinology or immunology RFP","No published call on the Factor XI class despite an active asset","Haemophilia calls are US-only; no ex-US equivalent posted"],
-  evidence:[["Active and closed RFP archive","https://www.pfizer.com/about/programs-policies/grants/competitive-grants"],
-            ["IME programme overview","https://www.pfizer.com/about/programs-policies/grants/independent-medical-education"],
-            ["Grant announcement alerts (sign up to see RFPs at release)","https://www.pfizer.com/about/health-policies/grants/independent-medical-education/email_sign_up"]]
- },
- "Eli Lilly":{
-  spaces:["endocrinology","immunology"],
-  stance:"No public RFP calendar, but the only funder here that publishes an itemised registry of grants it has actually awarded. Read the registry rather than the areas-of-focus page — stated interests are marketing, awarded grants are behaviour.",
-  releases:[
-   {date:"2026-08-10", label:"Areas of Focus — Immunology and Endocrine (standing, undated)",
-    topics:["Obesity","Type 2 diabetes","Immunology"], mechanism:"Rolling submission, ≥60 days before activity", geo:"Global",
-    url:"https://grantoffice.lilly.com/areas-of-focus",
-    note:"Standing page with no release date, so this is an observation point rather than a release."}
-  ],
-  shift:"Only one observation point — Lilly does not date its areas-of-focus page, so drift cannot be measured from it. The awarded-grants registry is the way to see change: Q1 2026 alone listed 18 endocrine-category awards concentrated in obesity, T2D, once-weekly insulin and OSA. Compare quarter to quarter there rather than reading the focus page twice.",
-  stillMissing:["No stated interest in the oral-versus-injectable GLP-1 selection question despite orforglipron being approved","Nothing on retatrutide-era comparative education, which their own pipeline makes inevitable"],
-  evidence:[["Areas of focus","https://grantoffice.lilly.com/areas-of-focus"],
-            ["Awarded-grants transparency registry","https://grantoffice.lilly.com/transparency"]]
- },
- "Genentech":{
-  spaces:["nephrology","immunology"],
-  stance:"Runs dated implementation-science calls through iMED and names specific diseases, including IgA nephropathy — unusual specificity for a funder this size.",
-  releases:[
-   {date:"2026-06-30", label:"Implementation science call (closed 30 Jun 2026)",
-    topics:["Implementation science","IgA nephropathy"], mechanism:"RFP-driven, ~90-day decision", geo:"USA",
-    url:"https://www.gene.com/good/giving/corporate-giving/medical-education-grant",
-    note:"Closed. Watch for the next cycle to see whether IgAN survives into it now that two therapies have launched."}
-  ],
-  shift:"One dated call observed and now closed, so no comparison yet. The question to answer at the next release is whether IgA nephropathy is still named — with sibeprenlimab and atacicept both approved, an implementation-science framing would be the natural evolution and would signal a sustained commitment rather than a launch-timed one.",
-  stillMissing:["No stated interest in sequencing across the four-drug IgAN field","Nothing on membranous nephropathy despite an active obinutuzumab filing"],
-  evidence:[["iMED grants","https://www.gene.com/good/giving/corporate-giving/medical-education-grant"]]
- },
- "Alcon":{
-  spaces:["ophthalmology"],
-  stance:"Fixed annual cycle rather than rolling — the portal closes entirely between cycles, which makes timing unusually important.",
-  releases:[
-   {date:"2026-08-10", label:"Portal closed; reopening signalled for Fall 2026 (2027 cycle)",
-    topics:["Ophthalmic surgical education","Vision care"], mechanism:"Annual cycle", geo:"Global",
-    url:"https://www.alcon.com/grants-and-giving",
-    note:"No date published as of this check. Observation point, not a release."}
-  ],
-  shift:"Cannot be judged — the portal has been closed through the observation period. The 2027 areas of interest, when posted, will be the first comparable data point.",
-  stillMissing:["No published areas of interest at all while the portal is closed"],
-  evidence:[["Grants and giving","https://www.alcon.com/grants-and-giving"]]
- }
-};
-/* WEEKLY-FOCUS-END */
 
 /* WEEKLY-RFPDL-START — the Monday/Thursday task maintains this block.
    Dated grant/RFP deadlines. This drives the banner at the very top of the page,
@@ -3857,7 +3800,7 @@ const CONFERENCES = [
 ];
 /* WEEKLY-CONFERENCES-END */
 /* WEEKLY-SIGNALS-START — the Monday task rewrites this block in place */
-const SIGNALS_UPDATED = "August 5, 2026";
+const SIGNALS_UPDATED = "August 11, 2026";
 const SIGNALS = {
  cardiovascular:[
    ["ESC Congress 2026 (Munich, 28-31 Aug) will present full LIBREXIA-ACS results — expect a wave of Factor XI reappraisal education.","https://www.escardio.org/news/press/press-releases/hot-lines-revealed--the-trials-that-will-make-the-headlines-at-esc-congress-2026/"],
@@ -3869,7 +3812,8 @@ const SIGNALS = {
    ["FDA grants Vera Therapeutics accelerated approval for TRUTAKNA (atacicept) in primary IgAN, 7 Jul 2026 — 46% proteinuria reduction in ORIGIN 3. Vera now has its FIRST commercial product, so a grant program should follow; move from relationship-building to active courtship.","https://ir.veratx.com/news-releases/news-release-details/vera-therapeutics-receives-fda-accelerated-approval-trutaknatm"],
    ["Vertex povetacicept has an FDA target action date of 30 Nov 2026 in IgAN — a defined pre-launch window for Vertex's first-ever renal product.","https://www.medicaldaily.com/iga-nephropathy-atacicept-approval-fda-decisions-2026-476696"],
    ["Otsuka sibeprenlimab (VOYXACT) approved Nov 2025 in primary IgAN — the IgAN field now has FIVE approved mechanisms and zero head-to-head data. Sequencing is the single largest unmet education need in nephrology.","https://www.hcplive.com/view/fda-approves-atacicept-trutakna-for-iga-nephropathy"],
-   ["Novartis Fabhalta (iptacopan) converted to traditional approval in primary IgAN on eGFR slope — validates eGFR slope as a regulatory surrogate and resets how the class is taught.","https://www.novartis.com/news/media-releases/novartis-receives-fda-accelerated-approval-fabhalta-iptacopan-first-and-only-complement-inhibitor-reduction-proteinuria-primary-iga-nephropathy-igan"]
+   ["Novartis Fabhalta (iptacopan) received FDA TRADITIONAL approval on 17 Jul 2026 — first and only complement inhibitor shown to significantly slow kidney function decline in primary IgAN, converting from the Aug 2024 accelerated approval. This is the class's first hard eGFR outcome, so 'proteinuria surrogate vs kidney function' is now a live teaching point rather than a caveat.","https://www.novartis.com/news/media-releases/novartis-fabhalta-iptacopan-receives-fda-traditional-approval-first-and-only-complement-inhibitor-significantly-slow-kidney-function-decline-primary-igan"],
+   ["Six agents are now FDA-approved in IgA nephropathy, per the National Kidney Foundation's own count — the field went from nothing to six inside about two years, and no head-to-head data exists.","https://www.kidney.org/news-stories/new-era-iga-nephropathy-six-new-treatments-bring-new-hope"]
  ],
  endocrinology:[
    ["Lilly retatrutide: TRIUMPH-2 and TRIUMPH-3 positive, up to 28% body-weight reduction at 80 weeks — five successful Ph3 trials; submission guided to early 2027, a defined launch-education runway.","https://www.biopharmadive.com/news/lillys-retatrutide-tripleG-phase3-obesity-data/820851/"],
@@ -3878,6 +3822,8 @@ const SIGNALS = {
    ["Inventiva guides lanifibranor NDA submission to H1 2027 after NATiV3 topline — a first-time MASH funder worth warming up now.","https://inventivapharma.com/pipeline/clinical-trials/"]
  ],
  immunology:[
+   ["Arcutis wins an sNDA expanding Zoryve (roflumilast) cream 0.3% in plaque psoriasis DOWN TO AGE 2, including intertriginous areas — paediatric and flexural psoriasis are two of the least-taught corners of derm, and a topical label that young creates a genuine primary-care education audience.","https://www.dermatologytimes.com/view/dermatology-times-monthly-fda-pipeline-review-july-2026"],
+   ["Incyte confirms Q4 2026 topline for ruxolitinib cream in mild-to-moderate hidradenitis suppurativa, alongside positive Ph3 results for oral povorcitinib — HS is turning from an orphan interest into a four-sponsor competitive market.","https://investor.incyte.com/news-releases/news-release-details/incyte-reports-second-quarter-2026-financial-results-and"],
    ["Affibody izokibep shows durable responses in hidradenitis suppurativa — HS remains one of the least-served derm education areas relative to disease burden.","https://pharmaphorum.com/rd/clinical-trials-round-march-and-april-2026"],
    ["Almirall reports up to four years of sustained lebrikizumab efficacy in atopic dermatitis — long-term durability data shifts AD education toward maintenance and persistence.","https://pharmaphorum.com/rd/clinical-trials-round-march-and-april-2026"],
    ["Sanofi discontinues amlitelimab in atopic dermatitis — the OX40/OX40L route in AD is now effectively closed; remove it from concepts.","https://www.sanofi.com/en/media-room"],
@@ -4731,63 +4677,43 @@ function renderEmphasis(){
     </div>`;
 }
 
-/* ---------- CLINICAL EMPHASIS OVER TIME ----------
-   What each supporter says it is looking for, release by release, so drift is
-   visible. A single observation is shown as a single observation — never dressed
-   up as a trend. */
-function renderFocus(){
-  const host=$("#focus"); if(!host) return;
-  const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  const pd=s=>{const p=(s||"").split("-"); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;};
-  const fmtd=d=>d?`${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`:"—";
-  const H=(typeof FOCUSHIST!=="undefined"?FOCUSHIST:{});
-
-  const names=Object.keys(H)
-    .filter(n=>activeTab==="all"||(H[n].spaces||[]).includes(activeTab))
-    .filter(n=>!activeSupporter||supMatch(n));
-
-  if(!names.length){
-    host.innerHTML=`<div class="empty">No emphasis history tracked for this filter yet. The Monday/Thursday refresh adds a funder here once it has posted something dated.</div>`;
-    return;
-  }
-
-  host.innerHTML=names.map(n=>{
-    const f=H[n];
-    const rels=(f.releases||[]).map((r,i)=>{
-      const isObs=/observation point/i.test(r.note||"");
-      return `<div class="fc-rel${i===0?" fc-latest":""}">
-        <div class="fc-when">${esc(fmtd(pd(r.date)))}${i===0&&!isObs?`<span class="fc-tag">latest</span>`:""}</div>
-        <div class="fc-body">
-          <div class="fc-rlab">${esc(r.label)}</div>
-          <div class="fc-topics">${(r.topics||[]).map(t=>`<span class="fc-topic">${esc(t)}</span>`).join("")}</div>
-          <div class="fc-meta">${esc(r.mechanism||"")}${r.geo?` · ${esc(r.geo)}`:""}</div>
-          ${r.note?`<div class="fc-note">${esc(r.note)}</div>`:""}
-          ${r.url?`<a class="fc-link" href="${r.url}" target="_blank" rel="noopener">Read the source →</a>`:""}
-        </div>
-      </div>`;
-    }).join("");
-    const oneOnly=(f.releases||[]).length<2;
-    return `<section class="fc-card">
-      <div class="fc-head">
-        <h4>${esc(n)}</h4>
-        <div class="fc-spaces">${(f.spaces||[]).map(k=>`<span class="fc-sp" style="background:${SPACECOLOR[k]||"#888"}">${esc(SPACENAME[k]||k)}</span>`).join("")}</div>
-      </div>
-      ${f.stance?`<p class="fc-stance">${esc(f.stance)}</p>`:""}
-      <div class="fc-lab">Releases observed</div>
-      <div class="fc-rels">${rels}</div>
-      <div class="fc-shift${oneOnly?" fc-shift-thin":""}">
-        <span class="fc-lab">${oneOnly?"⚠️ Not yet comparable":"What changed"}</span>
-        <p>${esc(f.shift||"")}</p>
-      </div>
-      ${(f.stillMissing||[]).length?`<div class="fc-miss">
-        <span class="fc-lab">Still not funded — where the remaining education gap sits</span>
-        <ul>${f.stillMissing.map(m=>`<li>${esc(m)}</li>`).join("")}</ul>
-      </div>`:""}
-      ${(f.evidence||[]).length?`<div class="fc-ev"><span class="fc-lab">Verify</span> ${f.evidence.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(l)} →</a>`).join("")}</div>`:""}
-    </section>`;
-  }).join("")+`<div class="fc-foot">
-    A comparison needs two dated observations. Where only one exists the card says so rather than implying a trend — and the "still not funded" list is the part that matters for design, because it is the space a funder's own stated interests leave open. Verified <b>${esc(typeof FOCUS_UPDATED!=="undefined"?FOCUS_UPDATED:"—")}</b>.
-  </div>`;
+/* ---------- WHAT REFRESHED, AND WHEN ----------
+   Every data block dates itself. This strip shows all of them side by side against
+   the last scheduled run, so "did it actually update?" is answerable at a glance
+   instead of being inferred from one badge that shows only the oldest date. */
+const LAST_RUN_AT     = "August 11, 2026";
+const LAST_RUN_STATUS = "Ran on schedule. Monday 10 Aug fired at 11:20am and rebuilt the supporter emphasis block, but could not refresh the news-driven blocks — the web-search quota for the account was exhausted. Rather than stamp a fresh date on unverified content, those blocks kept their real dates. They were refreshed manually on 11 Aug once search was available again.";
+function renderProvenance(){
+  const host=$("#provenance"); if(!host) return;
+  const V=name=>{ try{ return eval(name); }catch(e){ return null; } };
+  const blocks=[
+    ["Deadlines / RFPs",      "RFPDL_UPDATED"],
+    ["Supporter emphasis",    "EMPHASIS_UPDATED"],
+    ["Therapeutic area radar","RADAR_UPDATED"],
+    ["FDA calendar",          "PDUFA_UPDATED"],
+    ["Congress calendar",     "CONFERENCES_UPDATED"],
+    ["Weekly signals",        "SIGNALS_UPDATED"],
+    ["Supporters re-verified","SUPPORTERS_VERIFIED"],
+    ["Competitive intel",     "CINTEL_UPDATED"],
+    ["Supporter profiles",    "SUPSTRAT_UPDATED"],
+    ["Trial snapshot",        "TRIALSNAP_UPDATED"]
+  ];
+  const now=new Date(); now.setHours(0,0,0,0);
+  const rows=blocks.map(([lab,v])=>{
+    const d=V(v); if(!d) return "";
+    const p=Date.parse(d);
+    const age=isNaN(p)?null:Math.round((now-p)/86400000);
+    const cls=age===null?"":age<=2?"pv-fresh":age<=7?"pv-ok":"pv-stale";
+    const agel=age===null?"":age<=0?"today":age===1?"yesterday":`${age} days old`;
+    return `<div class="pv-row"><span class="pv-lab">${esc(lab)}</span>
+      <span class="pv-date">${esc(d)}</span>
+      <span class="pv-age ${cls}">${esc(agel)}</span></div>`;
+  }).join("");
+  host.innerHTML=`<details class="pv-box"><summary>🕐 What refreshed, and when — last scheduled run <b>${esc(LAST_RUN_AT)}</b></summary>
+    <div class="pv-grid">${rows}</div>
+    <div class="pv-note">${esc(LAST_RUN_STATUS)}</div>
+    <div class="pv-note pv-sched">Scheduled to run every <b>Monday and Thursday at 9am</b>. A block only gets a new date when its contents were actually re-verified that run — a date that has not moved means the underlying sources were not re-read, not that nothing happened.</div>
+  </details>`;
 }
 
 /* Evidence links for a gap area. Built from data already verified elsewhere in
@@ -5576,9 +5502,9 @@ function setTA(tab,sub){
   activeTab=tab; immunoSub=sub||"all";
   syncTAControls();
   render();
+  if(typeof renderProvenance==="function") renderProvenance();
   if(typeof renderDeadlines==="function") renderDeadlines();
   if(typeof renderEmphasis==="function") renderEmphasis();
-  if(typeof renderFocus==="function") renderFocus();
   if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();
   if(typeof renderConferences==="function") renderConferences();
@@ -5604,9 +5530,9 @@ function applySupporterFilter(){
   render();
   if(typeof renderDirectory==="function") renderDirectory();
   if(typeof renderConferences==="function") renderConferences();
+  if(typeof renderProvenance==="function") renderProvenance();
   if(typeof renderDeadlines==="function") renderDeadlines();
   if(typeof renderEmphasis==="function") renderEmphasis();
-  if(typeof renderFocus==="function") renderFocus();
   if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();   // was missing — the FDA
   // calendar kept showing every company regardless of the supporter dropdown.
@@ -6052,9 +5978,9 @@ renderNewSupp();
 renderCalendar();
 renderWatch();
 renderDirectory();
+renderProvenance();
 renderDeadlines();
 renderEmphasis();
-renderFocus();
 renderRadar();
 renderPdufa();
 renderConferences();
