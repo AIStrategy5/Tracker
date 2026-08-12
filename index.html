@@ -160,12 +160,51 @@
   .rfp-dir-note{font-size:11.5px;line-height:1.55;color:var(--ink)}
   .rfp-dir-lk{font-size:11.5px;white-space:nowrap;text-align:right}
   @media(max-width:640px){.rfp-dir-row{grid-template-columns:1fr}.rfp-dir-lk{text-align:left}}
-  /* ---------- conference checkpoints ---------- */
-  .ck-legend{font-size:11.5px;color:var(--muted);margin:2px 0 12px}
-  .ck-key{display:inline-block;font-size:9.5px;font-weight:700;color:#fff;border-radius:3px;padding:1px 6px}
-  .ck-badge{display:inline-block;font-size:9px;font-weight:800;color:#fff;border-radius:3px;padding:1px 5px;margin-top:4px}
-  .ck-cong{color:var(--muted)}
-  .ck-row .cf-sp{margin-left:4px}
+  /* ---------- conference checkpoint boxes (9/6/3) ---------- */
+  .ck-note{font-size:11.5px;color:var(--muted);line-height:1.6;margin:0 0 12px}
+  .ck-empty{font-size:13px;color:var(--muted);padding:14px;border:1px solid var(--line);border-radius:8px}
+  .ckgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .ckbox{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+  .ckbox-head{color:#fff;padding:10px 13px}
+  .ckbox-mo{font-size:16px;font-weight:800;letter-spacing:-.2px}
+  .ckbox-act{font-size:11.5px;font-weight:600;opacity:.95;margin-top:1px}
+  .ckbox-body{padding:11px 12px;display:flex;flex-direction:column;gap:8px}
+  .ckbox-why{font-size:11px;color:var(--muted);line-height:1.5;padding-bottom:6px;border-bottom:1px dashed var(--line)}
+  .ckc{border:1px solid var(--line);border-radius:7px;padding:8px 10px;background:#fbfcfd}
+  .ckc-now{border-color:#c99;background:#fff6f7;box-shadow:0 0 0 1px #e4c9cf inset}
+  .ckc-past{opacity:.5}
+  .ckc-top{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+  .ckc-date{font-size:12.5px;font-weight:700}
+  .ckc-when{font-size:9.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:#8d1b32}
+  .ckc-cong{font-size:13.5px;font-weight:700;margin-top:2px}
+  .ckc-meta{font-size:10.5px;color:var(--muted);line-height:1.45;margin-top:2px}
+  .ckc-tags{margin-top:5px;display:flex;flex-wrap:wrap;gap:3px}
+  .ckc-tags .cf-sp{font-size:9px;padding:1px 6px}
+  .ckc-lk{font-size:11px;display:inline-block;margin-top:6px}
+  .ckc-empty{font-size:11px;color:var(--muted);font-style:italic;padding:6px 0}
+  @media(max-width:820px){.ckgrid{grid-template-columns:1fr}}
+  /* ---------- congress month-grid calendar ---------- */
+  .calgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .cal-cell{border:1px solid var(--line);border-radius:8px;background:#fff;padding:9px 10px;min-height:74px}
+  .cal-cell-now{border-color:#9aa;box-shadow:0 0 0 1px #cdd3da inset}
+  .cal-cell-empty{background:#fafbfc}
+  .cal-m{font-size:12px;font-weight:800;letter-spacing:.3px;text-transform:uppercase;color:var(--ink);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+  .cal-y{color:var(--muted);font-weight:600}
+  .cal-nowtag{float:right;font-size:8.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:#0a6b4a;border-radius:3px;padding:1px 5px}
+  .cal-none{color:#c7ccd3;font-size:14px;text-align:center;padding:6px 0}
+  .cal-ev{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:4px 0;border-bottom:1px dashed var(--line)}
+  .cal-ev:last-child{border-bottom:0}
+  .cal-ev-soon .cal-ev-n{color:#8d1b32}
+  .cal-ev-d{font-size:10.5px;font-weight:700;color:var(--muted);min-width:44px}
+  .cal-ev-n{font-size:12px;font-weight:700;text-decoration:none;color:var(--ink)}
+  .cal-ev-n:hover{text-decoration:underline}
+  .cal-ev-dots{display:inline-flex;gap:2px}
+  .cal-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .cal-ev-lk{display:inline-flex;gap:4px;font-size:10px}
+  .cal-li{font-size:9px;font-weight:700;color:#2b6fd6;text-decoration:none;border:1px solid #cfe0f5;border-radius:3px;padding:0 4px}
+  .cal-ind{text-decoration:none;font-size:11px}
+  .cal-tbc{font-size:9px;color:#8a5a12;font-style:italic}
+  @media(max-width:820px){.calgrid{grid-template-columns:1fr}}
   /* ---------- deadline banner ---------- */
   .dl-box{border:1px solid #e4c9cf;border-left:4px solid #8d1b32;border-radius:8px;background:#fffafb;padding:14px 16px;margin:0 0 22px}
   .dl-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:11px;padding-bottom:9px;border-bottom:1px solid #f0dde1}
@@ -3426,6 +3465,7 @@ const RFP_VARIANTS = {
   "cfg":"CFG", "call for grant":"CFG", "call for grants":"CFG",
   "rfa":"RFA", "request for application":"RFA", "request for applications":"RFA",
   "cfp":"CFP", "call for proposal":"CFP", "call for proposals":"CFP",
+  "cgn":"CGN", "continuous grant":"CGN", "continuous grant notification":"CGN", "continuous grant submission":"CGN",
   "loi":"LOI", "letter of intent":"LOI",
   "aoi":"AOI", "area of interest":"AOI", "areas of interest":"AOI"
 };
@@ -3446,18 +3486,19 @@ const RFPDL = [];
    grant calls, and the cadence, so the calendar is useful even between dated calls.
    The weekly task adds a dated RFPDL entry above the moment one of these posts. */
 const RFP_PORTALS = [
- {co:"Pfizer", space:["cardiovascular","nephrology","endocrinology","immunology","raredisease","ophthalmology"], cadence:"Dated RFPs, posted year-round", portal:"Pfizer Competitive Grants — active RFPs", url:"https://www.pfizer.com/about/programs-policies/grants/competitive-grants", note:"The most transparent portal: a live table of dated calls with PDF links and a closed-RFP archive. Filter to Internal Medicine / Inflammation & Immunology / Rare Disease; skip Oncology, Vaccines, Hospital."},
- {co:"AstraZeneca", space:["cardiovascular","nephrology","immunology","raredisease"], cadence:"RFPs + rolling", portal:"AZ Medical Education Grants / ESR portal", url:"https://www.astrazeneca.com/our-company/our-global-medical-education-grants.html", note:"CVRM, Respiratory & Immunology and Rare Disease areas of interest. Posts intermittent RFPs; confirm the live URL each run."},
- {co:"GSK", space:["immunology","raredisease"], cadence:"Independent Medical Education RFPs", portal:"GSK Independent Medical Education", url:"https://www.gsk.com/en-gb/innovation/medical-education-and-independent-funding/independent-medical-education/", note:"Respiratory/immunology-weighted; posts dated IME RFPs. Eric's starter list — verify the live posting page each run."},
- {co:"Bristol Myers Squibb", space:["immunology"], cadence:"IME RFPs, intermittent", portal:"BMS Independent Medical Education", url:"https://www.bms.com/about-us/responsibility/independent-grants.html", note:"Immunology and lupus; the RFP table posts intermittently and topics are broad."},
- {co:"AbbVie", space:["immunology","ophthalmology"], cadence:"IME Provider Network (gated)", portal:"AbbVie Medical Education Grants", url:"https://www.abbvie.com/who-we-are/medical-affairs/independent-medical-education-grants.html", note:"Access is gated through the IME Provider Network; immunology plus DME/glaucoma. Access, not topic, is the binding constraint."},
- {co:"Novartis", space:["cardiovascular","nephrology","immunology"], cadence:"RFP-driven + rolling", portal:"Novartis Independent Medical Education", url:"https://www.novartis.com/about/our-support-healthcare-community/independent-medical-education", note:"IgA nephropathy, C3G, AF/ASCVD, Sjögren's. Posts named RFPs."},
- {co:"Genentech / Roche", space:["nephrology","ophthalmology"], cadence:"Named RFPs via iMED", portal:"Genentech iMED grants", url:"https://www.gene.com/good/grants/independent-medical-education", note:"Names specific diseases incl. IgA nephropathy; implementation-science calls posted on a cycle."},
- {co:"Lilly Grant Office", space:["endocrinology","immunology"], cadence:"Rolling; Foundation annual open call from 2027", portal:"Lilly Grant Office", url:"https://grantoffice.lilly.com/areas-of-focus", note:"Rolling submission ≥60 days before activity. The public awarded-grants registry (grantoffice.lilly.com/transparency) is the best read on what actually funds."},
- {co:"Alcon", space:["ophthalmology"], cadence:"Annual cycle — portal reopens Fall 2026 for 2027", portal:"Alcon Grants & Giving", url:"https://www.alcon.com/grants-and-giving", note:"Fixed annual cycle; portal closes between cycles. 2027 areas of interest publish before the portal opens — watch for the reopen."},
- {co:"Regeneron", space:["ophthalmology"], cadence:"Named RFPs", portal:"Regeneron Independent Medical Education", url:"https://www.regeneron.com/responsibility/independent-medical-education", note:"Wet AMD durability; posts named RFPs on an RFP page — monitor it."},
- {co:"Takeda", space:["immunology","raredisease"], cadence:"Rotating RFP list", portal:"Takeda IISR / IME grants", url:"https://www.takeda.com/what-we-do/research-and-development/collaboration-opportunities/", note:"IBD, EoE, SBS-IF, HAE, CIDP, rare metabolic. The RFP list rotates."},
- {co:"Alnylam", space:["raredisease","nephrology"], cadence:"Dated RFPs", portal:"Alnylam Grants & Giving", url:"https://www.alnylam.com/grants", note:"ATTR-CM and rare renal; has posted dated shared-decision-making RFPs with real budgets."}
+ {co:"Alliance / ACEHP (all companies)", space:"all", variant:"RFP·CGA·CGN", cadence:"Central hub — many sponsors post here", portal:"ACEHP: RFP, CGN & CGA Opportunities", url:"https://www.acehp.org/Resources/RFP-CGN-and-CGA-Opportunities", note:"The single best cross-company list of open RFP / CGA / CGN calls, each posted as a downloadable PDF. Not every company posts here, so the company portals below stay primary — but check this first."},
+ {co:"Pfizer", space:["cardiovascular","nephrology","endocrinology","immunology","raredisease","ophthalmology"], variant:"RFP", cadence:"Dated RFPs, year-round", portal:"Pfizer Competitive Grants — active RFP table", url:"https://www.pfizer.com/about/programs-policies/grants/competitive-grants", note:"Live table of dated calls, each linking a PDF, plus a closed-RFP archive. Filter to Internal Medicine / Inflammation & Immunology / Rare Disease; skip Oncology, Vaccines, Hospital."},
+ {co:"GSK", space:["immunology","raredisease"], variant:"CGA", cadence:"Call for Grant Applications", portal:"GSK US IME — CGA", url:"https://www.gskimefunding.com/ime/index.html", pdf:"https://www.gskimefunding.com/assets/ime/cga.pdf", note:"GSK calls it a CGA (Call for Grant Applications). The CGA PDF lists every open disease area, eligibility and dates — link goes straight to it."},
+ {co:"AstraZeneca", space:["cardiovascular","nephrology","immunology","raredisease"], variant:"CGA", cadence:"Educational Areas / Call for Grants", portal:"AZ MEGO — Educational Areas / CGA", url:"https://www.astrazeneca.com/content/az-us/sustainability/Request-Support/medical-education-office/educational-areas-call-for-grants.html", note:"AZ's Medical Education Grants Office posts CGAs by educational area (CVRM, Respiratory & Immunology, Rare Disease). Portal: grants1.astrazeneca-us.com."},
+ {co:"Bristol Myers Squibb", space:["immunology"], variant:"RFP", cadence:"RFPs, updated year-round", portal:"BMS — Request for Proposals (Education)", url:"https://www.bms.com/about-us/responsibility/corporate-giving/current-funding-opportunities/request-for-proposals-education.html", note:"Direct RFP-for-education listing. Immunology and lupus; posts intermittently with broad topics."},
+ {co:"AbbVie", space:["immunology","ophthalmology"], variant:"CFG", cadence:"Call for Grants (IME Provider Network)", portal:"AbbVie Independent Educational Grants", url:"https://www.abbvie.com/science/independent-educational-grants.html", note:"AbbVie uses 'Call for Grants' (CFG); most funding is gated to the IME Provider Network, but CFGs are open to all. Access, not topic, is the constraint."},
+ {co:"Novartis", space:["cardiovascular","nephrology","immunology"], variant:"RFP", cadence:"Named RFPs + rolling", portal:"Novartis Professional Medical Education Grants — RFPs", url:"https://www.novartis.com/us-en/about/external-funding/educational-grants/professional-medical-education-grants", note:"Office of Grants & Education posts named RFPs by topic. IgA nephropathy, C3G, AF/ASCVD, Sjögren's."},
+ {co:"Genentech / Roche", space:["nephrology","ophthalmology"], variant:"RFP", cadence:"Named RFPs via iMED", portal:"Genentech — Requests for Proposals", url:"https://www.gene.com/good/giving/corporate-giving/requests-for-proposals", note:"Direct RFP list; each RFP is a PDF. Names specific diseases incl. IgA nephropathy."},
+ {co:"Lilly Grant Office", space:["endocrinology","immunology"], variant:"CFG", cadence:"Call for Grants + rolling", portal:"Lilly Grant Office — Call for Grants", url:"https://grantoffice.lilly.com/callforgrants", note:"Direct Call-for-Grants page. Awarded-grants registry (grantoffice.lilly.com/transparency) shows what actually funds."},
+ {co:"Alnylam", space:["raredisease","nephrology"], variant:"RFP", cadence:"Dated RFPs (often via ACEHP)", portal:"Alnylam Grants & Giving", url:"https://www.alnylam.com/about-alnylam/grants-and-giving", note:"ATTR-CM and rare renal; posts dated RFPs with real budgets, usually mirrored on the ACEHP hub as a PDF (e.g. ALNY-RFP-TTR-13, ATTR-CM)."},
+ {co:"Takeda", space:["immunology","raredisease"], variant:"RFP", cadence:"Rolling + rotating RFPs", portal:"Takeda Independent Medical Education Grants", url:"https://www.takeda.com/en-us/science/independent-medical-education-grants/", note:"IBD, EoE, SBS-IF, HAE, CIDP, rare metabolic. Open to unsolicited requests year-round; RFP list rotates."},
+ {co:"Regeneron", space:["ophthalmology"], variant:"RFP", cadence:"Named RFPs", portal:"Regeneron Independent Medical Education", url:"https://www.regeneron.com/responsibility/independent-medical-education", note:"Wet AMD durability; posts named RFPs — monitor the page."},
+ {co:"Alcon", space:["ophthalmology"], variant:"CFG", cadence:"Annual cycle — reopens Fall 2026 for 2027", portal:"Alcon Grants & Giving", url:"https://www.alcon.com/grants-and-giving", note:"Fixed annual cycle; portal closes between cycles. 2027 areas of interest publish before the portal opens."}
 ];
 
 /* Congress lead-time checkpoints. Supporter approvals run 60–90 days, and satellite
@@ -4828,9 +4869,9 @@ function renderRFPCal(){
   const dir=(typeof RFP_PORTALS!=="undefined"?RFP_PORTALS:[])
     .filter(p=>inSpace(p.space)&&(!activeSupporter||supMatch(p.co)))
     .map(p=>`<div class="rfp-dir-row">
-      <div class="rfp-dir-co"><b>${esc(p.co)}</b><div class="rfp-dir-cad">${esc(p.cadence)}</div></div>
+      <div class="rfp-dir-co"><b>${esc(p.co)}</b>${p.variant?` <span class="rfp-var">${esc(p.variant)}</span>`:""}<div class="rfp-dir-cad">${esc(p.cadence)}</div></div>
       <div class="rfp-dir-note">${esc(p.note||"")}</div>
-      <div class="rfp-dir-lk"><a href="${p.url}" target="_blank" rel="noopener">${esc(p.portal)} →</a></div>
+      <div class="rfp-dir-lk"><a href="${p.url}" target="_blank" rel="noopener">${esc(p.portal)} →</a>${p.pdf?`<br><a href="${p.pdf}" target="_blank" rel="noopener">📄 Open CGA/RFP PDF</a>`:""}</div>
     </div>`).join("");
 
   const head=dated.length
@@ -4851,15 +4892,12 @@ function renderConfCheckpoints(){
   const host=$("#confcheck"); if(!host) return;
   const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const now=new Date(); now.setHours(0,0,0,0);
-  const DAY=86400000, HORIZON=270; // show checkpoints falling within ~9 months
+  const DAY=86400000, HORIZON=300;
   const pd=s=>{const p=(s||"").split("-"); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;};
-  const fmtd=d=>d?`${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`:"—";
+  const fmtd=d=>d?`${d.getDate()} ${MON[d.getMonth()]} ${String(d.getFullYear()).slice(2)}`:"—";
   const days=d=>Math.round((d-now)/DAY);
-  const chip=n=>n<0?`<span class="dl-chip dl-past">passed</span>`
-              :n<=14?`<span class="dl-chip dl-now">${n}d — act now</span>`
-              :n<=45?`<span class="dl-chip dl-soon">${n} days</span>`
-              :`<span class="dl-chip dl-ok">${n} days</span>`;
   const CK=(typeof CONF_CHECKPOINTS!=="undefined"?CONF_CHECKPOINTS:[]);
+  const boxColor={9:"#7a1020",6:"#8a5a12",3:"#0a6b4a"};
 
   const confs=(typeof CONFERENCES!=="undefined"?CONFERENCES:[])
     .map(c=>({c,_s:pd(c.start)}))
@@ -4871,38 +4909,48 @@ function renderConfCheckpoints(){
       return (x.c.spaces||[]).some(s=>sp.indexOf(s)>-1);
     })());
 
-  // build one row per (congress × checkpoint) whose checkpoint date is upcoming within horizon
-  let items=[];
-  confs.forEach(x=>{
-    CK.forEach(k=>{
+  // one column per checkpoint type; each holds upcoming checkpoints of that type
+  const cols=CK.map(k=>{
+    const items=confs.map(x=>{
       const cd=new Date(x._s.getTime()-k.months*30.4*DAY);
-      const n=days(cd);
-      if(n>=-14 && n<=HORIZON) items.push({cd,n,k,c:x.c,_s:x._s});
-    });
+      return {cd,n:days(cd),c:x.c,_s:x._s};
+    }).filter(it=>it.n>=-14 && it.n<=HORIZON).sort((a,b)=>a.cd-b.cd);
+    return {k,items};
   });
-  items.sort((a,b)=>a.cd-b.cd);
 
-  if(!items.length){
-    host.innerHTML=`<div class="dl-box"><div class="dl-head"><span class="dl-title">🎯 Conference lead-time checkpoints</span></div><div class="empty">No congress checkpoints coming up for this filter.</div></div>`;
+  if(cols.every(c=>!c.items.length)){
+    host.innerHTML=`<div class="ck-empty">No congress checkpoints coming up for this filter.</div>`;
     return;
   }
 
-  const mColor={9:"#7a1020",6:"#8a5a12",3:"#0a6b4a"};
-  const rows=items.map(it=>{
+  const cardsFor=(items)=>items.map(it=>{
     const dots=(it.c.spaces||[]).map(sp=>`<span class="cf-sp" style="background:${SPACECOLOR[sp]}">${esc(SPACENAME[sp]||sp)}</span>`).join("");
-    return `<div class="dl-row ck-row">
-      <div class="dl-date">${esc(fmtd(it.cd))}<div class="ck-badge" style="background:${mColor[it.k.months]}">${it.k.months}-mo</div></div>
-      <div class="dl-what"><b>${esc(it.c.short||it.c.name)}</b> — ${esc(it.k.label)}
-        <div class="dl-note">${esc(it.k.note)} <span class="ck-cong">${esc(it.c.name)}, ${esc(it.c.city)}${it.c.country?", "+esc(it.c.country):""} · ${esc(fmtd(it._s))}.</span> ${dots}</div></div>
-      <div class="dl-act">${chip(it.n)} <a href="${it.c.industryUrl||it.c.url}" target="_blank" rel="noopener">Congress →</a></div>
+    const urgent=it.n>=0&&it.n<=14, past=it.n<0;
+    return `<div class="ckc ${urgent?"ckc-now":""} ${past?"ckc-past":""}">
+      <div class="ckc-top"><span class="ckc-date">${esc(fmtd(it.cd))}</span>
+        <span class="ckc-when">${past?"passed":it.n===0?"today":it.n<=14?it.n+"d — act now":it.n+"d"}</span></div>
+      <div class="ckc-cong">${esc(it.c.short||it.c.name)}</div>
+      <div class="ckc-meta">${esc(it.c.name)} · ${esc(it.c.city)}${it.c.country?", "+esc(it.c.country):""} · ${esc(fmtd(it._s))}</div>
+      <div class="ckc-tags">${dots}</div>
+      <a class="ckc-lk" href="${it.c.industryUrl||it.c.url}" target="_blank" rel="noopener">Congress →</a>
     </div>`;
   }).join("");
 
-  host.innerHTML=`<div class="dl-box">
-    <div class="dl-head"><span class="dl-title">🎯 Conference lead-time checkpoints — 9 / 6 / 3 months out</span><span class="dl-sum"><b>${items.length}</b> checkpoint${items.length===1?"":"s"} ahead</span></div>
-    <div class="ck-legend"><span class="ck-key" style="background:#7a1020">9-mo</span> satellite proposal to supporters &nbsp;·&nbsp; <span class="ck-key" style="background:#8a5a12">6-mo</span> application timeline &nbsp;·&nbsp; <span class="ck-key" style="background:#0a6b4a">3-mo</span> travel + supporter follow-up</div>
-    ${rows}
-    <div class="dl-foot">Checkpoints are counted back from each congress start. Because supporter approvals typically take <b>60–90 days</b>, the 9-month mark is when a satellite proposal should already be in front of a supporter, the 6-month mark keeps you ahead of the congress's own application deadlines, and the 3-month mark is the trigger to book travel and confirm attendance. Congress dates verified <b>${esc(typeof CONFERENCES_UPDATED!=="undefined"?CONFERENCES_UPDATED:"—")}</b>.</div>
+  const boxes=cols.map(col=>`<div class="ckbox">
+    <div class="ckbox-head" style="background:${boxColor[col.k.months]}">
+      <div class="ckbox-mo">${col.k.months} months out</div>
+      <div class="ckbox-act">${esc(col.k.label)}</div>
+    </div>
+    <div class="ckbox-body">
+      <div class="ckbox-why">${esc(col.k.note)}</div>
+      ${col.items.length?cardsFor(col.items):`<div class="ckc-empty">Nothing at this checkpoint yet.</div>`}
+    </div>
+  </div>`).join("");
+
+  const total=cols.reduce((a,c)=>a+c.items.length,0);
+  host.innerHTML=`<div class="ck-wrap">
+    <div class="ck-note">Counted back from each congress start. Supporter approvals take <b>60–90 days</b>, so the <b>9-month</b> box is when a satellite proposal should already be with a supporter, <b>6-month</b> keeps you ahead of the congress's own deadlines, and <b>3-month</b> is book-travel-and-confirm. <b>${total}</b> checkpoint${total===1?"":"s"} ahead · congress dates verified ${esc(typeof CONFERENCES_UPDATED!=="undefined"?CONFERENCES_UPDATED:"—")}.</div>
+    <div class="ckgrid">${boxes}</div>
   </div>`;
 }
 
@@ -5084,7 +5132,6 @@ function renderConferences(){
     .filter(c=>!(activeTab==="immunology" && immunoSub!=="all") || (c.sub||[]).indexOf(immunoSub)>-1)
     .sort((a,b)=>a._s-b._s);
 
-  // supporter filter: keep congresses in that supporter's therapeutic areas
   if(activeSupporter){
     const spaces=Object.keys(CURATED).filter(k=>
       (CURATED[k].companies||[]).some(c=>supMatch(c.name)) ||
@@ -5098,49 +5145,46 @@ function renderConferences(){
   }
 
   const MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const fmtRange=c=>{
-    const s=c._s,e=c._e;
-    const d=n=>n.getDate();
-    if(s.getMonth()===e.getMonth()&&s.getFullYear()===e.getFullYear())
-      return `${d(s)}–${d(e)} ${MON[s.getMonth()].slice(0,3)} ${s.getFullYear()}`;
-    return `${d(s)} ${MON[s.getMonth()].slice(0,3)} – ${d(e)} ${MON[e.getMonth()].slice(0,3)} ${e.getFullYear()}`;
-  };
+  const MS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const daysAway=c=>Math.ceil((c._s-now)/864e5);
+  const drange=c=>{const s=c._s,e=c._e,d=n=>n.getDate();
+    if(s.getMonth()===e.getMonth())return `${d(s)}–${d(e)}`;
+    return `${d(s)} ${MS[s.getMonth()]} – ${d(e)} ${MS[e.getMonth()]}`;};
 
-  let html="", curMonth="";
-  list.forEach((c,i)=>{
-    const mk=MON[c._s.getMonth()]+" "+c._s.getFullYear();
-    if(mk!==curMonth){ curMonth=mk; html+=`<div class="cf-month">${esc(mk)}</div>`; }
-    const away=daysAway(c);
-    const soon=away<=45;
-    const dots=(c.spaces||[]).map(sp=>`<span class="cf-sp" style="background:${SPACECOLOR[sp]}">${esc(SPACENAME[sp]||sp)}</span>`).join("");
-    const subs=(c.sub||[]).map(x=>`<span class="cf-sub">${esc(IMMUNO_SUB_LABEL[x]||x)}</span>`).join("");
-    html+=`<div class="cf ${soon?"cf-soon":""}">
-      <div class="cf-when">
-        <div class="cf-dates">${esc(fmtRange(c))}</div>
-        <div class="cf-away ${soon?"cf-away-soon":""}">${away<=0?"happening now":away+" day"+(away===1?"":"s")+" away"}</div>
-        ${c.tbc?`<div class="cf-tbc">dates unconfirmed</div>`:""}
-      </div>
-      <div class="cf-body">
-        <div class="cf-h"><a href="${c.url}" target="_blank" rel="noopener">${esc(c.name)}</a>
-          <span class="cf-org">${esc(c.org)}</span></div>
-        <div class="cf-loc">📍 ${esc(c.city)}, ${esc(c.country)}</div>
-        ${c.note?`<div class="cf-note">${esc(c.note)}</div>`:""}
-        <div class="cf-tags">${dots}${subs}</div>
-        <div class="cf-links">
-          <a class="cf-lk cf-lk-site" href="${c.url}" target="_blank" rel="noopener">🌐 Congress website</a>
-          ${c.industryUrl?`<a class="cf-lk cf-lk-ind" href="${c.industryUrl}" target="_blank" rel="noopener">🏢 Industry / exhibitor programme</a>`:""}
-          ${c.hashtag?`<a class="cf-lk cf-lk-li" href="https://www.linkedin.com/search/results/content/?keywords=%23${encodeURIComponent(c.hashtag)}&sortBy=%22date_posted%22" target="_blank" rel="noopener">in #${esc(c.hashtag)}</a>
-          <a class="cf-lk cf-lk-li" href="https://www.linkedin.com/search/results/content/?keywords=${encodeURIComponent('#'+c.hashtag+' medical affairs')}&sortBy=%22date_posted%22" target="_blank" rel="noopener">in + medical affairs</a>
-          <a class="cf-lk cf-lk-li" href="https://www.linkedin.com/search/results/content/?keywords=${encodeURIComponent('#'+c.hashtag+' symposium')}&sortBy=%22date_posted%22" target="_blank" rel="noopener">in + symposium</a>
-          <a class="cf-lk cf-lk-li" href="https://www.linkedin.com/search/results/content/?keywords=${encodeURIComponent('"'+c.name+'" booth')}&sortBy=%22date_posted%22" target="_blank" rel="noopener">in "${esc(c.short)}" + booth</a>`:""}
-        </div>
-      </div>
+  // build a continuous run of month cells from this month through the horizon
+  const cells=[]; let cur=new Date(now.getFullYear(),now.getMonth(),1);
+  const end=new Date(horizon.getFullYear(),horizon.getMonth(),1);
+  while(cur<=end){ cells.push(new Date(cur)); cur.setMonth(cur.getMonth()+1); }
+
+  const byKey={};
+  list.forEach(c=>{ const k=c._s.getFullYear()+"-"+c._s.getMonth(); (byKey[k]=byKey[k]||[]).push(c); });
+
+  const grid=cells.map(m=>{
+    const k=m.getFullYear()+"-"+m.getMonth();
+    const evs=(byKey[k]||[]);
+    const thisMonth = m.getFullYear()===now.getFullYear()&&m.getMonth()===now.getMonth();
+    const chips=evs.map(c=>{
+      const away=daysAway(c), soon=away<=45;
+      const dots=(c.spaces||[]).map(sp=>`<span class="cal-dot" style="background:${SPACECOLOR[sp]}" title="${esc(SPACENAME[sp]||sp)}"></span>`).join("");
+      const li=c.hashtag?`<a class="cal-li" href="https://www.linkedin.com/search/results/content/?keywords=%23${encodeURIComponent(c.hashtag)}&sortBy=%22date_posted%22" target="_blank" rel="noopener" title="LinkedIn #${esc(c.hashtag)}">in</a>`:"";
+      const ind=c.industryUrl?`<a class="cal-ind" href="${c.industryUrl}" target="_blank" rel="noopener" title="Industry / exhibitor programme">🏢</a>`:"";
+      return `<div class="cal-ev ${soon?"cal-ev-soon":""}">
+        <span class="cal-ev-d">${esc(drange(c))}</span>
+        <a class="cal-ev-n" href="${c.url}" target="_blank" rel="noopener">${esc(c.short||c.name)}</a>
+        <span class="cal-ev-dots">${dots}</span>
+        <span class="cal-ev-lk">${ind}${li}</span>
+        ${c.tbc?`<span class="cal-tbc">dates TBC</span>`:""}
+      </div>`;
+    }).join("");
+    return `<div class="cal-cell ${thisMonth?"cal-cell-now":""} ${evs.length?"":"cal-cell-empty"}">
+      <div class="cal-m">${MON[m.getMonth()].slice(0,3)} <span class="cal-y">${m.getFullYear()}</span>${thisMonth?`<span class="cal-nowtag">now</span>`:""}</div>
+      ${chips||`<div class="cal-none">—</div>`}
     </div>`;
-  });
+  }).join("");
 
   const tbc=list.filter(c=>c.tbc).length;
-  host.innerHTML=html+`<div class="cf-foot">Showing <b>${list.length}</b> congress${list.length===1?"":"es"} between today and ${horizon.toLocaleDateString([], {month:"short",year:"numeric"})}. Rolling window — past events drop off automatically. Calendar verified <b>${esc(typeof CONFERENCES_UPDATED!=="undefined"?CONFERENCES_UPDATED:"—")}</b>${tbc?` · ${tbc} entr${tbc===1?"y has":"ies have"} unconfirmed dates — verify on the society site before committing.`:""}<br>Enduring content needs ~12–18 months of lead time, so a congress inside this window is generally too late to build <i>for</i> — use it to meet people, and to time concepts at the <i>following</i> year's meeting.</div>`;
+  host.innerHTML=`<div class="calgrid">${grid}</div>
+    <div class="cf-foot">Showing <b>${list.length}</b> congress${list.length===1?"":"es"} across the next 12 months. Rolling — past months drop off automatically. Each event links to the congress site; 🏢 = industry/exhibitor programme, "in" = LinkedIn. Calendar verified <b>${esc(typeof CONFERENCES_UPDATED!=="undefined"?CONFERENCES_UPDATED:"—")}</b>${tbc?` · ${tbc} with unconfirmed dates.`:""} Coloured dots mark therapeutic area (see key at top).</div>`;
 }
 
 function renderSignals(){
