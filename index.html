@@ -149,7 +149,8 @@
   .legend-lab{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-right:4px}
   .lg-chip{font-size:10.5px;font-weight:700;color:#fff;border-radius:4px;padding:2px 8px;letter-spacing:.2px}
   .legend-sep{width:1px;height:16px;background:var(--line);margin:0 4px}
-  h2.sechead{font-size:22px;font-weight:800;letter-spacing:-.2px;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line);scroll-margin-top:14px}
+  h2.sechead{font-size:30px;font-weight:800;letter-spacing:-.3px;line-height:1.2;margin:36px 0 14px;padding:0 0 9px 14px;border-left:6px solid var(--ink);border-bottom:2.5px solid var(--line);scroll-margin-top:14px}
+  @media(max-width:640px){h2.sechead{font-size:24px}}
   /* ---------- RFP variant tag + portal directory ---------- */
   .rfp-var{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.4px;color:#fff;background:#7a1020;border-radius:3px;padding:1px 6px;margin-right:5px;vertical-align:middle}
   .rfp-dir-lab{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;padding-top:10px;border-top:1px solid var(--line)}
@@ -1152,10 +1153,10 @@
     </div>
   </details>
 
-  <div class="blocklabel" style="margin-top:8px;font-size:12px">⭐ New Supporters tracker — emerging companies, catalysts, CME-funding status, competitor CME, contacts &amp; portals</div>
+  <h2 class="sechead">⭐ New Supporters tracker</h2>
   <div id="newsupp"></div>
 
-  <div class="blocklabel" style="margin-top:36px;font-size:12px">Live clinical-trial feed — refreshes from ClinicalTrials.gov each time you open this page</div>
+  <h2 class="sechead">🔬 Live clinical-trial feed</h2>
   <div class="livefilter">
     <input id="searchBox" type="search" aria-label="Filter live trials by drug, sponsor, condition or keyword" placeholder="🔎 Filter live trials by drug, sponsor, condition or keyword…">
     <label class="nw"><input type="checkbox" id="newOnly"> New this week</label>
@@ -1165,10 +1166,10 @@
   <div id="errBox"></div>
   <div id="content"></div>
 
-  <div class="blocklabel" style="margin-top:36px;font-size:12px">📅 Catalyst calendar — what's expected, and when (rest of 2026 → 2027)</div>
+  <h2 class="sechead">📅 Catalyst calendar</h2>
   <div id="calendar"></div>
 
-  <div class="blocklabel" id="sec-watch" style="margin-top:40px;font-size:12px">🔭 Potential new supporters to watch — emerging companies likely to fund IME/CME as they approach launch</div>
+  <h2 class="sechead" id="sec-watch">🔭 Potential new supporters to watch</h2>
   <div id="watchlist"></div>
 
   <h2 class="sechead" id="sec-directory">📇 Master IME / CME grant &amp; RFP directory</h2>
