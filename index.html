@@ -140,6 +140,23 @@
   .pv-stale{background:#fff1de;color:#8a5a12}
   .pv-note{font-size:11px;color:var(--muted);line-height:1.65;margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
   .pv-sched{border-top:0;padding-top:0;margin-top:6px}
+  /* ---------- watch-list area key + Medical Affairs finder ---------- */
+  .wl-legend{display:flex;flex-wrap:wrap;gap:5px 10px;align-items:center;margin:0 0 12px;font-size:11px}
+  .wl-legend-lab{font-size:11px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
+  .wl-key{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink)}
+  .wl-area{display:flex;align-items:center;gap:5px;margin-top:6px;font-size:11px;font-weight:600;color:var(--muted)}
+  .ma-res{border:1px solid var(--line);border-radius:9px;background:#fff;padding:14px 16px;margin-top:10px}
+  .ma-res-h{font-size:15px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px}
+  .ma-sub{font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin:13px 0 7px;padding-top:9px;border-top:1px solid var(--line)}
+  .ma-role{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:4px 0}
+  .ma-role-lab{flex:1 1 200px;font-size:12.5px;font-weight:600}
+  .ma-area{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line)}
+  .ma-area:last-of-type{border-bottom:0}
+  .ma-area-h{flex:1 1 190px;font-size:12.5px;display:flex;align-items:center;gap:6px}
+  .ma-lk{font-size:11.5px;font-weight:600;text-decoration:none;border-radius:4px;padding:3px 8px;white-space:nowrap}
+  .ma-li{color:#fff;background:#2b6fd6}.ma-li:hover{background:#1f5bb5}
+  .ma-web{color:var(--ink);background:#eef1f6;border:1px solid var(--line)}.ma-web:hover{background:#e4e8ef}
+  .ma-foot{font-size:11px;color:var(--muted);line-height:1.65;margin-top:12px;padding-top:9px;border-top:1px solid var(--line)}
   /* ---------- table of contents, legend, section headers ---------- */
   .toc{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;background:#fbfcfd;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:0 0 12px}
   .toc-lab{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-right:4px}
@@ -904,6 +921,7 @@
     <a href="#sec-signals">⚡ This week's signals</a>
     <a href="#sec-gap">🧭 Gap-Finder</a>
     <a href="#sec-directory">📇 Grant / RFP directory</a>
+    <a href="#sec-mafinder">👥 Medical Affairs finder</a>
   </nav>
   <div class="legend" id="legend">
     <span class="legend-lab">Colour key:</span>
@@ -1174,6 +1192,25 @@
 
   <h2 class="sechead" id="sec-directory">📇 Master IME / CME grant &amp; RFP directory</h2>
   <div id="directory"></div>
+
+  <h2 class="sechead" id="sec-mafinder">👥 Medical Affairs contact finder</h2>
+  <div class="lookup" id="maFinderBox">
+    <div class="lk-head">
+      <span class="lk-ico">👥</span>
+      <div>
+        <h2>Find Medical Affairs leaders at any supporter</h2>
+        <p>Type any company — <b>any supporter, regardless</b> — to get ready-made searches for its <b>VP of Medical Affairs</b>, <b>Medical Affairs Directors</b> and therapeutic-area MSL/MA leads, scoped to the areas that company funds. Names are found live so they're never stale.</p>
+      </div>
+    </div>
+    <div class="lk-bar">
+      <input id="maInput" list="maList" placeholder="Start typing a supporter — e.g. Novartis, Lilly, Amgen, Vertex, GSK…" autocomplete="off">
+      <datalist id="maList"></datalist>
+      <button id="maGo" class="lk-go">Find contacts</button>
+      <button id="maClear" class="lk-clear" hidden>✕</button>
+    </div>
+    <div class="lk-quick" id="maQuick"></div>
+    <div id="maOut"></div>
+  </div>
 
   <footer class="src">
     Trials: ClinicalTrials.gov v2 API (live) — industry-sponsored Phase 2/3, most recently updated. Companies, pipeline stages, grant portals and RFP signals: verified 2026-07-10 from official company pages; deadlines are point-in-time and rotate — always confirm on the portal.<br>
@@ -5577,10 +5614,14 @@ function renderWatch(){
       <span style="display:flex;gap:5px">${w.hot?'<span class="tag" style="background:#fdecea;color:#c0392b">High priority</span>':''}<span class="tag" style="background:#fff3e0;color:#b06a12">${esc(w.timing)}</span></span></div>
     <div class="drugs"><b>${esc(w.asset)}</b></div>
     <div style="font-size:12px;color:#555">↳ ${esc(w.trigger)}</div>
+    <div class="wl-area"><span class="sp-dot" style="background:${SPACECOLOR[w.space]}"></span>${esc(SPACENAME[w.space]||w.space)}</div>
   </div>`).join("");
+  // therapeutic-area colour key so the dot colours are self-explanatory
+  const shown=[...new Set(WATCH.filter(w=>supMatch(w.co)).map(w=>w.space))];
+  const legend=shown.length?`<div class="wl-legend"><span class="wl-legend-lab">Circle colour = therapeutic area:</span>${shown.map(k=>`<span class="wl-key"><span class="sp-dot" style="background:${SPACECOLOR[k]}"></span>${esc(SPACENAME[k]||k)}</span>`).join("")}</div>`:"";
   const h2027=WATCH.filter(w=>supMatch(w.co)&&/2027/.test(w.timing));
   const horizon = h2027.length?`<div class="horizon"><b>🗓️ 2027 planning horizon (enduring content):</b> enduring/on-demand materials need ~12–18 months' lead time, so seed them <b>now</b> for these 2027 catalysts — ${h2027.map(w=>esc(w.co)+" <span class='mut'>("+esc(w.asset.split('(')[0].trim())+")</span>").join(" · ")}. Live formats can wait until closer to launch.</div>`:"";
-  $("#watchlist").innerHTML=`<div class="cogrid">${cards}</div>${horizon}
+  $("#watchlist").innerHTML=`${legend}<div class="cogrid">${cards}</div>${horizon}
     <div style="font-size:11.5px;color:var(--muted);margin-top:8px">Not current grant funders — pipeline-only companies whose approaching launch makes them likely to open IME/CME funding. Companies usually stand up a grant program around first approval in a therapeutic area; track the trigger, then watch for a new portal.</div>`;
 }
 
@@ -5726,6 +5767,94 @@ function applySupporterFilter(){
   }catch(e){}
   if(typeof syncTAControls==="function") syncTAControls();
 })();
+/* ---------- MEDICAL AFFAIRS CONTACT FINDER ----------
+   Works for ANY supporter. It never lists a person's name — MA leadership turns
+   over constantly and a stale/mis-scoped name is worse than none. Instead it
+   builds the exact live LinkedIn people-searches and web searches that surface
+   whoever holds the VP / Director of Medical Affairs and MSL roles TODAY, scoped
+   to the therapeutic areas that supporter actually funds. */
+function maCompanyList(){
+  const set=new Set();
+  (typeof buildSupporterList==="function"?buildSupporterList():[]).forEach(x=>set.add(x[0]));
+  (typeof RFP_PORTALS!=="undefined"?RFP_PORTALS:[]).forEach(p=>set.add(supCanon(p.co)));
+  (typeof WATCH!=="undefined"?WATCH:[]).forEach(w=>set.add(supCanon(w.co)));
+  (typeof NEWSUPP!=="undefined"?NEWSUPP:[]).forEach(n=>set.add(supCanon(n.co)));
+  return [...set].filter(Boolean).sort();
+}
+function maResolve(raw){
+  const q=(raw||"").trim(); if(!q) return null;
+  const list=maCompanyList();
+  const c=supCanon(q); if(list.includes(c)) return c;
+  const qn=supKey(q);
+  if(SUP_ALIASES[qn]) return SUP_ALIASES[qn];
+  let m=list.find(n=>supKey(n)===qn); if(m) return m;
+  m=list.find(n=>supKey(n).startsWith(qn)); if(m) return m;
+  m=list.find(n=>supKey(n).includes(qn)); if(m) return m;
+  for(const v in SUP_ALIASES){ if(v.startsWith(qn)||v.includes(qn)) return SUP_ALIASES[v]; }
+  return c||null; // fall back to the canonicalised typed name so ANY supporter works
+}
+function maSpacesFor(name){
+  const s=new Set();
+  Object.keys(CURATED||{}).forEach(k=>{
+    if((CURATED[k].companies||[]).some(c=>supCanonEq(c.name,name))) s.add(k);
+    if((CURATED[k].grants||[]).some(g=>supCanonEq(g.co,name))) s.add(k);
+  });
+  (typeof EMPHASIS!=="undefined"&&EMPHASIS[name]&&EMPHASIS[name].spaces||[]).forEach(k=>s.add(k));
+  (typeof RFP_PORTALS!=="undefined"?RFP_PORTALS:[]).forEach(p=>{ if(supCanonEq(p.co,name)&&Array.isArray(p.space)) p.space.forEach(k=>s.add(k)); });
+  (typeof WATCH!=="undefined"?WATCH:[]).forEach(w=>{ if(supCanonEq(w.co,name)&&w.space) s.add(w.space); });
+  (typeof NEWSUPP!=="undefined"?NEWSUPP:[]).forEach(n=>{ if(supCanonEq(n.co,name)&&n.space) s.add(n.space); });
+  return [...s];
+}
+function liPeople(q){ return `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(q)}`; }
+function gWeb(q){ return `https://www.google.com/search?q=${encodeURIComponent(q)}`; }
+function maRender(name){
+  const out=$("#maOut"); if(!out) return;
+  const spaces=maSpacesFor(name);
+  const spChips=spaces.length?spaces.map(k=>`<span class="lk-sp" style="background:${SPACECOLOR[k]}">${esc(SPACENAME[k]||k)}</span>`).join(""):`<span class="mut" style="font-size:12px">no specific area on file — showing company-wide searches</span>`;
+
+  // company-wide role searches (always shown)
+  const roles=[
+    ["VP / Head of Medical Affairs", `"${name}" ("VP Medical Affairs" OR "Vice President Medical Affairs" OR "Head of Medical Affairs")`],
+    ["Medical Affairs Director", `"${name}" ("Medical Affairs Director" OR "Director, Medical Affairs" OR "Senior Director Medical Affairs")`],
+    ["Medical Science Liaison (MSL) lead", `"${name}" ("MSL" OR "Medical Science Liaison" OR "Field Medical")`]
+  ];
+  const roleLinks=roles.map(([lab,kw])=>`<div class="ma-role">
+    <span class="ma-role-lab">${esc(lab)}</span>
+    <a class="ma-lk ma-li" href="${liPeople(kw)}" target="_blank" rel="noopener">in LinkedIn people</a>
+    <a class="ma-lk ma-web" href="${gWeb(kw)}" target="_blank" rel="noopener">web</a>
+  </div>`).join("");
+
+  // per-therapeutic-area searches (scoped to what this supporter funds)
+  const areaBlocks=spaces.map(k=>{
+    const area=SPACENAME[k]||k;
+    const kw=`"${name}" "Medical Affairs" ${area}`;
+    const msl=`"${name}" ("MSL" OR "Medical Science Liaison") ${area}`;
+    return `<div class="ma-area">
+      <div class="ma-area-h"><span class="sp-dot" style="background:${SPACECOLOR[k]}"></span><b>${esc(area)}</b> Medical Affairs</div>
+      <a class="ma-lk ma-li" href="${liPeople(kw)}" target="_blank" rel="noopener">in MA leads</a>
+      <a class="ma-lk ma-li" href="${liPeople(msl)}" target="_blank" rel="noopener">in MSLs</a>
+      <a class="ma-lk ma-web" href="${gWeb(kw)}" target="_blank" rel="noopener">web</a>
+    </div>`;
+  }).join("");
+
+  // company leadership / newsroom anchor if we have one from the portal directory
+  let anchor="";
+  const portal=(typeof RFP_PORTALS!=="undefined"?RFP_PORTALS:[]).find(p=>supCanonEq(p.co,name));
+  if(portal) anchor=`<a class="ma-lk ma-web" href="${portal.url}" target="_blank" rel="noopener">${esc(portal.portal)} →</a>`;
+  const leadSearch=gWeb(`"${name}" leadership "Medical Affairs" team`);
+
+  out.innerHTML=`<div class="ma-res">
+    <div class="ma-res-h"><b>${esc(name)}</b> — Medical Affairs ${spChips}</div>
+    <div class="ma-sub">Company-wide roles</div>
+    ${roleLinks}
+    ${areaBlocks?`<div class="ma-sub">By therapeutic area this supporter funds</div>${areaBlocks}`:""}
+    <div class="ma-sub">Verify the person &amp; role</div>
+    <div class="ma-role"><span class="ma-role-lab">Official leadership / MA team page</span>
+      <a class="ma-lk ma-web" href="${leadSearch}" target="_blank" rel="noopener">find it</a>${anchor}</div>
+    <div class="ma-foot">Names are found live so they are never stale. Confirm the role covers the therapeutic area you need and sits in <b>Medical Affairs</b> — not regulatory, clinical development or commercial — before reaching out. Best sources in order: the company's own leadership/MA page → a press release naming the person → a LinkedIn profile you can open.<br><br><b>Compliance:</b> Medical Affairs and MSL contacts are for scientific exchange — data discussion, unmet-need input, investigator-initiated study ideas — <b>never</b> to request or approve IME funding. Grant funding requests go through the official grants portal or grants office only.</div>
+  </div>`;
+}
+
 /* ---------- SUPPORTER LOOKUP ----------
    A standalone box so the financial reports, grant portals and competitive
    intelligence are reachable by typing a name, without needing the dropdown. */
@@ -5874,6 +6003,26 @@ function supMatchTextFor(txt,name){
   inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); run(); } });
   inp.addEventListener("change",()=>{ if(inp.value) run(); });
   clr.addEventListener("click",()=>{ inp.value=""; $("#lkOut").innerHTML=""; clr.hidden=true; inp.focus(); });
+})();
+(function initMAFinder(){
+  const inp=$("#maInput"), go=$("#maGo"), clr=$("#maClear"), dl=$("#maList"), quick=$("#maQuick");
+  if(!inp) return;
+  maCompanyList().forEach(n=>{ const o=document.createElement("option"); o.value=n; dl.appendChild(o); });
+  if(quick){
+    quick.innerHTML=`<span class="lk-quick-lab">Try:</span>`+
+      ["Novartis","Eli Lilly","Amgen","GSK","Vertex","AstraZeneca","Regeneron","Apellis"]
+      .map(n=>`<button class="lk-chip" data-n="${esc(n)}">${esc(n)}</button>`).join("");
+    quick.addEventListener("click",e=>{ const b=e.target.closest(".lk-chip"); if(b){ inp.value=b.dataset.n; run(); } });
+  }
+  function run(){
+    const name=maResolve(inp.value);
+    if(!name){ $("#maOut").innerHTML=`<div class="lk-miss">Type any company name to find its Medical Affairs leaders.</div>`; clr.hidden=false; return; }
+    maRender(name); clr.hidden=false;
+  }
+  go.addEventListener("click",run);
+  inp.addEventListener("keydown",e=>{ if(e.key==="Enter"){ e.preventDefault(); run(); } });
+  inp.addEventListener("change",()=>{ if(inp.value) run(); });
+  clr.addEventListener("click",()=>{ inp.value=""; $("#maOut").innerHTML=""; clr.hidden=true; inp.focus(); });
 })();
 $("#reloadBtn").addEventListener("click", load);
 /* Getting-started panel: open by default for first-time readers, remembers if collapsed */
