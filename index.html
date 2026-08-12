@@ -3457,7 +3457,7 @@ const EMPHASIS = {
    real one. If nothing is confirmed, leave the array empty — an empty banner that
    says so is correct and useful; a padded one is not. */
 const RFPDL_UPDATED = "August 11, 2026";
-const RFPDL_NOTE = "This is the grant-opportunity calendar. It shows dated RFP / CGA / CFG calls (any naming variant) in the six non-oncologic areas, newest deadline first, each linked to its posting — a direct PDF link where the funder posts one. Right now no funder has a published, dated, in-scope deadline (Pfizer's open dated calls are all haemophilia, vaccines or oncology — out of scope), so the section below is the standing public-portal directory: where each company posts, and how often. The weekly task pulls fresh dated postings from these portals and the Alliance job board as they appear.";
+const RFPDL_NOTE = "This is the grant-opportunity calendar. It shows dated RFP / CGA / CFG calls (any naming variant) in the six non-oncologic areas, newest deadline first, each linked to its posting — a direct PDF link where the funder posts one. Right now no funder has a published, dated, in-scope deadline (Pfizer's open dated calls are all haemophilia, vaccines or oncology — out of scope), so the section below is the standing public-portal directory: where each company posts, and how often. The weekly task pulls fresh dated postings from these portals and the Alliance (ACEHP) hub as they appear. Note: the Alliance is a useful cross-company hub, but NOT every company posts there — so the individual company portals below stay primary.";
 
 /* Naming-variant recognition. Funders call the same thing many names — RFP,
    CGA (Competitive Grant Announcement / Application), CFG (Call for Grants),
@@ -4856,11 +4856,10 @@ function gapRefsHtml(g){
   }</div>`;
 }
 
-/* ---------- DEADLINES IN THE NEXT 90 DAYS ----------
-   Two kinds of date, kept visually separate because they are not equally hard:
-   (1) published RFP deadlines, and (2) lead-time cut-offs derived from confirmed
-   congress dates — if a funder needs 60 days and the congress is in 70, the
-   decision to submit is this week. Anything a funder has only hinted at renders
+/* ---------- GRANT OPPORTUNITY CALENDAR + CONFERENCE CHECKPOINTS ----------
+   Two separate sections: (1) dated RFP/CGA/CFG calls plus the funder-portal card
+   directory, and (2) conference lead-time checkpoints at 9/6/3 months. Anything a
+   funder has only hinted at renders
    in a separate, clearly-labelled row and is never counted. */
 /* ---------- GRANT OPPORTUNITY CALENDAR (RFP / CGA / CFG) ---------- */
 function renderRFPCal(){
