@@ -153,13 +153,16 @@
   /* ---------- RFP variant tag + portal directory ---------- */
   .rfp-var{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.4px;color:#fff;background:#7a1020;border-radius:3px;padding:1px 6px;margin-right:5px;vertical-align:middle}
   .rfp-dir-lab{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;padding-top:10px;border-top:1px solid var(--line)}
-  .rfp-dir-row{display:grid;grid-template-columns:2fr 3.4fr auto;gap:12px;align-items:start;padding:8px 0;border-bottom:1px dashed var(--line)}
-  .rfp-dir-row:last-child{border-bottom:0}
-  .rfp-dir-co b{font-size:13px}
-  .rfp-dir-cad{font-size:10.5px;color:var(--muted);margin-top:2px}
-  .rfp-dir-note{font-size:11.5px;line-height:1.55;color:var(--ink)}
-  .rfp-dir-lk{font-size:11.5px;white-space:nowrap;text-align:right}
-  @media(max-width:640px){.rfp-dir-row{grid-template-columns:1fr}.rfp-dir-lk{text-align:left}}
+  .rfp-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:7px}
+  .rfp-c{display:flex;align-items:center;gap:7px;background:#fbfcfd;border:1px solid var(--line);border-radius:7px;padding:7px 9px;text-decoration:none;color:var(--ink);transition:border-color .1s,background .1s}
+  .rfp-c:hover{border-color:#9aa;background:#fff}
+  .rfp-c-var{flex:0 0 auto;font-size:8.5px;font-weight:800;letter-spacing:.3px;color:#fff;border-radius:3px;padding:2px 5px}
+  .vt-rfp{background:#7a1020}.vt-cga{background:#0a5a8a}.vt-cfg{background:#8a5a12}.vt-cgn{background:#5a3a8a}
+  .rfp-c-co{flex:1 1 auto;font-size:12px;font-weight:700;line-height:1.25;min-width:0}
+  .rfp-c-dots{flex:0 0 auto;display:inline-flex;gap:2px}
+  .rfp-c-all{font-size:8.5px;font-weight:700;color:var(--muted)}
+  .rfp-c-pdf{flex:0 0 auto;font-size:9.5px;font-weight:700;color:#2b6fd6;border:1px solid #cfe0f5;border-radius:3px;padding:1px 4px;cursor:pointer}
+  .rfp-c-pdf:hover{background:#eef4fc}
   /* ---------- conference checkpoint boxes (9/6/3) ---------- */
   .ck-note{font-size:11.5px;color:var(--muted);line-height:1.6;margin:0 0 12px}
   .ck-empty{font-size:13px;color:var(--muted);padding:14px;border:1px solid var(--line);border-radius:8px}
@@ -3486,19 +3489,43 @@ const RFPDL = [];
    grant calls, and the cadence, so the calendar is useful even between dated calls.
    The weekly task adds a dated RFPDL entry above the moment one of these posts. */
 const RFP_PORTALS = [
- {co:"Alliance / ACEHP (all companies)", space:"all", variant:"RFP·CGA·CGN", cadence:"Central hub — many sponsors post here", portal:"ACEHP: RFP, CGN & CGA Opportunities", url:"https://www.acehp.org/Resources/RFP-CGN-and-CGA-Opportunities", note:"The single best cross-company list of open RFP / CGA / CGN calls, each posted as a downloadable PDF. Not every company posts here, so the company portals below stay primary — but check this first."},
- {co:"Pfizer", space:["cardiovascular","nephrology","endocrinology","immunology","raredisease","ophthalmology"], variant:"RFP", cadence:"Dated RFPs, year-round", portal:"Pfizer Competitive Grants — active RFP table", url:"https://www.pfizer.com/about/programs-policies/grants/competitive-grants", note:"Live table of dated calls, each linking a PDF, plus a closed-RFP archive. Filter to Internal Medicine / Inflammation & Immunology / Rare Disease; skip Oncology, Vaccines, Hospital."},
- {co:"GSK", space:["immunology","raredisease"], variant:"CGA", cadence:"Call for Grant Applications", portal:"GSK US IME — CGA", url:"https://www.gskimefunding.com/ime/index.html", pdf:"https://www.gskimefunding.com/assets/ime/cga.pdf", note:"GSK calls it a CGA (Call for Grant Applications). The CGA PDF lists every open disease area, eligibility and dates — link goes straight to it."},
- {co:"AstraZeneca", space:["cardiovascular","nephrology","immunology","raredisease"], variant:"CGA", cadence:"Educational Areas / Call for Grants", portal:"AZ MEGO — Educational Areas / CGA", url:"https://www.astrazeneca.com/content/az-us/sustainability/Request-Support/medical-education-office/educational-areas-call-for-grants.html", note:"AZ's Medical Education Grants Office posts CGAs by educational area (CVRM, Respiratory & Immunology, Rare Disease). Portal: grants1.astrazeneca-us.com."},
- {co:"Bristol Myers Squibb", space:["immunology"], variant:"RFP", cadence:"RFPs, updated year-round", portal:"BMS — Request for Proposals (Education)", url:"https://www.bms.com/about-us/responsibility/corporate-giving/current-funding-opportunities/request-for-proposals-education.html", note:"Direct RFP-for-education listing. Immunology and lupus; posts intermittently with broad topics."},
- {co:"AbbVie", space:["immunology","ophthalmology"], variant:"CFG", cadence:"Call for Grants (IME Provider Network)", portal:"AbbVie Independent Educational Grants", url:"https://www.abbvie.com/science/independent-educational-grants.html", note:"AbbVie uses 'Call for Grants' (CFG); most funding is gated to the IME Provider Network, but CFGs are open to all. Access, not topic, is the constraint."},
- {co:"Novartis", space:["cardiovascular","nephrology","immunology"], variant:"RFP", cadence:"Named RFPs + rolling", portal:"Novartis Professional Medical Education Grants — RFPs", url:"https://www.novartis.com/us-en/about/external-funding/educational-grants/professional-medical-education-grants", note:"Office of Grants & Education posts named RFPs by topic. IgA nephropathy, C3G, AF/ASCVD, Sjögren's."},
- {co:"Genentech / Roche", space:["nephrology","ophthalmology"], variant:"RFP", cadence:"Named RFPs via iMED", portal:"Genentech — Requests for Proposals", url:"https://www.gene.com/good/giving/corporate-giving/requests-for-proposals", note:"Direct RFP list; each RFP is a PDF. Names specific diseases incl. IgA nephropathy."},
- {co:"Lilly Grant Office", space:["endocrinology","immunology"], variant:"CFG", cadence:"Call for Grants + rolling", portal:"Lilly Grant Office — Call for Grants", url:"https://grantoffice.lilly.com/callforgrants", note:"Direct Call-for-Grants page. Awarded-grants registry (grantoffice.lilly.com/transparency) shows what actually funds."},
- {co:"Alnylam", space:["raredisease","nephrology"], variant:"RFP", cadence:"Dated RFPs (often via ACEHP)", portal:"Alnylam Grants & Giving", url:"https://www.alnylam.com/about-alnylam/grants-and-giving", note:"ATTR-CM and rare renal; posts dated RFPs with real budgets, usually mirrored on the ACEHP hub as a PDF (e.g. ALNY-RFP-TTR-13, ATTR-CM)."},
- {co:"Takeda", space:["immunology","raredisease"], variant:"RFP", cadence:"Rolling + rotating RFPs", portal:"Takeda Independent Medical Education Grants", url:"https://www.takeda.com/en-us/science/independent-medical-education-grants/", note:"IBD, EoE, SBS-IF, HAE, CIDP, rare metabolic. Open to unsolicited requests year-round; RFP list rotates."},
- {co:"Regeneron", space:["ophthalmology"], variant:"RFP", cadence:"Named RFPs", portal:"Regeneron Independent Medical Education", url:"https://www.regeneron.com/responsibility/independent-medical-education", note:"Wet AMD durability; posts named RFPs — monitor the page."},
- {co:"Alcon", space:["ophthalmology"], variant:"CFG", cadence:"Annual cycle — reopens Fall 2026 for 2027", portal:"Alcon Grants & Giving", url:"https://www.alcon.com/grants-and-giving", note:"Fixed annual cycle; portal closes between cycles. 2027 areas of interest publish before the portal opens."}
+ {co:"Alliance / ACEHP (all companies)", space:"all", variant:"RFP·CGA·CGN", cadence:"Central cross-company hub", portal:"ACEHP: RFP, CGN & CGA Opportunities", url:"https://www.acehp.org/Resources/RFP-CGN-and-CGA-Opportunities", note:"The best cross-company list of open calls, each a downloadable PDF. Not every company posts here — check company portals too — but start here."},
+ {co:"Pfizer", space:["cardiovascular","nephrology","endocrinology","immunology","raredisease","ophthalmology"], variant:"RFP", cadence:"Dated RFP table, year-round", portal:"Pfizer Competitive Grants", url:"https://www.pfizer.com/about/programs-policies/grants/competitive-grants", note:"Live table of dated calls with PDF links + closed archive. Filter to Internal Medicine / I&I / Rare Disease."},
+ {co:"GSK", space:["immunology","raredisease"], variant:"CGA", cadence:"Call for Grant Applications", portal:"GSK US IME", url:"https://www.gskimefunding.com/ime/index.html", pdf:"https://www.gskimefunding.com/assets/ime/cga.pdf", note:"CGA PDF lists every open area, eligibility and dates."},
+ {co:"AstraZeneca", space:["cardiovascular","nephrology","immunology","raredisease"], variant:"CGA", cadence:"Educational Areas / CGA", portal:"AZ Medical Education Grants Office", url:"https://www.astrazeneca.com/content/az-us/sustainability/Request-Support/medical-education-office/educational-areas-call-for-grants.html", note:"CGAs by educational area — CVRM, Respiratory & Immunology, Rare Disease."},
+ {co:"Bristol Myers Squibb", space:["immunology"], variant:"RFP", cadence:"RFPs, updated year-round", portal:"BMS Request for Proposals (Education)", url:"https://www.bms.com/our-impact/corporate-giving/funding-opportunities/request-for-proposals-education.html", note:"Direct RFP-for-education listing; immunology and lupus."},
+ {co:"AbbVie", space:["immunology","ophthalmology"], variant:"CFG", cadence:"Call for Grants (IME Provider Network)", portal:"AbbVie Independent Educational Grants", url:"https://www.abbvie.com/science/independent-educational-grants.html", note:"Uses 'Call for Grants' (CFG); most funding gated to the IME Provider Network, CFGs open to all."},
+ {co:"Novartis", space:["cardiovascular","nephrology","immunology"], variant:"RFP", cadence:"Named RFPs + rolling", portal:"Novartis Professional Medical Education Grants", url:"https://www.novartis.com/us-en/healthcare-professionals/external-funding/educational-grants/professional-medical-education-grants", note:"Named RFPs by topic — IgAN, C3G, AF/ASCVD, Sjögren's."},
+ {co:"Genentech / Roche", space:["nephrology","ophthalmology"], variant:"RFP", cadence:"Named RFPs via iMED", portal:"Genentech Requests for Proposals", url:"https://www.gene.com/good/giving/corporate-giving/requests-for-proposals", note:"Each RFP is a PDF; names specific diseases incl. IgAN."},
+ {co:"Eli Lilly", space:["endocrinology","immunology"], variant:"CFG", cadence:"Call for Grants + rolling", portal:"Lilly Grant Office — Call for Grants", url:"https://grantoffice.lilly.com/callforgrants", note:"Direct Call-for-Grants page; awarded-grants registry shows what actually funds."},
+ {co:"Merck (MSD)", space:["cardiovascular","immunology"], variant:"RFP", cadence:"IME grant portal", portal:"MSD IME Grants", url:"https://www.msdimegrants.com/", note:"Merck's independent medical education grant portal; cardiometabolic and immunology among areas."},
+ {co:"Gilead", space:["immunology","raredisease"], variant:"RFP", cadence:"IMED grants", portal:"Gilead Medical Education", url:"https://www.gilead.com/responsibility/medical-education", note:"Independent Medical Education (IMED) pathway; inflammation among areas."},
+ {co:"Sanofi", space:["immunology","raredisease"], variant:"RFP", cadence:"US educational grants portal", portal:"Sanofi US Educational Grants", url:"https://www.sanofi.us/en/our-company/social-impact/corporate-social-responsibility/contributions-and-giving", note:"Immunology (atopic derm, asthma) and rare disease; portal at grants.sanofi.us."},
+ {co:"Boehringer Ingelheim", space:["cardiovascular","endocrinology","immunology"], variant:"RFP", cadence:"IME grants", portal:"BI Medical Education Grants", url:"https://pro.boehringer-ingelheim.com/funding/medical-education-grants/", note:"Cardiometabolic (obesity/survodutide), MASH, immunology/ILD."},
+ {co:"Amgen", space:["endocrinology","immunology","raredisease","ophthalmology"], variant:"RFP", cadence:"IME funding, year-round", portal:"Amgen Independent Medical Education", url:"https://www.amgen.com/responsibility/healthy-society/community-investment/independent-medical-education-funding", note:"Broadest published list — obesity, RA/PsA/AS, ANCA vasculitis, lupus, IBD, asthma; TED via ex-Horizon."},
+ {co:"UCB", space:["immunology"], variant:"RFP", cadence:"Educational grants", portal:"UCB Grants", url:"https://www.ucb.com/innovation/funding/grants", note:"Immunology/dermatology and rheumatology (bimekizumab franchise)."},
+ {co:"Johnson & Johnson", space:["immunology"], variant:"RFP", cadence:"Educational grants + Impl. Science RFPs", portal:"J&J Innovative Medicine Grants", url:"https://www.jnj.com/innovativemedicine/us/grants-and-giving/educational", note:"IBD, PsA, AS, RA, gMG, SLE; posts implementation-science RFPs."},
+ {co:"Takeda", space:["immunology","raredisease"], variant:"RFP", cadence:"Rolling + rotating RFPs", portal:"Takeda IME Grants", url:"https://www.takeda.com/en-us/science/independent-medical-education-grants/", note:"IBD, EoE, SBS-IF, HAE, CIDP, rare metabolic."},
+ {co:"Bayer", space:["cardiovascular","nephrology"], variant:"RFP", cadence:"Medical educational grants", portal:"Bayer Grants & Contributions", url:"https://www.grants-contributions.bayer.com/home/medical-educational-grants", note:"Stroke prevention, Cardio-Kidney-Metabolic, HF, CKD in T2D, lupus nephritis."},
+ {co:"Novo Nordisk", space:["cardiovascular","endocrinology"], variant:"RFP", cadence:"External support", portal:"Novo Nordisk External Support", url:"https://www.novonordisk.com/contact-us/external-support.html", note:"Diabetes, obesity, MASH, CV outcomes in cardiometabolic."},
+ {co:"Alnylam", space:["raredisease","nephrology"], variant:"RFP", cadence:"Dated RFPs (often via ACEHP)", portal:"Alnylam Grants & Giving", url:"https://www.alnylam.com/about-alnylam/grants-and-giving", note:"ATTR-CM and rare renal; dated RFPs with real budgets, mirrored on ACEHP as PDFs."},
+ {co:"Vertex", space:["nephrology","raredisease"], variant:"RFP", cadence:"Grants & giving", portal:"Vertex Grants & Giving", url:"https://www.vrtx.com/our-company/grants-giving/", note:"No renal areas published yet — povetacicept PDUFA 30 Nov 2026 would be its first renal product. Watch this portal."},
+ {co:"Otsuka", space:["nephrology"], variant:"RFP", cadence:"IME", portal:"Otsuka Independent Medical Education", url:"https://www.otsuka-us.com/independent-medical-education", note:"IgAN (sibeprenlimab) and ADPKD."},
+ {co:"Travere", space:["nephrology"], variant:"RFP", cadence:"IME", portal:"Travere Independent Medical Education", url:"https://travere.com/independent-medical-education/", note:"IgAN (sparsentan), FSGS, non-immunosuppressive management."},
+ {co:"Apellis", space:["nephrology","ophthalmology"], variant:"RFP", cadence:"IME portal", portal:"Apellis Medical Education", url:"https://apellis.envisionpharma.com", note:"C3G/IC-MPGN and geographic atrophy (Syfovre)."},
+ {co:"Aurinia", space:["nephrology"], variant:"RFP", cadence:"IME", portal:"Aurinia Independent Medical Education", url:"https://www.auriniapharma.com/independent-medical-education", note:"Lupus nephritis (Lupkynis) — single-indication funder."},
+ {co:"Alexion / AstraZeneca (Rare)", space:["raredisease"], variant:"RFP", cadence:"Grants portal", portal:"Alexion Grants", url:"https://alexion.com/grants", note:"Complement (PNH, aHUS, C3G), rare hematology and renal."},
+ {co:"Sobi", space:["raredisease"], variant:"RFP", cadence:"US IME (CyberGrants)", portal:"Sobi Grants", url:"https://grants.sobi.com/", note:"Rare hematology, HAE, rare metabolic/lysosomal."},
+ {co:"Chiesi Global Rare Diseases", space:["raredisease"], variant:"CGA", cadence:"CyberGrants portal", portal:"Chiesi Global Rare Diseases Grants", url:"https://www.cybergrants.com/chiesi/landingpage", note:"Rare metabolic and lysosomal; newly restructured US route."},
+ {co:"CSL", space:["raredisease","immunology"], variant:"RFP", cadence:"IME grants", portal:"CSL Independent Medical Education", url:"https://www.csl.com/research-and-development/awards-grants-and-initiatives/independent-medical-education-grants", note:"HAE, immunology/immunodeficiency, rare hematology."},
+ {co:"Incyte", space:["immunology"], variant:"RFP", cadence:"RFP-gated (since Nov 2024)", portal:"Incyte Grants & Giving", url:"https://www.incytegrantsandgiving.com/", note:"Dermatology — atopic derm, vitiligo, HS; monetary grants by RFP."},
+ {co:"Galderma", space:["immunology"], variant:"RFP", cadence:"RFP-only", portal:"Galderma Request for Proposals", url:"https://galderma-portal.idea-point.com/Request-for-Proposals.aspx?groupid=GRANT", note:"Dermatology; topics defined per RFP, no standing list."},
+ {co:"LEO Pharma", space:["immunology"], variant:"RFP", cadence:"Dermatology CE", portal:"LEO Pharma Grants", url:"https://leo-portal.idea-point.com/", note:"Pure-play dermatology funder."},
+ {co:"Astellas", space:["ophthalmology"], variant:"RFP", cadence:"IME", portal:"Astellas Grants — IME", url:"https://www.astellasgrants.com/IndependentMedicalEducation.html", note:"Retina / geographic atrophy (Izervay), diabetic macular edema."},
+ {co:"Bausch + Lomb", space:["ophthalmology"], variant:"RFP", cadence:"IRC / CME grants", portal:"Bausch + Lomb Independent Research & CME", url:"https://www.bausch.com/product-innovation/independent-research-cme-grants/", note:"Retina, dry eye (Miebo), glaucoma; optometry audience often under-included."},
+ {co:"Tarsus", space:["ophthalmology"], variant:"RFP", cadence:"Medical education", portal:"Tarsus Medical Education", url:"https://www.tarsus-science.com", note:"Demodex blepharitis / ocular surface (Xdemvy)."},
+ {co:"Alcon", space:["ophthalmology"], variant:"CFG", cadence:"Annual cycle — reopens Fall 2026", portal:"Alcon Independent Medical Education", url:"https://www.alconscience.com/medical-education/independent/", note:"Fixed annual cycle; 2027 areas publish before the portal opens."},
+ {co:"Regeneron", space:["ophthalmology","immunology"], variant:"RFP", cadence:"Named RFPs", portal:"Regeneron Educational Funding", url:"https://educationalfunding.regeneron.com", note:"Wet AMD durability (Eylea/Eylea HD); also immunology (Dupixent)."}
 ];
 
 /* Congress lead-time checkpoints. Supporter approvals run 60–90 days, and satellite
@@ -4866,24 +4893,30 @@ function renderRFPCal(){
     </div>`).join("");
 
   // standing portal directory
-  const dir=(typeof RFP_PORTALS!=="undefined"?RFP_PORTALS:[])
-    .filter(p=>inSpace(p.space)&&(!activeSupporter||supMatch(p.co)))
-    .map(p=>`<div class="rfp-dir-row">
-      <div class="rfp-dir-co"><b>${esc(p.co)}</b>${p.variant?` <span class="rfp-var">${esc(p.variant)}</span>`:""}<div class="rfp-dir-cad">${esc(p.cadence)}</div></div>
-      <div class="rfp-dir-note">${esc(p.note||"")}</div>
-      <div class="rfp-dir-lk"><a href="${p.url}" target="_blank" rel="noopener">${esc(p.portal)} →</a>${p.pdf?`<br><a href="${p.pdf}" target="_blank" rel="noopener">📄 Open CGA/RFP PDF</a>`:""}</div>
-    </div>`).join("");
+  const dirAll=(typeof RFP_PORTALS!=="undefined"?RFP_PORTALS:[])
+    .filter(p=>inSpace(p.space)&&(!activeSupporter||supMatch(p.co)));
+  const varClass=v=>{const t=(v||"RFP").split(/[·\s]/)[0].toUpperCase();
+    return t==="CGA"?"vt-cga":t==="CFG"?"vt-cfg":t==="CGN"?"vt-cgn":"vt-rfp";};
+  const dir=dirAll.map(p=>{
+    const dots=(p.space==="all")?`<span class="rfp-c-all">all areas</span>`
+      :(Array.isArray(p.space)?p.space:[p.space]).map(k=>`<span class="cal-dot" style="background:${SPACECOLOR[k]}" title="${esc(SPACENAME[k]||k)}"></span>`).join("");
+    return `<a class="rfp-c" href="${p.url}" target="_blank" rel="noopener" title="${esc(p.note||"")} — ${esc(p.cadence||"")}">
+      <span class="rfp-c-var ${varClass(p.variant)}">${esc(p.variant||"RFP")}</span>
+      <span class="rfp-c-co">${esc(p.co)}</span>
+      <span class="rfp-c-dots">${dots}</span>
+      ${p.pdf?`<span class="rfp-c-pdf" onclick="event.preventDefault();event.stopPropagation();window.open('${p.pdf}','_blank')">📄 PDF</span>`:""}
+    </a>`;
+  }).join("");
 
   const head=dated.length
     ? `<b>${dated.length}</b> dated RFP/CGA/CFG deadline${dated.length===1?"":"s"} in scope`
-    : `No dated in-scope deadline right now — browse the portal directory below`;
+    : `${dirAll.length} funder portals — click any card to open its RFP/CGA/CFG page`;
 
   host.innerHTML=`<div class="dl-box">
     <div class="dl-head"><span class="dl-title">📋 Grant opportunity calendar — RFP · CGA · CFG</span><span class="dl-sum">${head}</span></div>
-    ${rows||`<div class="empty" style="margin-bottom:12px">No dated call published in the selected area(s) this week.</div>`}
-    <div class="rfp-dir-lab">Where these funders post — standing directory</div>
-    <div class="rfp-dir">${dir||`<div class="empty">No portal for this filter.</div>`}</div>
-    <div class="dl-foot">${esc(typeof RFPDL_NOTE!=="undefined"?RFPDL_NOTE:"")} Verified <b>${esc(typeof RFPDL_UPDATED!=="undefined"?RFPDL_UPDATED:"—")}</b>.</div>
+    ${rows?rows+`<div class="rfp-dir-lab">Every funder portal — click to open its RFP/CGA/CFG page</div>`:""}
+    <div class="rfp-cards">${dir||`<div class="empty">No portal for this filter.</div>`}</div>
+    <div class="dl-foot">${esc(typeof RFPDL_NOTE!=="undefined"?RFPDL_NOTE:"")} Hover any card for the cadence and areas of interest. Verified <b>${esc(typeof RFPDL_UPDATED!=="undefined"?RFPDL_UPDATED:"—")}</b>.</div>
   </div>`;
 }
 
