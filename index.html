@@ -140,6 +140,32 @@
   .pv-stale{background:#fff1de;color:#8a5a12}
   .pv-note{font-size:11px;color:var(--muted);line-height:1.65;margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
   .pv-sched{border-top:0;padding-top:0;margin-top:6px}
+  /* ---------- table of contents, legend, section headers ---------- */
+  .toc{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;background:#fbfcfd;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:0 0 12px}
+  .toc-lab{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-right:4px}
+  .toc a{font-size:12.5px;font-weight:600;text-decoration:none;color:var(--ink);background:#eef1f6;border-radius:999px;padding:4px 11px;white-space:nowrap}
+  .toc a:hover{background:var(--ink);color:#fff}
+  .legend{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 20px;font-size:11px}
+  .legend-lab{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-right:4px}
+  .lg-chip{font-size:10.5px;font-weight:700;color:#fff;border-radius:4px;padding:2px 8px;letter-spacing:.2px}
+  .legend-sep{width:1px;height:16px;background:var(--line);margin:0 4px}
+  h2.sechead{font-size:22px;font-weight:800;letter-spacing:-.2px;margin:30px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line);scroll-margin-top:14px}
+  /* ---------- RFP variant tag + portal directory ---------- */
+  .rfp-var{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.4px;color:#fff;background:#7a1020;border-radius:3px;padding:1px 6px;margin-right:5px;vertical-align:middle}
+  .rfp-dir-lab{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;padding-top:10px;border-top:1px solid var(--line)}
+  .rfp-dir-row{display:grid;grid-template-columns:2fr 3.4fr auto;gap:12px;align-items:start;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .rfp-dir-row:last-child{border-bottom:0}
+  .rfp-dir-co b{font-size:13px}
+  .rfp-dir-cad{font-size:10.5px;color:var(--muted);margin-top:2px}
+  .rfp-dir-note{font-size:11.5px;line-height:1.55;color:var(--ink)}
+  .rfp-dir-lk{font-size:11.5px;white-space:nowrap;text-align:right}
+  @media(max-width:640px){.rfp-dir-row{grid-template-columns:1fr}.rfp-dir-lk{text-align:left}}
+  /* ---------- conference checkpoints ---------- */
+  .ck-legend{font-size:11.5px;color:var(--muted);margin:2px 0 12px}
+  .ck-key{display:inline-block;font-size:9.5px;font-weight:700;color:#fff;border-radius:3px;padding:1px 6px}
+  .ck-badge{display:inline-block;font-size:9px;font-weight:800;color:#fff;border-radius:3px;padding:1px 5px;margin-top:4px}
+  .ck-cong{color:var(--muted)}
+  .ck-row .cf-sp{margin-left:4px}
   /* ---------- deadline banner ---------- */
   .dl-box{border:1px solid #e4c9cf;border-left:4px solid #8d1b32;border-radius:8px;background:#fffafb;padding:14px 16px;margin:0 0 22px}
   .dl-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:11px;padding-bottom:9px;border-bottom:1px solid #f0dde1}
@@ -822,7 +848,38 @@
   </div>
 
   <div id="provenance"></div>
-  <div id="deadlines" data-sec="sec-deadlines"></div>
+
+  <nav class="toc" id="toc">
+    <span class="toc-lab">Jump to:</span>
+    <a href="#sec-rfpcal">📋 Grant calendar (RFP/CGA/CFG)</a>
+    <a href="#sec-confcheck">🎯 Conference checkpoints</a>
+    <a href="#sec-lookup">🔎 Supporter lookup</a>
+    <a href="#sec-emphasis">🎯 Supporter emphasis</a>
+    <a href="#sec-radar">📡 Therapeutic radar</a>
+    <a href="#sec-pdufa">⚖️ FDA decision calendar</a>
+    <a href="#sec-conf">🗓️ Congress calendar</a>
+    <a href="#sec-signals">⚡ This week's signals</a>
+    <a href="#sec-gap">🧭 Gap-Finder</a>
+    <a href="#sec-directory">📇 Grant / RFP directory</a>
+  </nav>
+  <div class="legend" id="legend">
+    <span class="legend-lab">Colour key:</span>
+    <span class="lg-chip" style="background:var(--cardio)">Cardiovascular</span>
+    <span class="lg-chip" style="background:var(--nephro)">Nephrology</span>
+    <span class="lg-chip" style="background:var(--endo)">Endocrinology</span>
+    <span class="lg-chip" style="background:var(--immuno)">Immunology</span>
+    <span class="lg-chip" style="background:var(--rare)">Rare Disease</span>
+    <span class="lg-chip" style="background:var(--oph)">Ophthalmology</span>
+    <span class="legend-sep"></span>
+    <span class="lg-chip lg-rfp" style="background:#7a1020">RFP/CGA/CFG deadline</span>
+    <span class="lg-chip" style="background:#0a6b4a">catalyst / signal</span>
+  </div>
+
+  <h2 class="sechead" id="sec-rfpcal">📋 Grant opportunity calendar — RFP · CGA · CFG</h2>
+  <div id="rfpcal"></div>
+
+  <h2 class="sechead" id="sec-confcheck">🎯 Conference lead-time checkpoints — 9 / 6 / 3 months out</h2>
+  <div id="confcheck"></div>
 
   <div class="lookup" id="sec-lookup">
     <div class="lk-head">
@@ -842,64 +899,22 @@
     <div id="lkOut"></div>
   </div>
 
-  <details class="howto" id="sec-howto">
-    <summary><b>New here? How to use this tracker</b> <span class="howtohint">— 60-second orientation</span></summary>
-    <div class="howtobody">
-      <p class="howlede">This tracks where independent medical education (IME/CME) funding is likely to come from next, across six therapeutic areas. It answers three questions: <b>who can fund education right now</b>, <b>who is about to be able to</b>, and <b>what topic they'll care about</b>.</p>
-      <div class="howgrid">
-        <div class="howcard">
-          <div class="hownum">1</div>
-          <h4>Start with a space</h4>
-          <p>Use the coloured tabs above to filter to one therapeutic area, or stay on <b>All</b>. Everything below re-filters with you.</p>
-        </div>
-        <div class="howcard">
-          <div class="hownum">2</div>
-          <h4>Check this week's signals</h4>
-          <p>Approvals, readouts and launches that typically <i>precede</i> a company opening education funding. This is the earliest warning you get.</p>
-        </div>
-        <div class="howcard">
-          <div class="hownum">3</div>
-          <h4>Run the Gap-Finder</h4>
-          <p>Paste what you already cover. It returns the white space, the funder that fits, and how to reach them. Nothing you paste leaves this page.</p>
-        </div>
-        <div class="howcard">
-          <div class="hownum">4</div>
-          <h4>Work the readiness tags</h4>
-          <p><span class="rd rd-ready">Ready to approach</span> already funds IME — submit. <span class="rd rd-near">Near-term</span> has a catalyst in sight — warm up now. <span class="rd rd-early">Relationship-building</span> is a longer play.</p>
-        </div>
-        <div class="howcard">
-          <div class="hownum">5</div>
-          <h4>Use the calendar for 2027</h4>
-          <p>Catalysts bucketed into now / rest of 2026 / 2027+. Enduring content needs 12–18 months of lead time, so 2027 items need seeding during 2026.</p>
-        </div>
-        <div class="howcard">
-          <div class="hownum">6</div>
-          <h4>Export when you need to</h4>
-          <p><b>⬇ Download PDF</b> produces a full snapshot with every link printed as visible text, so it stays usable once flattened.</p>
-        </div>
-      </div>
-      <p class="howfoot">Grant portals and contacts verified 2026-07-10. Signals and supporter checks refresh automatically every Monday. Competitive intelligence is directional — IME award registries are almost never public — so confirm every deadline on the company portal before acting.</p>
-    </div>
-  </details>
-
-  <div class="note">
-    <b>Reading the RFP signals.</b> <span class="rfp open" style="padding:1px 6px">Open RFP</span> = grant call live now with a deadline. <span class="rfp limited" style="padding:1px 6px">Limited</span> = area listed but funding constrained. <span class="rfp signal" style="padding:1px 6px">Signal</span> = a readout, approval or launch that typically <i>precedes</i> a company opening education funding — watch the newsroom. Agency/vendor business RFPs are rarely public; they surface via company procurement teams, the <a href="https://www.acehp.org/" target="_blank" rel="noopener">Alliance for Continuing Education in the Health Professions</a>, and med-ed network/job boards. Verify every deadline on the portal before acting — cycles rotate.
-  </div>
 
 
-  <div class="blocklabel" id="sec-emphasis" style="margin-top:22px;font-size:12px">🎯 Supporter emphasis &amp; drift — what they say they want, and the gaps it leaves</div>
+
+  <h2 class="sechead" id="sec-emphasis">🎯 Supporter emphasis &amp; drift</h2>
   <div id="emphasis"></div>
 
-  <div class="blocklabel" id="sec-radar" style="margin-top:22px;font-size:12px">📡 Therapeutic area radar — what moved, and what it means</div>
+  <h2 class="sechead" id="sec-radar">📡 Therapeutic area radar</h2>
   <div id="radar"></div>
 
-  <div class="blocklabel" id="sec-pdufa" style="margin-top:22px;font-size:12px">⚖️ FDA decision calendar — PDUFA dates, filings &amp; catalysts ahead</div>
+  <h2 class="sechead" id="sec-pdufa">⚖️ FDA decision calendar — PDUFA, filings &amp; catalysts</h2>
   <div id="pdufa"></div>
 
-  <div class="blocklabel" id="sec-conf" style="margin-top:22px;font-size:12px">🗓️ Congress calendar — next 12 months, rolling</div>
+  <h2 class="sechead" id="sec-conf">🗓️ Congress calendar — next 12 months</h2>
   <div id="conferences"></div>
 
-  <div class="blocklabel" id="sec-signals" style="margin-top:22px;font-size:12px">⚡ This week's signals — approvals &amp; readouts that precede education funding</div>
+  <h2 class="sechead" id="sec-signals">⚡ This week's signals</h2>
   <div id="signals"></div>
 
   <div class="gapbox" id="sec-gap">
@@ -1114,7 +1129,7 @@
   <div class="blocklabel" id="sec-watch" style="margin-top:40px;font-size:12px">🔭 Potential new supporters to watch — emerging companies likely to fund IME/CME as they approach launch</div>
   <div id="watchlist"></div>
 
-  <div class="blocklabel" style="margin-top:36px;font-size:12px">Master IME / CME grant &amp; RFP directory — every company, with region, grant contact &amp; spaces funded</div>
+  <h2 class="sechead" id="sec-directory">📇 Master IME / CME grant &amp; RFP directory</h2>
   <div id="directory"></div>
 
   <footer class="src">
@@ -3399,21 +3414,60 @@ const EMPHASIS = {
    seeing the date on the funder's own page. An invented deadline makes Leen miss a
    real one. If nothing is confirmed, leave the array empty — an empty banner that
    says so is correct and useful; a padded one is not. */
-const RFPDL_UPDATED = "August 11, 2026 (scope-corrected)";
-const RFPDL_NOTE = "No funder currently has a published, dated RFP deadline in any of the tracker's six non-oncologic areas (cardiovascular, nephrology, endocrinology, immunology, rare disease, ophthalmology). Pfizer is running dated competitive-grants RFPs right now, but every one is OUT OF SCOPE for this tracker — haemophilia/bleeding disorders, vaccines and infectious disease, or oncology — so none are listed here. The remaining in-scope portals (Alcon, Genentech iMED, Lilly, Novartis, AbbVie, Takeda, Galderma, Vertex, Otsuka, UCB, Incyte, Bayer, AstraZeneca, Travere) are rolling submission rather than fixed-cycle. The lead-time cut-offs below, computed back from confirmed congress dates, are therefore the real planning dates.";
-const RFPDL = [
- {co:"Alcon", title:"Independent Medical Education portal reopens for the 2027 grant cycle",
-  space:["ophthalmology"], due:"2026-10-01", confirmed:false,
-  portal:"Alcon Grants & Giving", url:"https://www.alcon.com/grants-and-giving",
-  note:"Alcon has signalled a Fall 2026 reopening for 2027 funding but has NOT published a date. 1 Oct is a placeholder for sorting only — treat it as 'watch the portal', not a deadline."},
- {co:"Eli Lilly Foundation", title:"Annual open call for the 2027 cycle",
-  space:["endocrinology","immunology"], due:"2027-01-01", confirmed:false,
-  portal:"Lilly Grant Office", url:"https://grantoffice.lilly.com/areas-of-focus",
-  note:"Foundation moves to an annual open call from 2027. No date published. Lilly's awarded-grants registry remains the best public read on what actually gets funded."}
+const RFPDL_UPDATED = "August 11, 2026";
+const RFPDL_NOTE = "This is the grant-opportunity calendar. It shows dated RFP / CGA / CFG calls (any naming variant) in the six non-oncologic areas, newest deadline first, each linked to its posting — a direct PDF link where the funder posts one. Right now no funder has a published, dated, in-scope deadline (Pfizer's open dated calls are all haemophilia, vaccines or oncology — out of scope), so the section below is the standing public-portal directory: where each company posts, and how often. The weekly task pulls fresh dated postings from these portals and the Alliance job board as they appear.";
+
+/* Naming-variant recognition. Funders call the same thing many names — RFP,
+   CGA (Competitive Grant Announcement / Application), CFG (Call for Grants),
+   RFA, CFP, LOI, "areas of interest". Normalise so the section catches them all. */
+const RFP_VARIANTS = {
+  "rfp":"RFP", "request for proposal":"RFP", "request for proposals":"RFP",
+  "cga":"CGA", "competitive grant announcement":"CGA", "competitive grant application":"CGA", "competitive grant":"CGA",
+  "cfg":"CFG", "call for grant":"CFG", "call for grants":"CFG",
+  "rfa":"RFA", "request for application":"RFA", "request for applications":"RFA",
+  "cfp":"CFP", "call for proposal":"CFP", "call for proposals":"CFP",
+  "loi":"LOI", "letter of intent":"LOI",
+  "aoi":"AOI", "area of interest":"AOI", "areas of interest":"AOI"
+};
+function rfpVariant(s){
+  const t=(s||"").toLowerCase();
+  for(const k in RFP_VARIANTS){ if(t.indexOf(k)>-1) return RFP_VARIANTS[k]; }
+  return "RFP";
+}
+
+/* Dated calls. Shape:
+   {co, title, variant?:"RFP"|"CGA"|"CFG"|…, space:[keys]|"all", due:"YYYY-MM-DD",
+    confirmed:true|false, pdf?:true, budget?, portal, url, note}
+   confirmed:true only when the date is published on the funder's page/PDF and seen
+   this run. pdf:true means `url` points straight at the RFP PDF. Never invent a date. */
+const RFPDL = [];
+
+/* Standing public grant portals — the directory. Where each company posts IME/CME
+   grant calls, and the cadence, so the calendar is useful even between dated calls.
+   The weekly task adds a dated RFPDL entry above the moment one of these posts. */
+const RFP_PORTALS = [
+ {co:"Pfizer", space:["cardiovascular","nephrology","endocrinology","immunology","raredisease","ophthalmology"], cadence:"Dated RFPs, posted year-round", portal:"Pfizer Competitive Grants — active RFPs", url:"https://www.pfizer.com/about/programs-policies/grants/competitive-grants", note:"The most transparent portal: a live table of dated calls with PDF links and a closed-RFP archive. Filter to Internal Medicine / Inflammation & Immunology / Rare Disease; skip Oncology, Vaccines, Hospital."},
+ {co:"AstraZeneca", space:["cardiovascular","nephrology","immunology","raredisease"], cadence:"RFPs + rolling", portal:"AZ Medical Education Grants / ESR portal", url:"https://www.astrazeneca.com/our-company/our-global-medical-education-grants.html", note:"CVRM, Respiratory & Immunology and Rare Disease areas of interest. Posts intermittent RFPs; confirm the live URL each run."},
+ {co:"GSK", space:["immunology","raredisease"], cadence:"Independent Medical Education RFPs", portal:"GSK Independent Medical Education", url:"https://www.gsk.com/en-gb/innovation/medical-education-and-independent-funding/independent-medical-education/", note:"Respiratory/immunology-weighted; posts dated IME RFPs. Eric's starter list — verify the live posting page each run."},
+ {co:"Bristol Myers Squibb", space:["immunology"], cadence:"IME RFPs, intermittent", portal:"BMS Independent Medical Education", url:"https://www.bms.com/about-us/responsibility/independent-grants.html", note:"Immunology and lupus; the RFP table posts intermittently and topics are broad."},
+ {co:"AbbVie", space:["immunology","ophthalmology"], cadence:"IME Provider Network (gated)", portal:"AbbVie Medical Education Grants", url:"https://www.abbvie.com/who-we-are/medical-affairs/independent-medical-education-grants.html", note:"Access is gated through the IME Provider Network; immunology plus DME/glaucoma. Access, not topic, is the binding constraint."},
+ {co:"Novartis", space:["cardiovascular","nephrology","immunology"], cadence:"RFP-driven + rolling", portal:"Novartis Independent Medical Education", url:"https://www.novartis.com/about/our-support-healthcare-community/independent-medical-education", note:"IgA nephropathy, C3G, AF/ASCVD, Sjögren's. Posts named RFPs."},
+ {co:"Genentech / Roche", space:["nephrology","ophthalmology"], cadence:"Named RFPs via iMED", portal:"Genentech iMED grants", url:"https://www.gene.com/good/grants/independent-medical-education", note:"Names specific diseases incl. IgA nephropathy; implementation-science calls posted on a cycle."},
+ {co:"Lilly Grant Office", space:["endocrinology","immunology"], cadence:"Rolling; Foundation annual open call from 2027", portal:"Lilly Grant Office", url:"https://grantoffice.lilly.com/areas-of-focus", note:"Rolling submission ≥60 days before activity. The public awarded-grants registry (grantoffice.lilly.com/transparency) is the best read on what actually funds."},
+ {co:"Alcon", space:["ophthalmology"], cadence:"Annual cycle — portal reopens Fall 2026 for 2027", portal:"Alcon Grants & Giving", url:"https://www.alcon.com/grants-and-giving", note:"Fixed annual cycle; portal closes between cycles. 2027 areas of interest publish before the portal opens — watch for the reopen."},
+ {co:"Regeneron", space:["ophthalmology"], cadence:"Named RFPs", portal:"Regeneron Independent Medical Education", url:"https://www.regeneron.com/responsibility/independent-medical-education", note:"Wet AMD durability; posts named RFPs on an RFP page — monitor it."},
+ {co:"Takeda", space:["immunology","raredisease"], cadence:"Rotating RFP list", portal:"Takeda IISR / IME grants", url:"https://www.takeda.com/what-we-do/research-and-development/collaboration-opportunities/", note:"IBD, EoE, SBS-IF, HAE, CIDP, rare metabolic. The RFP list rotates."},
+ {co:"Alnylam", space:["raredisease","nephrology"], cadence:"Dated RFPs", portal:"Alnylam Grants & Giving", url:"https://www.alnylam.com/grants", note:"ATTR-CM and rare renal; has posted dated shared-decision-making RFPs with real budgets."}
 ];
-/* Most funders in this tracker require the request in 45–90 days before the
-   activity starts; 60 days is the modal rule across the grants data, so that is
-   the line the banner draws. Overrides live in the `dl` field of each grants entry. */
+
+/* Congress lead-time checkpoints. Supporter approvals run 60–90 days, and satellite
+   symposia must be pitched far earlier, so the tracker works three checkpoints back
+   from each congress start date instead of one 60-day cut-off. */
+const CONF_CHECKPOINTS = [
+ {months:9, label:"Satellite proposal to supporters", note:"Get satellite-symposium proposals in front of supporters now — this is the window to secure a slot."},
+ {months:6, label:"Application timeline", note:"Stay ahead of the congress's own application and abstract deadlines."},
+ {months:3, label:"Travel + supporter follow-up", note:"Book travel and confirm with supporters about attendance; remember supporter approvals take 60–90 days."}
+];
 const LEAD_DAYS_DEFAULT = 60;
 /* WEEKLY-RFPDL-END */
 
@@ -4740,72 +4794,115 @@ function gapRefsHtml(g){
    congress dates — if a funder needs 60 days and the congress is in 70, the
    decision to submit is this week. Anything a funder has only hinted at renders
    in a separate, clearly-labelled row and is never counted. */
-function renderDeadlines(){
-  const host=$("#deadlines"); if(!host) return;
+/* ---------- GRANT OPPORTUNITY CALENDAR (RFP / CGA / CFG) ---------- */
+function renderRFPCal(){
+  const host=$("#rfpcal"); if(!host) return;
   const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const now=new Date(); now.setHours(0,0,0,0);
-  const HORIZON=90, DAY=86400000;
+  const DAY=86400000, HORIZON=180;
   const pd=s=>{const p=(s||"").split("-"); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;};
-  const fmtd=d=>d?`${d.getDate()} ${MON[d.getMonth()]}`:"—";
+  const fmtd=d=>d?`${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`:"—";
   const inSpace=k=>activeTab==="all"||k==="all"||(Array.isArray(k)?k.includes(activeTab):k===activeTab);
   const days=d=>Math.round((d-now)/DAY);
-
-  /* (1) published, dated RFP calls */
-  const dated=(typeof RFPDL!=="undefined"?RFPDL:[])
-    .map(x=>({...x,_d:pd(x.due)}))
-    .filter(x=>x._d&&inSpace(x.space)&&(!activeSupporter||supMatch(x.co)));
-  const hard=dated.filter(x=>x.confirmed&&days(x._d)>=0&&days(x._d)<=HORIZON).sort((a,b)=>a._d-b._d);
-  const soft=dated.filter(x=>!x.confirmed).sort((a,b)=>a._d-b._d);
-
-  /* (2) lead-time cut-offs computed backwards from confirmed congress dates */
-  const lead=(typeof LEAD_DAYS_DEFAULT!=="undefined"?LEAD_DAYS_DEFAULT:60);
-  const cuts=(typeof CONFERENCES!=="undefined"?CONFERENCES:[])
-    .map(c=>({c,_s:pd(c.start)}))
-    .filter(x=>x._s&&!x.c.tbc)
-    .filter(x=>activeTab==="all"||(x.c.spaces||[]).includes(activeTab))
-    .filter(x=>!(activeTab==="immunology"&&immunoSub!=="all")||(x.c.sub||[]).includes(immunoSub))
-    .map(x=>({...x,_cut:new Date(x._s.getTime()-lead*DAY)}))
-    .filter(x=>days(x._cut)<=HORIZON&&days(x._s)>=0)
-    .sort((a,b)=>a._cut-b._cut);
-
   const chip=n=>n<0?`<span class="dl-chip dl-past">closed ${Math.abs(n)}d ago</span>`
               :n===0?`<span class="dl-chip dl-now">today</span>`
               :n<=14?`<span class="dl-chip dl-now">${n} days left</span>`
               :n<=45?`<span class="dl-chip dl-soon">${n} days left</span>`
               :`<span class="dl-chip dl-ok">${n} days left</span>`;
 
-  let rows="";
-  if(hard.length) rows+=hard.map(x=>`<div class="dl-row">
+  // dated, in-scope calls
+  const dated=(typeof RFPDL!=="undefined"?RFPDL:[])
+    .map(x=>({...x,_d:pd(x.due),_v:x.variant||rfpVariant((x.title||"")+" "+(x.portal||""))}))
+    .filter(x=>x._d&&x.confirmed&&inSpace(x.space)&&(!activeSupporter||supMatch(x.co)))
+    .filter(x=>days(x._d)>=0)
+    .sort((a,b)=>a._d-b._d);
+
+  const rows=dated.map(x=>`<div class="dl-row">
       <div class="dl-date">${esc(fmtd(x._d))}</div>
-      <div class="dl-what"><b>${esc(x.co)}</b> — ${esc(x.title)}${x.budget?` <span class="dl-bud">${esc(x.budget)}</span>`:""}
+      <div class="dl-what"><span class="rfp-var">${esc(x._v)}</span> <b>${esc(x.co)}</b> — ${esc(x.title)}${x.budget?` <span class="dl-bud">${esc(x.budget)}</span>`:""}
         ${x.note?`<div class="dl-note">${esc(x.note)}</div>`:""}</div>
-      <div class="dl-act">${chip(days(x._d))} <a href="${x.url}" target="_blank" rel="noopener">${esc(x.portal)} →</a></div>
+      <div class="dl-act">${chip(days(x._d))} <a href="${x.url}" target="_blank" rel="noopener">${x.pdf?"📄 Open RFP (PDF)":esc(x.portal)+" →"}</a></div>
     </div>`).join("");
 
-  rows+=cuts.map(x=>{
-    const n=days(x._cut);
-    return `<div class="dl-row dl-derived">
-      <div class="dl-date">${esc(fmtd(x._cut))}</div>
-      <div class="dl-what"><b>${esc(x.c.short||x.c.name)}</b> — submission cut-off for a ${lead}-day funder
-        <div class="dl-note">${esc(x.c.name)}, ${esc(x.c.city)}${x.c.country?", "+esc(x.c.country):""} · ${esc(fmtd(x._s))}${x.c.end?"–"+esc(fmtd(pd(x.c.end))):""}. ${n<0?"A standard 60-day window has already closed; only funders on a 45-day rule are still reachable.":"Anything tied to this congress needs to be with the grants office by this date."}</div></div>
-      <div class="dl-act">${chip(n)} <a href="${x.c.industryUrl||x.c.url}" target="_blank" rel="noopener">Congress site →</a></div>
+  // standing portal directory
+  const dir=(typeof RFP_PORTALS!=="undefined"?RFP_PORTALS:[])
+    .filter(p=>inSpace(p.space)&&(!activeSupporter||supMatch(p.co)))
+    .map(p=>`<div class="rfp-dir-row">
+      <div class="rfp-dir-co"><b>${esc(p.co)}</b><div class="rfp-dir-cad">${esc(p.cadence)}</div></div>
+      <div class="rfp-dir-note">${esc(p.note||"")}</div>
+      <div class="rfp-dir-lk"><a href="${p.url}" target="_blank" rel="noopener">${esc(p.portal)} →</a></div>
+    </div>`).join("");
+
+  const head=dated.length
+    ? `<b>${dated.length}</b> dated RFP/CGA/CFG deadline${dated.length===1?"":"s"} in scope`
+    : `No dated in-scope deadline right now — browse the portal directory below`;
+
+  host.innerHTML=`<div class="dl-box">
+    <div class="dl-head"><span class="dl-title">📋 Grant opportunity calendar — RFP · CGA · CFG</span><span class="dl-sum">${head}</span></div>
+    ${rows||`<div class="empty" style="margin-bottom:12px">No dated call published in the selected area(s) this week.</div>`}
+    <div class="rfp-dir-lab">Where these funders post — standing directory</div>
+    <div class="rfp-dir">${dir||`<div class="empty">No portal for this filter.</div>`}</div>
+    <div class="dl-foot">${esc(typeof RFPDL_NOTE!=="undefined"?RFPDL_NOTE:"")} Verified <b>${esc(typeof RFPDL_UPDATED!=="undefined"?RFPDL_UPDATED:"—")}</b>.</div>
+  </div>`;
+}
+
+/* ---------- CONFERENCE LEAD-TIME CHECKPOINTS (9 / 6 / 3 month) ---------- */
+function renderConfCheckpoints(){
+  const host=$("#confcheck"); if(!host) return;
+  const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const now=new Date(); now.setHours(0,0,0,0);
+  const DAY=86400000, HORIZON=270; // show checkpoints falling within ~9 months
+  const pd=s=>{const p=(s||"").split("-"); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;};
+  const fmtd=d=>d?`${d.getDate()} ${MON[d.getMonth()]} ${d.getFullYear()}`:"—";
+  const days=d=>Math.round((d-now)/DAY);
+  const chip=n=>n<0?`<span class="dl-chip dl-past">passed</span>`
+              :n<=14?`<span class="dl-chip dl-now">${n}d — act now</span>`
+              :n<=45?`<span class="dl-chip dl-soon">${n} days</span>`
+              :`<span class="dl-chip dl-ok">${n} days</span>`;
+  const CK=(typeof CONF_CHECKPOINTS!=="undefined"?CONF_CHECKPOINTS:[]);
+
+  const confs=(typeof CONFERENCES!=="undefined"?CONFERENCES:[])
+    .map(c=>({c,_s:pd(c.start)}))
+    .filter(x=>x._s&&!x.c.tbc&&days(x._s)>=0)
+    .filter(x=>activeTab==="all"||(x.c.spaces||[]).includes(activeTab))
+    .filter(x=>!(activeTab==="immunology"&&immunoSub!=="all")||(x.c.sub||[]).includes(immunoSub))
+    .filter(x=>!activeSupporter||(function(){
+      const sp=Object.keys(CURATED).filter(k=>(CURATED[k].companies||[]).some(c=>supMatch(c.name))||(CURATED[k].grants||[]).some(g=>supMatch(g.co)));
+      return (x.c.spaces||[]).some(s=>sp.indexOf(s)>-1);
+    })());
+
+  // build one row per (congress × checkpoint) whose checkpoint date is upcoming within horizon
+  let items=[];
+  confs.forEach(x=>{
+    CK.forEach(k=>{
+      const cd=new Date(x._s.getTime()-k.months*30.4*DAY);
+      const n=days(cd);
+      if(n>=-14 && n<=HORIZON) items.push({cd,n,k,c:x.c,_s:x._s});
+    });
+  });
+  items.sort((a,b)=>a.cd-b.cd);
+
+  if(!items.length){
+    host.innerHTML=`<div class="dl-box"><div class="dl-head"><span class="dl-title">🎯 Conference lead-time checkpoints</span></div><div class="empty">No congress checkpoints coming up for this filter.</div></div>`;
+    return;
+  }
+
+  const mColor={9:"#7a1020",6:"#8a5a12",3:"#0a6b4a"};
+  const rows=items.map(it=>{
+    const dots=(it.c.spaces||[]).map(sp=>`<span class="cf-sp" style="background:${SPACECOLOR[sp]}">${esc(SPACENAME[sp]||sp)}</span>`).join("");
+    return `<div class="dl-row ck-row">
+      <div class="dl-date">${esc(fmtd(it.cd))}<div class="ck-badge" style="background:${mColor[it.k.months]}">${it.k.months}-mo</div></div>
+      <div class="dl-what"><b>${esc(it.c.short||it.c.name)}</b> — ${esc(it.k.label)}
+        <div class="dl-note">${esc(it.k.note)} <span class="ck-cong">${esc(it.c.name)}, ${esc(it.c.city)}${it.c.country?", "+esc(it.c.country):""} · ${esc(fmtd(it._s))}.</span> ${dots}</div></div>
+      <div class="dl-act">${chip(it.n)} <a href="${it.c.industryUrl||it.c.url}" target="_blank" rel="noopener">Congress →</a></div>
     </div>`;
   }).join("");
 
-  const softRows=soft.length?`<div class="dl-soft">
-    <div class="dl-soft-lab">⚠️ Signalled but NOT published — do not plan against these</div>
-    ${soft.map(x=>`<div class="dl-soft-row"><b>${esc(x.co)}</b> — ${esc(x.title)}. ${esc(x.note||"")} <a href="${x.url}" target="_blank" rel="noopener">${esc(x.portal)} →</a></div>`).join("")}
-  </div>`:"";
-
-  const headline = hard.length
-    ? `<b>${hard.length}</b> published RFP deadline${hard.length===1?"":"s"} and <b>${cuts.length}</b> lead-time cut-off${cuts.length===1?"":"s"} in the next 90 days`
-    : `<b>No published RFP deadlines</b> in the next 90 days · <b>${cuts.length}</b> lead-time cut-off${cuts.length===1?"":"s"}`;
-
   host.innerHTML=`<div class="dl-box">
-    <div class="dl-head"><span class="dl-title">⏰ Due in the next 90 days</span><span class="dl-sum">${headline}</span></div>
-    ${rows||`<div class="empty">Nothing due in the next 90 days for this filter.</div>`}
-    ${softRows}
-    <div class="dl-foot">${esc(typeof RFPDL_NOTE!=="undefined"?RFPDL_NOTE:"")} Cut-off dates are calculated as the congress start date minus ${lead} days, the modal requirement across the grant portals in this tracker; individual funders range from 45 to 90 days, so check the portal before relying on a date near the line. Verified <b>${esc(typeof RFPDL_UPDATED!=="undefined"?RFPDL_UPDATED:"—")}</b>.</div>
+    <div class="dl-head"><span class="dl-title">🎯 Conference lead-time checkpoints — 9 / 6 / 3 months out</span><span class="dl-sum"><b>${items.length}</b> checkpoint${items.length===1?"":"s"} ahead</span></div>
+    <div class="ck-legend"><span class="ck-key" style="background:#7a1020">9-mo</span> satellite proposal to supporters &nbsp;·&nbsp; <span class="ck-key" style="background:#8a5a12">6-mo</span> application timeline &nbsp;·&nbsp; <span class="ck-key" style="background:#0a6b4a">3-mo</span> travel + supporter follow-up</div>
+    ${rows}
+    <div class="dl-foot">Checkpoints are counted back from each congress start. Because supporter approvals typically take <b>60–90 days</b>, the 9-month mark is when a satellite proposal should already be in front of a supporter, the 6-month mark keeps you ahead of the congress's own application deadlines, and the 3-month mark is the trigger to book travel and confirm attendance. Congress dates verified <b>${esc(typeof CONFERENCES_UPDATED!=="undefined"?CONFERENCES_UPDATED:"—")}</b>.</div>
   </div>`;
 }
 
@@ -5484,7 +5581,8 @@ function setTA(tab,sub){
   syncTAControls();
   render();
   if(typeof renderProvenance==="function") renderProvenance();
-  if(typeof renderDeadlines==="function") renderDeadlines();
+  if(typeof renderRFPCal==="function") renderRFPCal();
+  if(typeof renderConfCheckpoints==="function") renderConfCheckpoints();
   if(typeof renderEmphasis==="function") renderEmphasis();
   if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();
@@ -5512,7 +5610,8 @@ function applySupporterFilter(){
   if(typeof renderDirectory==="function") renderDirectory();
   if(typeof renderConferences==="function") renderConferences();
   if(typeof renderProvenance==="function") renderProvenance();
-  if(typeof renderDeadlines==="function") renderDeadlines();
+  if(typeof renderRFPCal==="function") renderRFPCal();
+  if(typeof renderConfCheckpoints==="function") renderConfCheckpoints();
   if(typeof renderEmphasis==="function") renderEmphasis();
   if(typeof renderRadar==="function") renderRadar();
   if(typeof renderPdufa==="function") renderPdufa();   // was missing — the FDA
@@ -5960,7 +6059,8 @@ renderCalendar();
 renderWatch();
 renderDirectory();
 renderProvenance();
-renderDeadlines();
+renderRFPCal();
+renderConfCheckpoints();
 renderEmphasis();
 renderRadar();
 renderPdufa();
