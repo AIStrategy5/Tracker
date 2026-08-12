@@ -3570,9 +3570,9 @@ const RFP_PORTALS = [
    symposia must be pitched far earlier, so the tracker works three checkpoints back
    from each congress start date instead of one 60-day cut-off. */
 const CONF_CHECKPOINTS = [
- {months:9, label:"Satellite proposal to supporters", note:"Get satellite-symposium proposals in front of supporters now — this is the window to secure a slot."},
+ {months:3, label:"Travel + supporter follow-up", note:"Book travel and confirm with supporters about attendance; remember supporter approvals take 60–90 days."},
  {months:6, label:"Application timeline", note:"Stay ahead of the congress's own application and abstract deadlines."},
- {months:3, label:"Travel + supporter follow-up", note:"Book travel and confirm with supporters about attendance; remember supporter approvals take 60–90 days."}
+ {months:9, label:"Satellite proposal to supporters", note:"Get satellite-symposium proposals in front of supporters now — this is the window to secure a slot."}
 ];
 const LEAD_DAYS_DEFAULT = 60;
 /* WEEKLY-RFPDL-END */
@@ -4473,22 +4473,8 @@ function renderSpace(s){
         <div class="cigap-item"><b>Underserved clinical decisions:</b> ${esc(ci.underservedDecisions)}</div>
       </div>`;
     }
-    // Medical Affairs leadership
-    {
-      // Named Medical Affairs contacts are NOT displayed. A spot-check in Aug 2026
-      // found the stored list unreliable — one entry mis-scoped to regulatory, one
-      // unverifiable — so rather than show names that might be wrong, this points at
-      // the primary sources where a current name can be confirmed.
-      const coList=[...new Set((cur.companies||[]).filter(c=>c.funder!==false).map(c=>supCanon(c.name)))].slice(0,10);
-      sec.innerHTML+=`<div class="cisubhead"><span class="ciicon lead">👤</span> Finding a current Medical Affairs contact</div>
-      <div class="ma-howto">
-        <div class="ma-howto-lede">No names are listed here on purpose. Pharma Medical Affairs leadership turns over constantly, and a stale or mis-scoped name is worse than none — you could approach the wrong person, in the wrong function, at the wrong company. Use these live searches instead, which always return whoever holds the role today:</div>
-        <div class="ma-howto-grid">${coList.map(co=>`<div class="ma-howto-co"><b>${esc(co)}</b>
-          <a href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(co+" medical affairs "+s.label)}" target="_blank" rel="noopener">LinkedIn people →</a>
-          <a href="https://www.google.com/search?q=${encodeURIComponent(co+" medical affairs leadership "+s.label)}" target="_blank" rel="noopener">web →</a></div>`).join("")}</div>
-        <div class="ma-howto-foot"><b>Best primary sources, in order:</b> the company's own medical-affairs or leadership page → a company press release naming the person → a LinkedIn profile you can actually open. Confirm the role covers <i>${esc(s.label)}</i> specifically and sits in Medical Affairs rather than regulatory, clinical development or commercial.<br><br>Medical Affairs and MSL contacts are appropriate for scientific exchange — data discussion, unmet-need input, investigator-initiated study ideas — <b>never</b> to request or approve IME funding. Grant funding requests go through the official grants portal or grants office only.</div>
-      </div>`;
-    }
+    // (Per-area Medical Affairs contact block removed — the dedicated
+    //  "Medical Affairs contact finder" box near the bottom covers this for any supporter.)
     // Competitor formats with links
     if(ci.competitorFormats && ci.competitorFormats.length){
       sec.innerHTML+=`<div class="cisubhead"><span class="ciicon" style="background:#d4760a">📋</span> Competitor CME programs — what others are offering</div>
