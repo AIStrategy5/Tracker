@@ -4800,7 +4800,7 @@ function renderEmphasis(){
     </div>
     <div class="em-grid">${cards}</div>
     <div class="em-foot">
-      Topic lists are what each funder <i>publishes</i>, not what it funds — the gap between the two is where independent education has room. <span class="em-t em-new">＋ new</span> appeared since the previous observation, <span class="em-t em-gone">− dropped</span> disappeared from the published list, and unmarked topics have persisted. Most supporters currently show a <b>baseline</b>: change tracking began ${esc(fd(typeof EMPHASIS_BASELINE!=="undefined"?EMPHASIS_BASELINE:""))}, so drift will appear as the Monday and Thursday runs re-read each portal. A dropped topic is a real signal — funders withdraw quietly and rarely announce it.
+      Topic lists are what each funder <i>publishes</i>, not what it funds — the gap between the two is where independent education has room. <span class="em-t em-new">＋ new</span> appeared since the previous observation, <span class="em-t em-gone">− dropped</span> disappeared from the published list, and unmarked topics have persisted. Most supporters currently show a <b>baseline</b>: change tracking began ${esc(fd(typeof EMPHASIS_BASELINE!=="undefined"?EMPHASIS_BASELINE:""))}, so drift will appear as the weekly Monday run re-reads each portal. A dropped topic is a real signal — funders withdraw quietly and rarely announce it.
     </div>`;
 }
 
@@ -4839,7 +4839,7 @@ function renderProvenance(){
   host.innerHTML=`<details class="pv-box"><summary>🕐 What refreshed, and when — last scheduled run <b>${esc(LAST_RUN_AT)}</b></summary>
     <div class="pv-grid">${rows}</div>
     <div class="pv-note">${esc(LAST_RUN_STATUS)}</div>
-    <div class="pv-note pv-sched">Scheduled to run every <b>Monday and Thursday at 9am</b>. A block only gets a new date when its contents were actually re-verified that run — a date that has not moved means the underlying sources were not re-read, not that nothing happened.</div>
+    <div class="pv-note pv-sched">Scheduled to run every <b>Monday at 9am</b>. A block only gets a new date when its contents were actually re-verified that run — a date that has not moved means the underlying sources were not re-read, not that nothing happened.</div>
   </details>`;
 }
 
