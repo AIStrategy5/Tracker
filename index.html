@@ -5802,7 +5802,8 @@ function maRender(name){
   const roles=[
     ["VP / Head of Medical Affairs", `"${name}" ("VP Medical Affairs" OR "Vice President Medical Affairs" OR "Head of Medical Affairs")`],
     ["Medical Affairs Director", `"${name}" ("Medical Affairs Director" OR "Director, Medical Affairs" OR "Senior Director Medical Affairs")`],
-    ["Medical Science Liaison (MSL) lead", `"${name}" ("MSL" OR "Medical Science Liaison" OR "Field Medical")`]
+    ["Medical Science Liaison (MSL) lead", `"${name}" ("MSL" OR "Medical Science Liaison" OR "Field Medical")`],
+    ["IME / Grants lead", `"${name}" ("Independent Medical Education" OR "IME Grants" OR "Grants Manager" OR "Grants Director" OR "Medical Education Grants" OR "Educational Grants")`]
   ];
   const roleLinks=roles.map(([lab,kw])=>`<div class="ma-role">
     <span class="ma-role-lab">${esc(lab)}</span>
@@ -5815,10 +5816,12 @@ function maRender(name){
     const area=SPACENAME[k]||k;
     const kw=`"${name}" "Medical Affairs" ${area}`;
     const msl=`"${name}" ("MSL" OR "Medical Science Liaison") ${area}`;
+    const ime=`"${name}" ("IME" OR "Independent Medical Education" OR "Educational Grants" OR "Grants") ${area}`;
     return `<div class="ma-area">
       <div class="ma-area-h"><span class="sp-dot" style="background:${SPACECOLOR[k]}"></span><b>${esc(area)}</b> Medical Affairs</div>
       <a class="ma-lk ma-li" href="${liPeople(kw)}" target="_blank" rel="noopener">in MA leads</a>
       <a class="ma-lk ma-li" href="${liPeople(msl)}" target="_blank" rel="noopener">in MSLs</a>
+      <a class="ma-lk ma-li" href="${liPeople(ime)}" target="_blank" rel="noopener">in IME leads</a>
       <a class="ma-lk ma-web" href="${gWeb(kw)}" target="_blank" rel="noopener">web</a>
     </div>`;
   }).join("");
