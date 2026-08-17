@@ -304,6 +304,59 @@
 </style>
 </head>
 <body>
+<!-- GATE-START — same access screen as tracker. Password: 5 MULTI Amigos -->
+<style>
+  #gate{position:fixed;inset:0;z-index:99999;background:#f5f4ee;display:flex;align-items:center;justify-content:center;padding:24px;
+        font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+  #gate.hide{display:none}
+  .gate-card{background:#fff;border:1.5px solid #0f1a1a;box-shadow:6px 6px 0 #0f1a1a;
+             padding:34px 34px 28px;max-width:440px;width:100%;text-align:left}
+  .gate-bar{width:46px;height:5px;background:#c6f34e;border:1.5px solid #0f1a1a;margin-bottom:18px}
+  .gate-card h1{font-family:'Inter',sans-serif;font-size:26px;margin:0 0 6px;letter-spacing:-.02em;color:#0f1a1a;line-height:1.15;font-weight:900}
+  .gate-card .gsub{font-size:14px;color:#5b6666;margin:0 0 22px;line-height:1.5}
+  .gate-card label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5b6666;margin-bottom:7px;font-family:'JetBrains Mono',monospace}
+  .gate-card input{width:100%;font:inherit;font-size:15px;padding:12px 14px;border:1.5px solid #0f1a1a;background:#fff;color:#0f1a1a;border-radius:0}
+  .gate-card input:focus{outline:none;background:#fbfaf4}
+  .gate-card button{width:100%;margin-top:13px;border:1.5px solid #0f1a1a;background:#0f1a1a;color:#fff;padding:13px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;border-radius:0}
+  .gate-card button:hover{background:#c6f34e;color:#0f1a1a}
+  .gate-err{font-size:13px;color:#8d1b32;background:#f4e5e5;border:1.5px solid #8d1b32;padding:9px 12px;margin-top:13px;display:none}
+  .gate-err.show{display:block}
+  .gate-foot{font-size:11.5px;color:#5b6666;margin-top:20px;padding-top:15px;border-top:1.5px solid #0f1a1a;line-height:1.55}
+  @media print{ #gate{display:none!important} }
+</style>
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-bar"></div>
+    <h1>Educational Strategy Tracker</h1>
+    <p class="gsub">Independent medical education — grant landscape and supporter intelligence. Non-oncologic, seven therapeutic areas.</p>
+    <label for="gatePw">Access password</label>
+    <input id="gatePw" type="password" autocomplete="current-password" placeholder="Enter password" autofocus>
+    <button id="gateGo">Open tracker</button>
+    <div class="gate-err" id="gateErr">That password isn't right — check with Leen.</div>
+    <div class="gate-foot">Contains competitive intelligence and named Medical Affairs contacts. Please don't forward the link outside the team.</div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY="es_gate_ok";
+  var g=document.getElementById("gate"), pw=document.getElementById("gatePw"),
+      go=document.getElementById("gateGo"), err=document.getElementById("gateErr");
+  function h(s){ var a=5381,b=52711,i=s.length; while(i--){a=(a*33)^s.charCodeAt(i);b=(b*37)^s.charCodeAt(i);}
+                 return ((a>>>0).toString(36)+"-"+(b>>>0).toString(36)); }
+  var TARGET="msy5mv-9jzfet";
+  function norm(v){ return (v||"").trim().replace(/\s+/g," ").toLowerCase(); }
+  function unlock(){ g.classList.add("hide"); try{sessionStorage.setItem(KEY,"1");}catch(e){} }
+  try{ if(sessionStorage.getItem(KEY)==="1"){ g.classList.add("hide"); } }catch(e){}
+  function attempt(){
+    if(h(norm(pw.value))===TARGET){ unlock(); }
+    else { err.classList.add("show"); pw.select(); }
+  }
+  go.addEventListener("click",attempt);
+  pw.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); attempt(); } });
+  pw.addEventListener("input",function(){ err.classList.remove("show"); });
+})();
+</script>
+<!-- GATE-END -->
 
 <!-- NAV -->
 <nav class="nav">
