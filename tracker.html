@@ -92,6 +92,23 @@
   .gap-refs-lab{font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
   .gap-refs a{font-size:11px;background:#f2f5f9;border:1px solid #e2e8f0;border-radius:4px;padding:2px 7px;text-decoration:none;color:#2b6fd6}
   .gap-refs a:hover{background:#e8eff8;text-decoration:underline}
+  /* ---------- Cost of inaction · Differentiation (COIF) ---------- */
+  .coif-card{background:#fff;border:1.5px solid #0f1a1a;padding:16px 18px;margin-bottom:12px}
+  .coif-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid #0f1a1a}
+  .coif-head h4{margin:0;font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .coif-block{margin-bottom:10px}
+  .coif-lab{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:800;color:#0f1a1a;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .coif-body{font-size:13px;line-height:1.55;color:#1a2626;margin:0}
+  .coif-src{font-size:11px;color:#5b6666;margin-top:8px;padding-top:8px;border-top:1px dashed #0f1a1a}
+  /* ---------- Faculty & KOL Intelligence ---------- */
+  .kolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 14px;border:1.5px solid #0f1a1a;background:#fbfaf4;margin-bottom:12px}
+  .kolbar label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:#0f1a1a;text-transform:uppercase;letter-spacing:.06em;display:flex;flex-direction:column;gap:4px}
+  .kolbar select{border:1.5px solid #0f1a1a;padding:6px 10px;font:inherit;font-size:12.5px;background:#fff;color:#0f1a1a;min-width:150px}
+  .koltable{width:100%;border-collapse:collapse;background:#fff;border:1.5px solid #0f1a1a;font-size:12.5px}
+  .koltable th{background:#0f1a1a;color:#c6f34e;text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase}
+  .koltable td{padding:9px 12px;border-top:1px solid #d8dcda;vertical-align:top}
+  .koltable tr:hover td{background:#fbfaf4}
+  .koltable a{color:#0f1a1a;text-decoration:underline;text-decoration-color:#c6f34e;text-decoration-thickness:2px}
   /* ---------- clinical emphasis over time ---------- */
   .fc-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 17px;margin-bottom:13px}
   .fc-head{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:7px}
@@ -772,6 +789,22 @@
     .rfp-btns,.rfp-score-row{display:none!important}
     .rfp-summary textarea{display:none!important}
   }
+  /* Cost-of-Inaction · Differentiation cards + KOL intelligence table */
+  .coif-card{background:#fff;border:1.5px solid #0f1a1a;padding:16px 18px;margin-bottom:12px}
+  .coif-head{padding-bottom:8px;border-bottom:1.5px solid #0f1a1a;margin-bottom:10px}
+  .coif-head h4{margin:0;font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .coif-block{margin-bottom:10px}
+  .coif-lab{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:800;color:#0f1a1a;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .coif-body{font-size:13px;line-height:1.55;color:#1a2626;margin:0}
+  .coif-src{font-size:11px;color:#5b6666;margin-top:8px;padding-top:8px;border-top:1px dashed #0f1a1a}
+  .kolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;padding:10px 14px;border:1.5px solid #0f1a1a;background:#fbfaf4;margin-bottom:12px}
+  .kolbar label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;color:#0f1a1a;text-transform:uppercase;letter-spacing:.06em;display:flex;flex-direction:column;gap:4px}
+  .kolbar select{border:1.5px solid #0f1a1a;padding:6px 10px;font:inherit;font-size:12.5px;background:#fff;color:#0f1a1a;min-width:150px}
+  .koltable{width:100%;border-collapse:collapse;background:#fff;border:1.5px solid #0f1a1a;font-size:12.5px}
+  .koltable th{background:#0f1a1a;color:#c6f34e;text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase}
+  .koltable td{padding:9px 12px;border-top:1px solid #d8dcda;vertical-align:top}
+  .koltable tr:hover td{background:#fbfaf4}
+  .koltable a{color:#0f1a1a;text-decoration:underline;text-decoration-color:#c6f34e;text-decoration-thickness:2px}
 </style>
 
 <!-- ============================================================
@@ -1459,6 +1492,188 @@
     <div class="lk-quick" id="maQuick"></div>
     <div id="maOut"></div>
   </div>
+
+  <h2 style="margin-top:38px;font-weight:900;letter-spacing:-.02em;font-size:24px">Cost of Inaction · Differentiation</h2>
+<p class="sub" style="margin-bottom:14px">For each active supporter: consequences if the gap isn't addressed, what CEA could uniquely offer vs competitors (Medscape · PeerView · Clinical Care Options · ACHL), and the supporter's own strategic rationale. Per Katie: strategic thinking, not generic summaries.</p>
+<div class="em-strip" id="coifStrip" style="margin-bottom:12px">Populated by Monday refresh. Empty until first run.</div>
+<!-- WEEKLY-COIF-START — Monday task rewrites ONLY between these markers.
+     Per supporter card schema:
+     <div class="coif-card">
+       <div class="coif-head"><h4>Supporter · space · indication</h4></div>
+       <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">Clinical/patient/provider/system consequence + timing rationale.</p></div>
+       <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">Reference competitor activity (link to competitor program). Name what CEA could offer that they don't.</p></div>
+       <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Business/medical milestone that makes this timely from the supporter's angle.</p></div>
+       <div class="coif-src">Source: <a href="…">…</a></div>
+     </div>
+     Rules: no named individuals, no invented URLs. -->
+<div id="coifGrid" class="em-grid">
+  <div class="coif-card">
+    <div class="coif-head"><h4>Vera Therapeutics · nephrology · IgA nephropathy (TRUTAKNA / atacicept)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">TRUTAKNA is the first BAFF/APRIL dual inhibitor to reach commercial launch (accelerated approval 7 Jul 2026). Without sequencing and mechanism-of-action education seeded now, community nephrologists will default to whatever molecule their local sales rep detailed first — driving inappropriate combination use with existing SGLT2i / ERAs / endothelin blockers and preventable adverse-event signals in the first 12 months post-launch.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">Medscape and PeerView are running mechanism-primer IgAN activities funded by the incumbent (sparsentan/Filspari) and Novartis (Fabhalta). None currently offer a supporter-neutral, five-mechanism comparative-sequencing curriculum built around the NEJM ORIGIN-3 evidence base. CEA/Decera could uniquely deliver a case-based sequencing framework with a structured post-activity outcomes assessment tied to guideline-adherent prescribing patterns.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Vera stood up its Medical Affairs org this quarter and has NOT yet published a grants portal — first-mover education partners set the reference terms. Their commercial priority through 2027 is establishing TRUTAKNA share of voice against Novartis Fabhalta and pre-empting Otsuka's sibeprenlimab launch; education positioning atacicept in the dual BAFF/APRIL class is directly aligned with that.</p></div>
+    <div class="coif-src">Source: <a href="https://ir.veratx.com/news-releases/news-release-details/vera-therapeutics-announces-positive-origin-phase-3-data/" target="_blank" rel="noopener">Vera Therapeutics — Positive ORIGIN Phase 3 Data (NEJM, ASN Kidney Week 2025)</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Otsuka · nephrology · IgA nephropathy (sibeprenlimab / anti-APRIL)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">Sibeprenlimab VISIONARY interim data (NEJM Nov 2025) show statistically and clinically meaningful proteinuria reduction. When approved, IgAN will have five approved mechanisms with zero head-to-head data. Without comparative-mechanism education pre-launch, community nephrologists will make sequencing decisions on payer coverage alone; academic centers will over-select CAR-T-adjacent B-cell depleting strategies for patients whose IgAN could be managed with sequential targeted therapy.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">Clinical Care Options currently runs an anti-APRIL–focused activity in the nephrology space (funded by a competing sponsor). What is missing: a nurse-practitioner and PA curriculum for community nephrology sites, where 65% of IgAN patients are managed. CEA could uniquely deliver a mid-level-directed IgAN sequencing curriculum — a format Otsuka's cardio/renal team has funded in HFpEF but not yet in nephrology.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Otsuka is an established renal funder (Jynarque/Samsca legacy); this is submit-ready, not warm-up. FDA action anticipated 2026-27; their US medical affairs team is scoping pre-launch grants NOW for activities landing in the 6-month post-approval window.</p></div>
+    <div class="coif-src">Source: <a href="https://www.otsuka-us.com/news/otsuka-sibeprenlimab-phase-3-data-show-statistically-significant-and-clinically-meaningful" target="_blank" rel="noopener">Otsuka US — Sibeprenlimab Phase 3 Data (VISIONARY, NEJM 2025)</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Travere · nephrology · IgAN and FSGS (sparsentan / FILSPARI)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">Sparsentan received full FSGS approval Apr 2026 — the first-ever pharmacotherapy for a disease with zero prior approved options. FSGS prescriber inertia is severe (nephrologists default to immunosuppression + supportive care learned in fellowship). Without practical initiation and monitoring education, sparsentan uptake in FSGS will underperform payer models and Travere will pull grant funding by 2027.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">NKF runs the benchmark IgAN Clinical Education Series (Travere-funded). No provider is currently offering an FSGS-specific enduring curriculum with case-based ERA initiation protocols, LFT monitoring, and REMS practice patterns. CEA could uniquely deliver a REMS-integrated FSGS initiation toolkit — the format Travere has said they need but haven't been offered.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Travere has the most mature grants office in the emerging-supporter set (CyberGrants portal live). Q4 2026 planning cycle for 2027 grants is open now. Their strategic priority is FSGS pull-through — not incremental IgAN activities, which are already saturated.</p></div>
+    <div class="coif-src">Source: <a href="https://travere.com/our-company/grants/medical-education-grants/" target="_blank" rel="noopener">Travere Therapeutics — Medical Education Grants portal</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Apellis · nephrology · C3G and primary IC-MPGN (EMPAVELI / pegcetacoplan)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">EMPAVELI became the FIRST and ONLY approved therapy for C3G and primary IC-MPGN in Jul 2025 (patients aged 12+). Prescriber familiarity is at floor: many nephrologists have never diagnosed a C3G/MPGN case and rely on biopsy pathologist interpretation. Without diagnostic-pathway and complement-cascade education, patients will remain undiagnosed for 6-24 months post-biopsy, and post-transplant recurrence — the highest-morbidity subgroup — will be missed entirely.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">No provider currently offers an integrated nephrologist + renal-pathologist joint curriculum for C3G/IC-MPGN. Existing complement-cascade CME (from Alexion/AstraZeneca-supported providers) is PNH-anchored, not glomerular. CEA could uniquely deliver a diagnostic-first curriculum co-developed with a renal-pathology society partner (ASN Renal Pathology Society or Arkana Labs registry) — a structural gap Apellis has flagged publicly.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Apellis + Sobi have a joint commercial launch to fund; the education window is 12-18 months post-approval before payer coverage ossifies. Their Q3 2026 grant docket is open; Sobi's ex-US expansion adds international CME priorities uncommon at emerging supporters.</p></div>
+    <div class="coif-src">Source: <a href="https://investors.apellis.com/news-releases/news-release-details/fda-approves-apellis-empavelir-pegcetacoplan-first-c3g-and" target="_blank" rel="noopener">Apellis — FDA Approves EMPAVELI as First C3G and Primary IC-MPGN Treatment</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Roche / Genentech · nephrology · primary membranous nephropathy (Gazyva / obinutuzumab)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">Gazyva PDUFA Nov 2026 in primary membranous nephropathy on the basis of MAJESTY (NEJM Jun 2026, obinutuzumab superior to tacrolimus). Current KDIGO guidance still positions rituximab-based regimens as anchor therapy; without pre-launch education aligning obinutuzumab-vs-rituximab efficacy signals with the anti-PLA2R serology-driven treatment algorithm, community nephrologists will default to off-label rituximab and never trial the approved therapy.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">Almost no accredited CME exists in PMN today — the space has been narrow enough that competitors haven't invested. CEA could establish first-mover authority with an anti-PLA2R–anchored treat-to-target curriculum co-developed with an academic GN reference center. PeerView and ACHL have not scoped this indication.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Genentech has a formal Independent Medical Education (IME) office with a fast-cycle review process. Their strategic frame will be Gazyva franchise defense across immuno-hematology + immunology — a nephrology-anchored PMN activity fits a whitespace within an established portfolio.</p></div>
+    <div class="coif-src">Source: <a href="https://www.biopharminternational.com/view/fda-grants-priority-review-obinutuzumab-gazyva-primary-membranous-nephropathy" target="_blank" rel="noopener">BioPharm International — FDA Grants Priority Review to Obinutuzumab in PMN (MAJESTY)</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Idorsia · cardiovascular · self-injected P2Y12 antiplatelet (selatogrel)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">Selatogrel is a first-in-class patient-self-administered subcutaneous P2Y12 antagonist positioned for suspected acute MI. If approved off SOS-AMI, the education need is unprecedented: emergency-medicine, cardiology, AND patient-facing training on when to self-inject vs call EMS. Without a coordinated multi-audience curriculum ready at launch, adoption will stall on medico-legal ambiguity and prescriber discomfort with dispensing to at-risk outpatients.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">StatPearls carries a generic antiplatelet CME. No provider offers a cardiology + EM + primary-care joint curriculum for a self-administered acute-phase antiplatelet — because no such product has existed. CEA could uniquely bridge the specialty divide with a multi-audience simulation-based activity tied to AHA/ACC chest-pain guidelines.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Idorsia's existing IME "Powered by Science" portal currently scopes Insomnia grants — cardio launch requires standing up cardio scope. Their Q4 2026 / Q1 2027 planning is the window to seed enduring cardiology education aligned to the SOS-AMI readout and label.</p></div>
+    <div class="coif-src">Source: <a href="https://www.idorsia.com/media/news-details?newsId=2545303" target="_blank" rel="noopener">Idorsia — Selatogrel SOS-AMI Phase 3 initiation</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Viking Therapeutics · endocrinology · obesity (VK2735 dual GLP-1/GIP)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">VK2735 Ph3 VANQUISH is enrolling; oral formulation Ph2 VENTURE showed up to 12% weight loss. If approved 2027, it becomes the third GLP-1/GIP entrant behind tirzepatide and (potentially) survodutide. Without pre-launch differentiation education on the SC + oral formulation strategy, VK2735 will be perceived as a "me too" — the exact positioning problem that stalled several oral-GLP-1 launches.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">NEJM/MMS runs an established obesity-management CME series (Lilly/Novo-supported). No accredited program currently addresses formulation-choice decision-making (oral vs SC, initiation-vs-maintenance switching) in a supporter-neutral framework. CEA could uniquely offer a formulation-decision toolkit for primary care and endocrinology — the workflow gap that will determine VK2735 real-world adoption.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Viking hired VP Medical Affairs (Karen Chung) in the last 12 months — a proxy for grants-program build-out. They cannot fund yet, but relationship-first engagement now positions CEA for the first grants cycle when their portal opens.</p></div>
+    <div class="coif-src">Source: <a href="https://ir.vikingtherapeutics.com/2025-06-25-Viking-Therapeutics-Announces-Initiation-of-Phase-3-Obesity-Clinical-Program-with-GLP-1-GIP-Agonist-VK2735" target="_blank" rel="noopener">Viking Therapeutics — Ph3 VANQUISH initiation (VK2735 obesity)</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Akero Therapeutics · endocrinology / hepatology · MASH cirrhosis (efruxifermin / EFX)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">Ph3 SYNCHRONY OUTCOMES enrolling in compensated cirrhosis (F4) — a MASH subpopulation with essentially no approved options (resmetirom is F2-F3 only). If EFX approves in F4 cirrhosis, prescribers will be hepatologists first and endocrinologists second, but the referral path from PCP → GI → hepatology is broken. Without pre-launch referral-pathway education, F4 patients will remain undiagnosed until decompensation.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">AASLD LiverLearning and Decera/CCO run mechanism-focused MASH activities. Missing: a triage/referral curriculum for primary care and endocrinology aligned to non-invasive test (FIB-4, VCTE, MASEF) thresholds specifically for cirrhotic patients. CEA could uniquely deliver a PCP → hepatology handoff curriculum in the F4 window.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Akero is now a Novo Nordisk company (acquisition closed). Future med-ed funding likely routes via Novo channels — meaning grant scope broadens dramatically. Engaging Akero-branded activities now positions for the Novo integration in 2027.</p></div>
+    <div class="coif-src">Source: <a href="https://www.biospace.com/akero-therapeutics-announces-initiation-of-phase-3-synchrony-outcomes-trial-of-efruxifermin-in-patients-with-compensated-cirrhosis-f4-due-to-mash" target="_blank" rel="noopener">Akero Therapeutics — SYNCHRONY OUTCOMES Ph3 (EFX in F4 MASH cirrhosis)</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Abivax · gastroenterology / immunology · ulcerative colitis (obefazimod, oral miR-124 enhancer)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">Both ABTECT-1 and ABTECT-2 Ph3 induction trials POSITIVE (Sep 2026); NDA planned late 2026 → likely 2027 US approval. Obefazimod is the first oral miR-124 enhancer — a mechanism no gastroenterologist has encountered. Without mechanism-primer education seeded pre-launch, obefazimod will be positioned by prescribers as "another oral for UC" alongside JAKs and S1Ps — a comparative-safety framing that misses its differentiated mechanism.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">Crohn's & Colitis Foundation runs the anchor online IBD education. Existing UC CME (Pfizer/Bristol/AbbVie-supported) is JAK-vs-biologic focused. No provider currently addresses miRNA-mechanism therapeutics in IBD. CEA could uniquely deliver a first-in-class mechanism curriculum with a comparative-safety toolkit vs JAKs — a structurally novel angle.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Abivax has named a VP Global Head of Medical Affairs (Chris Rabbat) and CMO (Fabio Cataldi) — strongest emerging-supporter medical-org signal in the immunology set. STAT flagged safety questions Jun 2026, sharpening their need for balanced, third-party, mechanism-anchored education vs promotional messaging.</p></div>
+    <div class="coif-src">Source: <a href="https://ir.abivax.com/news-releases/news-release-details/abivax-announces-positive-phase-3-results-both-abtect-8-week/" target="_blank" rel="noopener">Abivax — Positive Ph3 ABTECT-1 and ABTECT-2 induction (obefazimod)</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Celldex Therapeutics · immunology-derm · chronic spontaneous urticaria (barzolvolimab, anti-KIT)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">EMBARQ-CSU1 and EMBARQ-CSU2 Ph3 enrollment complete; readouts expected 2026-27. Barzolvolimab is the first anti-KIT for CSU — a mechanism (mast-cell depletion) fundamentally different from omalizumab (IgE) and remibrutinib (BTK). Allergists and dermatologists will otherwise default to sequential omalizumab → BTK; without mechanism-of-action education seeded now, mast-cell-depleting strategy will be positioned as "third-line" rather than mechanism-appropriate for omalizumab-refractory patients.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">Healio/Vindico runs a CSU "Situation Room" and Novartis funds omalizumab-anchored activities. No provider currently offers a mast-cell-biology anchored curriculum with a clear framework for CSU sequencing. CEA could uniquely deliver a joint dermatology + allergy CME with a mast-cell-mediator focus tied to the emerging four-drug CSU armamentarium.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Celldex hired CCO Teri Lawver (Nov 2025) → commercial/med-affairs build-out. Grants portal not yet public; the pre-launch window is exactly when they scope structural education partnerships.</p></div>
+    <div class="coif-src">Source: <a href="https://ir.celldex.com/news-releases/news-release-details/celldex-completes-enrollment-global-phase-3-studies-embarq-csu1" target="_blank" rel="noopener">Celldex — Ph3 EMBARQ-CSU1 / CSU2 enrollment complete (barzolvolimab)</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Intellia Therapeutics · rare disease · hereditary angioedema (lonvo-z / NTLA-2002, in vivo CRISPR)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">HAELO Ph3 positive (Apr 2026), rolling BLA underway → potential H1 2027 launch as first in vivo CRISPR therapy for any indication. HAE specialists are a small, tight community (~200 US) but the education gap is enormous: one-time gene editing replaces lifelong prophylaxis — patient counseling, off-target monitoring, and long-term safety surveillance are entirely new competencies. Without pre-launch structured education, uptake will stall on physician liability concerns.</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">US HAEA and NORD run patient-facing HAE education. No accredited program currently addresses in-vivo gene-editing counseling, informed-consent frameworks, or post-treatment monitoring for HAE. CEA could uniquely establish the enduring provider curriculum for gene-editing HAE — potentially THE reference activity for the launch.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Intellia has no grants program yet (pre-commercial) — relationship-first engagement is the play. Their BLA is rolling; commercial team is standing up in 2026; the first education partners in place at approval anchor the reference standard for the entire in vivo CRISPR category.</p></div>
+    <div class="coif-src">Source: <a href="https://ir.intelliatx.com/news-releases/news-release-details/intellia-therapeutics-reports-positive-phase-3-results" target="_blank" rel="noopener">Intellia — Positive Ph3 HAELO Results (NTLA-2002 in HAE)</a></div>
+  </div>
+
+  <div class="coif-card">
+    <div class="coif-head"><h4>Viridian Therapeutics · ophthalmology · thyroid eye disease (veligrotug / VRDN-001)</h4></div>
+    <div class="coif-block"><div class="coif-lab">Cost of inaction</div><p class="coif-body">BLA under Priority Review (accepted Dec 2025); THRIVE and THRIVE-2 both positive across active AND chronic TED. Veligrotug is the first serious Tepezza (teprotumumab) competitor — but TED prescribing has been shaped by 5+ years of Amgen-funded Tepezza education. Without pre-launch comparator education, IGF-1R selection will collapse to whichever agent has the sales-force presence, not clinical differentiation (chronic-TED indication, SC formulation via VRDN-003).</p></div>
+    <div class="coif-block"><div class="coif-lab">Differentiation — what CEA could uniquely do</div><p class="coif-body">MedEdicus runs "TEDucation" (Amgen-supported for Tepezza). No provider currently offers a two-agent IGF-1R comparator curriculum with the chronic-TED evidence base (THRIVE-2). CEA could uniquely deliver a joint oculoplastic + endocrinology CME with active-vs-chronic disease algorithms — the exact whitespace the Viridian launch needs.</p></div>
+    <div class="coif-block"><div class="coif-lab">Supporter perspective — why now</div><p class="coif-body">Viridian has no grants portal yet — Medical Affairs relationship-build is the vehicle. BLA action H1 2026 → 2026 launch means grant-funded education must be scoped now to publish inside the launch window. SC VRDN-003 topline H1 2026 adds a second launch-phase education need.</p></div>
+    <div class="coif-src">Source: <a href="https://investors.viridiantherapeutics.com/news/news-details/2025/Viridian-Therapeutics-Announces-BLA-Acceptance-and-Priority-Review-for-Veligrotug-for-the-Treatment-of-Thyroid-Eye-Disease/default.aspx" target="_blank" rel="noopener">Viridian Therapeutics — BLA Acceptance and Priority Review (veligrotug in TED)</a></div>
+  </div>
+</div>
+<!-- WEEKLY-COIF-END -->
+<div style="font-size:11.5px;color:#5b6666;margin-top:10px;font-style:italic">COIF_UPDATED = "August 17, 2026"</div>
+
+<h2 style="margin-top:38px;font-weight:900;letter-spacing:-.02em;font-size:24px">Faculty &amp; KOL Intelligence</h2>
+<p class="sub" style="margin-bottom:14px">Named faculty appear ONLY when the source is a public verified disclosure — ClinicalTrials.gov investigator list, published CME agenda, disclosure/DOI statement, or society leadership roster. Every row carries a source link. Filter by supporter, area, and indication.</p>
+<div class="kolbar">
+  <label>Supporter <select id="kolFilterSupporter"><option value="">All</option></select></label>
+  <label>Therapeutic area <select id="kolFilterArea"><option value="">All</option></select></label>
+  <label>Indication <select id="kolFilterIndication"><option value="">All</option></select></label>
+  <label>Role <select id="kolFilterRole"><option value="">All</option><option>Trial investigator</option><option>Advisory board (disclosed)</option><option>CME faculty</option><option>Society leadership</option></select></label>
+  <button class="supclear" id="kolClearBtn" style="align-self:end">Clear filters</button>
+</div>
+<!-- WEEKLY-KOL-START — Monday task rewrites ONLY between these markers.
+     Populate window.KOL_DATA as array of {name, institution, specialty, role, supporter, area, indication, srcUrl, srcTitle}.
+     Rules: name appears ONLY with a public verified source URL, no inferred relationships, no contact info. -->
+<script>
+window.KOL_DATA = [
+  {name:"Richard Lafayette, MD, FACP", institution:"Stanford University Medical Center", specialty:"Nephrology (Glomerular Disease Center)", role:"Trial investigator", supporter:"Vera Therapeutics", area:"nephrology", indication:"IgA nephropathy", srcUrl:"https://ir.veratx.com/news-releases/news-release-details/vera-therapeutics-announces-positive-origin-phase-3-data/", srcTitle:"Vera IR — ORIGIN Ph3 (Lafayette named PI)"},
+  {name:"Dana Rizk, MD", institution:"University of Alabama at Birmingham", specialty:"Nephrology", role:"Trial investigator", supporter:"Otsuka", area:"nephrology", indication:"IgA nephropathy", srcUrl:"https://www.appliedclinicaltrialsonline.com/view/otsuka-sibeprenlimab-demonstrates-meaningful-outcomes-study-immunoglobulin-nephropathy", srcTitle:"Applied Clinical Trials — VISIONARY sibeprenlimab (Rizk quoted)"},
+  {name:"Brad Rovin, MD", institution:"Ohio State University", specialty:"Nephrology", role:"Trial investigator", supporter:"Travere", area:"nephrology", indication:"IgA nephropathy", srcUrl:"https://www.hcplive.com/view/protect-sparsentan-outperforms-irbesartan-in-iga-nephropathy", srcTitle:"HCPLive — PROTECT sparsentan (Rovin steering committee)"},
+  {name:"Carla Nester, MD", institution:"University of Iowa (Jean E. Robillard Chair in Pediatric Nephrology)", specialty:"Nephrology (glomerular disease)", role:"Trial investigator", supporter:"Apellis", area:"nephrology", indication:"C3G / primary IC-MPGN", srcUrl:"https://www.hcplive.com/view/valiant-pegcetacoplan-offers-benefit-for-upcr-egfr-c3-staining-in-c3g-ic-mpgn", srcTitle:"HCPLive — VALIANT pegcetacoplan (Nester corresponding author)"},
+  {name:"Deepak L. Bhatt, MD", institution:"Brigham and Women's Hospital / Harvard Medical School", specialty:"Interventional Cardiology", role:"Trial investigator", supporter:"Idorsia", area:"cardiovascular", indication:"Acute myocardial infarction", srcUrl:"https://www.biospace.com/idorsia-initiates-the-phase-3-registration-study-with-selatogrel-for-the-treatment-of-acute-myocardial-infarction", srcTitle:"BioSpace — SOS-AMI Ph3 (Bhatt Steering Committee Chair)"},
+  {name:"Mary Mooney", institution:"Trinity College Dublin, School of Nursing and Midwifery", specialty:"Cardiovascular Nursing", role:"Trial investigator", supporter:"Idorsia", area:"cardiovascular", indication:"Acute myocardial infarction", srcUrl:"https://www.biospace.com/idorsia-initiates-the-phase-3-registration-study-with-selatogrel-for-the-treatment-of-acute-myocardial-infarction", srcTitle:"BioSpace — SOS-AMI Ph3 (Mooney Steering Committee)"},
+  {name:"Stephen Harrison, MD", institution:"Pinnacle Clinical Research (San Antonio)", specialty:"Hepatology", role:"Trial investigator", supporter:"Akero Therapeutics", area:"endocrinology", indication:"MASH / MASH cirrhosis", srcUrl:"https://www.pharmacytimes.com/view/efruxifermin-demonstrates-potential-in-treating-patients-with-mash-related-scarring-or-cirrhosis", srcTitle:"Pharmacy Times — HARMONY EFX Ph2b (Harrison lead investigator)"},
+  {name:"David Rubin, MD", institution:"University of Chicago Medicine (IBD Center)", specialty:"Gastroenterology (IBD)", role:"Trial investigator", supporter:"Abivax", area:"immunology", indication:"Ulcerative colitis", srcUrl:"https://ir.abivax.com/news-releases/news-release-details/abivax-announces-positive-phase-3-results-both-abtect-8-week/", srcTitle:"Abivax IR — Positive Ph3 ABTECT (Rubin quoted)"},
+  {name:"Silvio Danese, MD", institution:"San Raffaele / Vita-Salute San Raffaele University, Milan", specialty:"Gastroenterology / Endoscopy", role:"Trial investigator", supporter:"Abivax", area:"immunology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Danese co-author)"},
+  {name:"Laurent Peyrin-Biroulet, MD", institution:"INFINY Institute — INSERM NGERE, Vandoeuvre-lès-Nancy", specialty:"Gastroenterology (IBD)", role:"Trial investigator", supporter:"Abivax", area:"immunology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Peyrin-Biroulet co-author)"},
+  {name:"Ursula Seidler, MD", institution:"Hannover Medical School — Dept of Gastroenterology, Hepatology, Endocrinology", specialty:"Gastroenterology", role:"Trial investigator", supporter:"Abivax", area:"immunology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Seidler first author)"},
+  {name:"Marcus Maurer, MD", institution:"Charité — Universitätsmedizin Berlin (Dermatology & Allergy)", specialty:"Dermatology / Allergy", role:"Trial investigator", supporter:"Celldex Therapeutics", area:"immunology", indication:"Chronic spontaneous urticaria", srcUrl:"https://www.medthority.com/news/2024/7/initiation-of-phase-iii-program-for-barzolvolimab-in-patients-with-chronic-spontaneous-urticaria.--celldex-therapeutics", srcTitle:"Medthority — Barzolvolimab Ph3 (Maurer PI, Charité)"},
+  {name:"Michael T. Yen, MD", institution:"Baylor College of Medicine (Oculoplastic Surgery & Ophthalmology)", specialty:"Ophthalmology / Oculoplastic", role:"Trial investigator", supporter:"Viridian Therapeutics", area:"ophthalmology", indication:"Thyroid eye disease", srcUrl:"https://www.ophthalmologytimes.com/view/viridian-announces-positive-topline-data-from-phase-3-thrive-trial-evaluating-veligrotug-in-patients-with-active-ted", srcTitle:"Ophthalmology Times — THRIVE veligrotug (Yen investigator)"},
+  {name:"Arshad M. Khanani, MD, MA, FASRS", institution:"Sierra Eye Associates; University of Nevada, Reno School of Medicine", specialty:"Vitreoretinal", role:"Trial investigator", supporter:"Ocular Therapeutix", area:"ophthalmology", indication:"Wet age-related macular degeneration", srcUrl:"https://retinalphysician.com/issues/2026/january/axpaxli-superior-to-aflibercept-in-wet-amd-trial/", srcTitle:"Retinal Physician — SOL-1 axpaxli (Khanani Steering Committee Chair)"},
+  {name:"Darius M. Moshfeghi, MD", institution:"Stanford University Byers Eye Institute (Retina Division)", specialty:"Vitreoretinal", role:"Trial investigator", supporter:"Ocular Therapeutix", area:"ophthalmology", indication:"Wet age-related macular degeneration", srcUrl:"https://retinalphysician.com/issues/2026/january/axpaxli-superior-to-aflibercept-in-wet-amd-trial/", srcTitle:"Retinal Physician — SOL-1 axpaxli (Moshfeghi investigator)"}
+];
+</script>
+<!-- WEEKLY-KOL-END -->
+<div id="kolTableWrap">
+  <table class="koltable" id="kolTable">
+    <thead><tr><th>Name</th><th>Institution</th><th>Specialty</th><th>Role</th><th>Supporter</th><th>Area · Indication</th><th>Source</th></tr></thead>
+    <tbody id="kolTableBody"><tr><td colspan="7" style="text-align:center;padding:24px;color:#5b6666;font-style:italic">No entries yet — populated by Monday refresh</td></tr></tbody>
+  </table>
+</div>
+<div style="font-size:11.5px;color:#5b6666;margin-top:10px;font-style:italic">KOL_UPDATED = "August 17, 2026"</div>
+<script>
+(function(){
+  var data = window.KOL_DATA || [];
+  var sup=document.getElementById('kolFilterSupporter'), area=document.getElementById('kolFilterArea'),
+      ind=document.getElementById('kolFilterIndication'), role=document.getElementById('kolFilterRole'),
+      clr=document.getElementById('kolClearBtn'), tbody=document.getElementById('kolTableBody');
+  function u(a){return Array.from(new Set(a.filter(Boolean))).sort();}
+  u(data.map(function(d){return d.supporter})).forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sup.appendChild(o);});
+  u(data.map(function(d){return d.area})).forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;area.appendChild(o);});
+  u(data.map(function(d){return d.indication})).forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;ind.appendChild(o);});
+  function r(){
+    var rows=data.filter(function(d){return(!sup.value||d.supporter===sup.value)&&(!area.value||d.area===area.value)&&(!ind.value||d.indication===ind.value)&&(!role.value||d.role===role.value);});
+    if(!rows.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:24px;color:#5b6666;font-style:italic">No matches for current filters</td></tr>';return;}
+    tbody.innerHTML=rows.map(function(d){return '<tr><td>'+d.name+'</td><td>'+d.institution+'</td><td>'+d.specialty+'</td><td>'+d.role+'</td><td>'+d.supporter+'</td><td>'+d.area+' · '+d.indication+'</td><td><a href="'+d.srcUrl+'" target="_blank" rel="noopener">'+(d.srcTitle||'source')+'</a></td></tr>';}).join('');
+  }
+  [sup,area,ind,role].forEach(function(e){e.addEventListener('change',r);});
+  clr.addEventListener('click',function(){sup.value='';area.value='';ind.value='';role.value='';r();});
+  r();
+})();
+</script>
+
+<h3 style="margin-top:24px;font-weight:800;font-size:17px">Gap Finder — strategic prompts</h3>
+<div class="em-strip" style="line-height:1.75">
+  When you identify a gap, force yourself to answer, in one line each:<br>
+  • <b>Cost of inaction:</b> clinical / patient / provider / system consequence if the gap remains<br>
+  • <b>Why now:</b> business or medical milestone that makes timing critical (approval, PDUFA, guideline update, congress readout)<br>
+  • <b>Differentiation:</b> what CEA could uniquely do that Medscape / PeerView / CCO / ACHL are not currently doing<br>
+  • <b>Supporter perspective:</b> if I were this supporter, what would I care about — and why would it matter to them now?
+</div>
 
   <footer class="src">
     Trials: ClinicalTrials.gov v2 API (live) — industry-sponsored Phase 2/3, most recently updated. Companies, pipeline stages, grant portals and RFP signals: verified 2026-07-10 from official company pages; deadlines are point-in-time and rotate — always confirm on the portal.<br>
