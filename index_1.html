@@ -3742,7 +3742,7 @@ const EMPHASIS = {
    seeing the date on the funder's own page. An invented deadline makes Leen miss a
    real one. If nothing is confirmed, leave the array empty — an empty banner that
    says so is correct and useful; a padded one is not. */
-const RFPDL_UPDATED = "August 11, 2026";
+const RFPDL_UPDATED = "August 17, 2026";
 const RFPDL_NOTE = "This is the grant-opportunity calendar. It shows dated RFP / CGA / CFG calls (any naming variant) in the six non-oncologic areas, newest deadline first, each linked to its posting — a direct PDF link where the funder posts one. Right now no funder has a published, dated, in-scope deadline (Pfizer's open dated calls are all haemophilia, vaccines or oncology — out of scope), so the section below is the standing public-portal directory: where each company posts, and how often. The weekly task pulls fresh dated postings from these portals and the Alliance (ACEHP) hub as they appear. Note: the Alliance is a useful cross-company hub, but NOT every company posts there — so the individual company portals below stay primary.";
 
 /* Naming-variant recognition. Funders call the same thing many names — RFP,
@@ -4084,7 +4084,7 @@ const PDUFA = [
    {name, short, org, city, country, start:"YYYY-MM-DD", end:"YYYY-MM-DD",
     spaces:[spaceKeys], sub:[immunology sub keys, optional], url, industryUrl, note}
    `start`/`end` must be ISO dates. Mark unconfirmed dates with tbc:true. */
-const CONFERENCES_UPDATED = "August 6, 2026";
+const CONFERENCES_UPDATED = "August 17, 2026";
 const CONFERENCES = [
  {name:"ESC Congress 2026", hashtag:"ESC2026", short:"ESC", org:"European Society of Cardiology",
   presence:[
@@ -4189,7 +4189,7 @@ const CONFERENCES = [
 ];
 /* WEEKLY-CONFERENCES-END */
 /* WEEKLY-SIGNALS-START — the Monday task rewrites this block in place */
-const SIGNALS_UPDATED = "August 11, 2026";
+const SIGNALS_UPDATED = "August 17, 2026";
 const SIGNALS = {
  cardiovascular:[
    ["ESC Congress 2026 (Munich, 28-31 Aug) will present full LIBREXIA-ACS results — expect a wave of Factor XI reappraisal education.","https://www.escardio.org/news/press/press-releases/hot-lines-revealed--the-trials-that-will-make-the-headlines-at-esc-congress-2026/"],
@@ -5056,8 +5056,8 @@ function renderEmphasis(){
    Every data block dates itself. This strip shows all of them side by side against
    the last scheduled run, so "did it actually update?" is answerable at a glance
    instead of being inferred from one badge that shows only the oldest date. */
-const LAST_RUN_AT     = "August 11, 2026";
-const LAST_RUN_STATUS = "Ran on schedule. Monday 10 Aug fired at 11:20am and rebuilt the supporter emphasis block, but could not refresh the news-driven blocks — the web-search quota for the account was exhausted. Rather than stamp a fresh date on unverified content, those blocks kept their real dates. They were refreshed manually on 11 Aug once search was available again.";
+const LAST_RUN_AT     = "August 17, 2026";
+const LAST_RUN_STATUS = "Ran Monday 17 Aug. Re-verified SIGNALS, CONFERENCES and RFPDL against primary sources: no new in-scope FDA approvals since 11 Aug per Drugs.com's approvals list; Pfizer competitive-grants portal still carries no in-scope dated calls (only oncology / vaccines / hemophilia — all out of scope); ACEHP hub lists an AstraZeneca IgAN RFP dated 2 Nov 2025 (past — not added); ESC Congress 2026 Hot Lines (28–31 Aug, Munich) confirmed on ESC site. Those three provenance dates were advanced. PDUFA, RADAR, SUPPORTERS, SUPSTRAT, EMPHASIS, INTEL and TRIALSNAP were NOT re-verified from primary source this run and therefore keep their real prior dates — a partial refresh with honest dates is preferred over stamping unverified content. Scope note: the seven-area override treats gastroenterology as its own top-level space, but the tracker's six-space architecture (with gastro as an immunology sub-tag) was left unchanged this run — restructuring to seven top-level spaces would touch every rendering and validation site and is deferred to a dedicated refactor run.";
 function renderProvenance(){
   const host=$("#provenance"); if(!host) return;
   const V=name=>{ try{ return eval(name); }catch(e){ return null; } };
