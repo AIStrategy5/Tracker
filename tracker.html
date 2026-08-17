@@ -805,6 +805,20 @@
   .koltable td{padding:9px 12px;border-top:1px solid #d8dcda;vertical-align:top}
   .koltable tr:hover td{background:#fbfaf4}
   .koltable a{color:#0f1a1a;text-decoration:underline;text-decoration-color:#c6f34e;text-decoration-thickness:2px}
+  .tab[data-k=kol]{background:#0f1a1a !important;color:#c6f34e !important;border-color:#0f1a1a !important;font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.02em}
+  .tab[data-k=kol].active,
+  .tab[data-k=kol]:hover{background:#c6f34e !important;color:#0f1a1a !important}
+  body.kol-mode section:not(.kol-section),
+  body.kol-mode .em-grid,
+  body.kol-mode .em-strip:not(.kol-section .em-strip),
+  body.kol-mode .fc-card,
+  body.kol-mode .pd,
+  body.kol-mode #coifGrid,
+  body.kol-mode #coifStrip{display:none !important}
+  body.kol-mode h1, body.kol-mode h2, body.kol-mode h3, body.kol-mode h4{display:none !important}
+  body.kol-mode .kol-section, body.kol-mode .kol-section *{display:revert !important}
+  body.kol-mode .kol-section h2, body.kol-mode .kol-section h3{display:block !important}
+  body.kol-mode header.top, body.kol-mode .controls, body.kol-mode .subtabs{display:flex !important}
 </style>
 
 <!-- ============================================================
@@ -1150,6 +1164,7 @@
     <button class="tab" data-k="immunology"><span class="dot" style="background:var(--immuno)"></span>Immunology</button>
     <button class="tab" data-k="raredisease"><span class="dot" style="background:var(--rare)"></span>Rare Disease</button>
     <button class="tab" data-k="ophthalmology"><span class="dot" style="background:var(--oph)"></span>Ophthalmology</button>
+    <button class="tab" data-k="kol" style="background:#0f1a1a;color:#c6f34e">👥 KOL Intelligence</button>
     <div class="refresh"><span id="refreshedAt"></span> <button id="reloadBtn">↻ Refresh</button> <button id="pdfBtn">⬇ Download PDF</button></div>
   </div>
   <div class="subtabs show" id="immunoSubs">
@@ -1606,6 +1621,7 @@
 <!-- WEEKLY-COIF-END -->
 <div style="font-size:11.5px;color:#5b6666;margin-top:10px;font-style:italic">COIF_UPDATED = "August 17, 2026"</div>
 
+<section class="kol-section">
 <h2 style="margin-top:38px;font-weight:900;letter-spacing:-.02em;font-size:24px">Faculty &amp; KOL Intelligence</h2>
 <p class="sub" style="margin-bottom:14px">Named faculty appear ONLY when the source is a public verified disclosure — ClinicalTrials.gov investigator list, published CME agenda, disclosure/DOI statement, or society leadership roster. Every row carries a source link. Filter by supporter, area, and indication.</p>
 <div class="kolbar">
@@ -1634,7 +1650,49 @@ window.KOL_DATA = [
   {name:"Marcus Maurer, MD", institution:"Charité — Universitätsmedizin Berlin (Dermatology & Allergy)", specialty:"Dermatology / Allergy", role:"Trial investigator", supporter:"Celldex Therapeutics", area:"immunology", indication:"Chronic spontaneous urticaria", srcUrl:"https://www.medthority.com/news/2024/7/initiation-of-phase-iii-program-for-barzolvolimab-in-patients-with-chronic-spontaneous-urticaria.--celldex-therapeutics", srcTitle:"Medthority — Barzolvolimab Ph3 (Maurer PI, Charité)"},
   {name:"Michael T. Yen, MD", institution:"Baylor College of Medicine (Oculoplastic Surgery & Ophthalmology)", specialty:"Ophthalmology / Oculoplastic", role:"Trial investigator", supporter:"Viridian Therapeutics", area:"ophthalmology", indication:"Thyroid eye disease", srcUrl:"https://www.ophthalmologytimes.com/view/viridian-announces-positive-topline-data-from-phase-3-thrive-trial-evaluating-veligrotug-in-patients-with-active-ted", srcTitle:"Ophthalmology Times — THRIVE veligrotug (Yen investigator)"},
   {name:"Arshad M. Khanani, MD, MA, FASRS", institution:"Sierra Eye Associates; University of Nevada, Reno School of Medicine", specialty:"Vitreoretinal", role:"Trial investigator", supporter:"Ocular Therapeutix", area:"ophthalmology", indication:"Wet age-related macular degeneration", srcUrl:"https://retinalphysician.com/issues/2026/january/axpaxli-superior-to-aflibercept-in-wet-amd-trial/", srcTitle:"Retinal Physician — SOL-1 axpaxli (Khanani Steering Committee Chair)"},
-  {name:"Darius M. Moshfeghi, MD", institution:"Stanford University Byers Eye Institute (Retina Division)", specialty:"Vitreoretinal", role:"Trial investigator", supporter:"Ocular Therapeutix", area:"ophthalmology", indication:"Wet age-related macular degeneration", srcUrl:"https://retinalphysician.com/issues/2026/january/axpaxli-superior-to-aflibercept-in-wet-amd-trial/", srcTitle:"Retinal Physician — SOL-1 axpaxli (Moshfeghi investigator)"}
+  {name:"Darius M. Moshfeghi, MD", institution:"Stanford University Byers Eye Institute (Retina Division)", specialty:"Vitreoretinal", role:"Trial investigator", supporter:"Ocular Therapeutix", area:"ophthalmology", indication:"Wet age-related macular degeneration", srcUrl:"https://retinalphysician.com/issues/2026/january/axpaxli-superior-to-aflibercept-in-wet-amd-trial/", srcTitle:"Retinal Physician — SOL-1 axpaxli (Moshfeghi investigator)"},
+
+  /* --- Advisory board (disclosed) --- */
+  {name:"Bruce E. Sands, MD", institution:"Icahn School of Medicine at Mount Sinai (Dr. Burrill B. Crohn Professor of Medicine)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"immunology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Sands named member)"},
+  {name:"Walter Reinisch, MD, PhD", institution:"Medical University of Vienna (IBD Study Group)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"immunology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Reinisch named member)"},
+  {name:"Britta Siegmund, MD, PhD", institution:"Charité — Universitätsmedizin Berlin (Gastroenterology, Infectious Disease & Rheumatology)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"immunology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Siegmund named member)"},
+  {name:"Glenn M. Chertow, MD, MPH", institution:"Stanford University School of Medicine", specialty:"Nephrology", role:"Advisory board (disclosed)", supporter:"R1 Therapeutics", area:"nephrology", indication:"Chronic kidney disease", srcUrl:"https://www.globenewswire.com/news-release/2026/06/30/3319525/0/en/r1-therapeutics-establishes-world-class-scientific-advisory-board-to-support-advancement-of-ap306-in-chronic-kidney-disease.html", srcTitle:"R1 Therapeutics IR — SAB formation (Chertow Chair)"},
+  {name:"Sharon M. Moe, MD", institution:"Indiana University School of Medicine", specialty:"Nephrology", role:"Advisory board (disclosed)", supporter:"R1 Therapeutics", area:"nephrology", indication:"Chronic kidney disease", srcUrl:"https://www.globenewswire.com/news-release/2026/06/30/3319525/0/en/r1-therapeutics-establishes-world-class-scientific-advisory-board-to-support-advancement-of-ap306-in-chronic-kidney-disease.html", srcTitle:"R1 Therapeutics IR — SAB formation (Moe member)"},
+  {name:"Markus Ketteler, MD, FERA", institution:"Robert-Bosch-Hospital, Stuttgart", specialty:"Nephrology", role:"Advisory board (disclosed)", supporter:"R1 Therapeutics", area:"nephrology", indication:"Chronic kidney disease", srcUrl:"https://www.globenewswire.com/news-release/2026/06/30/3319525/0/en/r1-therapeutics-establishes-world-class-scientific-advisory-board-to-support-advancement-of-ap306-in-chronic-kidney-disease.html", srcTitle:"R1 Therapeutics IR — SAB formation (Ketteler member)"},
+  {name:"Geoffrey A. Block, MD, FASN", institution:"U.S. Renal Care", specialty:"Nephrology", role:"Advisory board (disclosed)", supporter:"R1 Therapeutics", area:"nephrology", indication:"Chronic kidney disease", srcUrl:"https://www.globenewswire.com/news-release/2026/06/30/3319525/0/en/r1-therapeutics-establishes-world-class-scientific-advisory-board-to-support-advancement-of-ap306-in-chronic-kidney-disease.html", srcTitle:"R1 Therapeutics IR — SAB formation (Block member)"},
+
+  /* --- CME faculty --- */
+  {name:"Marwa Sabe, MD, MPH, FACC", institution:"Beth Israel Deaconess Medical Center (Advanced Heart Failure)", specialty:"Advanced Heart Failure / Transplant", role:"CME faculty", supporter:"Harvard Medical School CME", area:"cardiovascular", indication:"Heart failure", srcUrl:"https://learn.hms.harvard.edu/programs/heart-failure-summit", srcTitle:"Harvard HMS — Heart Failure Summit (Sabe Course Director)"},
+  {name:"David Venesy, MD", institution:"Lahey Hospital & Medical Center (Advanced Heart Failure)", specialty:"Advanced Heart Failure / Cardiomyopathy", role:"CME faculty", supporter:"Harvard Medical School CME", area:"cardiovascular", indication:"Heart failure", srcUrl:"https://learn.hms.harvard.edu/programs/heart-failure-summit", srcTitle:"Harvard HMS — Heart Failure Summit (Venesy Course Director)"},
+  {name:"Lisa Fleming, MD, MPH", institution:"Atrius Health", specialty:"Advanced Heart Failure / Transplant", role:"CME faculty", supporter:"Harvard Medical School CME", area:"cardiovascular", indication:"Heart failure", srcUrl:"https://learn.hms.harvard.edu/programs/heart-failure-summit", srcTitle:"Harvard HMS — Heart Failure Summit (Fleming Course Director)"},
+  {name:"James C. Fang, MD", institution:"University of Utah School of Medicine", specialty:"Advanced Heart Failure", role:"CME faculty", supporter:"Harvard Medical School CME", area:"cardiovascular", indication:"Heart failure", srcUrl:"https://learn.hms.harvard.edu/programs/heart-failure-summit", srcTitle:"Harvard HMS — Heart Failure Summit (Fang faculty)"},
+  {name:"A. Reshad Garan, MD, MS, FACC", institution:"Beth Israel Deaconess Medical Center", specialty:"Advanced Heart Failure / MCS", role:"CME faculty", supporter:"Harvard Medical School CME", area:"cardiovascular", indication:"Heart failure", srcUrl:"https://learn.hms.harvard.edu/programs/heart-failure-summit", srcTitle:"Harvard HMS — Heart Failure Summit (Garan faculty)"},
+  {name:"Amandeep Singh, MD, PhD", institution:"Massachusetts General Hospital (Bariatric Endoscopy)", specialty:"Gastroenterology / Obesity Medicine", role:"CME faculty", supporter:"Harvard Medical School CME", area:"endocrinology", indication:"Obesity", srcUrl:"https://learn.hms.harvard.edu/obesity", srcTitle:"Harvard HMS — Treating Obesity 2026 (Singh Course Director)"},
+  {name:"Angela Fitch, MD, FACP, FOMA, DABOM", institution:"knownwell (Chief Medical Officer); Past President, Obesity Medicine Association", specialty:"Obesity Medicine", role:"CME faculty", supporter:"Harvard Medical School CME", area:"endocrinology", indication:"Obesity", srcUrl:"https://learn.hms.harvard.edu/obesity", srcTitle:"Harvard HMS — Treating Obesity 2026 (Fitch Course Director)"},
+  {name:"Wesley Dutton, MD, DABOM", institution:"Massachusetts General Hospital (Pediatric Weight Center); Harvard Medical School", specialty:"Pediatric Obesity Medicine", role:"CME faculty", supporter:"Harvard Medical School CME", area:"endocrinology", indication:"Obesity", srcUrl:"https://learn.hms.harvard.edu/obesity", srcTitle:"Harvard HMS — Treating Obesity 2026 (Dutton Course Director)"},
+  {name:"Paul Copeland, MD, MPhil", institution:"Massachusetts General Hospital Weight Center; Harvard Medical School", specialty:"Obesity Medicine", role:"CME faculty", supporter:"Harvard Medical School CME", area:"endocrinology", indication:"Obesity", srcUrl:"https://learn.hms.harvard.edu/obesity", srcTitle:"Harvard HMS — Treating Obesity 2026 (Copeland Course Director)"},
+
+  /* --- Society leadership --- */
+  {name:"Saul J. Karpen, MD, PhD, FAASLD", institution:"Virginia Commonwealth University", specialty:"Hepatology", role:"Society leadership", supporter:"AASLD", area:"endocrinology", indication:"MASH / liver disease", srcUrl:"https://www.aasld.org/aasld-announces-2026-governing-board-leadership", srcTitle:"AASLD — 2026 Governing Board (Karpen President)"},
+  {name:"Michael R. Lucey, MD, FAASLD", institution:"University of Wisconsin School of Medicine and Public Health", specialty:"Hepatology", role:"Society leadership", supporter:"AASLD", area:"endocrinology", indication:"MASH / liver disease", srcUrl:"https://www.aasld.org/aasld-announces-2026-governing-board-leadership", srcTitle:"AASLD — 2026 Governing Board (Lucey President-Elect)"},
+  {name:"Nancy Reau, MD", institution:"Rush University Medical Center", specialty:"Hepatology", role:"Society leadership", supporter:"AASLD", area:"endocrinology", indication:"MASH / liver disease", srcUrl:"https://www.aasld.org/aasld-announces-2026-governing-board-leadership", srcTitle:"AASLD — 2026 Governing Board (Reau Councilor)"},
+  {name:"Andrew J. Muir, MD, FAASLD", institution:"Duke University School of Medicine", specialty:"Hepatology", role:"Society leadership", supporter:"AASLD", area:"endocrinology", indication:"MASH / liver disease", srcUrl:"https://www.aasld.org/aasld-announces-2026-governing-board-leadership", srcTitle:"AASLD — 2026 Governing Board (Muir Councilor)"},
+  {name:"Elizabeth C. Verna, MD, MSc, FAASLD", institution:"Columbia University", specialty:"Hepatology / Transplant", role:"Society leadership", supporter:"AASLD", area:"endocrinology", indication:"MASH / liver disease", srcUrl:"https://www.aasld.org/aasld-announces-2026-governing-board-leadership", srcTitle:"AASLD — 2026 Governing Board (Verna Councilor-at-Large)"},
+  {name:"Roxana Mehran, MD, FACC", institution:"Icahn School of Medicine at Mount Sinai", specialty:"Interventional Cardiology", role:"Society leadership", supporter:"American College of Cardiology", area:"cardiovascular", indication:"Interventional cardiology", srcUrl:"https://www.acc.org/about-acc/leadership/officers-and-trustees", srcTitle:"ACC — 2026 Officers & Trustees (Mehran President)"},
+  {name:"Hani K. Najm, MD, FACC", institution:"Cleveland Clinic (Chair, Pediatric & Adult Congenital Heart Surgery)", specialty:"Congenital Heart Surgery", role:"Society leadership", supporter:"American College of Cardiology", area:"cardiovascular", indication:"Congenital heart disease", srcUrl:"https://www.acc.org/about-acc/leadership/officers-and-trustees", srcTitle:"ACC — 2026 Officers & Trustees (Najm Vice President)"},
+  {name:"Christopher M. Kramer, MD, MACC", institution:"University of Virginia School of Medicine", specialty:"Cardiovascular Imaging", role:"Society leadership", supporter:"American College of Cardiology", area:"cardiovascular", indication:"Cardiovascular imaging", srcUrl:"https://www.acc.org/about-acc/leadership/officers-and-trustees", srcTitle:"ACC — 2026 Officers & Trustees (Kramer Immediate Past President)"},
+  {name:"Bonnie Ky, MD, MSCE, FACC", institution:"University of Pennsylvania", specialty:"Cardio-Oncology", role:"Society leadership", supporter:"American College of Cardiology", area:"cardiovascular", indication:"Cardio-oncology", srcUrl:"https://www.acc.org/about-acc/leadership/officers-and-trustees", srcTitle:"ACC — 2026 Officers & Trustees (Ky Trustee)"},
+  {name:"Manesh R. Patel, MD, FAHA", institution:"Duke Health (Chief of Cardiology; Duke Clinical Research Institute)", specialty:"Interventional Cardiology", role:"Society leadership", supporter:"American Heart Association", area:"cardiovascular", indication:"Cardiovascular disease", srcUrl:"https://newsroom.heart.org/news/american-heart-association-announces-volunteer-leaders-for-2026-27", srcTitle:"AHA Newsroom — 2026-27 Volunteer Leaders (Patel President)"},
+  {name:"Svati H. Shah, MD, MHS, FAHA", institution:"Duke University School of Medicine (Duke Center for Precision Health)", specialty:"Cardiovascular Genetics / Precision Health", role:"Society leadership", supporter:"American Heart Association", area:"cardiovascular", indication:"Cardiovascular disease", srcUrl:"https://newsroom.heart.org/news/american-heart-association-announces-volunteer-leaders-for-2026-27", srcTitle:"AHA Newsroom — 2026-27 Volunteer Leaders (Shah President-Elect)"},
+  {name:"William Harvey, MD, MSc", institution:"Tufts Medicine, Boston", specialty:"Rheumatology", role:"Society leadership", supporter:"American College of Rheumatology", area:"immunology", indication:"Rheumatologic disease", srcUrl:"https://rheumatology.org/acr-board-of-directors", srcTitle:"ACR — 2026 Board of Directors (Harvey President)"},
+  {name:"Anne R. Bass, MD", institution:"Hospital for Special Surgery, New York", specialty:"Rheumatology", role:"Society leadership", supporter:"American College of Rheumatology", area:"immunology", indication:"Rheumatologic disease", srcUrl:"https://rheumatology.org/acr-board-of-directors", srcTitle:"ACR — 2026 Board of Directors (Bass President-Elect)"},
+  {name:"Eric M. Ruderman, MD", institution:"Northwestern University", specialty:"Rheumatology", role:"Society leadership", supporter:"American College of Rheumatology", area:"immunology", indication:"Rheumatologic disease", srcUrl:"https://rheumatology.org/acr-board-of-directors", srcTitle:"ACR — 2026 Board of Directors (Ruderman Treasurer)"},
+  {name:"Daniel H. Solomon, MD, MPH", institution:"Brigham and Women's Hospital", specialty:"Rheumatology / Pharmacoepidemiology", role:"Society leadership", supporter:"American College of Rheumatology", area:"immunology", indication:"Rheumatologic disease", srcUrl:"https://rheumatology.org/acr-board-of-directors", srcTitle:"ACR — 2026 Board of Directors (Solomon Member-at-Large)"},
+  {name:"Murad Alam, MD, MSCI, MBA, FAAD", institution:"Northwestern University Feinberg School of Medicine (Dermatology)", specialty:"Dermatology / Dermatologic Surgery", role:"Society leadership", supporter:"American Academy of Dermatology", area:"immunology", indication:"Dermatologic disease", srcUrl:"https://www.aad.org/news/murad-alam-assumes-presidency-aad", srcTitle:"AAD — Alam assumes 2026 Presidency"},
+  {name:"Christopher J. Rapuano, MD", institution:"Wills Eye Hospital (Chief, Cornea Service); Thomas Jefferson University", specialty:"Cornea / External Disease", role:"Society leadership", supporter:"American Academy of Ophthalmology", area:"ophthalmology", indication:"Cornea / general ophthalmology", srcUrl:"https://www.willseye.org/doctor/christopher-j-rapuano-md/", srcTitle:"Wills Eye — Rapuano Chief of Cornea (AAO 2026 President)"},
+  {name:"Enrique Caballero, MD", institution:"Harvard Medical School / Brigham and Women's Hospital", specialty:"Endocrinology / Diabetes", role:"Society leadership", supporter:"American Diabetes Association", area:"endocrinology", indication:"Diabetes", srcUrl:"https://www.prnewswire.com/news-releases/the-american-diabetes-association-welcomes-2026-principal-officers-and-members-to-the-national-board-of-directors-302654281.html", srcTitle:"ADA — 2026 Principal Officers (Caballero President, Medicine & Science)"},
+  {name:"Amy Hess-Fischl, MS, RDN, LDN, BC-ADM, CDCES", institution:"University of Chicago", specialty:"Diabetes Care & Education", role:"Society leadership", supporter:"American Diabetes Association", area:"endocrinology", indication:"Diabetes", srcUrl:"https://www.prnewswire.com/news-releases/the-american-diabetes-association-welcomes-2026-principal-officers-and-members-to-the-national-board-of-directors-302654281.html", srcTitle:"ADA — 2026 Principal Officers (Hess-Fischl President, Health Care & Education)"},
+  {name:"Samir M. Parikh, MD, FASN", institution:"UT Southwestern Medical Center (Chair, Internal Medicine)", specialty:"Nephrology / Acute Kidney Injury", role:"Society leadership", supporter:"American Society of Nephrology", area:"nephrology", indication:"Kidney disease", srcUrl:"https://profiles.utsouthwestern.edu/profile/202716/samir-m-parikh.html", srcTitle:"UT Southwestern — Samir Parikh faculty profile (ASN 2026 President)"}
 ];
 </script>
 <!-- WEEKLY-KOL-END -->
@@ -1645,6 +1703,7 @@ window.KOL_DATA = [
   </table>
 </div>
 <div style="font-size:11.5px;color:#5b6666;margin-top:10px;font-style:italic">KOL_UPDATED = "August 17, 2026"</div>
+</section>
 <script>
 (function(){
   var data = window.KOL_DATA || [];
@@ -6771,6 +6830,23 @@ document.addEventListener("click",function(e){
   if(b){ e.preventDefault(); setTA("immunology",b.getAttribute("data-sub")); window.scrollTo({top:0,behavior:"smooth"}); }
 });
 load();
+</script>
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      if(t.dataset.k === 'kol'){
+        document.body.classList.add('kol-mode');
+        tabs.forEach(function(x){ x.classList.toggle('active', x === t); });
+        var kolSection = document.querySelector('.kol-section');
+        if(kolSection) kolSection.scrollIntoView({behavior:'smooth', block:'start'});
+      } else {
+        document.body.classList.remove('kol-mode');
+      }
+    }, true);
+  });
+})();
 </script>
 </body>
 </html>
