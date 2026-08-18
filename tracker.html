@@ -1156,15 +1156,6 @@
     <div class="freshness" id="freshness"></div>
   </header>
 
-  <div class="subtabs show" id="immunoSubs" style="margin-bottom:12px">
-    <span class="subtabs-lab">Immunology sub-specialties:</span>
-    <button class="subtab on" data-sub="all">All Immunology</button>
-    <button class="subtab" data-sub="derm">🩹 Dermatology</button>
-    <button class="subtab" data-sub="rheum">🦴 Rheumatology</button>
-    <button class="subtab" data-sub="gastro">🫀 Gastroenterology</button>
-    <button class="subtab" data-sub="pulm">🫁 Pulmonology</button>
-    <button class="subtab" data-sub="allergy">🌾 Allergy</button>
-  </div>
   <div class="controls">
     <button class="tab active" data-k="all">All</button>
     <button class="tab" data-k="cardiovascular"><span class="dot" style="background:var(--cardio)"></span>Cardiovascular</button>
@@ -1173,8 +1164,17 @@
     <button class="tab" data-k="immunology"><span class="dot" style="background:var(--immuno)"></span>Immunology</button>
     <button class="tab" data-k="raredisease"><span class="dot" style="background:var(--rare)"></span>Rare Disease</button>
     <button class="tab" data-k="ophthalmology"><span class="dot" style="background:var(--oph)"></span>Ophthalmology</button>
-    <button class="tab" data-k="kol" style="background:#0f1a1a;color:#c6f34e">👥 KOL Intelligence</button>
+    <button class="tab" data-k="kol"><span class="dot" style="background:#0f1a1a"></span>👥 KOL Intelligence</button>
     <div class="refresh"><span id="refreshedAt"></span> <button id="reloadBtn">↻ Refresh</button> <button id="pdfBtn">⬇ Download PDF</button></div>
+  </div>
+  <div class="subtabs" id="immunoSubs" style="margin-top:8px">
+    <span class="subtabs-lab">Immunology sub-specialties:</span>
+    <button class="subtab on" data-sub="all">All Immunology</button>
+    <button class="subtab" data-sub="derm">🩹 Dermatology</button>
+    <button class="subtab" data-sub="rheum">🦴 Rheumatology</button>
+    <button class="subtab" data-sub="gastro">🫀 Gastroenterology</button>
+    <button class="subtab" data-sub="pulm">🫁 Pulmonology</button>
+    <button class="subtab" data-sub="allergy">🌾 Allergy</button>
   </div>
   <div class="supbar">
     <label for="taSel">Filter by therapeutic area</label>
@@ -6197,10 +6197,9 @@ async function load(){
 function syncTAControls(){
   document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.k===activeTab));
   document.querySelectorAll(".subtab").forEach(x=>x.classList.toggle("on",x.dataset.sub===immunoSub));
-  // Immunology sub-specialty tabs stay visible at all times so they read as a
-  // permanent second tab row rather than something hidden behind another tab.
+  // Immunology sub-specialty tabs show only when Immunology is the active area.
   const isub=$("#immunoSubs");
-  if(isub) isub.classList.add("show");
+  if(isub) isub.classList.toggle("show", activeTab==="immunology");
   const ts=$("#taSel");
   if(ts) ts.value = (activeTab==="immunology"&&immunoSub!=="all") ? "immunology:"+immunoSub : activeTab;
   const sc=$("#supClear"); if(sc) sc.hidden = !activeSupporter && activeTab==="all" && immunoSub==="all";
@@ -6832,17 +6831,40 @@ document.addEventListener("click",function(e){
 load();
 </script>
 <script>
+// KOL tab behaves like the other therapeutic-area tabs: it lives in the same jump-to
+// row, scrolls to the KOL section, and pre-filters that section based on the currently
+// active therapeutic area. Does NOT hide the rest of the page.
 (function(){
+  var AREA_TO_KOL = {
+    cardiovascular: "cardiovascular",
+    nephrology: "nephrology",
+    endocrinology: "endocrinology",
+    immunology: "immunology",
+    raredisease: "rare disease",
+    ophthalmology: "ophthalmology"
+  };
   var tabs = document.querySelectorAll('.tab');
   tabs.forEach(function(t){
     t.addEventListener('click', function(){
+      // Any tab click: make sure we're not stuck in the old hide-everything mode.
+      document.body.classList.remove('kol-mode');
       if(t.dataset.k === 'kol'){
-        document.body.classList.add('kol-mode');
+        // Highlight KOL tab; scroll to the KOL section; pre-filter to current area.
         tabs.forEach(function(x){ x.classList.toggle('active', x === t); });
         var kolSection = document.querySelector('.kol-section');
         if(kolSection) kolSection.scrollIntoView({behavior:'smooth', block:'start'});
-      } else {
-        document.body.classList.remove('kol-mode');
+        // If a therapeutic area is currently active in state, drive the area filter.
+        try {
+          var area = (typeof activeTab !== 'undefined') ? activeTab : 'all';
+          var areaSel = document.getElementById('kolFilterArea');
+          if(areaSel && AREA_TO_KOL[area]){
+            areaSel.value = AREA_TO_KOL[area];
+            areaSel.dispatchEvent(new Event('change'));
+          } else if(areaSel){
+            areaSel.value = '';
+            areaSel.dispatchEvent(new Event('change'));
+          }
+        } catch(e){}
       }
     }, true);
   });
