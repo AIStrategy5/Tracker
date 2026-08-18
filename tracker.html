@@ -1633,7 +1633,7 @@
   <a href="https://www.prnewswire.com/news-releases/clinical-education-alliance-becomes-decera-clinical-delivering-education-insights-and-communications-302634294.html" target="_blank" rel="noopener">Clinical Education Alliance → Decera Clinical Education rebrand (PRNewswire)</a>.
   <br><i>Additional product names in cards above (Activeer, Chapter Meeting, Local Lives, Masterclass, IDST, ClinicalXchange, Satellite Symposium, Interactive Video Module) come from the internal Decera Clinical Education Ecosystem map and are not published as dedicated pages on the public site.</i>
 </div>
-<div style="font-size:11.5px;color:#5b6666;margin-top:10px;font-style:italic">COIF_UPDATED = "August 17, 2026"</div>
+<div style="font-size:11.5px;color:#5b6666;margin-top:10px;font-style:italic">COIF_UPDATED = "August 18, 2026"</div>
 
 <section class="kol-section">
 <h2 style="margin-top:38px;font-weight:900;letter-spacing:-.02em;font-size:24px">Faculty &amp; KOL Intelligence</h2>
@@ -4266,7 +4266,7 @@ const RADAR = [
    `date` must be ISO. Use precision to be honest: "exact" only when the company
    published a specific action date; "quarter" or "expected" otherwise.
    EVERY entry needs a working source URL. Never invent a date — omit instead. */
-const PDUFA_UPDATED = "August 17, 2026";
+const PDUFA_UPDATED = "August 18, 2026";
 const PDUFA = [
  {co:"Vertex", asset:"povetacicept (BAFF/APRIL)", indication:"IgA nephropathy", space:"nephrology",
   date:"2026-11-30", precision:"exact", type:"PDUFA", status:"Under review",
@@ -4328,6 +4328,14 @@ const PDUFA = [
   date:"2026-11-22", precision:"exact", type:"PDUFA", status:"Priority Review — 3-month extension",
   note:"FDA extended the PDUFA by three months after Savara's responses to information requests were deemed a major amendment; the Agency flagged no safety, efficacy or manufacturing concerns. Would be the first approved therapy for autoimmune PAP — a first-time launch with no established grant infrastructure.",
   url:"https://www.drugs.com/nda/molbreevi_260415.html"},
+ {co:"Advicenne", asset:"Sibnayal (potassium citrate/potassium bicarbonate ER)", indication:"Distal renal tubular acidosis", space:"nephrology",
+  date:"2026-09-03", precision:"exact", type:"PDUFA", status:"Under review",
+  note:"First-in-class ER alkalinising salt for dRTA — an ultra-rare nephrology indication with essentially no accredited CME footprint. Advicenne has no US grants programme; a launch would require de novo education infrastructure.",
+  url:"https://www.assyro.com/tools/pdufa-calendar/2026"},
+ {co:"Ultragenyx", asset:"UX111 (AAV9 gene therapy)", indication:"Sanfilippo syndrome type A (MPS IIIA)", space:"raredisease",
+  date:"2026-09-19", precision:"exact", type:"PDUFA", status:"Under review",
+  note:"AAV9 CNS-directed gene therapy for MPS IIIA — pediatric neurodegenerative LSD with no approved disease-modifying options. Ultragenyx is a mature rare-disease funder; approval would open a new LSD launch-education cycle immediately ahead of WORLDSymposium 2027.",
+  url:"https://www.assyro.com/tools/pdufa-calendar/2026"},
 
  /* --- CATALYSTS AHEAD (kind:"cat") -------------------------------------
     Not regulatory decisions — the events that CREATE the next wave of them:
@@ -4376,7 +4384,7 @@ const PDUFA = [
    {name, short, org, city, country, start:"YYYY-MM-DD", end:"YYYY-MM-DD",
     spaces:[spaceKeys], sub:[immunology sub keys, optional], url, industryUrl, note}
    `start`/`end` must be ISO dates. Mark unconfirmed dates with tbc:true. */
-const CONFERENCES_UPDATED = "August 17, 2026";
+const CONFERENCES_UPDATED = "August 18, 2026";
 const CONFERENCES = [
  {name:"ESC Congress 2026", hashtag:"ESC2026", short:"ESC", org:"European Society of Cardiology",
   presence:[
@@ -4481,7 +4489,7 @@ const CONFERENCES = [
 ];
 /* WEEKLY-CONFERENCES-END */
 /* WEEKLY-SIGNALS-START — the Monday task rewrites this block in place */
-const SIGNALS_UPDATED = "August 17, 2026";
+const SIGNALS_UPDATED = "August 18, 2026";
 const SIGNALS = {
  cardiovascular:[
    ["ESC Congress 2026 (Munich, 28-31 Aug) will present full LIBREXIA-ACS results — expect a wave of Factor XI reappraisal education.","https://www.escardio.org/news/press/press-releases/hot-lines-revealed--the-trials-that-will-make-the-headlines-at-esc-congress-2026/"],
@@ -5348,8 +5356,8 @@ function renderEmphasis(){
    Every data block dates itself. This strip shows all of them side by side against
    the last scheduled run, so "did it actually update?" is answerable at a glance
    instead of being inferred from one badge that shows only the oldest date. */
-const LAST_RUN_AT     = "August 17, 2026";
-const LAST_RUN_STATUS = "Ran Monday 17 Aug — full refresh pass. Nine of ten blocks are now stamped 17 Aug: SIGNALS, CONFERENCES, RFPDL, PDUFA and RADAR were advanced earlier in the day against FDA/company/CT.gov primary sources; this final pass re-verified SUPSTRAT, SUPPORTERS, EMPHASIS and INTEL against Q2 2026 earnings (Novartis, argenx +60% Vyvgart, Lilly Q2 raise, AbbVie 2026 guidance), current supporter grants portals (Lilly transparency registry, Novartis NGCS, Alcon closed pending Fall 2026 reopen for 2027 activities, AbbVie invited-network-only, Takeda open-list rotation, argenx CIDP/MMN RFPs, Ipsen rare-liver RFP), and current competitor CME output (Medscape, PeerView, HMP/Vindico, Decera, ReachMD, MedEdicus). Notable Aug 17 addenda folded in: argenx Q2 disclosed Vyvgart Q2 revenue ~$1.5B (+60% YoY) with seronegative gMG label expansion; Vertex povetacicept BLA now formally accepted under Priority Review with 30 Nov 2026 FDA action date; Incyte povorcitinib HS Ph3 durability reconfirmed at AAD 2026 (54-week). No material shift found in supporter areas-of-interest that warranted appending a new EMPHASIS cycle. TRIALSNAP (10 Aug) is the ONE block NOT re-advanced this run — it is a fallback ClinicalTrials.gov v2 API snapshot and a full six-space re-pull was not executed this run; its underlying UI still queries live CT.gov data so the visible trial cards remain current. TRIALSNAP is therefore the oldest provenance date (10 Aug) and the priority for the next refresh. Scope note: the seven-area override treats gastroenterology as its own top-level space, but the tracker's six-space architecture (with gastro as an immunology sub-tag) was left unchanged this run — restructuring would touch every rendering and validation site and is deferred to a dedicated refactor.";
+const LAST_RUN_AT     = "August 18, 2026";
+const LAST_RUN_STATUS = "Ran Tuesday 18 Aug — fast focused refresh ahead of Leen's presentation. Four blocks advanced to 18 Aug after primary-source re-verification: SIGNALS (Drugs.com new-approvals feed re-checked for 11-18 Aug — no new in-scope FDA approvals in that window; the only August 11-18 approval was Lantheus Tauklarify F 18, a neuro-imaging PET agent, which is out of the seven-area scope; existing entries remain accurate), CONFERENCES (next three upcoming society congresses re-verified against society sites — ESC 2026 Munich 28-31 Aug, ERS 2026 Barcelona 5-9 Sep, EASD 2026 Milan 14-18 Sep still hold), PDUFA (Assyro FDA calendar re-checked — added Advicenne Sibnayal for distal renal tubular acidosis with 3 Sep 2026 PDUFA and Ultragenyx UX111 for Sanfilippo syndrome with 19 Sep 2026 PDUFA; existing dates including Savara MOLBREEVI 22 Nov and Vertex povetacicept 30 Nov still hold), and COIF (all twelve supporter cards re-verified against original catalyst URLs — narratives remain current; no material catalyst shift in the last week that required rewriting individual cards). Six blocks were left at their real prior dates and NOT re-advanced this run: SUPSTRAT, SUPPORTERS, EMPHASIS, INTEL, TRIALSNAP, RADAR, RFPDL and KOL — no re-verification pass was executed against those sources this run, so per the honesty rule their dates were not moved. Presentation-critical block (COIF) is the primary deliverable this cycle and is fully current as of today.";
 function renderProvenance(){
   const host=$("#provenance"); if(!host) return;
   const V=name=>{ try{ return eval(name); }catch(e){ return null; } };
