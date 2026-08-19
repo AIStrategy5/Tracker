@@ -1166,7 +1166,7 @@
     <button class="tab" data-k="nephrology"><span class="dot" style="background:var(--nephro)"></span>Nephrology</button>
     <button class="tab" data-k="endocrinology"><span class="dot" style="background:var(--endo)"></span>Endocrinology</button>
     <button class="tab" data-k="immunology"><span class="dot" style="background:var(--immuno)"></span>Immunology</button>
-    <button class="tab" data-k="gastroenterology"><span class="dot" style="background:var(--immuno)"></span>🫀 Gastroenterology</button>
+    <button class="tab" data-k="gastroenterology"><span class="dot" style="background:var(--immuno)"></span>Gastroenterology</button>
     <button class="tab" data-k="raredisease"><span class="dot" style="background:var(--rare)"></span>Rare Disease</button>
     <button class="tab" data-k="ophthalmology"><span class="dot" style="background:var(--oph)"></span>Ophthalmology</button>
     <button class="tab" data-k="kol"><span class="dot" style="background:#0f1a1a"></span>👥 KOL Intelligence</button>
@@ -6236,13 +6236,19 @@ async function load(){
 /* Keep the tabs, the sub-tabs and the therapeutic-area dropdown all showing the
    same state, whichever control the user actually touched. */
 function syncTAControls(){
-  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.k===activeTab));
+  // Highlight the Gastroenterology top-level tab when we're on immunology+gastro,
+  // and hide the Immunology sub-tab row in that case so the UI reads "GI only".
+  const isGastroView = (activeTab==="immunology" && immunoSub==="gastro");
+  document.querySelectorAll(".tab").forEach(x=>{
+    if(x.dataset.k==="gastroenterology"){ x.classList.toggle("active", isGastroView); }
+    else { x.classList.toggle("active", x.dataset.k===activeTab && !isGastroView); }
+  });
   document.querySelectorAll(".subtab").forEach(x=>x.classList.toggle("on",x.dataset.sub===immunoSub));
-  // Immunology sub-specialty tabs show only when Immunology is the active area.
+  // Immunology sub-specialty tabs show only when Immunology is the active area AND we're not in the GI view.
   const isub=$("#immunoSubs");
-  if(isub) isub.classList.toggle("show", activeTab==="immunology");
+  if(isub) isub.classList.toggle("show", activeTab==="immunology" && !isGastroView);
   const ts=$("#taSel");
-  if(ts) ts.value = (activeTab==="immunology"&&immunoSub!=="all") ? "immunology:"+immunoSub : activeTab;
+  if(ts) ts.value = isGastroView ? "gastroenterology" : ((activeTab==="immunology"&&immunoSub!=="all") ? "immunology:"+immunoSub : activeTab);
   const sc=$("#supClear"); if(sc) sc.hidden = !activeSupporter && activeTab==="all" && immunoSub==="all";
   try{ localStorage.setItem("es_tab",activeTab); localStorage.setItem("es_sub",immunoSub); }catch(e){}
 }
@@ -6259,6 +6265,10 @@ function setTA(tab,sub){
   if(typeof renderConferences==="function") renderConferences();
 }
 document.querySelectorAll(".tab").forEach(b=> b.addEventListener("click", ()=>{
+  // Gastroenterology is displayed as its own top-level tab but data is still tagged
+  // as immunology:gastro under the hood — route the click to that sub-filter so the
+  // existing filter logic surfaces the GI content correctly.
+  if(b.dataset.k === "gastroenterology"){ setTA("immunology","gastro"); return; }
   setTA(b.dataset.k,"all");
 }));
 document.querySelectorAll(".subtab").forEach(b=> b.addEventListener("click", ()=>{
@@ -6270,6 +6280,7 @@ document.querySelectorAll(".subtab").forEach(b=> b.addEventListener("click", ()=
   const ts=$("#taSel"); if(!ts) return;
   ts.addEventListener("change",()=>{
     const v=ts.value;
+    if(v==="gastroenterology"){ setTA("immunology","gastro"); return; }
     if(v.indexOf(":")>-1){ const p=v.split(":"); setTA(p[0],p[1]); }
     else setTA(v,"all");
   });
