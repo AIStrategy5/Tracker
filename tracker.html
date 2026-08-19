@@ -1202,8 +1202,8 @@
       </optgroup>
     </select>
     <span class="supdiv"></span>
-    <label for="supSel">Filter by supporter</label>
-    <select id="supSel"><option value="">All supporters</option></select>
+    <label for="supSel">Filter by supporter (hold ⌘/Ctrl to pick multiple)</label>
+    <select id="supSel" multiple size="4" style="min-width:280px"></select>
     <button id="supClear" class="supclear" hidden>✕ Clear all filters</button>
     <span id="supNote" class="supnote"></span>
   </div>
@@ -1659,8 +1659,8 @@
 <h2 style="margin-top:38px;font-weight:900;letter-spacing:-.02em;font-size:24px">Faculty &amp; KOL Intelligence</h2>
 <p class="sub" style="margin-bottom:14px">Named faculty appear ONLY when the source is a public verified disclosure — ClinicalTrials.gov investigator list, published CME agenda, disclosure/DOI statement, or society leadership roster. Every row carries a source link. Filter by supporter, area, and indication.</p>
 <div class="kolbar">
-  <label>Supporter <select id="kolFilterSupporter"><option value="">All</option></select></label>
-  <label>Therapeutic area <select id="kolFilterArea"><option value="">All</option></select></label>
+  <label>Supporter (hold ⌘/Ctrl to pick multiple) <select id="kolFilterSupporter" multiple size="4" style="min-width:220px"></select></label>
+  <label>Therapeutic area (hold ⌘/Ctrl to pick multiple) <select id="kolFilterArea" multiple size="4" style="min-width:180px"></select></label>
   <label>Indication <select id="kolFilterIndication"><option value="">All</option></select></label>
   <label>Role <select id="kolFilterRole"><option value="">All</option><option>Trial investigator</option><option>Advisory board (disclosed)</option><option>CME faculty</option><option>Society leadership</option></select></label>
   <button class="supclear" id="kolClearBtn" style="align-self:end">Clear filters</button>
@@ -1677,19 +1677,19 @@ window.KOL_DATA = [
   {name:"Deepak L. Bhatt, MD", institution:"Brigham and Women's Hospital / Harvard Medical School", specialty:"Interventional Cardiology", role:"Trial investigator", supporter:"Idorsia", area:"cardiovascular", indication:"Acute myocardial infarction", srcUrl:"https://www.biospace.com/idorsia-initiates-the-phase-3-registration-study-with-selatogrel-for-the-treatment-of-acute-myocardial-infarction", srcTitle:"BioSpace — SOS-AMI Ph3 (Bhatt Steering Committee Chair)"},
   {name:"Mary Mooney", institution:"Trinity College Dublin, School of Nursing and Midwifery", specialty:"Cardiovascular Nursing", role:"Trial investigator", supporter:"Idorsia", area:"cardiovascular", indication:"Acute myocardial infarction", srcUrl:"https://www.biospace.com/idorsia-initiates-the-phase-3-registration-study-with-selatogrel-for-the-treatment-of-acute-myocardial-infarction", srcTitle:"BioSpace — SOS-AMI Ph3 (Mooney Steering Committee)"},
   {name:"Stephen Harrison, MD", institution:"Pinnacle Clinical Research (San Antonio)", specialty:"Hepatology", role:"Trial investigator", supporter:"Akero Therapeutics", area:"endocrinology", indication:"MASH / MASH cirrhosis", srcUrl:"https://www.pharmacytimes.com/view/efruxifermin-demonstrates-potential-in-treating-patients-with-mash-related-scarring-or-cirrhosis", srcTitle:"Pharmacy Times — HARMONY EFX Ph2b (Harrison lead investigator)"},
-  {name:"David Rubin, MD", institution:"University of Chicago Medicine (IBD Center)", specialty:"Gastroenterology (IBD)", role:"Trial investigator", supporter:"Abivax", area:"immunology", indication:"Ulcerative colitis", srcUrl:"https://ir.abivax.com/news-releases/news-release-details/abivax-announces-positive-phase-3-results-both-abtect-8-week/", srcTitle:"Abivax IR — Positive Ph3 ABTECT (Rubin quoted)"},
-  {name:"Silvio Danese, MD", institution:"San Raffaele / Vita-Salute San Raffaele University, Milan", specialty:"Gastroenterology / Endoscopy", role:"Trial investigator", supporter:"Abivax", area:"immunology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Danese co-author)"},
-  {name:"Laurent Peyrin-Biroulet, MD", institution:"INFINY Institute — INSERM NGERE, Vandoeuvre-lès-Nancy", specialty:"Gastroenterology (IBD)", role:"Trial investigator", supporter:"Abivax", area:"immunology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Peyrin-Biroulet co-author)"},
-  {name:"Ursula Seidler, MD", institution:"Hannover Medical School — Dept of Gastroenterology, Hepatology, Endocrinology", specialty:"Gastroenterology", role:"Trial investigator", supporter:"Abivax", area:"immunology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Seidler first author)"},
+  {name:"David Rubin, MD", institution:"University of Chicago Medicine (IBD Center)", specialty:"Gastroenterology (IBD)", role:"Trial investigator", supporter:"Abivax", area:"gastroenterology", indication:"Ulcerative colitis", srcUrl:"https://ir.abivax.com/news-releases/news-release-details/abivax-announces-positive-phase-3-results-both-abtect-8-week/", srcTitle:"Abivax IR — Positive Ph3 ABTECT (Rubin quoted)"},
+  {name:"Silvio Danese, MD", institution:"San Raffaele / Vita-Salute San Raffaele University, Milan", specialty:"Gastroenterology / Endoscopy", role:"Trial investigator", supporter:"Abivax", area:"gastroenterology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Danese co-author)"},
+  {name:"Laurent Peyrin-Biroulet, MD", institution:"INFINY Institute — INSERM NGERE, Vandoeuvre-lès-Nancy", specialty:"Gastroenterology (IBD)", role:"Trial investigator", supporter:"Abivax", area:"gastroenterology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Peyrin-Biroulet co-author)"},
+  {name:"Ursula Seidler, MD", institution:"Hannover Medical School — Dept of Gastroenterology, Hepatology, Endocrinology", specialty:"Gastroenterology", role:"Trial investigator", supporter:"Abivax", area:"gastroenterology", indication:"Ulcerative colitis", srcUrl:"https://academic.oup.com/ecco-jcc/article/20/Supplement_1/jjaf231.893/8433392", srcTitle:"J Crohn's Colitis — ABTECT Ph3 safety pooled (Seidler first author)"},
   {name:"Marcus Maurer, MD", institution:"Charité — Universitätsmedizin Berlin (Dermatology & Allergy)", specialty:"Dermatology / Allergy", role:"Trial investigator", supporter:"Celldex Therapeutics", area:"immunology", indication:"Chronic spontaneous urticaria", srcUrl:"https://www.medthority.com/news/2024/7/initiation-of-phase-iii-program-for-barzolvolimab-in-patients-with-chronic-spontaneous-urticaria.--celldex-therapeutics", srcTitle:"Medthority — Barzolvolimab Ph3 (Maurer PI, Charité)"},
   {name:"Michael T. Yen, MD", institution:"Baylor College of Medicine (Oculoplastic Surgery & Ophthalmology)", specialty:"Ophthalmology / Oculoplastic", role:"Trial investigator", supporter:"Viridian Therapeutics", area:"ophthalmology", indication:"Thyroid eye disease", srcUrl:"https://www.ophthalmologytimes.com/view/viridian-announces-positive-topline-data-from-phase-3-thrive-trial-evaluating-veligrotug-in-patients-with-active-ted", srcTitle:"Ophthalmology Times — THRIVE veligrotug (Yen investigator)"},
   {name:"Arshad M. Khanani, MD, MA, FASRS", institution:"Sierra Eye Associates; University of Nevada, Reno School of Medicine", specialty:"Vitreoretinal", role:"Trial investigator", supporter:"Ocular Therapeutix", area:"ophthalmology", indication:"Wet age-related macular degeneration", srcUrl:"https://retinalphysician.com/issues/2026/january/axpaxli-superior-to-aflibercept-in-wet-amd-trial/", srcTitle:"Retinal Physician — SOL-1 axpaxli (Khanani Steering Committee Chair)"},
   {name:"Darius M. Moshfeghi, MD", institution:"Stanford University Byers Eye Institute (Retina Division)", specialty:"Vitreoretinal", role:"Trial investigator", supporter:"Ocular Therapeutix", area:"ophthalmology", indication:"Wet age-related macular degeneration", srcUrl:"https://retinalphysician.com/issues/2026/january/axpaxli-superior-to-aflibercept-in-wet-amd-trial/", srcTitle:"Retinal Physician — SOL-1 axpaxli (Moshfeghi investigator)"},
 
   /* --- Advisory board (disclosed) --- */
-  {name:"Bruce E. Sands, MD", institution:"Icahn School of Medicine at Mount Sinai (Dr. Burrill B. Crohn Professor of Medicine)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"immunology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Sands named member)"},
-  {name:"Walter Reinisch, MD, PhD", institution:"Medical University of Vienna (IBD Study Group)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"immunology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Reinisch named member)"},
-  {name:"Britta Siegmund, MD, PhD", institution:"Charité — Universitätsmedizin Berlin (Gastroenterology, Infectious Disease & Rheumatology)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"immunology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Siegmund named member)"},
+  {name:"Bruce E. Sands, MD", institution:"Icahn School of Medicine at Mount Sinai (Dr. Burrill B. Crohn Professor of Medicine)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"gastroenterology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Sands named member)"},
+  {name:"Walter Reinisch, MD, PhD", institution:"Medical University of Vienna (IBD Study Group)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"gastroenterology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Reinisch named member)"},
+  {name:"Britta Siegmund, MD, PhD", institution:"Charité — Universitätsmedizin Berlin (Gastroenterology, Infectious Disease & Rheumatology)", specialty:"Gastroenterology (IBD)", role:"Advisory board (disclosed)", supporter:"AltruBio", area:"gastroenterology", indication:"Ulcerative colitis / IBD", srcUrl:"https://www.biospace.com/press-releases/altrubio-announces-formation-of-inflammatory-bowel-disease-clinical-advisory-board", srcTitle:"BioSpace — AltruBio IBD Clinical Advisory Board (Siegmund named member)"},
   {name:"Glenn M. Chertow, MD, MPH", institution:"Stanford University School of Medicine", specialty:"Nephrology", role:"Advisory board (disclosed)", supporter:"R1 Therapeutics", area:"nephrology", indication:"Chronic kidney disease", srcUrl:"https://www.globenewswire.com/news-release/2026/06/30/3319525/0/en/r1-therapeutics-establishes-world-class-scientific-advisory-board-to-support-advancement-of-ap306-in-chronic-kidney-disease.html", srcTitle:"R1 Therapeutics IR — SAB formation (Chertow Chair)"},
   {name:"Sharon M. Moe, MD", institution:"Indiana University School of Medicine", specialty:"Nephrology", role:"Advisory board (disclosed)", supporter:"R1 Therapeutics", area:"nephrology", indication:"Chronic kidney disease", srcUrl:"https://www.globenewswire.com/news-release/2026/06/30/3319525/0/en/r1-therapeutics-establishes-world-class-scientific-advisory-board-to-support-advancement-of-ap306-in-chronic-kidney-disease.html", srcTitle:"R1 Therapeutics IR — SAB formation (Moe member)"},
   {name:"Markus Ketteler, MD, FERA", institution:"Robert-Bosch-Hospital, Stuttgart", specialty:"Nephrology", role:"Advisory board (disclosed)", supporter:"R1 Therapeutics", area:"nephrology", indication:"Chronic kidney disease", srcUrl:"https://www.globenewswire.com/news-release/2026/06/30/3319525/0/en/r1-therapeutics-establishes-world-class-scientific-advisory-board-to-support-advancement-of-ap306-in-chronic-kidney-disease.html", srcTitle:"R1 Therapeutics IR — SAB formation (Ketteler member)"},
@@ -1726,7 +1726,13 @@ window.KOL_DATA = [
   {name:"Christopher J. Rapuano, MD", institution:"Wills Eye Hospital (Chief, Cornea Service); Thomas Jefferson University", specialty:"Cornea / External Disease", role:"Society leadership", supporter:"American Academy of Ophthalmology", area:"ophthalmology", indication:"Cornea / general ophthalmology", srcUrl:"https://www.willseye.org/doctor/christopher-j-rapuano-md/", srcTitle:"Wills Eye — Rapuano Chief of Cornea (AAO 2026 President)"},
   {name:"Enrique Caballero, MD", institution:"Harvard Medical School / Brigham and Women's Hospital", specialty:"Endocrinology / Diabetes", role:"Society leadership", supporter:"American Diabetes Association", area:"endocrinology", indication:"Diabetes", srcUrl:"https://www.prnewswire.com/news-releases/the-american-diabetes-association-welcomes-2026-principal-officers-and-members-to-the-national-board-of-directors-302654281.html", srcTitle:"ADA — 2026 Principal Officers (Caballero President, Medicine & Science)"},
   {name:"Amy Hess-Fischl, MS, RDN, LDN, BC-ADM, CDCES", institution:"University of Chicago", specialty:"Diabetes Care & Education", role:"Society leadership", supporter:"American Diabetes Association", area:"endocrinology", indication:"Diabetes", srcUrl:"https://www.prnewswire.com/news-releases/the-american-diabetes-association-welcomes-2026-principal-officers-and-members-to-the-national-board-of-directors-302654281.html", srcTitle:"ADA — 2026 Principal Officers (Hess-Fischl President, Health Care & Education)"},
-  {name:"Samir M. Parikh, MD, FASN", institution:"UT Southwestern Medical Center (Chair, Internal Medicine)", specialty:"Nephrology / Acute Kidney Injury", role:"Society leadership", supporter:"American Society of Nephrology", area:"nephrology", indication:"Kidney disease", srcUrl:"https://profiles.utsouthwestern.edu/profile/202716/samir-m-parikh.html", srcTitle:"UT Southwestern — Samir Parikh faculty profile (ASN 2026 President)"}
+  {name:"Samir M. Parikh, MD, FASN", institution:"UT Southwestern Medical Center (Chair, Internal Medicine)", specialty:"Nephrology / Acute Kidney Injury", role:"Society leadership", supporter:"American Society of Nephrology", area:"nephrology", indication:"Kidney disease", srcUrl:"https://profiles.utsouthwestern.edu/profile/202716/samir-m-parikh.html", srcTitle:"UT Southwestern — Samir Parikh faculty profile (ASN 2026 President)"},
+
+  /* --- Rare disease --- */
+  {name:"John Vest, MD", institution:"Chief Medical Officer, argenx", specialty:"Neuromuscular / Rare Autoimmune", role:"Trial investigator", supporter:"argenx", area:"raredisease", indication:"Generalized myasthenia gravis / CIDP", srcUrl:"https://www.argenx.com/our-science/leadership", srcTitle:"argenx — leadership page (Vest CMO)"},
+  {name:"James F. Howard, Jr., MD", institution:"University of North Carolina at Chapel Hill", specialty:"Neuromuscular Medicine", role:"Trial investigator", supporter:"argenx", area:"raredisease", indication:"Generalized myasthenia gravis", srcUrl:"https://www.uspharmacist.com/article/fda-approves-first-neonatal-fc-receptor-blocker-vyvgart-for-generalized-myasthenia-gravis", srcTitle:"US Pharmacist — Vyvgart approval (Howard PI, ADAPT)"},
+  {name:"Marc Turini, MD", institution:"Pharvaris (Chief Medical Officer)", specialty:"Rare autoimmune / HAE", role:"Advisory board (disclosed)", supporter:"Pharvaris", area:"raredisease", indication:"Hereditary angioedema", srcUrl:"https://www.pharvaris.com/leadership/", srcTitle:"Pharvaris — leadership page (Turini CMO)"},
+  {name:"Marc Riedl, MD, MS", institution:"UC San Diego (US HAEA Angioedema Center)", specialty:"Allergy / Immunology (HAE)", role:"Trial investigator", supporter:"KalVista", area:"raredisease", indication:"Hereditary angioedema", srcUrl:"https://www.kalvista.com/our-science/publications", srcTitle:"KalVista — sebetralstat publications (Riedl author)"}
 ];
 </script>
 <!-- WEEKLY-KOL-END -->
@@ -1748,13 +1754,24 @@ window.KOL_DATA = [
   u(data.map(function(d){return d.supporter})).forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sup.appendChild(o);});
   u(data.map(function(d){return d.area})).forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;area.appendChild(o);});
   u(data.map(function(d){return d.indication})).forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;ind.appendChild(o);});
+  function selectedValues(sel){return Array.from(sel.selectedOptions).map(function(o){return o.value;}).filter(Boolean);}
   function r(){
-    var rows=data.filter(function(d){return(!sup.value||d.supporter===sup.value)&&(!area.value||d.area===area.value)&&(!ind.value||d.indication===ind.value)&&(!role.value||d.role===role.value);});
+    var supPicked=selectedValues(sup), areaPicked=selectedValues(area);
+    var rows=data.filter(function(d){
+      return (!supPicked.length||supPicked.indexOf(d.supporter)>-1) &&
+             (!areaPicked.length||areaPicked.indexOf(d.area)>-1) &&
+             (!ind.value||d.indication===ind.value) &&
+             (!role.value||d.role===role.value);
+    });
     if(!rows.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:24px;color:#5b6666;font-style:italic">No matches for current filters</td></tr>';return;}
     tbody.innerHTML=rows.map(function(d){return '<tr><td>'+d.name+'</td><td>'+d.institution+'</td><td>'+d.specialty+'</td><td>'+d.role+'</td><td>'+d.supporter+'</td><td>'+d.area+' · '+d.indication+'</td><td><a href="'+d.srcUrl+'" target="_blank" rel="noopener">'+(d.srcTitle||'source')+'</a></td></tr>';}).join('');
   }
   [sup,area,ind,role].forEach(function(e){e.addEventListener('change',r);});
-  clr.addEventListener('click',function(){sup.value='';area.value='';ind.value='';role.value='';r();});
+  clr.addEventListener('click',function(){
+    Array.from(sup.options).forEach(function(o){o.selected=false;});
+    Array.from(area.options).forEach(function(o){o.selected=false;});
+    ind.value='';role.value='';r();
+  });
   r();
 })();
 </script>
@@ -4947,25 +4964,34 @@ function supCanon(name){
   if(SUP_ALIASES[fk]) return SUP_ALIASES[fk];
   return first||name||"";
 }
-// Does a piece of text / company name belong to the active supporter?
-function supMatch(name){
-  if(!activeSupporter) return true;
+// activeSupporter is a semicolon-joined list of picked supporters ("" = none).
+// These helpers let every existing match call site work over the pick set transparently.
+function activeSupporterList(){ return (activeSupporter||"").split(";").map(s=>s.trim()).filter(Boolean); }
+function _supMatchOne(name, pick){
   if(!name) return false;
-  if(supCanon(name)===activeSupporter) return true;
-  // substring fallback so "BMS + J&J" matches both BMS and J&J
-  const nk=supKey(name), ak=supKey(activeSupporter);
+  if(supCanon(name)===pick) return true;
+  const nk=supKey(name), ak=supKey(pick);
   if(nk.includes(ak)||ak.includes(nk)) return true;
-  // check each alias variant that maps to the active supporter
-  for(const v in SUP_ALIASES){ if(SUP_ALIASES[v]===activeSupporter && nk.includes(v)) return true; }
+  for(const v in SUP_ALIASES){ if(SUP_ALIASES[v]===pick && nk.includes(v)) return true; }
   return false;
 }
-function supMatchText(txt){
-  if(!activeSupporter) return true;
+function _supMatchTextOne(txt, pick){
   if(!txt) return false;
-  const t=supKey(txt), ak=supKey(activeSupporter);
+  const t=supKey(txt), ak=supKey(pick);
   if(t.includes(ak)) return true;
-  for(const v in SUP_ALIASES){ if(SUP_ALIASES[v]===activeSupporter && t.includes(v)) return true; }
+  for(const v in SUP_ALIASES){ if(SUP_ALIASES[v]===pick && t.includes(v)) return true; }
   return false;
+}
+// Does a piece of text / company name belong to ANY of the active supporters?
+function supMatch(name){
+  const picks=activeSupporterList();
+  if(!picks.length) return true;
+  return picks.some(p=>_supMatchOne(name,p));
+}
+function supMatchText(txt){
+  const picks=activeSupporterList();
+  if(!picks.length) return true;
+  return picks.some(p=>_supMatchTextOne(txt,p));
 }
 // Build the dropdown from every company/grant/supporter name in the dataset
 function buildSupporterList(){
@@ -5027,7 +5053,7 @@ function renderSpace(s){
   let grantsF=(cur.grants||[]).filter(g=>supMatch(g.co));
   if(isGastroView) grantsF = grantsF.filter(g=>inGastroGrantSet(g.co));
   if(grantsF.length){
-    sec.insertAdjacentHTML("beforeend",`<div class="blocklabel">Grant &amp; RFP watch — where ${isGastroView?"gastroenterology":"education"} funding is posted${activeSupporter?" · "+esc(activeSupporter):""}</div>`);
+    sec.insertAdjacentHTML("beforeend",`<div class="blocklabel">Grant &amp; RFP watch — where ${isGastroView?"gastroenterology":"education"} funding is posted${activeSupporter?" · "+esc(activeSupporterList().join(", ")):""}</div>`);
     const gg=el("div","grantgrid"); gg.innerHTML=grantsF.map(grantCard).join(""); sec.appendChild(gg);
   }
   if(!activeSupporter && !isGastroView) sec.insertAdjacentHTML("beforeend",`<div class="note" style="margin:12px 0 4px"><b>Signal:</b> ${esc(cur.signals)}</div>`);
@@ -5149,8 +5175,8 @@ function renderSpace(s){
   const GI_KW = /(ulcerative colitis|crohn|inflammatory bowel|IBD|eosinophilic esophagitis|EoE|short bowel|SBS|IBS-C|IBS-D|primary biliary|PBC|primary sclerosing|MASH|MASLD|NASH|gastro|esophag|colonic|colitis|proctitis|celiac)/i;
   let trialsS=trials.filter(t=>supMatch(t.sponsor));
   if(isGastroView) trialsS = trialsS.filter(t => GI_KW.test((t.title||"")+" "+(t.cond||"")+" "+((t.drugs||[]).join(" "))));
-  sec.insertAdjacentHTML("beforeend",`<div class="blocklabel">${newOnly?"Trials updated in the last 7 days":liveSearch?"Matching trials":"Newest industry Phase 2/3 trials"}${activeSupporter?" · "+esc(activeSupporter):""}</div>`);
-  if(!trialsS.length){ sec.appendChild(el("div","empty", activeSupporter?"No live trials for "+activeSupporter+" in "+s.label+".":(filtered?"No live trials match this filter in "+s.label+".":"No recent trials returned."))); }
+  sec.insertAdjacentHTML("beforeend",`<div class="blocklabel">${newOnly?"Trials updated in the last 7 days":liveSearch?"Matching trials":"Newest industry Phase 2/3 trials"}${activeSupporter?" · "+esc(activeSupporterList().join(", ")):""}</div>`);
+  if(!trialsS.length){ sec.appendChild(el("div","empty", activeSupporter?"No live trials for "+activeSupporterList().join(", ")+" in "+s.label+".":(filtered?"No live trials match this filter in "+s.label+".":"No recent trials returned."))); }
   else{
     const lim = expand[s.key]?trialsS.length:SHOW_TRIALS;
     const g=el("div","grid"); g.innerHTML=trialsS.slice(0,lim).map(trialCard).join(""); sec.appendChild(g);
@@ -5255,12 +5281,12 @@ function supStratPanel(name){
 
 function render(){
   const c=$("#content"); c.innerHTML="";
-  if(activeSupporter) c.appendChild(supStratPanel(activeSupporter));
+  if(activeSupporter) activeSupporterList().forEach(sup => c.appendChild(supStratPanel(sup)));
   const specs=SPECIALTIES.filter(s=>(activeTab==="all"||s.key===activeTab)&&spaceHasSupporter(s));
   let shown=0, pool=0;
   specs.forEach(s=>{ const all=DATA[s.key]||[]; pool+=all.length; shown+=filterTrials(all).length; c.appendChild(renderSpace(s)); });
   if(activeSupporter&&!specs.length){
-    c.appendChild(el("div","empty",`No tracked activity for ${activeSupporter} in this therapeutic area. Try switching to All.`));
+    c.appendChild(el("div","empty",`No tracked activity for ${activeSupporterList().join(", ")} in this therapeutic area. Try switching to All.`));
   }
   const lc=$("#liveCount");
   if(lc) lc.textContent=(liveSearch||newOnly)?`${shown} matching of ${pool} loaded`:`${pool} loaded, newest first`;
@@ -5275,7 +5301,7 @@ function render(){
     } else if(immunoSub!=="all"){
       bits.push(`Immunology › <b>${esc(subNames[immunoSub]||immunoSub)}</b>`);
     }
-    if(activeSupporter) bits.push(`<b>${esc(activeSupporter)}</b>`);
+    if(activeSupporter) bits.push(`<b>${esc(activeSupporterList().join(", "))}</b>`);
     sn.innerHTML = bits.length ? bits.join(" &nbsp;·&nbsp; ")+` &nbsp;·&nbsp; ${specs.length} area${specs.length===1?"":"s"} shown` : "";
   }
   const sc=$("#supClear"); if(sc) sc.hidden = !activeSupporter && activeTab==="all" && immunoSub==="all";
@@ -6329,15 +6355,25 @@ function applySupporterFilter(){
     o.value=name; o.textContent=count>1?`${name} (${count})`:name;
     sel.appendChild(o);
   });
-  try{ const saved=localStorage.getItem("es_sup"); if(saved){ activeSupporter=saved; sel.value=saved; } }catch(e){}
+  // Restore multi-pick from localStorage (semicolon-joined). Single-value legacy still works.
+  try{
+    const saved=localStorage.getItem("es_sup");
+    if(saved){
+      activeSupporter=saved;
+      const picks=saved.split(";").map(s=>s.trim()).filter(Boolean);
+      Array.from(sel.options).forEach(o=>{ o.selected = picks.indexOf(o.value)>-1; });
+    }
+  }catch(e){}
   sel.addEventListener("change",()=>{
-    activeSupporter=sel.value;
+    const picks=Array.from(sel.selectedOptions).map(o=>o.value).filter(Boolean);
+    activeSupporter=picks.join(";");
     try{ localStorage.setItem("es_sup",activeSupporter);}catch(e){}
     applySupporterFilter();
   });
   const clr=$("#supClear");
   if(clr) clr.addEventListener("click",()=>{
-    activeSupporter=""; sel.value="";
+    activeSupporter="";
+    Array.from(sel.options).forEach(o=>{ o.selected=false; });
     activeTab="all"; immunoSub="all";
     try{ localStorage.removeItem("es_sup");}catch(e){}
     if(typeof syncTAControls==="function") syncTAControls();
@@ -6913,7 +6949,8 @@ load();
     nephrology: "nephrology",
     endocrinology: "endocrinology",
     immunology: "immunology",
-    raredisease: "rare disease",
+    gastroenterology: "gastroenterology",
+    raredisease: "raredisease",
     ophthalmology: "ophthalmology"
   };
   var tabs = document.querySelectorAll('.tab');
@@ -6929,12 +6966,12 @@ load();
         // If a therapeutic area is currently active in state, drive the area filter.
         try {
           var area = (typeof activeTab !== 'undefined') ? activeTab : 'all';
+          // Gastro-view lives under immunology+gastro sub in the main tracker — route to KOL gastro.
+          if(area === 'immunology' && typeof immunoSub !== 'undefined' && immunoSub === 'gastro') area = 'gastroenterology';
           var areaSel = document.getElementById('kolFilterArea');
-          if(areaSel && AREA_TO_KOL[area]){
-            areaSel.value = AREA_TO_KOL[area];
-            areaSel.dispatchEvent(new Event('change'));
-          } else if(areaSel){
-            areaSel.value = '';
+          if(areaSel){
+            var target = AREA_TO_KOL[area] || '';
+            Array.from(areaSel.options).forEach(function(o){ o.selected = (target !== '' && o.value === target); });
             areaSel.dispatchEvent(new Event('change'));
           }
         } catch(e){}
