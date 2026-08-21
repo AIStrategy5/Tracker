@@ -2,7 +2,17 @@
 
 Supporter-focused intelligence dashboard for independent medical education strategy.
 
-**Live:** https://aistrategy5.github.io/Tracker/ (password-gated)
+**Live:** https://aistrategy5.github.io/Tracker/
+
+Access password: `nine six three months out` — the 9/6/3-month conference
+lead-time checkpoints the hub is built around. Case-insensitive, extra spaces
+tolerated. Stored as a hash in both `index.html` and `src/shell.html`; to change
+it, hash the new phrase with the gate's own function and replace `TARGET` in
+both places, then rebuild.
+
+The gate runs in the browser, so it deters casual link-sharing — it is not
+access control. Anyone who opens the page source can read past it. Treat the
+named Medical Affairs contacts and competitive intelligence accordingly.
 
 - `index.html` — landing page / guided tour (the public front door)
 - `tracker.html` — the dashboard: MULTI and Neuroscience business-unit tabs, one shared engine

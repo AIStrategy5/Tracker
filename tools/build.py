@@ -52,7 +52,7 @@ def main():
 
     # Sanity checks — cheap guards against shipping a broken dashboard.
     checks = [
-        ("password gate", 'TARGET="axlqyp-x31avj"'),
+        ("password gate", 'var TARGET="'),
         ("section registry", "const SECTIONS = ["),
         ("MULTI COIF cards", "COIF_MULTI_HTML"),
         ("product references", "Decera product references"),

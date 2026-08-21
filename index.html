@@ -343,7 +343,7 @@
       go=document.getElementById("gateGo"), err=document.getElementById("gateErr");
   function h(s){ var a=5381,b=52711,i=s.length; while(i--){a=(a*33)^s.charCodeAt(i);b=(b*37)^s.charCodeAt(i);}
                  return ((a>>>0).toString(36)+"-"+(b>>>0).toString(36)); }
-  var TARGET="axlqyp-x31avj";  // password: "Decera Clinical Hub" (case-insensitive)
+  var TARGET="1k8qevc-a35ok6";  // password: "nine six three months out" (case-insensitive, extra spaces tolerated)
   function norm(v){ return (v||"").trim().replace(/\s+/g," ").toLowerCase(); }
   function unlock(){ g.classList.add("hide"); try{sessionStorage.setItem(KEY,"1");}catch(e){} }
   try{ if(sessionStorage.getItem(KEY)==="1"){ g.classList.add("hide"); } }catch(e){}
