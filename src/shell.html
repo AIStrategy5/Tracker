@@ -73,6 +73,12 @@
   <div class="supbar" style="margin-top:12px">
     <label for="taSel">Filter by therapeutic area</label>
     <select id="taSel"></select>
+    <!-- Immunology sub-specialty picker. Hidden unless Immunology is the selected area,
+         so the bar stays identical in every other case and in the Neuroscience tab. -->
+    <span id="subWrap" hidden style="align-items:center;gap:8px">
+      <label for="subSel" style="margin:0">Sub-specialty</label>
+      <select id="subSel"></select>
+    </span>
     <span class="supdiv"></span>
     <label for="supSel">Filter by supporter (hold ⌘/Ctrl to pick multiple)</label>
     <span style="display:inline-flex;flex-direction:column;gap:4px">

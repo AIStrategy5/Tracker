@@ -1157,6 +1157,12 @@
   <div class="supbar" style="margin-top:12px">
     <label for="taSel">Filter by therapeutic area</label>
     <select id="taSel"></select>
+    <!-- Immunology sub-specialty picker. Hidden unless Immunology is the selected area,
+         so the bar stays identical in every other case and in the Neuroscience tab. -->
+    <span id="subWrap" hidden style="align-items:center;gap:8px">
+      <label for="subSel" style="margin:0">Sub-specialty</label>
+      <select id="subSel"></select>
+    </span>
     <span class="supdiv"></span>
     <label for="supSel">Filter by supporter (hold ⌘/Ctrl to pick multiple)</label>
     <span style="display:inline-flex;flex-direction:column;gap:4px">
@@ -5669,14 +5675,26 @@ function renderSubGaps(subKey){
     `<div style="font-size:12px;padding:3px 0">▸ <b>${esc(g.area)}</b> — funder: ${esc(g.funder)}${g.contact&&g.contact!=="Portal form"?` · <span style="color:#5b6666">${esc(g.contact)}</span>`:""}</div>`).join("")}</div>`;
 }
 function renderImmunoSubs(cos){
-  let html=`<div class="blocklabel" style="margin-top:20px">Immunology by sub-specialty — each laid out as its own section</div>`;
   // Gastroenterology is excluded here — it has its own first-class tab in the bar.
-  (typeof IMMUNO_SUBS!=="undefined"?IMMUNO_SUBS:[]).filter(sub=>sub.key!=="gastro").forEach(sub=>{
+  const subs=(typeof IMMUNO_SUBS!=="undefined"?IMMUNO_SUBS:[]).filter(sub=>sub.key!=="gastro");
+  const picked=subs.some(s=>s.key===SUBTA)?SUBTA:"all";
+  const shown=picked==="all"?subs:subs.filter(s=>s.key===picked);
+  // Chips mirror the filter-bar picker so the section can be driven from either place.
+  let html=`<div class="blocklabel" style="margin-top:20px">Immunology by sub-specialty — each laid out as its own section</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px">
+      <button class="subchip" data-sub="all" style="padding:5px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;border:1.5px solid #0f1a1a;background:${picked==="all"?"#0f1a1a":"#fff"};color:${picked==="all"?"#fff":"#0f1a1a"}">All</button>`+
+    subs.map(s=>{
+      const n=cos.filter(c=>c.sub&&c.sub.split(",").includes(s.key)).length;
+      return `<button class="subchip" data-sub="${s.key}" style="padding:5px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;border:1.5px solid #0f1a1a;background:${picked===s.key?"#0f1a1a":"#fff"};color:${picked===s.key?"#fff":"#0f1a1a"}">${s.icon||""} ${esc(s.label)} (${n})</button>`;}).join("")+
+    `</div>`;
+  let rendered=0;
+  shown.forEach(sub=>{
     const subCos=cos.filter(c=>c.sub&&c.sub.split(",").includes(sub.key));
     const gapsHtml=renderSubGaps(sub.key);
     if(!subCos.length&&!gapsHtml) return;
+    rendered++;
     const us=subCos.filter(c=>c.region&&String(c.region).startsWith("US")), gl=subCos.filter(c=>!c.region||!String(c.region).startsWith("US"));
-    html+=`<div style="border-left:4px solid ${sub.key==="gastro"?(SPACECOLOR.gastroenterology||"#1f9d8f"):"var(--immuno)"};padding-left:14px;margin:20px 0">
+    html+=`<div style="border-left:4px solid var(--immuno);padding-left:14px;margin:20px 0">
       <div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">${sub.icon||"🔹"}</span>
         <h3 style="margin:0;font-size:17px">${esc(sub.label)}</h3>
         <span style="font-size:11px;color:#5b6666">${subCos.length} compan${subCos.length===1?"y":"ies"}</span></div>
@@ -5686,6 +5704,7 @@ function renderImmunoSubs(cos){
       ${gl.length?`<div class="blocklabel" style="margin-top:6px;font-size:11px;color:#7a6b2e">🌐 Global (${gl.length})</div><div class="cogrid">${gl.map(companyCard).join("")}</div>`:""}
     </div>`;
   });
+  if(!rendered) html+=`<div class="empty">Nothing tracked under this sub-specialty${SUP.length?" for "+esc(SUP.join(", ")):""} yet.</div>`;
   return html;
 }
 
@@ -5730,6 +5749,7 @@ function renderSpaces(){
         :`<div class="empty">${TRIAL_STATUS==="loading"?"Loading live trials from ClinicalTrials.gov…":SUP.length?"No live trials for "+esc(SUP.join(", "))+" here.":"No live trials returned — the feed may be unreachable from this network."}</div>`}
     </div>`;}).join("");
   $$("#taContent [data-more]").forEach(b=>b.addEventListener("click",()=>{EXPAND[b.dataset.more]=true;renderSpaces();}));
+  $$("#taContent .subchip").forEach(b=>b.addEventListener("click",()=>{SUBTA=b.dataset.sub;renderChrome();renderSpaces();}));
 }
 
 /* ============================================================================
@@ -5763,6 +5783,21 @@ function renderChrome(){
     if(k==="immunology"&&BU==="multi") o+=`<option value="immunology:gastro">Gastroenterology</option>`;
     return o;}).join("");
   $("#taSel").value=(TA==="immunology"&&SUBTA==="gastro")?"immunology:gastro":TA;
+  // Sub-specialty picker — only meaningful when Immunology itself is the selected area in
+  // MULTI. Gastroenterology has its own tab, so it is not offered here. Counts come from the
+  // same company data the breakout renders, so an empty sub is visible before it is picked.
+  const subWrap=$("#subWrap"), subSel=$("#subSel");
+  const showSub = BU==="multi" && TA==="immunology" && SUBTA!=="gastro";
+  subWrap.hidden = !showSub;
+  subWrap.style.display = showSub ? "inline-flex" : "none";
+  if(showSub){
+    const cos=((CURATED.immunology||{}).companies||[]).filter(c=>supMatch(c.name));
+    const subs=(typeof IMMUNO_SUBS!=="undefined"?IMMUNO_SUBS:[]).filter(s=>s.key!=="gastro");
+    subSel.innerHTML=`<option value="all">All sub-specialties</option>`+subs.map(s=>{
+      const n=cos.filter(c=>c.sub&&c.sub.split(",").includes(s.key)).length;
+      return `<option value="${s.key}">${esc(s.label)} (${n})</option>`;}).join("");
+    subSel.value=subs.some(s=>s.key===SUBTA)?SUBTA:"all";
+  }
   $("#supClear").hidden = !SUP.length && TA==="all" && SUBTA==="all" && !$("#supSearch").value;
   paintPill();
 }
@@ -5931,6 +5966,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     const q=$("#supSearch").value.trim().toLowerCase();
     Array.from($("#supSel").options).forEach(o=>{o.hidden=q&&!o.value.toLowerCase().includes(q)&&!o.selected;});
     $("#supClear").hidden = !SUP.length && TA==="all" && !q;
+  });
+  $("#subSel").addEventListener("change",()=>{
+    SUBTA=$("#subSel").value||"all";
+    renderChrome(); renderSpaces();
   });
   $("#supClear").addEventListener("click",()=>{SUP=[];TA="all";SUBTA="all";$("#supSearch").value="";applyFilter();});
   $("#weekPill").textContent="Week of "+new Date().toLocaleDateString([],{month:"short",day:"numeric"});
