@@ -4,9 +4,8 @@ Supporter-focused intelligence dashboard for independent medical education strat
 
 **Live:** https://aistrategy5.github.io/Tracker/
 
-Access password: `nine six three months out` — the 9/6/3-month conference
-lead-time checkpoints the hub is built around. Case-insensitive, extra spaces
-tolerated. Stored as a hash in both `index.html` and `src/shell.html`; to change
+Access password: `Decera strategy and science` — names the two groups who use
+the hub, Strategy and Scientific. Case-insensitive, extra spaces tolerated. Stored as a hash in both `index.html` and `src/shell.html`; to change
 it, hash the new phrase with the gate's own function and replace `TARGET` in
 both places, then rebuild.
 
