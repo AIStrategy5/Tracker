@@ -5486,6 +5486,22 @@ const SECTIONS = [
             <input id="siFiles" type="file" multiple accept=".docx,.pdf,.pptx,.xlsx,.txt,.md,.csv" style="width:100%;padding:8px 10px;font-size:12px;border:1.5px solid #0f1a1a;background:#fff"></div>
         </div>
         <div id="siKB" style="font-size:12px;color:#5b6666;margin-bottom:12px;font-style:italic">Pick a supporter first — everything you attach is remembered against that supporter.</div>
+        <div style="border:1.5px solid #0f1a1a;background:#fff;padding:14px 16px;margin-bottom:12px">
+          <label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">What decision is this brief for? <span style="color:#a33">required</span></label>
+          <select id="siGoal" style="width:100%;padding:8px 10px;font-size:13px;border:1.5px solid #0f1a1a;background:#fff;margin-bottom:8px">
+            <option value="">— Pick the decision —</option>
+            <option value="submit">Decide whether to submit against a current or expected RFP</option>
+            <option value="diagnose">Diagnose why we lost, and what to change before resubmitting</option>
+            <option value="whitespace">Find whitespace — where this supporter funds nothing yet</option>
+            <option value="defend">Defend or grow an account a competitor is taking</option>
+            <option value="reengage">Re-engage a supporter who has gone quiet</option>
+            <option value="concept">Pressure-test a specific concept before it goes to the supporter</option>
+            <option value="other">Something else — described below</option>
+          </select>
+          <label for="siAsk" style="display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">The specific question you need answered <span style="color:#a33">required</span></label>
+          <textarea id="siAsk" rows="2" placeholder="e.g. Their BTK asset files in Q1 — do we build a comparative-sequencing series now, or wait for the label?" style="width:100%;padding:8px 10px;font-size:12.5px;border:1.5px solid #0f1a1a;background:#fff;font-family:inherit"></textarea>
+          <div style="font-size:11.5px;color:#5b6666;margin-top:6px;line-height:1.5">The brief is written to answer this. It also decides which internal evidence counts as relevant and what the RWE section looks for — a brief with no stated decision is a landscape summary.</div>
+        </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button id="siCopy" class="gapbtn">📋 Copy Brief Prompt</button>
           <button id="siClear" class="gapclear">✕ Clear form</button>
@@ -5899,10 +5915,42 @@ function initSupIntel(){
     [...D.multi.kol,...D.neuro.kol].forEach(k=>{if(String(k.supporter).toLowerCase().includes(name.toLowerCase().split(" ")[0]))L.push(`- KOL: ${k.name} (${k.institution}) — ${k.role}, ${k.indication}`);});
     return L.length?L.join("\n"):"(No tracker rows found for this supporter — rely on public sources and any internal documents.)";
   }
+  const GOALS={
+    submit:{label:"Decide whether to submit against a current or expected RFP",
+      focus:"Whether to submit, what the submission should contain, and what would make it lose.",
+      evidence:"Prior submissions to this supporter and their outcomes; the funded/declined pattern; cycle timing against the current portal state.",
+      rwe:"outcomes or completion data from prior work with this supporter that a competing submission could not cite"},
+    diagnose:{label:"Diagnose why we lost, and what to change before resubmitting",
+      focus:"The specific reasons the declined work failed against this supporter's stated priorities, and the smallest change that would flip it.",
+      evidence:"The declined document itself, read against any funded document for the same supporter; the gap between what was proposed and what the supporter said it wanted.",
+      rwe:"evidence in the library that the declined proposal failed to use, and evidence a resubmission could now cite"},
+    whitespace:{label:"Find whitespace — where this supporter funds nothing yet",
+      focus:"Indications, formats or audiences inside this supporter's portfolio with no current educational coverage, and which are reachable this cycle.",
+      evidence:"What the library shows we have already proposed, so whitespace is not confused with ground already covered.",
+      rwe:"practice-pattern or gap evidence showing the unmet need is real rather than assumed"},
+    defend:{label:"Defend or grow an account a competitor is taking",
+      focus:"Where the competitor has displaced us with this supporter, what they offer that we do not, and what we can counter with credibly.",
+      evidence:"Our funded history with this supporter and what it proves we can deliver that the competitor has not.",
+      rwe:"delivered outcomes that constitute a defensible track record with this specific supporter"},
+    reengage:{label:"Re-engage a supporter who has gone quiet",
+      focus:"What changed on the supporter's side since the last contact, and the specific opening that justifies re-approaching now.",
+      evidence:"The date and substance of the last exchange, and what has moved since.",
+      rwe:"results from the last engagement that are worth putting in front of them again"},
+    concept:{label:"Pressure-test a specific concept before it goes to the supporter",
+      focus:"Whether the concept survives contact with this supporter's stated priorities, funded history and competitive position — and what would strengthen or sink it.",
+      evidence:"Funded work with structural similarity to the concept, and declined work it resembles.",
+      rwe:"evidence the concept can cite to justify its format and audience"},
+    other:{label:"Stated below",focus:"Exactly what is stated in the question below.",
+      evidence:"Whatever in the library bears on that question.",
+      rwe:"evidence bearing directly on that question"}
+  };
   function buildPrompt(){
     const n=pick.value||"[SUPPORTER NAME]";
+    const g=GOALS[$("#siGoal").value]||null;
+    const ask=($("#siAsk").value||"").trim();
     const stored=kbFor(n), all=stored.concat(live.filter(a=>!stored.some(s=>s.name===a.name)));
     const readable=all.filter(d=>d.text&&d.text[0]!=="[");
+    const objective=g?`\n\n---\nTHE DECISION THIS BRIEF EXISTS TO SUPPORT\nDecision type: ${g.label}\nThe question, in the strategist's own words: "${ask}"\n\nEvery section answers that question. A bullet that is true but does not change the answer does not belong in this brief — cut it. Section 4 must resolve the question with a recommendation, not restate the options.\nWhat matters most here: ${g.focus}\nWeight this evidence above the rest: ${g.evidence}\nIf the available evidence cannot answer the question, say so in Section 5 and name what would.`:"";
     let docs;
     if(readable.length){
       const won=readable.filter(d=>/WON/i.test(d.tag||"")), lost=readable.filter(d=>/LOST/i.test(d.tag||""));
@@ -5917,11 +5965,11 @@ function initSupIntel(){
       docs=`\n\n---\nNO INTERNAL DOCUMENTS ON FILE for ${n.toUpperCase()}. Say so plainly in Section 3 rather than inventing internal history, and put the missing internal evidence at the top of Section 5.`;
     }
     const rwe=`\n\n---\nRWE LINKAGE\n`+(readable.length
-      ?`Search the library for real-world evidence signals — outcomes, completion figures, pre/post shifts, practice patterns, field insights. Where found: name the document and figure, state what it proves that a competitor cannot claim, and tie it to a Section 4 recommendation. If none exist, say so — do not manufacture RWE language.`
-      :`No internal documents on file — do NOT manufacture RWE claims. Name in Section 5 the specific real-world evidence that would most change the recommendation.`);
-    const guard=`\n\n---\nSPECIFICITY TEST\nDelete any bullet that would still be true with "${n}" swapped for any other pharmaceutical company. A bullet survives only if it names something particular to ${n} — a named asset, dated milestone, specific portal or posture, a figure from the library, or a named competitor programme.\n\n---\nLANGUAGE STANDARD\nWrite in strategy-ready pharma Medical Affairs language: launch windows, label expansions, PDUFA anchoring, sequencing questions, share-of-voice, ARIA/REMS-class practicalities where relevant, IME/CME grant mechanics (RFP vs unsolicited, cycle timing), field-medical insights. No consulting filler ("leverage synergies", "holistic approach"), no hedge-words stacked in place of a judgment. Every recommendation must be executable by a Medical Affairs team this quarter.`;
+      ?`Search the library specifically for ${g?g.rwe:"real-world evidence signals — outcomes, completion figures, pre/post shifts, practice patterns, field insights"}. For each one found: name the document, quote the figure, state what it proves that a competitor cannot claim, and tie it to a Section 4 recommendation${g?" that answers the question above":""}. Do not report RWE that has no bearing on the decision. If the library holds no evidence that bears on it, say exactly that — do not substitute adjacent findings and do not manufacture RWE language.`
+      :`No internal documents on file — do NOT manufacture RWE claims. Name in Section 5 the single piece of real-world evidence that would most change the answer${g?" to the question above — specifically, "+g.rwe:""}, and say where it would come from.`);
+    const guard=`\n\n---\nSPECIFICITY TEST\nTwo tests, both must pass. First: delete any bullet that would still be true with "${n}" swapped for any other pharmaceutical company. A bullet survives only if it names something particular to ${n} — a named asset, dated milestone, specific portal or posture, a figure from the library, or a named competitor programme.${g?`\nSecond: delete any bullet that would be equally true whichever way the decision goes. If the bullet does not push the answer toward one course of action, it is context, not intelligence.`:""}\n\n---\nLANGUAGE STANDARD\nWrite in strategy-ready pharma Medical Affairs language: launch windows, label expansions, PDUFA anchoring, sequencing questions, share-of-voice, ARIA/REMS-class practicalities where relevant, IME/CME grant mechanics (RFP vs unsolicited, cycle timing), field-medical insights. No consulting filler ("leverage synergies", "holistic approach"), no hedge-words stacked in place of a judgment. Every recommendation must be executable by a Medical Affairs team this quarter.${g?`\n\n---\nFINAL GATE\nBefore returning the brief, state in one sentence how it answers: "${ask}" If it does not, rewrite it rather than returning it.`:""}`;
     return SUPPORTER_INTELLIGENCE_PROMPT.replace(/\[SUPPORTER NAME\]/g,n)
-      +`\n\n---\nTRACKER CONTEXT FOR ${n.toUpperCase()}\n`+trackerContext(n)+docs+rwe+guard;
+      +objective+`\n\n---\nTRACKER CONTEXT FOR ${n.toUpperCase()}\n`+trackerContext(n)+docs+rwe+guard;
   }
   const paintPrompt=()=>{ preview.textContent=buildPrompt(); };
   files.addEventListener("change",async()=>{
@@ -5935,12 +5983,26 @@ function initSupIntel(){
     files.value=""; paintPrompt();
   });
   pick.addEventListener("change",()=>{live=[];paintKB();paintPrompt();});
+  $("#siGoal").addEventListener("change",paintPrompt);
+  $("#siAsk").addEventListener("input",paintPrompt);
   $("#siCopy").addEventListener("click",async()=>{
+    // The objective is what stops this being a landscape summary, so the prompt does not
+    // leave the page without one.
+    const missing=[];
+    if(!$("#siGoal").value) missing.push("pick the decision this brief is for");
+    if(($("#siAsk").value||"").trim().length<15) missing.push("write the specific question you need answered");
+    if(missing.length){
+      status.style.color="#a33";
+      status.textContent="Not copied — "+missing.join(" and ")+".";
+      (!$("#siGoal").value?$("#siGoal"):$("#siAsk")).focus();
+      setTimeout(()=>{status.textContent="";status.style.color="#2f7d55";},6000);
+      return;
+    }
     try{await navigator.clipboard.writeText(buildPrompt());status.textContent="Copied — paste into Claude.";}
     catch(e){preview.textContent=buildPrompt();status.textContent="Clipboard blocked — copy from the preview below.";}
     setTimeout(()=>status.textContent="",4000);
   });
-  $("#siClear").addEventListener("click",()=>{pick.value="";files.value="";live=[];paintKB();resp.value="";rendered.innerHTML="";preview.textContent="";});
+  $("#siClear").addEventListener("click",()=>{pick.value="";files.value="";live=[];paintKB();resp.value="";rendered.innerHTML="";preview.textContent="";$("#siGoal").value="";$("#siAsk").value="";});
   const md=t=>esc(t).replace(/^### (.*)$/gm,"<h4>$1</h4>").replace(/^## (.*)$/gm,"<h3 style='margin:16px 0 6px'>$1</h3>")
     .replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/^[-•] (.*)$/gm,"<li>$1</li>").replace(/(<li>.*<\/li>\n?)+/g,m=>"<ul style='margin:4px 0 10px;padding-left:18px'>"+m+"</ul>").replace(/\n{2,}/g,"<br>");
   $("#siRender").addEventListener("click",()=>{
