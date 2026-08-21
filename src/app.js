@@ -651,11 +651,12 @@ const SECTIONS = [
         <div id="gapOut"></div>
         <h3 style="margin-top:18px;font-weight:800;font-size:16px">Gap Finder — strategic prompts</h3>
         <div class="em-strip" style="line-height:1.75">
-          When you identify a gap, answer these in one line each:<br>
-          • <b>Cost of inaction:</b> clinical / patient / provider / system consequence if the gap remains<br>
-          • <b>Why now:</b> business or medical milestone that makes timing critical (approval, PDUFA, guideline update, congress readout)<br>
-          • <b>Differentiation:</b> what Decera Clinical Education could uniquely do that Medscape / PeerView / ACHL / PRIME are not currently doing<br>
-          • <b>Supporter perspective:</b> if I were this supporter, what would I care about — and why would it matter to them now?
+          When you identify a gap, answer these in one line each — each line names a specific consequence, date, competitor or audience, or it is not an answer:<br>
+          • <b>Cost of inaction:</b> the clinical / patient / provider / system consequence if the gap remains — name which decision goes wrong, not that outcomes "may suffer"<br>
+          • <b>Why now:</b> the dated business or medical milestone that makes timing critical (approval, PDUFA, guideline update, congress readout) — a date or it is not a reason<br>
+          • <b>Differentiation:</b> what Decera Clinical Education could do that Medscape / PeerView / ACHL / PRIME are not currently doing — name the competitor programme you are differentiating against<br>
+          • <b>Supporter perspective:</b> if I were this supporter, what would I care about, and why would it matter to them now — tie it to their asset, filing or field priority<br>
+          <i style="font-size:11.5px;color:#5b6666">A line that would read the same for another disease area, another supporter, or another quarter has not answered the question.</i>
         </div>`;
     },
     wire(bu){

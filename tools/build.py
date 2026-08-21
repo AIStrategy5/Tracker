@@ -10,6 +10,7 @@ Writes: tracker.html (repo root)
 """
 import json
 import pathlib
+import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -24,6 +25,14 @@ def read(name):
 
 
 def main():
+    # Language gate first — a build that would publish speculation or puffery
+    # should not produce a file at all.
+    lint = ROOT / "tools" / "lint_language.py"
+    if lint.exists():
+        result = subprocess.run([sys.executable, str(lint)])
+        if result.returncode != 0:
+            sys.exit("BUILD FAILED: language lint did not pass (see findings above)")
+
     shell = read("shell.html")
 
     css = read("style.css")
