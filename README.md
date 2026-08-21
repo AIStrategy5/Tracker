@@ -4,8 +4,9 @@ Supporter-focused intelligence dashboard for independent medical education strat
 
 **Live:** https://aistrategy5.github.io/Tracker/
 
-Access password: `Decera strategy and science` — names the two groups who use
-the hub, Strategy and Scientific. Case-insensitive, extra spaces tolerated. Stored as a hash in both `index.html` and `src/shell.html`; to change
+Access password: `Decera evidence to education` — the IME value chain the hub
+serves: scientific evidence in, educational strategy out. Used by both the
+Strategy and Scientific teams. Case-insensitive, extra spaces tolerated. Stored as a hash in both `index.html` and `src/shell.html`; to change
 it, hash the new phrase with the gate's own function and replace `TARGET` in
 both places, then rebuild.
 
