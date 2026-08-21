@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decera Clinical Hub — MULTI · Neuroscience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+/*__CSS__*/
+</style>
+</head>
+<body>
+
+<!-- ================= PASSWORD GATE ================= -->
+<div id="gate">
+  <div class="gate-card">
+    <div style="width:44px;height:4px;background:linear-gradient(90deg,#c6499a,#5c62d6,#2f9d76);margin-bottom:14px"></div>
+    <h1 style="font-size:34px;font-weight:900;letter-spacing:-.03em;margin:0 0 8px">Business Unit Intelligence</h1>
+    <p style="font-size:13px;color:#5b6666;margin:0 0 18px">Independent medical education — grant landscape and supporter intelligence across Decera's business units.</p>
+    <label for="gatePw">Access password</label>
+    <input id="gatePw" type="password" placeholder="Enter password" autocomplete="current-password">
+    <button id="gateGo">Open the hub</button>
+    <div class="gate-err" id="gateErr">That's not it — check with the team for the current password.</div>
+    <p style="font-size:11px;color:#8a8a8a;margin-top:16px">Contains competitive intelligence and named Medical Affairs contacts. Please don't forward the link outside the team.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY="es_gate_ok";
+  var g=document.getElementById("gate"), pw=document.getElementById("gatePw"),
+      go=document.getElementById("gateGo"), err=document.getElementById("gateErr");
+  function h(s){ var a=5381,b=52711,i=s.length; while(i--){a=(a*33)^s.charCodeAt(i);b=(b*37)^s.charCodeAt(i);}
+                 return ((a>>>0).toString(36)+"-"+(b>>>0).toString(36)); }
+  var TARGET="axlqyp-x31avj";  // password: "Decera Clinical Hub" (case-insensitive)
+  function norm(v){ return (v||"").trim().replace(/\s+/g," ").toLowerCase(); }
+  function unlock(){ g.classList.add("hide"); try{sessionStorage.setItem(KEY,"1");}catch(e){} }
+  try{ if(sessionStorage.getItem(KEY)==="1"||localStorage.getItem(KEY)==="1"){ g.classList.add("hide"); } }catch(e){}
+  function attempt(){ if(h(norm(pw.value))===TARGET){ unlock(); } else { err.classList.add("show"); pw.select(); } }
+  go.addEventListener("click",attempt);
+  pw.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); attempt(); } });
+  pw.addEventListener("input",function(){ err.classList.remove("show"); });
+})();
+</script>
+
+<div class="wrap">
+
+  <!-- ================= HEADER (one header, both BUs) ================= -->
+  <header class="top">
+    <div>
+      <a href="index.html" style="display:inline-block;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#0f1a1a;background:#c6f34e;border:1.5px solid #0f1a1a;padding:6px 12px;text-decoration:none">← Back to overview</a>
+      <h1>Decera Clinical Hub</h1>
+      <p class="sub" id="huBuSub"></p>
+      <!-- BU switcher — two separate tabs. Everything below re-renders for the picked BU
+           through ONE engine, so the two views are identical by construction. -->
+      <div id="buSwitcher" style="display:flex;gap:6px;margin-top:12px;padding:4px;background:#0f1a1a;border:1.5px solid #0f1a1a;width:fit-content">
+        <button class="bu-tab" data-bu="multi" style="padding:8px 18px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:0;cursor:pointer">MULTI</button>
+        <button class="bu-tab" data-bu="neuro" style="padding:8px 18px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:0;cursor:pointer">Neuroscience</button>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="pill"><b id="totalCount">…</b> live trials</span>
+      <span class="pill" id="spacesPill"></span>
+      <span class="pill" id="weekPill"></span>
+      <button class="pill" id="printBtn" style="cursor:pointer" onclick="window.print()">🖨️ Print</button>
+    </div>
+  </header>
+
+  <!-- ================= TA TABS (one bar, options swap per BU) ================= -->
+  <div class="controls" id="taTabs" style="margin-top:14px"></div>
+
+  <!-- ================= FILTER BAR (one bar, both BUs) ================= -->
+  <div class="supbar" style="margin-top:12px">
+    <label for="taSel">Filter by therapeutic area</label>
+    <select id="taSel"></select>
+    <span class="supdiv"></span>
+    <label for="supSel">Filter by supporter (hold ⌘/Ctrl to pick multiple)</label>
+    <span style="display:inline-flex;flex-direction:column;gap:4px">
+      <input id="supSearch" type="search" placeholder="Type to search supporters…" style="min-width:320px;padding:6px 10px;font-size:13px;border:1.5px solid #0f1a1a;border-radius:0;background:#fff">
+      <select id="supSel" multiple size="9" style="min-width:320px;max-height:240px"></select>
+    </span>
+    <button id="supClear" class="supclear" hidden>✕ Clear all filters</button>
+  </div>
+
+  <!-- ================= HUB (jump nav + TA sections + section stack) ================= -->
+  <div id="hub"></div>
+
+  <footer class="src" style="margin-top:40px">
+    Trials: ClinicalTrials.gov v2 API (live) · industry-sponsored Phase 2/3, most recently updated · grant portals and RFP signals verified August 19, 2026 from official company pages. Deadlines are point-in-time and move — always confirm on the portal. Competitive intelligence is directional, assembled from published RFPs, disclosed registries and provider announcements — not an exhaustive award list.
+  </footer>
+</div>
+
+<script>
+/*__DATA__*/
+</script>
+<script>
+/*__COIF_MULTI__*/
+</script>
+<script>
+/*__APP__*/
+</script>
+</body>
+</html>
