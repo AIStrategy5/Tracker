@@ -689,7 +689,12 @@ async function loadTrials(){
     try{
       const r=await fetch(apiURL(s.cond),{headers:{Accept:"application/json"}});
       if(!r.ok) throw 0;
-      const j=await r.json(); TRIALS[s.key]=(j.studies||[]).map(parseStudy);
+      const j=await r.json(); const rows=(j.studies||[]).map(parseStudy);
+      // A 200 with an empty result set is still a broken feed from the reader's point of
+      // view — the area would render "No live trials returned" with no explanation. Treat
+      // it like any other failure so the saved snapshot shows and the banner explains why.
+      if(!rows.length) throw 0;
+      TRIALS[s.key]=rows;
     }catch(e){
       TRIALS[s.key]=(TRIALSNAP[s.key]||[]); // real saved snapshot — both BUs have one
       window._usedSnap = true;
@@ -715,7 +720,7 @@ function taColor(k){ return SPACECOLOR[k]||"#0f1a1a"; }
 function paintFeedNote(){
   const eb=$("#feedNote"); if(!eb) return;
   eb.innerHTML = (TRIAL_STATUS==="done" && window._usedSnap)
-    ? '<div class="note" style="margin:10px 0;border-left:4px solid #a06a12"><b>Live feed unreachable from this network</b> — showing the saved ClinicalTrials.gov snapshot from August 19, 2026 (both business units). Refresh to retry the live feed.</div>'
+    ? '<div class="note" style="margin:10px 0;border-left:4px solid #a06a12"><b>Live feed unavailable</b> — ClinicalTrials.gov did not return results, so this is the saved snapshot from '+(typeof TRIALSNAP_REFRESHED!=="undefined"?TRIALSNAP_REFRESHED:TRIALSNAP_UPDATED)+'. Refresh to retry the live feed.</div>'
     : '';
 }
 

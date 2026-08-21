@@ -158,7 +158,8 @@ fs.writeFileSync(
   OUT,
   header +
     "const TRIALSNAP_NEURO = " + JSON.stringify(snap) + ";\n" +
-    "Object.assign(TRIALSNAP, TRIALSNAP_NEURO);\n",
+    "Object.assign(TRIALSNAP, TRIALSNAP_NEURO);\n" +
+    "var TRIALSNAP_REFRESHED = " + JSON.stringify(stamp) + ";\n",
   "utf8"
 );
 
